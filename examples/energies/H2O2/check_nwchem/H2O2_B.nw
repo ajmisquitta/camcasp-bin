@@ -1,0 +1,32 @@
+Title "  water2 Method: PBE0 "
+Scratch_dir <SCRATCHDIR>
+Memory     2048 mb
+Start H2O2_B
+ 
+Charge     0
+Geometry Units Bohr nocenter noautoz noautosym
+   O1             -0.09648300       0.00000000       5.59028800
+   H1              0.77186787       1.45365210       6.30032236
+   H2              0.77186805      -1.45365182       6.30032273
+   bqO1            0.10880900       0.00000000      -0.06077600
+   bqH1           -0.16161460       0.00000000       1.75530702
+   bqH2           -1.57933347       0.00000000      -0.78289890
+   bqmb            0.00376528       0.00000007       3.64787605
+End
+Basis "ao basis" Spherical
+      *          library     Sadlej_pVTZ
+      bqO*        library O  Sadlej_pVTZ        
+      bqH*        library H  Sadlej_pVTZ        
+      bqmb       library  B  mb-3s2p1d
+End
+set lindep:tol 1e-5
+dft
+   direct
+   grid fine
+   iterations 60
+   convergence energy 1e-6
+   xc PBE0
+   Mult 1
+   CS00  0.13186
+end
+task DFT energy

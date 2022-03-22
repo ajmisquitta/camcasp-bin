@@ -1,0 +1,1118 @@
+$cbas
+*
+############################# TURBOMOLE basis sets #############################
+*
+ne SVP
+ne def-SVP
+# ne    (8s6p5d3f) / [6s5p4d1f]     {311111/21111/2111/3}
+#  MP2-energy (RI):    -0.18541743 H
+#  EMP2(RI) - EMP2:    36.900345   uH
+#  delta/|EMP2|:        0.991678   ppm
+# Ref.: C. Hättig, to be published.
+*
+   3  s                          
+  626.227       1.00000
+  141.090       1.75948
+  29.4706       1.05065
+   1  s
+  11.3204       1.00000
+   1  s
+  4.62065       1.00000
+   1  s
+  1.88601       1.00000
+   1  s
+  1.09986       1.00000
+   1  s
+ 0.506496       1.00000
+   2  p                
+  89.1569       1.00000
+  25.1456       2.33909
+   1  p
+  8.54541       1.00000
+   1  p
+  3.87801       1.00000
+   1  p
+  1.61638       1.00000
+   1  p
+ 0.676412       1.00000
+   2  d
+  25.0470      0.701458
+  9.58419      0.991667
+   1  d
+  4.56241       1.00000
+   1  d
+  2.14273       1.00000
+   1  d
+ 0.627853       1.00000
+   3  f
+  9.17098       1.00000
+  4.20953       3.18117
+  1.90355       1.31756
+*
+ne TZVP
+ne def-TZVP
+# ne    (8s6p5d3f) / [7s6p4d1f]     
+#  MP2-energy (RI):    -0.22769334 H
+#  EMP2(RI) - EMP2:    16.421462   uH
+#  delta/|EMP2|:        0.559849   ppm
+# Ref.: C. Hättig, to be published.
+*
+   2  s                            
+  626.227       1.00000
+  141.090       1.75948
+   1  s
+  29.4706       1.00000
+   1  s
+  11.3204       1.00000
+   1  s
+  4.62065       1.00000
+   1  s
+  1.88601       1.00000
+   1  s
+  1.09986       1.00000
+   1  s
+ 0.506496       1.00000
+   1  p
+  89.1569       1.00000
+   1  p
+  25.1456       1.00000
+   1  p
+  8.54541       1.00000
+   1  p
+  3.87801       1.00000
+   1  p
+  1.61638       1.00000
+   1  p
+ 0.676412       1.00000
+   2  d
+  25.0470      0.701458
+  9.58419      0.991667
+   1  d
+  4.56241       1.00000
+   1  d
+  2.14273       1.00000
+   1  d
+ 0.627853       1.00000
+   3  f 
+  9.17098       1.00000
+  4.20953       3.18117
+  1.90355       1.31756
+*
+ne TZVPP
+ne def-TZVPP
+# ne    (8s6p5d3f1g) / [8s6p4d3f1g] 
+#  MP2-energy (RI):    -0.28082142 H
+#  EMP2(RI) - EMP2:     4.320216   uH
+#  delta/|EMP2|:        0.780239   ppm
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 626.227   1.0
+   1  s
+ 141.09    1.0
+   1  s
+ 29.4706   1.0
+   1  s
+ 11.3204   1.0
+   1  s
+ 4.62065   1.0
+   1  s
+ 1.88601   1.0
+   1  s
+ 1.09986   1.0
+   1  s
+ 0.506496  1.0
+   1  p
+ 89.1569   1.0
+   1  p
+ 25.1456   1.0
+   1  p
+ 8.54541   1.0
+   1  p
+ 3.87801   1.0
+   1  p
+ 1.61638   1.0
+   1  p
+ 0.676412  1.0
+   2  d
+ 25.0470   0.701458
+ 9.58419   0.991667
+   1  d
+ 4.56241   1.0
+   1  d
+ 2.14273   1.0
+   1  d
+ 0.627853  1.0
+   1  f
+ 9.17098   1.0
+   1  f
+ 4.20953   1.0
+   1  f
+ 1.90355   1.0
+   1  g
+ 4.10996   1.0
+*
+ne QZVP
+ne def-QZVP
+ne QZVPP
+ne def-QZVPP
+# ne (9s8p7d5f3g1h)
+#  MP2-energy (RI):    -0.31351687 H
+#  EMP2(RI) - EMP2:     9.450517   uH
+#  delta/|EMP2|:        0.153706   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne QZVP-spd-kernel
+-> ne cc-pVQZ-pol
+*
+ne QZVP-spd-kernel
+# ne (9s8p7d) optimized for QZVP basis 
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 522.238   1.0
+   1  s
+ 110       1.0
+   1  s
+ 55.2844   1.0
+   1  s
+ 19.0692   1.0
+   1  s
+ 6.02475   1.0
+   1  s
+ 3.27601   1.0
+   1  s
+ 1.4991    1.0
+   1  s
+ 0.70479   1.0
+   1  s
+ 0.335473  1.0
+   1  p
+ 136.169   1.0
+   1  p
+ 39.5257   1.0
+   1  p
+ 21.0177   1.0
+   1  p
+ 7.20186   1.0
+   1  p
+ 3.91497   1.0
+   1  p
+ 2.11148   1.0
+   1  p
+ 1.07553   1.0
+   1  p
+ 0.611671  1.0
+   1  d
+ 38.1967   1.0
+   1  d
+ 16.0637   1.0
+   1  d
+ 6.74951   1.0
+   1  d
+ 3.70209   1.0
+   1  d
+ 1.87989   1.0
+   1  d
+ 0.937028  1.0
+   1  d
+ 0.41005   1.0
+*
+###############################  Dunning DZ sets  ##############################
+*
+ne cc-pVDZ
+# ne    (7s5p4d2f) 
+#  MP2-energy (RI):    -0.18756592 H
+#  EMP2(RI) - EMP2:     1.267351   uH
+#  delta/|EMP2|:        0.001610   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+164.92915503  1.00000000
+   1  s
+ 38.12451040  1.00000000
+   1  s
+ 11.05687179  1.00000000
+   1  s
+  4.16750238  1.00000000
+   1  s
+  1.48066017  1.00000000
+   1  s
+  0.90165326  1.00000000
+   1  s
+  0.59844563  1.00000000
+   1  p
+ 53.85419773  1.00000000
+   1  p
+ 15.69463165  1.00000000
+   1  p
+  5.20892608  1.00000000
+   1  p
+  2.55303662  1.00000000
+   1  p
+  0.95908051  1.00000000
+   1  d
+ 22.37152027  1.00000000
+   1  d
+  7.41948182  1.00000000
+   1  d
+  3.26149213  1.00000000
+   1  d
+  0.91518501  1.00000000
+   1  f
+  7.88894407  1.00000000
+   1  f
+  3.28508835  1.00000000
+*
+ne aug-cc-pVDZ
+# ne (8s6p5d3f)
+# anion (all electron):
+#  MP2-energy (RI):    -0.22374443 H
+#  EMP2(RI) - EMP2:   -19.569137   uH
+#  delta/|EMP2|:        0.498269   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.20905607 H
+#  EMP2(RI) - EMP2:     3.784828   uH
+#  delta/|EMP2|:        0.038383   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne cc-pVDZ
+-> ne aug-D
+*
+ne aug-D
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 0.37263473659       1.0000000000
+   1  p
+ 0.43097251378       1.0000000000
+   1  d
+ 0.55608927576       1.0000000000
+   1  f
+  1.1649184234       1.0000000000
+*
+ne cc-pwCVDZ
+# ne (10s7p5d2f)
+#  MP2-energy (RI):    -0.22851345 H
+#  EMP2(RI) - EMP2:     2.505144   uH
+#  delta/|EMP2|:        0.002221   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne wCD
+-> ne cc-pVDZ
+*
+ne aug-cc-pwCVDZ
+# ne (11s8p6d3f) 
+# anion (all electron):
+#  MP2-energy (RI):    -0.26498054 H
+#  EMP2(RI) - EMP2:   -16.742758   uH
+#  delta/|EMP2|:        0.420710   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.25008106 H
+#  EMP2(RI) - EMP2:     4.657412   uH
+#  delta/|EMP2|:        0.029197   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne wCD
+-> ne cc-pVDZ
+-> ne aug-D
+*
+ne wCD
+# ne (3s2p1d)
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 726.708   1.0
+   1  s
+ 88.9066   1.0
+   1  s
+ 23.9832   1.0
+   1  p
+ 117.266   1.0
+   1  p
+ 29.0727   1.0
+   1  d
+ 35.0086   1.0
+*
+###############################  Dunning TZ sets  ##############################
+*
+ne cc-pVTZ
+# ne    (8s6p5d3f1g) 
+# Note: new optimized cc-pVTZ auxliary basis
+#  MP2-energy (RI):    -0.27727351 H
+#  EMP2(RI) - EMP2:    18.044936   uH
+#  delta/|EMP2|:        0.164476   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 665.389   1.0
+   1  s
+ 136.778   1.0
+   1  s
+ 37.474    1.0
+   1  s
+ 17.2402   1.0
+   1  s
+ 4.134     1.0
+   1  s
+ 2.10468   1.0
+   1  s
+ 1.10095   1.0
+   1  s
+ 0.608061  1.0
+   1  p
+ 78.4885   1.0
+   1  p
+ 22.7285   1.0
+   1  p
+ 6.44089   1.0
+   1  p
+ 3.80884   1.0
+   1  p
+ 1.60398   1.0
+   1  p
+ 0.828899  1.0
+   1  d
+ 23.1267   1.0
+   1  d
+ 7.85743   1.0
+   1  d
+ 4.83955   1.0
+   1  d
+ 1.92337   1.0
+   1  d
+ 0.776576  1.0
+   1  f
+ 8.17892   1.0
+   1  f
+ 3.88687   1.0
+   1  f
+ 1.84607   1.0
+   1  g
+ 4.11088   1.0
+*
+ne aug-cc-pVTZ
+# ne    (9s7p6d4f2g) 
+# Note: based on new optimized cc-pVTZ auxliary basis
+# anion (all electron):
+#  MP2-energy (RI):    -0.30083151 H
+#  EMP2(RI) - EMP2:    -7.504638   uH
+#  delta/|EMP2|:        1.982160   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.28588018 H
+#  EMP2(RI) - EMP2:    25.958944   uH
+#  delta/|EMP2|:        0.629302   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne cc-pVTZ
+-> ne aug-T
+*
+ne aug-T
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 0.25533924399       1.0000000000
+   1  p
+ 0.39641689912       1.0000000000
+   1  d
+ 0.33257330099       1.0000000000
+   1  f
+ 0.73705250831       1.0000000000
+   1  g
+  1.5785006538       1.0000000000
+*
+ne cc-pwCVTZ
+# ne (12s9p7d4f1g)
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.33025552 H
+#  EMP2(RI) - EMP2:     4.670784   uH
+#  delta/|EMP2|:        0.150089   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne wCT
+-> ne cc-pVTZ
+*
+ne aug-cc-pwCVTZ
+# ne (13s10p8d5f2g) 
+# anion (all electron):
+#  MP2-energy (RI):    -0.35282248 H
+#  EMP2(RI) - EMP2:   -16.284126   uH
+#  delta/|EMP2|:        1.216960   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.33842596 H
+#  EMP2(RI) - EMP2:    13.803524   uH
+#  delta/|EMP2|:        0.411863   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne wCT
+-> ne cc-pVTZ
+-> ne aug-T
+*
+ne wCT
+# ne (4s3p2d1f)
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 1431.36   1.0
+   1  s
+ 301.948   1.0
+   1  s
+ 71.1568   1.0
+   1  s
+ 8.47961   1.0
+   1  p
+ 200.589   1.0
+   1  p
+ 40.201    1.0
+   1  p
+ 12.0357   1.0
+   1  d
+ 62.5225   1.0
+   1  d
+ 13.4802   1.0
+   1  f
+ 22.9212   1.0
+*
+###############################  Dunning QZ sets  ##############################
+*
+ne cc-pVQZ
+# ne    (8s7p6d5f3g1h) 
+# Note: new optimized cc-pVQZ auxliary basis
+#  MP2-energy (RI):    -0.32624983 H
+#  EMP2(RI) - EMP2:     8.596294   uH
+#  delta/|EMP2|:        0.056330   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne cc-pVQZ-spd-kernel
+-> ne cc-pVQZ-pol
+*
+ne cc-pVQZ-spd-kernel
+# ne (8s7p6d)
+# auxiliary spd functions optimized for cc-pVQZ
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+  537.491       1.0
+   1  s
+  116.228       1.0
+   1  s
+  34.9862       1.0
+   1  s
+  8.00175       1.0
+   1  s
+  4.44378       1.0
+   1  s
+  2.42296       1.0
+   1  s
+  1.15012       1.0
+   1  s
+ 0.475905       1.0
+   1  p
+  99.1660       1.0
+   1  p
+  28.8220       1.0
+   1  p
+  8.40942       1.0
+   1  p
+  5.56496       1.0
+   1  p
+  2.65744       1.0
+   1  p
+  1.32817       1.0
+   1  p
+ 0.734850       1.0
+   1  d
+  28.7452       1.0
+   1  d
+  8.92401       1.0
+   1  d
+  5.92146       1.0
+   1  d
+  2.79480       1.0
+   1  d
+  1.62894       1.0
+   1  d
+ 0.599895       1.0
+*
+ne cc-pVQZ-pol
+# ne (5f3g1h) 
+# auxiliary fgh polarization functions optimized for cc-pVQZ
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  f
+  13.3090       1.0
+   1  f
+  6.59876       1.0
+   1  f
+  3.04656       1.0
+   1  f
+  2.09380       1.0
+   1  f
+  1.03607       1.0
+   1  g
+  8.28581       1.0
+   1  g
+  4.24027       1.0
+   1  g
+  2.29250       1.0
+   1  h
+  4.49231       1.0
+*
+ne aug-cc-pVQZ
+# ne    (9s8p7d6f4g2h) 
+# Note: based on new optimized cc-pVQZ auxliary basis
+# anion (all electron):
+#  MP2-energy (RI):    -0.34357121 H
+#  EMP2(RI) - EMP2:   -39.151927   uH
+#  delta/|EMP2|:        3.976420   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.32999489 H
+#  EMP2(RI) - EMP2:    15.512631   uH
+#  delta/|EMP2|:        0.222735   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne cc-pVQZ
+-> ne aug-Q
+*
+ne aug-Q
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 0.22214384769       1.0000000000
+   1  p
+ 0.33322690090       1.0000000000
+   1  d
+ 0.14066050145       1.0000000000
+   1  f
+ 0.51153237356       1.0000000000
+   1  g
+  1.1078697479       1.0000000000
+   1  h
+  1.9158769568       1.0000000000
+*
+ne cc-pwCVQZ
+# ne (12s11p9d7f4g1h) 
+#  MP2-energy (RI):    -0.36198999 H
+#  EMP2(RI) - EMP2:     1.491031   uH
+#  delta/|EMP2|:        0.047559   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne wCQ
+-> ne cc-pVQZ
+*
+ne aug-cc-pwCVQZ
+# ne (13s12p10d8f5g2h)
+# anion (all electron):
+#  MP2-energy (RI):    -0.37914377 H
+#  EMP2(RI) - EMP2:   -41.727981   uH
+#  delta/|EMP2|:        2.866560   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.36561505 H
+#  EMP2(RI) - EMP2:     7.381537   uH
+#  delta/|EMP2|:        0.149167   ppm
+# Ref.: C. Hättig, to be published.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne wCQ
+-> ne cc-pVQZ
+-> ne aug-Q
+*
+ne wCQ
+# ne (4s4p3d2f1g)
+# Ref.: C. Hättig, to be published.
+*
+   1  s                 
+  2084.28       1.0
+   1  s                 
+  330.007       1.0
+   1  s                 
+  76.0755       1.0
+   1  s                 
+  13.6186       1.0
+   1  p                 
+  411.225       1.0
+   1  p                 
+  163.791       1.0
+   1  p                 
+  51.7701       1.0
+   1  p                 
+  15.5684       1.0
+   1  d                 
+  136.340       1.0
+   1  d                 
+  71.9263       1.0
+   1  d                 
+  15.4681       1.0
+   1  f                 
+  61.7418       1.0
+   1  f                 
+  26.0985       1.0
+   1  g                 
+  26.4171       1.0
+*
+###############################  Dunning 5Z sets  ##############################
+*
+ne cc-pV5Z
+# ne    (10s8p7d6f4g3h1i) 
+#  MP2-energy (RI):    -0.34610358 H
+#  EMP2(RI) - EMP2:     2.551751   uH
+#  delta/|EMP2|:        0.023520   ppm
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+   812.72         1.0
+   1  s
+    174.7         1.0
+   1  s
+  44.5926         1.0
+   1  s
+  26.6945         1.0
+   1  s
+  9.38618         1.0
+   1  s
+  5.41907         1.0
+   1  s
+  3.40558         1.0
+   1  s
+   1.5567         1.0
+   1  s
+ 0.771454         1.0
+   1  s
+ 0.370078         1.0
+   1  p
+  148.323         1.0
+   1  p
+  40.0181         1.0
+   1  p
+  18.4576         1.0
+   1  p
+  8.05032         1.0
+   1  p
+  4.38108         1.0
+   1  p
+  2.07589         1.0
+   1  p
+  1.10223         1.0
+   1  p
+  0.66896         1.0
+   1  d
+  34.4842         1.0
+   1  d
+  10.9197         1.0
+   1  d
+  6.88003         1.0
+   1  d
+  3.53306         1.0
+   1  d
+  2.19771         1.0
+   1  d
+  1.10352         1.0
+   1  d
+  0.44922         1.0
+   1  f
+  24.0526         1.0
+   1  f
+  11.3246         1.0
+   1  f
+  6.35667         1.0
+   1  f
+  3.72916         1.0
+   1  f
+  2.02831         1.0
+   1  f
+  1.02488         1.0
+   1  g
+  11.7603         1.0
+   1  g
+  6.18752         1.0
+   1  g
+  3.48349         1.0
+   1  g
+  1.71928         1.0
+   1  h
+  8.99863         1.0
+   1  h
+  5.23084         1.0
+   1  h
+  2.73497         1.0
+   1  i
+  5.33528         1.0
+*
+ne aug-cc-pV5Z
+# ne (11s9p8d7f5g4h2i)
+# anion (all electron):
+#  MP2-energy (RI):    -0.35994483 H
+#  EMP2(RI) - EMP2:    -0.281040   uH
+#  delta/|EMP2|:        0.288603   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.34795222 H
+#  EMP2(RI) - EMP2:     4.125430   uH
+#  delta/|EMP2|:        0.047286   ppm
+# Ref.: C. Hättig, to be published.
+*
+-> ne cc-pV5Z
+-> ne aug-5
+*
+ne aug-5
+# ne (1s1p1d1f1g1h1i)
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 0.180000  1.0
+   1  p
+ 0.338611  1.0
+   1  d
+ 0.237693  1.0
+   1  f
+ 0.455115  1.0
+   1  g
+ 0.776561  1.0
+   1  h
+ 1.302380  1.0
+   1  i
+ 2.381190  1.0
+*
+ne cc-pwCV5Z
+# ne (14s12p11d9f6g4h1i)
+#  MP2-energy (RI):    -0.37441919 H
+#  EMP2(RI) - EMP2:     1.310753   uH
+#  delta/|EMP2|:        0.021958   ppm
+# Ref.: C. Hättig, to be published.
+*
+-> ne wC5
+-> ne cc-pV5Z
+*
+ne aug-cc-pwCV5Z
+# ne (15s13p12d10f7g5h2i)
+# anion:
+#  MP2-energy (RI):    -0.38816318 H
+#  EMP2(RI) - EMP2:    -1.094097   uH
+#  delta/|EMP2|:        0.227883   ppm
+# neutral atom:
+#  MP2-energy (RI):    -0.37620039 H
+#  EMP2(RI) - EMP2:     2.704326   uH
+#  delta/|EMP2|:        0.040616   ppm
+# Ref.: C. Hättig, to be published.
+*
+-> ne wC5
+-> ne cc-pV5Z
+-> ne aug-5
+*
+ne wC5
+# ne (4s4p4d3f2g1h)
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 3511.03   1.0
+   1  s
+ 300.421   1.0
+   1  s
+ 103.547   1.0
+   1  s
+ 15.9      1.0
+   1  p
+ 361.829   1.0
+   1  p
+ 77.9664   1.0
+   1  p
+ 30.5984   1.0
+   1  p
+ 12.2      1.0
+   1  d
+ 231.619   1.0
+   1  d
+ 100.509   1.0
+   1  d
+ 76.3038   1.0
+   1  d
+ 21.1983   1.0
+   1  f
+ 137.715   1.0
+   1  f
+ 80.5744   1.0
+   1  f
+ 33.6901   1.0
+   1  g
+ 61.2498   1.0
+   1  g
+ 27.8129   1.0
+   1  h
+ 30.4907   1.0
+*
+################################## OLD STUFF  ##################################
+*
+ne prel-cc-pwCVDZ
+# ne (11s7p5d3f)
+#  MP2-energy (RI):    -0.22851435 H
+#  EMP2(RI) - EMP2:     1.606144   uH
+#  delta/|EMP2|:        0.001668   ppm
+# Ref.: C. Hättig, unpublished.
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne prel-wCD
+-> ne cc-pVDZ
+*
+ne prel-wCD
+# ne (4s2p1d1f)
+# Ref.: C. Hättig, unpublished.
+*
+   1  s
+  947.371       1.0
+   1  s
+  380.696       1.0
+   1  s
+  42.7796       1.0
+   1  s            
+  19.6941       1.0
+   1  p
+  195.520       1.0
+   1  p
+  21.9593       1.0
+   1  d            
+  34.9138       1.0
+   1  f
+  16.2122       1.0
+*
+*
+ne cc-pVTZ-old
+# ne (8s6p5d3f2g) 
+# Note: original cc-pVTZ auxiliary basis; 
+#       contains 1 g function more than for li--f
+#  MP2-energy (RI):    -0.27728669 H
+#  EMP2(RI) - EMP2:     4.904675   uH
+#  delta/|EMP2|:        0.020575   ppm   
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+  431.96185774       1.0000000000
+   1  s
+  91.661077953       1.0000000000
+   1  s
+  32.007820151       1.0000000000
+   1  s
+  12.201978563       1.0000000000
+   1  s
+  3.9059621098       1.0000000000
+   1  s
+  1.8329932238       1.0000000000
+   1  s
+  1.1099280453       1.0000000000
+   1  s
+ 0.51284490530       1.0000000000
+   1  p
+  58.709547824       1.0000000000
+   1  p
+  13.756908896       1.0000000000
+   1  p
+  5.5987423787       1.0000000000
+   1  p
+  2.8507458948       1.0000000000
+   1  p
+  1.5459527989       1.0000000000
+   1  p
+ 0.79171924911       1.0000000000
+   1  d
+  20.056792127       1.0000000000
+   1  d
+  6.5386253356       1.0000000000
+   1  d
+  3.5112244659       1.0000000000
+   1  d
+  1.8708677212       1.0000000000
+   1  d
+ 0.73381327298       1.0000000000
+   1  f
+  8.0353509043       1.0000000000
+   1  f
+  3.8857621931       1.0000000000
+   1  f
+  1.8333430283       1.0000000000
+   1  g
+  6.1116175992       1.0000000000
+   1  g
+  3.2868026157       1.0000000000
+*
+ne aug-cc-pVTZ-old
+# ne    (9s7p6d4f3g) 
+# Note: original aug-cc-pVTZ auxiliary basis; 
+#       contains 1 g function more than for li--f
+# anion:
+#  MP2-energy (RI):    -0.30083799 H
+#  EMP2(RI) - EMP2:   -13.571967   uH
+#  delta/|EMP2|:        0.630526   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.28589845 H
+#  EMP2(RI) - EMP2:     7.852384   uH
+#  delta/|EMP2|:        0.058148   ppm 
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne cc-pVTZ-old
+-> ne aug-T
+*
+ne cc-pVQZ-old
+# ne    (8s7p6d5f3g1h)
+# Note: original cc-pVQZ auxiliary basis, not converged!?
+#  MP2-energy (RI):    -0.32624407 H
+#  EMP2(RI) - EMP2:    14.334403   uH
+#  delta/|EMP2|:        0.107953   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+   429.88569002        1.0
+   1  s
+   93.337152126        1.0
+   1  s
+   27.833633628        1.0
+   1  s
+   6.4165516755        1.0
+   1  s
+   3.5989888671        1.0
+   1  s
+   1.8998754062        1.0
+   1  s
+  0.96379352737        1.0
+   1  s
+  0.43024994936        1.0
+   1  p
+   80.747729731        1.0
+   1  p
+   23.427561204        1.0
+   1  p
+   6.7889480632        1.0
+   1  p
+   4.3774358765        1.0
+   1  p
+   2.2219779685        1.0
+   1  p
+   1.0483199132        1.0
+   1  p
+  0.60145956273        1.0
+   1  d
+   24.797119002        1.0
+   1  d
+   7.3061991378        1.0
+   1  d
+   4.4291371578        1.0
+   1  d
+   2.3943226251        1.0
+   1  d
+   1.2628422000        1.0
+   1  d
+  0.49712953893        1.0
+   1  f
+   13.717370509        1.0
+   1  f
+   6.1467543092        1.0
+   1  f
+   2.9789698217        1.0
+   1  f
+   1.8667804276        1.0
+   1  f
+   1.0278591668        1.0
+   1  g
+   7.6621650301        1.0
+   1  g
+   3.8329415253        1.0
+   1  g
+   1.9566298175        1.0
+   1  h
+   4.4964585377        1.0
+*
+ne aug-cc-pVQZ-old
+# ne    (9s8p7d6f4g2h) 
+# Note: based on original cc-pVQZ auxiliary basis, not converged!?
+# anion (all electron):
+#  MP2-energy (RI):    -0.34353654 H
+#  EMP2(RI) - EMP2:    -3.480079   uH
+#  delta/|EMP2|:        1.060170   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.32999440 H
+#  EMP2(RI) - EMP2:    16.023168   uH
+#  delta/|EMP2|:        0.167008   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> ne cc-pVQZ-old
+-> ne aug-Q
+*
+ne cc-pwCgVTZ
+# ne (12s9p7d4f2g)
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.33025286 H
+#  EMP2(RI) - EMP2:     7.360703   uH
+#  delta/|EMP2|:        0.046192   ppm
+# Ref.: C. Hättig, unpublished.
+*
+-> ne wCT
+-> ne wCgT
+-> ne cc-pVTZ
+*
+ne aug-cc-pwCgVTZ
+# ne (13s10p8d5f3g)
+# anion:
+#  MP2-energy (RI):    -0.35282050 H
+#  EMP2(RI) - EMP2:   -14.215764   uH
+#  delta/|EMP2|:        0.971115   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.33842392 H
+#  EMP2(RI) - EMP2:    15.933552   uH
+#  delta/|EMP2|:        0.136123   ppm
+# Ref.: C. Hättig, unpublished.
+*
+-> ne wCT
+-> ne wCgT
+-> ne cc-pVTZ
+-> ne aug-T
+*
+ne wCgT
+# ne (1g)
+# Ref.: C. Hättig, unpublished.
+*
+   1  g
+ 14.4888   1.0
+*
+ne cc-pwChVQZ
+# ne (12s11p9d7f4g2h)
+#  MP2-energy (RI):    -0.36198977 H
+#  EMP2(RI) - EMP2:     1.722030   uH
+#  delta/|EMP2|:        0.019332   ppm
+# Ref.: C. Hättig, unpublished.
+*
+-> ne wCQ
+-> ne wChQ
+-> ne cc-pVQZ
+*
+ne aug-cc-pwChVQZ
+# ne (13s12p10d8f5g3h)
+# anion:
+#  MP2-energy (RI):    -0.37914375 H
+#  EMP2(RI) - EMP2:   -41.686142   uH
+#  delta/|EMP2|:        2.812070   ppm
+# neutral atom (all electron):
+#  MP2-energy (RI):    -0.36561504 H
+#  EMP2(RI) - EMP2:     7.421114   uH
+#  delta/|EMP2|:        0.091542   ppm
+# Ref.: C. Hättig, unpublished.
+*
+-> ne wCQ
+-> ne wChQ
+-> ne cc-pVQZ
+-> ne aug-Q
+*
+ne wChQ
+# ne (1h)
+# Ref.: C. Hättig, unpublished.
+*
+   1  h                 
+  14.1855       1.0
+*
+$end

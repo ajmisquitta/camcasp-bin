@@ -1,0 +1,28 @@
+! H2O properties calculation
+! ==========================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule H2O
+  I.P. 12.62063 eV
+  HOMO -0.33187
+  ! Vibrationally averaged geom.
+  O   8.0    0.0000000000    0.0000000000    0.0000000000  Type O
+  H1  1.0   -1.4536519600    0.0000000000   -1.1216873200  Type H
+  H2  1.0    1.4536519600    0.0000000000   -1.1216873200  Type H
+End
+
+Run-type properties
+  Molecule H2O
+  Basis aVTZ
+  SCFcode dalton
+  Options Tests
+  Orient file
+  Process file
+  Sites file
+End
+
+Finish

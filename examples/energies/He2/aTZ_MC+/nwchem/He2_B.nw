@@ -1,0 +1,27 @@
+Title "  He2 Method DFT with Functional: PBE0 "
+Scratch_dir <SCRATCHDIR>
+Memory     4096 mb
+Start He2_B
+ 
+Charge     0
+Geometry Units Bohr nocenter noautoz noautosym
+   He              0.00000000       0.00000000       5.60000000
+   bqHe            0.00000000       0.00000000       0.00000000
+   bqmb            0.00000000       0.00000000       2.80000000
+End
+Basis "ao basis" SPHERICAL
+      *          library     aug-cc-pVTZ
+      bqHe*       library He aug-cc-pVTZ-sp     
+      bqmb       library  B  mb-3s2p1d
+End
+set lindep:tol 1e-5
+dft
+   direct
+   grid fine
+   iterations 60
+   convergence energy 1e-6
+   xc PBE0
+   Mult 1
+   CS00  0.23980
+end
+task DFT energy

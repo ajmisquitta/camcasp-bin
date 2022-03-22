@@ -1,0 +1,83 @@
+6-July-2006
+
+List of vertical ionization potentials:
+=======================================
+Method[1] = PBE0 Sadlej(pVTZ) in a Delta-DFT calculation, i.e., 
+            IP = E(N-1) - E(N)
+
+Molecule            IP (a.u.)  Description/Source
+=======================================================================
+water               0.4638      Ref [1] 
+methane             0.4634      Ref [1]
+CO2                 0.5063      Ref [1]
+formamide           0.3745      Ref [2] : HCONH2 : Method[1] with CADPAC
+N-methylpropanamide 0.3452      Ref [2] : CH3CH2CONHCH3 : Method[1] with CADPAC
+Helium              0.9036      Ref [1]
+Neon                0.7925      Ref [1]
+urea                0.3674      Ref [3] : PBE0/Sadlej optimized structure :
+                                Method[1] with CADPAC
+benzene             0.3397      Ref [1]
+carbamazepine       0.2852      Ref [3] : Method[1] with GAUSSIAN03 : 
+                                MP2/631G(d,p) optimized structure
+hydantoin           0.3695      Ref [3] : Method[1] with CADPAC
+Argon               0.5791      Ref [1]
+formaldehyde        0.3998      Ref [1]
+CO                  0.5150      Ref [1]
+NH3                 0.3701      Ref [1]
+CH4                 0.4634      Ref [1]
+acetylene           0.4189      Ref [1] : C2H2
+thymine             0.3302      Ref [4] : Method[1] with Gaussian03 :
+                                CSD structure : aka 5-methyluracil :
+                                C5H6N2O2
+BOQQUT              0.35025     Ref [4] : Method[1] with Gaussian03 :
+                                Structure ???
+                                Full name ???
+H2                  0.5669      Ref [1]
+HF                  0.5891      Ref [1] R_HF = 0.920 Ang
+Cl-                 0.1311      Ref [5] Method[1] PBE0/aug-cc-pVQZ Gaussian03
+                                PBE0/Sadlej gives 0.1331 a.u.
+C6ClBr2H2F          0.3342      Ref [5] Method[1] PBE0/Sadlej Gaussian03
+                                Molecule XIII in the CCSD Blind Test 2007
+                                C2v symmetry
+pyridine            0.3488      Ref [6] Method[1] with PBE0/aug-cc-pVTZ basis
+                                and Gaussian03 : structure C2v PBE0/cc-pVTZ
+                                optimized with Gaussian03
+                    0.340       Ref [1]
+thiophene           0.326       Ref [1] 8.86 +- 0.02 eV
+Cl2                 0.4219      Ref [1] from Yencha, A.J.; Hopkirk, A.; 
+     Hiraya, A.; Donovan, R.J.; Goode, J.G.; Maier, R.R.J.; King, G.C.; Kvaran, A.,
+     Threshold photoelectron spectroscopy of Cl2 and Br2 up to 35 eV,
+     J. Phys. Chem., 1995, 99, 7231. Quoted value: 11.481 +- 0.003 eV
+
+HI                  0.38168     Ref [1] 
+Zinc                0.3452      Ref [7] 906.4 kJ/mol
+toluene             0.3244      Ref [1] 8.828 +- 0.001 eV 
+HCl                 0.4683      Ref [1] 12.744 +- 0.009 eV
+=======================================================================
+
+Refs:
+[1] S. G. Lias, in NIST Chemistry Webbook, NIST Standard Reference Database
+    Number 69, edited by W. G. Mallard and P. J. Linstrom
+    (Gaithersburg, 2000); http://webbook.nist.gov
+[2] A. J. Misquitta and A. J. Stone, J. Chem. Phys. 124, 024111 (2006).
+[3] A. J. Misquitta (2006)
+[4] G. Welch (2006)
+[5] A. J. Misquitta (2007)
+[6] A. J. Misquitta & A. J. Stone (2009)
+[7] https://www.webelements.com/zinc/atoms.html
+
+Abbreviations:
+CSD : Cambridge Crystallographic Database
+
+Notes:
+[1] PBE0 as defined in CADPAC and DALTON seems to be the same as PBE1PBE as 
+defined in GAUSSIAN03, but I haven't tested these programs sufficiently well
+to be sure of this.
+[2] PBE0 should be used for IP calculations as is has been shown to yield
+small errors with no systematic drift (Ref. [2]).
+[3] The Sadlej(pVTZ) basis results in IPs very close to those obtained with
+the aug-cc-pVTZ Dunning basis. Given that Sadlej is half the aug-cc-pVTZ 
+size, it is the basis we should use for organic molecules. But keep in mind
+that the Sadlej basis sets *must not be used* with wavefunction methods like
+MP2 as the bases were optimized for HF properties --- i.e., mean-field 
+methods work well with Sadlej.

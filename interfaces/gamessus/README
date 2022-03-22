@@ -1,0 +1,7 @@
+Build interface program using
+
+$ gfortran -DGAM8 gamsintf.F -o gamsintf
+
+Run job using:
+
+$ gamess-intf.bash JOB

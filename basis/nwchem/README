@@ -1,0 +1,6 @@
+These basis set are compatible with those in NWChem
+
+Each directory contains the basis set file from NWChem 6.1 These bases can also
+be obtained from the EMSL Basis Set Exchange at https://bse.pnl.gov/bse/portal
+
+Copy the files in for-nwchem-lib/ into the NWChem basis library

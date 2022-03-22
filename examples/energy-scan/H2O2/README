@@ -1,0 +1,152 @@
+Water dimer scan
+================
+Basis: Sadlej-pVTZ MC+
+Method: PBE/AC ALDA
+
+This is an example of a batch calculation using a set of
+configurations. In this case, we use only a few of the configurations
+in the geometry file, but you should nevertheless get a good idea of
+how the calculation proceeds.
+
+Time per confiduration:
+  Dalton:  about 3 mins cpu
+  CamCASP: about 2 mins cpu
+
+Files needed:
+=============
+(1) CLUSTER file: water2.clt
+This is almost the usual cluster file. It contains two molecule blocks, one
+for each water molecule in a reference geometry. Then come the following
+lines:
+   Rotate water2 by {alpha} about {Nx} {Ny} {Nz
+   Place water2 at {Rx} {Ry} {Rz}
+The values of alpha, Nx, Ny, Nz, Rx, Ry, Rz will be set by the batch_sapt.py
+script. These lines must contain these variable names in the given form. 
+CASE MATTERS here.
+
+It is important to be consistent with UNITS. The UNITS specified in the
+CLUSTER file need to be consistent with the geometry units in the geometry
+file (below). In this example, we have used BOHR and DEGREES in the geometry
+file, so we need:
+GLOBAL
+  UNITS BOHR DEGREES
+END
+in the preamble.
+
+NOTE: We always keep molecule 1 fixed and translate/rotate molecule 2.
+The example cluster file also contains the lines
+  join water1 and water2 into dimer
+  write dimer in pdb format
+These create a file dimer.pdb in PDB format that can be viewed using a
+program such as mercury.
+
+Following that is the FILES (or RUN-TYPE) block. There are two important
+lines:
+   {task}
+   File-prefix {job}
+These must be present in exactly this form. {job} will be replaced by
+the job name. {task} will be replaced by the type of calculation,
+sapt-dft by default, or delta-hf if the "--dHF" flag is specified. The
+rest of the specifications here are pretty much as usual, and can be
+changed if you wish. In particular, the basis and basis-type can be
+changed by means of options to the batch_sapt.py script. Run
+$ batch_sapt.py --help
+to see the available options.
+
+(2) Geometry file: geom.data
+It contains a few comment lines (starting with '! ') and then the geometry
+specification in BOHR and DEGREES (other units are possible, in which case the
+UNITS command in the CLUSTER file should be changed).
+The order of the entries must be:
+   INDEX  Rx     Ry     Rz    alpha    Nx      Ny     Nz
+INDEX: Index of the geometry. 
+Rx,Ry,Rz: (BOHR) Translation vector of centre of molecule 2.
+Nx,Ny,Nz: (dimensionless) Components of vector that defines rotation
+          axis. This need not be a unit vector.
+angle   : (DEGREES) Angle by which molecule 2 is rotated about the vector
+          (Nx,Ny,Nz).
+
+We normally generate the geometries using the ENERGY-SCAN module in
+CamCASP. This can create a random selection of geometries near van der
+Waals contact. The geom.data file provided shows how it is possible to
+run calculations for a selection of geometries, perhaps to run the
+calculations a small batch at a time. In this case we skip the first
+30 geometries and stop after no. 40.
+
+Command:
+========
+The job is run using
+$ batch_sapt.py H2O2 water2.clt geom.data --direct [-q <queue>]
+Here we have specified:
+job name      : H2O2
+cluster file  : water2.clt
+geometry file : geom.data
+DALTON options: --direct creates DALTON command files with the
+                .DIRECT directive. This uses direct integral
+		management, avoiding excessive disk access,
+                and is recommended for large jobs.
+queue         : As usual, the appropriate queue needs to be specified.
+	        The default is "batch", and is strongly recommended
+		for all but very small examples.
+
+Warning!
+
+There is ample opportunity to make mistakes in such a calculation.
+SO before submitting the jobs to the queue, use the '-q none' option
+to generate the input files, inspect them, and only then use the
+proper queue name to submit the jobs. 
+
+Use
+$ batch_sapt.py --help
+to see more details and other options.
+
+The batch_sapt.py script will use the job name ("H2O2") and the
+INDEX in the geometry file to create a unique name for each dimer
+configuration. A directory with this name will be created for the
+output files for each configuration.
+
+If delta-HF calculations are needed, just repeat the batch_sapt.py
+command with the --dHF flag added.
+
+Results
+=======
+
+The output will be in H2O2_<index>/OUT. The search script will search
+through all directories for you (ignoring any plain files that match
+the filename pattern):
+
+$ extract_saptdft.py H2O2_*
+
+If you don't do the delta-HF calculations, the output should be:
+kJ/mol           elst        exch         ind        exind       disp      exdisp      total
+H2O2_31       -2.52777     1.62117    -0.86061     0.38081    -2.23664     0.18545    -3.43759
+H2O2_32       -1.89551     5.18796    -2.12948     1.50652    -4.32509     0.57604    -1.07956
+H2O2_33       -0.83995     2.20198    -1.20000     0.46024    -2.77826     0.20589    -1.95010
+H2O2_34        3.00074     4.35239    -1.81039     1.08089    -3.81483     0.47614     3.28493
+H2O2_35       -3.54982     2.66490    -1.23912     0.65161    -3.11124     0.26818    -4.31548
+H2O2_36       -5.01674     0.94094    -0.67047     0.16825    -1.70594     0.09764    -6.18633
+H2O2_37        1.60817     3.06240    -1.31739     0.79091    -3.09523     0.35655     1.40541
+H2O2_38        5.26778     3.55085    -1.50381     0.86023    -3.26500     0.42237     5.33242
+H2O2_39        5.30238     3.95097    -1.70524     0.77377    -4.17855     0.31679     4.46011
+H2O2_40       -6.73249     1.05666    -0.73742     0.16887    -1.84131     0.10723    -7.97846
+
+If a calculation has failed or if certain energies have not been calculated 
+the output will contain '----' strings.
+
+If you do run the delta-HF calculations, the output will be different.
+The delta-HF energy will automatically be included with the earlier
+results:
+
+$ extract_saptdft.py H2O2_*
+kJ/mol           elst        exch         ind        exind       disp       exdisp        dHF        total
+H2O2_31       -2.52777     1.62117    -0.86061     0.38081    -2.23664     0.18545    -0.08891    -3.52651
+H2O2_32       -1.89551     5.18796    -2.12948     1.50652    -4.32509     0.57604    -0.19231    -1.27187
+H2O2_33       -0.83995     2.20198    -1.20000     0.46024    -2.77826     0.20589    -0.19188    -2.14199
+H2O2_34        3.00074     4.35239    -1.81039     1.08089    -3.81483     0.47614    -0.23349     3.05144
+H2O2_35       -3.54982     2.66490    -1.23912     0.65161    -3.11124     0.26818    -0.15869    -4.47416
+H2O2_36       -5.01674     0.94094    -0.67047     0.16825    -1.70594     0.09764    -0.10673    -6.29306
+H2O2_37        1.60817     3.06240    -1.31739     0.79091    -3.09523     0.35655    -0.10182     1.30359
+H2O2_38        5.26778     3.55085    -1.50381     0.86023    -3.26500     0.42237    -0.17535     5.15707
+H2O2_39        5.30238     3.95097    -1.70524     0.77377    -4.17855     0.31679    -0.32950     4.13061
+H2O2_40       -6.73249     1.05666    -0.73742     0.16887    -1.84131     0.10723    -0.06530    -8.04376
+

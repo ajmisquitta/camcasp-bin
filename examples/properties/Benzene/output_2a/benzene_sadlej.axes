@@ -1,0 +1,14 @@
+Axes
+  C1  z from C1 to H1  x from C1 to C2
+  C2  z from C2 to H2  x from C2 to C3
+  C3  z from C3 to H3  x from C3 to C4
+  C4  z from C4 to H4  x from C4 to C5
+  C5  z from C5 to H5  x from C5 to C6
+  C6  z from C6 to H6  x from C6 to C1
+  H1  z from C1 to H1  x from C1 to C2
+  H2  z from C2 to H2  x from C2 to C3
+  H3  z from C3 to H3  x from C3 to C4
+  H4  z from C4 to H4  x from C4 to C5
+  H5  z from C5 to H5  x from C5 to C6
+  H6  z from C6 to H6  x from C6 to C1
+End

@@ -1,0 +1,59 @@
+FC      := gfortran
+FC2     := gfortran
+CC      := gcc
+OPT     := -march=native -fexternal-blas # -ftree-parallelize-loops=4
+BIN     := 
+MOD     := mod
+# WARN    := -Wuninitialized -Wsurprising    
+FFLAGS  := -O3 ${OPT} -DG77 -DCADPAC -DGAMESS -DSAPT2002 -DSIGNED_INTEGER \
+            -DERF ${DEBUG} -DF2003 -fno-backslash -fimplicit-none ${WARN} #\
+#        -fcheck=bounds -fbacktrace
+FFLAGS2 := -O3 ${OPT} -DG77 -DCADPAC -DGAMESS -DSAPT2002 -DSIGNED_INTEGER \
+            -DERF ${DEBUG} -DF2003
+FFLAGS3 := -O1 ${OPT} -std=legacy -DG77 -DCADPAC -DGAMESS -DSAPT2002 -DSIGNED_INTEGER \
+            -DERF ${DEBUG} -DF2003
+CFLAGS  := -c
+LDFLAGS := -static -static-libgfortran -static-libgcc -lblas -llapack -lpthread # -t
+# LIBS    := -lblas -llapack -lpthread
+# -t to list all object-file sources
+CTAGS   := ctags >tags
+DEPEND  := makedepend
+
+ifeq ($(MACHINE),whirligig)
+  LIBDIRS := -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/x86_64-linux-gnu/atlas
+  LIBS  := -llapack -lcblas -lpthread -lf77blas -latlas -lgfortran
+endif
+
+ifeq ($(MACHINE),Redwing)
+  LIBDIRS := -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/x86_64-linux-gnu/atlas
+  LIBS  := -llapack -lcblas -lpthread -lf77blas -latlas -lgfortran
+endif
+
+ifeq ($(MACHINE),pepito)
+LIBDIRS := -L/home/alston/install/lib/
+LIBS    := -lopenblas \
+     -L/usr/lib/gcc/x86_64-linux-gnu/7/ -lgfortran   \
+     -lm -ldl -lgfortran -lquadmath -lpthread
+endif
+
+ifeq ($(MACHINE),andreas-ixtreme-M5800)
+  LIBS  := -lopenblas -lpthread
+endif
+
+ifeq ($(MACHINE),ryzen)
+LIBDIRS := -L/home/alston/install/lib/
+LIBS    := $(LIBDIRS) -lopenblas \
+     -L/usr/lib/x86_64-linux-gnu/ -lgfortran   \
+     -lm -ldl -lgfortran -lquadmath -lpthread
+endif
+
+ifeq ($(MACHINE),threadripper)
+LIBDIRS := -L/home/alston/install/lib/
+LIBS    := ${LIBDIRS} -lopenblas \
+     -L/usr/lib64/ -lgfortran -lm -ldl -lgfortran -lquadmath -lpthread \
+     -fopenmp
+endif
+
+
+
+

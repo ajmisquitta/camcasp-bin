@@ -1,0 +1,29 @@
+INTGRL
+  He1 with He2
+  Basis is aug-cc-pVTZ and type DC+
+SPHERICAL  Atomtypes=  1 +   1  Charge=   0 +   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! He1
+!
+Charge=  2.0  Atoms=1 Blocks=3 1 1 1
+He               0.00000000         0.00000000         0.00000000
+#include  aug-cc-pVTZ/He
+!
+!
+#molecule B
+!
+! He2
+!
+Charge=  2.0  Atoms=1 Blocks=3 1 1 1
+He               0.00000000         0.00000000         5.60000000
+#include  aug-cc-pVTZ/He
+!
+!
+#midbond
+!
+Charge=0.0 Atoms=1 Blocks=3 1 1 1
+Mb                0.00000000         0.00000000         2.80000000
+#include  midbond/Mb_3s2p1d
+!

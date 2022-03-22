@@ -1,0 +1,94 @@
+!  aug-cc-pVTZ-PP-RI Diffuse  EMSL  Basis Set Exchange Library  4/12/16 2:47 AM
+! Elements                             References
+! --------                             ----------
+! Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! Cu Zn Ag Cd Au Hg: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! 
+!  cc-pVTZ-PP-RI  EMSL  Basis Set Exchange Library  4/12/16 2:48 AM
+! Elements                             References
+! --------                             ----------
+! Hf Ta W Re Os Ir Pt: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! Cu Zn Ag Cd Au Hg: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! 
+! br   aug-cc-pVTZ-PP-RI Diffuse
+!
+    1  s
+     33.095900000            1.0000000        
+    1  s
+     16.994700000            1.0000000        
+    1  s
+      8.0208700000           1.0000000        
+    1  s
+      2.8892100000           1.0000000        
+    1  s
+      1.4707100000           1.0000000        
+    1  s
+      0.83456000000          1.0000000        
+    1  s
+      0.49254800000          1.0000000        
+    1  s
+      0.19571000000          1.0000000        
+    1  p
+     35.304300000            1.0000000        
+    1  p
+     20.315900000            1.0000000        
+    1  p
+      9.3461000000           1.0000000        
+    1  p
+      2.8907600000           1.0000000        
+    1  p
+      1.6581800000           1.0000000        
+    1  p
+      0.79670900000          1.0000000        
+    1  p
+      0.49057600000          1.0000000        
+    1  p
+      0.27131400000          1.0000000        
+    1  d
+     34.733000000            1.0000000        
+    1  d
+     10.642800000            1.0000000        
+    1  d
+      3.8053100000           1.0000000        
+    1  d
+      1.8835100000           1.0000000        
+    1  d
+      1.0051800000           1.0000000        
+    1  d
+      0.54701000000          1.0000000        
+    1  d
+      0.26126100000          1.0000000        
+    1  f
+     14.848600000            1.0000000        
+    1  f
+      5.7610800000           1.0000000        
+    1  f
+      2.7623000000           1.0000000        
+    1  f
+      0.99523300000          1.0000000        
+    1  f
+      0.46736100000          1.0000000        
+    1  g
+     34.948900000            1.0000000        
+    1  g
+     12.169400000            1.0000000        
+    1  g
+      2.4703600000           1.0000000        
+    1  g
+      0.86966800000          1.0000000        
+    1  h
+      2.3177500000           1.0000000        
+! Diffuse functions
+    1  s
+      0.77043800000E-01            1.0000000        
+    1  p
+      0.12512300000          1.0000000        
+    1  d
+      0.10825500000          1.0000000        
+    1  f
+      0.20178700000          1.0000000        
+    1  g
+      0.40765700000          1.0000000        
+    1  h
+      0.75465300000          1.0000000        

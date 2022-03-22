@@ -1,0 +1,47 @@
+TITLE  PROCESS file to write the CASIMIR input
+!    for CO_1
+!    and CO_2
+! Usage: process < CO-CO_casimir.prss > CO-CO_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>.casimir
+
+Set Global-data
+   CamCASP /home/ajs1/camcasp/trunk
+   Units  BOHR  DEGREE
+   Overwrite
+   Echo Off
+End
+
+
+Molecule CO_1
+  Units BOHR
+  C1          6.00    0.00000000    0.00000000   -1.20270254   Type C
+  O1          8.00    0.00000000    0.00000000    0.90202691   Type O
+End
+
+Read local pols for CO_1
+   Use ascii file CO_1_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>_0f10.pol
+   Maximum rank  <WSMLIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Frequencies STATIC + 10
+End
+
+Molecule CO_2
+  Units BOHR
+  C2          6.00    0.00000000    0.00000000   -1.20270254   Type C
+  O2          8.00    0.00000000    0.00000000    0.90202691   Type O
+End
+
+Read local pols for CO_2
+   Use ascii file CO_2_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>_0f10.pol
+   Maximum rank  <WSMLIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Frequencies STATIC + 10
+End
+
+Write
+   File-prefix CO-CO
+   CASIMIR file for CO_1 +++
+      and CO_2 +++
+      with cutoff 0.0001
+End
+
+Finish

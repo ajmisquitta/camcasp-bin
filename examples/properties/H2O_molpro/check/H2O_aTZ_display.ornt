@@ -1,0 +1,140 @@
+! ORIENT display commands
+
+UNITS BOHR
+
+Parameters
+      Sites     10 polarizable      8
+      Types     10
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      O          Z     8
+      H          Z     1
+End
+
+Molecule  H2O at  0.0 0.0 0.0
+  ! Units BOHR
+  O           0.00000000    0.00000000    0.00000000   Type O
+  H1         -1.45365196    0.00000000   -1.12168732   Type H
+  H2          1.45365196    0.00000000   -1.12168732   Type H
+  !  Use this line for the DMA multipoles
+  !    #include H2O_DMA2_L4.mom
+  #include H2O_ISA-GRID.mom
+End
+Edit H2O
+   #include H2O.axes
+   Bonds Auto
+End
+! Polarizabilities are assumed to be in the local-axes frame.
+! So they are read **after** the local axes are defined:
+Polarizabilities for H2O
+   Read Pairs Limit <WSMLIMIT!2> File H2O_ref_wt3_L<WSMLIMIT!2>_static.pol
+End
+
+Pairs
+!  Dispersion damping factor <BETA!2.0>
+!  Induction  damping factor <BETA!2.0>
+!  #include <POTENTIAL!atom_atom>
+End
+
+Units Bohr kJ/mol
+
+! This is a probe of the induction energy
+Atom X at 0.0 0.0 0.0 rank 0
+  Q00 = 1.0
+
+End
+
+! This is the older format used by Orient versions < 4.8         
+!  Display energy
+!    Title " H2O...Q 1.0 induction " 
+!    Molecule H2O
+!    ! * Use the Compare line for energy comparisons and
+!    ! * comment out the Radii, Step and Grid lines
+!    ! Compare with energy_values.dat
+!    Radii scale 2.0
+!    Step  0.75 B
+!    Grid  exp
+!    Colour-map
+!      0   210  0.25  1
+!      6   240  0.75  1
+!     12   300  1.0   0
+!     18   360  0.75  1
+!     24   390  0.25  1
+!    End
+!    Viewport 10
+!    Colour-scale min -20 max +10 top +10
+!    Probe X
+!    Ball-and-stick
+!    ! * Uncomment the following line for the grid:
+!    ! Write H2O_2vdW.grid no values
+!  End
+
+Display                                                                 
+  ! If you have a pre-defined grid (from CamCASP) to be imported:       
+  Import Grid H2O_1.00E-03_iso.grid                    
+                                                                        
+  ! Alternatively, define the grid using:                               
+  ! Grid                                                                
+  !    Name  OrientGrid                                                 
+  !    Title "Orient Grid title"                                        
+  !    Molecule H2O                                    
+  !    Step  0.75 B       ( adjust as appropriate )                     
+  !    Radius  Scale 2.0  ( for the 2xvdW surface )                     
+  ! End                                                                 
+                                                                        
+  ! If Orient stops with an insufficient points error include the       
+  ! following line in the PARAMETERS block at the start of the file:    
+  !   ALLOCATE POINTS n ( where n is an appropriate number of points )  
+                                                                        
+  ! Now import the energy map computed on the above grid:               
+  ! Make sure that the map corresponds to the defined grid.             
+  Import Map H2O_1.00E-03_iso_Q+1_E2ind.map  ref-Epol  
+  Describe Map ref-Epol                                                 
+                                                                        
+  Map Lpol                                                              
+    Molecule H2O                                       
+    Title "Pol map Lpol"                                                
+    Probe X  ( defines energy with probe )                              
+  End                                                                   
+                                                                        
+  Map Diff                                                              
+    Molecule H2O                                       
+    Title "Diff map: Pol Lpol"                                          
+    Difference  Lpol minus ref-E2ind                                    
+  End                                                                   
+  Describe Map Diff                                                     
+                                                                        
+  Colour-map                                                            
+    0   210  0.25  1                                                    
+    6   240  0.75  1                                                    
+   12   300  1.0   0                                                    
+   18   360  0.75  1                                                    
+   24   390  0.25  1                                                    
+  End                                                                   
+                                                                        
+  ! And finally, display the difference map:                            
+  Show Diff                                                             
+    Viewport 08                                                         
+    Colour-scale min -60 max +60 top +60                                
+    Ball-and-stick                                                      
+    Height 1200                                                         
+    Ticks kJ/mol -100 -75 -50 -25 0 25 50 75 100                        
+  End                                                                   
+                                                                        
+  ! Alternatively display one of the energy maps:                       
+  !   Show ref-Epol ( or Lpol )                                         
+  !     Viewport 08                                                     
+  !     Colour-scale min -200 max -100 top -100                         
+  !     Ball-and-stick                                                  
+  !     Height 1200                                                     
+  !     Ticks kJ/mol -200 -175 -150 -125 100                            
+  !   End                                                               
+                                                                        
+End                                                                     
+
+Finish

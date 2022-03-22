@@ -1,0 +1,79 @@
+Title  Template Cluster file for elst-energy-scan
+
+! Notes
+! -----
+! In this energy scan, you will need a grid file with coordinates (in Bohr )
+! at which the unit point charge will be placed. For each of these coordinates
+! the electrostatic energy between the molecule and this charge will be computed.
+! There are no approximations used here apart from the single-det and RI approxs.
+! 
+! This type of calculation is particularly useful when displaying the electrostatic
+! energy on an appropriate iso-density surface around the molecule. This kind of 
+! surface can be generated using the 
+! DISPLAY
+!   ...
+! END 
+! module. See for example the isa-A method. Alternatively, the Orient program
+! can be used to generate a grid using various algorithms. 
+! In any case, there are a few formats needed for the points. These are described
+! in the methods/elst-energy-scan file so please look there. But in brief the points
+! should be in one of these formats:
+!(A):
+!  X1  Y1  Z1
+!  X2  Y2  Z2
+!  ...
+! In this case inlcude the command TRANSLATIONS-ONLY to tell CamCASP that only 
+! translations are present.
+!
+!(B):
+!  If the points are of the form (translation+angle-axis):
+!  X1  Y1  Z1  ALPHA1  NX1  NY1  NZ1
+!  X2  Y2  Z2  ALPHA2  NX2  NY2  NZ2
+!  ...
+!  Then no additional command is needed as this is the default.
+!(C): 
+!  If an additional INDEX column is included as shown here:
+!  1  X1  Y1  Z1
+!  2  X2  Y2  Z2
+!  .. ...
+!  then also include the command:
+!   SKIP-FIRST-COLUMN
+!
+! The default units are BOHR and DEGREES.
+!
+! CamCASP version: >= 6.0.14
+
+Molecule  MOL
+  UNITS  Bohr
+  IP         0.0 a.u.     ( the AC usually needs the IP. )
+  AC-SHIFT   0.0 a.u.     ( the AC-shift in a.u. for CS00 etc. )
+  X   Z    Rx   Ry   Rz
+  ...
+End
+
+Show MOL in XYZ format         ( always a useful check )
+
+Run-Type
+  Properties  ( this must be used as we have only one molecule present )
+  Molecule     MOL
+
+  ! In this example the AUX basis is aVTZ+ISAset2 and ATOMAUX is aVQZ+ISAset
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Spherical
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  ! MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file if available )
+
+  File-Prefix  MOL-Q-Scan      ( change this to something reasonable )
+
+  #METHOD      elst-energy-scan
+
+End
+
+Finish
+

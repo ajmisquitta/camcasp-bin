@@ -1,0 +1,99 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+! MOL..Q or MOL..MOL or MOL..Q & MOL energy scans with the MC auxiliary basis
+
+! The Monomer-Centered (MC) auxiliary basis results in fast calculations.
+! While this option is appropriate for the density-overlap integral calculation, and
+! perhaps even calculations of E(1)exch, it is not recommended that E(1)elst be calculated
+! using the MC auxiliary basis as the errors introduced by the density-fitting 
+! can be large, particularly in non-polar systems for which the density-tails 
+! play an important role the first-order energies. 
+
+! For a charge probe calculation we recomment you use a charge of -1.0e if induction 
+! energies are being computed. This reduces the chance of spurious charge movements that
+! could occur if a positive charge probe was used.
+
+! Only needed for large molecules
+! Edit  A
+!   NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+! End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+  DF-TYPE-DIMER   OV
+END
+
+SET DF
+  Type     OO   ( needed to force OO so the DF-INT module does not default to NN )
+  Eta    = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  False  ( if True, DF will be repeated on mol rotation )
+                              ( if False, DF sol will be rotated.            )
+  Solver   LU
+  ! Solver GELSS Condition = 1e-8
+END
+
+! These switches must be 0 (i.e. DF will be used for the nuclear integrals) when
+! using the MC auxiliary basis. This way you get a higher accuracy from a sysematic
+! cancellation of errors. 
+
+Set E1elst
+  Integral switch = 0
+End
+
+Set E1exch
+  Integral switch = 0
+End
+
+BEGIN energy-scan
+  !  Scan electrostatic potential on the specified grid
+  Scan molecule A with charge -1.0
+  ! For a scan with the partner molecule use:
+  !    Scan molecule A with B
+  ! For both scans combined:
+  !    Scan molecule A with B and with charge -1.0
+  Energies E1elst  ( E1exch & Overlap )
+  Energy-file elst-scan
+  ! see user's guide for details
+  Units  Bohr Degree
+  Points
+    !  Provide points file (created by Orient or CamCASP)
+    !  Give full path or put the file in the job directory
+    !  e.g.
+    !  file /home/ajs1/molecules/piracetam/aug-cc-pVDZ_-63/piracetam_vdW1.50.pts
+    !  or make a symbolic link grid.pts to the appropriate file
+    !  If Traslations-Only is specified (as is done here) the format of points should be:
+    !  X1  Y1  Z1
+    !  X2  Y2  Z2
+    !  ...
+    !  Units are Bohr (see Units setting in this block)
+    !  If an initial index column is included as in:
+    !  1  X1  Y1  Z1
+    !  2  X2  Y2  Z2
+    !  .. ...
+    !  Then also include the command:
+    !   SKIP-FIRST-COLUMN
+    !  If the points are of the form (translation+angle-axis):
+    !  X1  Y1  Z1  ALPHA1  NX1  NY1  NZ1
+    !  X2  Y2  Z2  ALPHA2  NX2  NY2  NZ2
+    !  ...
+    !  Then delete the TRANSLATIONS-ONLY command.
+    !
+    Translations-Only
+    file  grid.pts
+  ---
+End
+
+End-CamCASP-commands

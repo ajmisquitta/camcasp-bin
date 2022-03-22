@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Usage:
+# nwchem.sh <datafile> [<cores>] 
+
+# This script uses the environment-modules package to set the necessary
+# environment variables and paths
+# Load the mpi and nwchem modules if not already loaded
+module is-loaded nwchem || module load mpi/openmpi/64/gnu nwchem
+# or whatever may be needed to set up parallel processing
+
+# If the second argument is present and greater than 1, run in parallel,
+# using the specified number of cores.
+# "${2:-0}" provides "0" if $2 is unset.
+if (( ${2:-0} > 1 )); then
+  mpirun -np $2 nwchem $1
+else
+# Otherwise just run serially 
+  nwchem $1
+fi
+
+# If nwchem is not in the PATH it is necessary to replace "nwchem"
+# above by the full path to the nwchem executable, or to set
+# CamCASP/bin/nwchem as a symbolic link to it.

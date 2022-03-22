@@ -1,0 +1,520 @@
+#!/usr/bin/python
+#  -*-  coding:  iso-8859-1  -*-
+
+"""Read basis set and wavefunction information from an FCHK file
+"""
+
+import argparse
+import re
+import os.path
+import string
+import numpy as np
+# import subprocess
+
+parser = argparse.ArgumentParser(
+formatter_class=argparse.RawDescriptionHelpFormatter,
+description="""Read basis set and wavefunction information from an FCHK file.
+""",epilog="""
+E.g.
+$CAMCASP/interfaces/psi4/readfchk.py H2Odimer_A.fchk --prefix dimer-A \\
+    --verbose --dalton --sites H2Odimer.sites
+
+It is important to provide a .sitenames file as CamCASP needs to have the
+correct site labels attached to the basis set definitions -- they are not
+included in the .fchk file. A .sites file can be used for a single-molecule
+calculation but not for sapt(dft) or delta-hf.
+""")
+
+
+parser.add_argument("fchk", help="Path to fchk file")
+parser.add_argument("--prefix", help="prefix for movecs and basis set files")
+parser.add_argument("--dalton", action="store_true",
+                    help="Reorder basis function components for dalton") 
+parser.add_argument("--molecule", help="Molecule name")
+parser.add_argument("--labels", help="File containing site labels")
+parser.add_argument("--sites", help="File containing the site list")
+parser.add_argument("--basis", help="Suffix for basis-function file", default=".basis")
+vb = parser.add_mutually_exclusive_group()
+vb.add_argument("--verbose", "-v", help="More output", action="store_true")
+vb.add_argument("--quiet", help="Less output", dest="verbose",
+                    action="store_false")
+parser.add_argument("--debug", help="Extra output for debugging",
+                    action="store_true")
+
+args = parser.parse_args()
+verbose = args.verbose
+
+element = [" ", "H ", "He",
+    "Li", "Be", "B ", "C ", "N ", "O ", "F ", "Ne",
+    "Na", "Mg", "Al", "Si", "P ", "S ", "Cl", "Ar",
+    "K ", "Ca", "Sc", "Ti", "V ", "Cr", "Mn", "Fe", "Co", "Ni",
+    "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr",
+    "Rb", "Sr", "Y ", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd",
+    "Ag", "Cd", "In", "Sn", "Sb", "Te", "I ", "Xe"]
+
+size = {
+  -4: 9,
+  -3: 7,
+  -2: 5,
+  -1: 4,
+  0: 1,
+  1: 3,
+  2: 6,
+  3: 10,
+  4: 15,
+}
+csize = {
+  -4: 15,
+  -3: 10,
+  -2: 6,
+  -1: 4,
+  0: 1,
+  1: 3,
+  2: 6,
+  3: 10,
+  4: 15,
+}
+label = {
+  -5: "h(s)",
+  -4: "g(s)",
+  -3: "f(s)",
+  -2: "d(s)",
+  -1: "sp  ",
+  0: "s",
+  1: "p",
+  2: "d(c)",
+  3: "f(c)",
+  4: "g(c)",
+  5: "h(c)"
+}
+  
+
+def getint(n):
+  #  Read a list of n integers, possibly running over several lines
+  global line, text
+  list = []
+  for i in range(n):
+    if re.match(r' *$', line):
+      line = IN.readline()
+    m = re.match(r' *(-?\d+)', line)
+    if m:
+      list.append(int(m.group(1)))
+      line = re.sub(r' *(-?\d+)', '', line, count=1)
+    else:
+      print "Not enough numbers for ", text
+  return list
+
+def getfloat(n):
+  #  Read a list of n floats, possibly running over several lines
+  global line, text
+  list = []
+  # if args.debug:
+  #   print line,
+  for i in range(n):
+    if re.match(r'^ *$', line):
+      line = IN.readline()
+    m = re.match(r' *(-?\d+\.\d+e[+-]?\d+)', line)
+    if m:
+      list.append(float(m.group(1)))
+      line = re.sub(r' *(-?\d+\.\d+e[+-]?\d+)', '', line, count=1)
+    else:
+      print "Not enough numbers for ", text
+  return list
+
+#  Read atom names from labels (.sitenames) file, if provided.
+site = []
+sitetype = []
+if args.labels and os.path.exists(args.labels):
+  with open(args.labels) as S:
+    for line in S:
+      v = line.split()
+      site.append(v[0])
+      if len(v) > 1:
+        sitetype.append(v[1])
+      else:
+        #  No type specified
+        sitetype.append("")
+#  Alternatively use a .sites file, if present.
+elif args.sites and os.path.exists(args.sites):
+  with open(args.sites) as S:
+    for line in S:
+      m = re.match(r' +\@?(\w+) +-?\d+\.\d+', line)
+      if m:
+        site.append(m.group(1))
+        m = re.search(r'Type +(\w+)', line)
+        if m:
+          sitetype.append(m.group(1))
+        else:
+          sitetype.append("")
+else:
+  print "No site or label file found"
+  exit(1)
+if verbose:
+  print("Sites and sitetypes follow: {} ".format(len(site)))
+  for i in range(len(site)):
+    print(" site = {}   sitetype = {} ".format(site[i], sitetype[i]))
+
+# AJM : This parser needs to be changed. It is fragile and very sensitive to 
+#       formatting of the FCHK file. Either we use reg-exps or pyparsing to 
+#       parse the lines.
+  
+#  Now read the fchk file      
+nobeta = 0
+with open(args.fchk) as IN:
+  line = "--"
+  while line != "":
+    line = IN.readline()
+    if args.debug:
+      print line,
+    if len(line) < 40:
+      continue
+    text = line[:40].rstrip()
+    type = line[43:44]
+    ww = line[47:49]
+    ff = 0.0
+    nn = 0
+    if type == "I" or ww == "N=":
+      nn = int(line[50:61])
+    elif type == "R":
+      ff = float(line[48:])
+    if ww == "N=":
+      line = IN.readline()
+
+    if args.debug:
+      print text, "{}  {}{:1d}".format(type,ww,nn) 
+      # print line,
+
+    if text == "":
+      continue
+    elif text == "Number of atoms":
+      natoms = nn
+      zan = []; name = []
+      if verbose:
+        print "{:1d} atoms".format(natoms)
+    elif text == "Charge":
+      ich = nn
+      if verbose:
+        print "Charge {:1d}".format(ich)
+    elif text == "Multiplicity":
+      mul = nn
+      if verbose:
+        print "Multiplicity {:1d}".format(mul)
+    elif text == "Number of electrons":
+      nelec = nn
+      if verbose:
+        print "{:1d} electrons".format(nelec)
+    elif text == "Number of basis functions":
+      nbasis = nn
+      if verbose:
+        print "{:1d} basis functions".format(nbasis)
+    elif text == "Number of independent functions":
+      n_independent_functions = nn
+      if verbose:
+          print "{:1d} independent functions".format(n_independent_functions)
+    elif text == "Number of contracted shells":
+      nshell = nn
+      if verbose:
+        print "{:1d} shells".format(nshell)
+    elif text == "Highest angular momentum":
+      maxl = nn
+      if verbose:
+        print "Highest angular momentum {:1d}".format(maxl)
+    elif text == "Largest contraction depth":
+      cmax = nn
+      if verbose:
+        print "Largest contraction depth {:1d}".format(cmax)
+    elif text == "Number of primitive shells":
+      nprim = nn
+      if verbose:
+        print "{:1d} primitive shells".format(nprim)
+    elif text == "Atomic numbers":
+      zan = getint(natoms)
+      if site:
+        name = site
+      else:
+        name = []
+        i = 0
+        for z in zan:
+          i += 1
+          name.append("{:1s}{:1d}".format(element[z].rstrip(),i))
+      if verbose:
+        print "Atoms:  ",
+        start = 0
+        while start < len(zan):
+          if start > 0:
+            print "        ",
+          end = min(len(zan),start+12)
+          for i in range(start,end):
+            print "{:5s}".format(name[i]),
+          print ""
+          start += 16
+    elif text == "Nuclear charges":
+      zch = getfloat(natoms)
+    elif text == "Current cartesian coordinates":
+      coords = []
+      for i in range(natoms):
+        c = getfloat(3)
+        coords.append([c[0], c[1], c[2]])
+        if verbose:
+          print "{:3s} {:4.1f} {:10.5f} {:10.5f} {:10.5f}".format(
+            name[i], zan[i], c[0], c[1], c[2])
+    elif text == "Shell types":
+      #  shell_start[k] is the first basis function of shell k.
+      shell_start = []
+      nbas = 0
+      ncart = 0
+      shell_type = getint(nshell)
+      for t in shell_type:
+        shell_start.append(nbas)
+        nbas += size[t]
+        ncart += csize[t]
+      # if args.debug:
+      #   print "Shell types:"
+      #   print shell_type
+      #   print shell_start
+      if verbose:
+        print "{:1d} basis functions".format(nbas)
+        if ncart > nbas:
+          print "({:1d} after conversion to cartesian)".format(ncart)
+    elif text == "Number of primitives per shell":
+      kng = getint(nshell)
+      k = 0
+      kstart = []
+      for ng in kng:
+        kstart.append(k)
+        k += ng
+      if verbose:
+        s = "Contraction depths: "
+        start = 0
+        while start < len(kng):
+          print s,
+          end = min(len(kng),start+20)
+          for i in range(start,end):
+            print "{:2d}".format(kng[i]),
+          print ""
+          start += 20
+          s = "                    "
+        print "Total number of primitives = {:1d}".format(k)
+      if k != nprim:
+        print "Shell contractions do not match number of primitives"
+    elif text == "Shell to atom map":
+      katom = getint(nshell)
+      if verbose:
+        print("katom nshell = {}".format(nshell))
+        print(katom)
+    elif text == "Primitive exponents":
+      ex = getfloat(nprim)
+    elif text == "Contraction coefficients":
+      cs = getfloat(nprim)
+      cp = [0.0 for i in range(nprim)]
+    elif text == "P(S=P) Contraction coefficients":
+      temp = getfloat(nn)
+      for i in range(nshell):
+        if shell_type[i] == -1:
+          for j in range(kstart[i],kstart[i]+kng[i]):
+            cp[j] = temp.pop(0)
+    elif text == "Total Energy":
+      energy = ff
+      if verbose:
+        print "Total energy = {:20.12f}".format(energy)
+    elif text == "Alpha Orbital Energies":
+      noalpha = nn
+      ealpha = getfloat(nn)
+      # If this is a closed-shell system, only the Alpha energies will be
+      # given in the fchk file.
+      if verbose:
+          print "{:1d} Alpha Orbital Energies (not printing them)".format(noalpha)
+    elif text == "Beta Orbital Energies":
+      nobeta = nn
+      ebeta = getfloat(nn)
+      if verbose:
+          print "{:1d} Beta Orbital Energies (not printing them)".format(nobeta)
+    elif text == "orbital energies":
+      # Needed for Psi4 1.2
+      noalpha = nn
+      nobeta = nn
+      ealpha = getfloat(nn)
+      ebeta  = ealpha  # not sure if we need a copy here
+    elif text == "Alpha MO coefficients":
+      if nn != nbasis*noalpha:
+        print "Inconsistency in number of alpha coefficients"
+        print " nbasis = {:1d}    noalpha = {:1d}   num MO coeffs = {:1d}".format(nbasis,noalpha,nn)
+        exit(1)
+      alphamo = []
+      for j in range(noalpha):
+        mocoeff =  getfloat(nbasis)
+        alphamo.append(mocoeff)
+    elif text == "Beta MO coefficients":
+      if nn != nbasis*nobeta:
+        print "Inconsistency in number of beta coefficients"
+        exit(1)
+      betamo = []
+      for j in range(nobeta):
+        mocoeff =  getfloat(nbasis)
+        betamo.append(mocoeff)
+    elif text == "MO coefficients (C)":
+      # Needed for Psi4 1.2
+      if nn != nbasis*noalpha:
+        print "Inconsistency in number of alpha/beta coefficients"
+        exit(1)
+      alphamo = []
+      for j in range(noalpha):
+        mocoeff =  getfloat(nbasis)
+        alphamo.append(mocoeff)
+      betamo = alphamo
+    else:
+      #  Ignore this section
+      #  We need to read past any data in the section
+      if nn > 0 and ww == "N=":
+        if type == "I":
+          getint(nn)
+        elif type == "R":
+          getfloat(nn)
+
+if verbose:
+  print "End of file {}".format(args.fchk)
+
+#  Check that alpha and beta energies match, if both provided.
+if nobeta > 0:
+  for i in range(noalpha):
+    if abs(ealpha[i]-ebeta[i]) > 1.0e-10:
+      print "This appears to be an open-shell system -- alpha and beta energies differ"
+      exit(2)
+
+# if args.debug:
+#   print alphamo[0]
+
+#  We now have the MOs in the array alphamo (or betamo), each element of
+#  which is an array of length nbasis. We express it as a numpy array.
+mopsi4 = np.array(alphamo)
+# if args.debug:
+#   print mopsi4[0,:]
+#  Each MO is a row of this array
+# movecs = np.array(alphamo)
+if args.dalton:
+  #  We have to define a new array for movecs -- trying to copy mopsi4
+  #  just makes movecs a pointer to the same array.
+  movecs = np.zeros((noalpha,nbasis))
+  #  To provide for different indexing of the basis function components, we
+  #  need to re-order the columns of the array.
+  for k in range(len(shell_type)):
+    start = shell_start[k]
+    t = shell_type[k]
+    end = start + size[t]
+    if t == 0:
+      #  s function
+      movecs[:,start] = mopsi4[:,start]
+    elif t == 1:
+      #  p shell
+      #  psi4 and dalton both in order x, y, z
+      movecs[:,start:start+3] = mopsi4[:,start:start+3]
+    elif t == -1:
+      #  sp shell
+      #  psi4 and dalton probably in order s, x, y, z
+      #  Not checked or tested
+      movecs[:,start:start+4] = mopsi4[:,start:start+4]
+    elif t == -2:
+      #  Spherical d shell. We need to reorder the components.
+      #  psi4 in order 0, 1c, 1s, 2c, 2s
+      # dalton in order 2s, 1s, 0, 1c, 2c
+      movecs[:,start] = mopsi4[:,start+4]
+      movecs[:,start+1] = mopsi4[:,start+2]
+      movecs[:,start+2] = mopsi4[:,start]
+      movecs[:,start+3] = mopsi4[:,start+1]
+      movecs[:,start+4] = mopsi4[:,start+3]
+    elif t == -3:
+      #  Spherical f shell.
+      #  psi4 in order 0, 1c, 1s, 2c, 2s, 3c, 3s
+      # dalton in order 3s, 2s, 1s, 0, 1c, 2c, 3c
+      movecs[:,start] = mopsi4[:,start+6]
+      movecs[:,start+1] = mopsi4[:,start+4]
+      movecs[:,start+2] = mopsi4[:,start+2]
+      movecs[:,start+3] = mopsi4[:,start]
+      movecs[:,start+4] = mopsi4[:,start+1]
+      movecs[:,start+5] = mopsi4[:,start+3]
+      movecs[:,start+6] = mopsi4[:,start+5]
+    elif t == -4:
+      #  Spherical g shell.
+      #  psi4 in order 0, 1c, 1s, 2c, 2s, 3c, 3s, 4c, 4s
+      # dalton in order 4s, 3s, 2s, 1s, 0, 1c, 2c, 3c, 4c
+      movecs[:,start] = mopsi4[:,start+8]
+      movecs[:,start+1] = mopsi4[:,start+6]
+      movecs[:,start+2] = mopsi4[:,start+4]
+      movecs[:,start+3] = mopsi4[:,start+2]
+      movecs[:,start+4] = mopsi4[:,start]
+      movecs[:,start+5] = mopsi4[:,start+1]
+      movecs[:,start+6] = mopsi4[:,start+3]
+      movecs[:,start+7] = mopsi4[:,start+5]
+      movecs[:,start+8] = mopsi4[:,start+7]
+else:
+  #  No change needed, so it's OK to point movecs at mopsi4
+  movecs = mopsi4
+
+#  Write the .movecs file
+
+movecs_file = "{}-asc.movecs".format(args.prefix)
+with open(movecs_file,"w") as V:
+  V.write("Source     Psi4 fchk file {}\n".format(args.fchk))
+  if args.dalton:
+    V.write("Title      M.O. coefficients re-ordered for dalton\n")
+  V.write("""BFNS       {:<6d}
+NMOS       {:<6d}
+Energies   {:<6d}
+""".format(nbasis,noalpha,noalpha))
+  start = 0
+  while start < noalpha:
+    end = min(start+5,noalpha)
+    for i in range(start,end):
+      V.write("{:16.8e}".format(ealpha[i]))
+    V.write("\n")
+    start += 5
+    
+
+  # Dimensions:
+  #   ealpha[noalpha]
+  #   movecs[noalpha,nbasis]
+  for i in range(noalpha):
+    V.write("\nMO {:1d}  Energy {:16.8e}\n".format(i+1,ealpha[i]))
+    start = 0
+    while start < nbasis:
+      end = min(start+5,nbasis)
+      for j in range(start,end):
+        V.write("{:16.8e}".format(movecs[i,j]))
+      V.write("\n")
+      start += 5
+
+  V.write("END")
+
+#  Print the basis functions
+
+basis_file = args.prefix + args.basis
+with open(basis_file,"w") as B:
+  atom = 0
+  for i in range(nshell):
+    if katom[i] != atom:
+      atom = katom[i]
+      a = atom - 1
+      if verbose:
+        print(" atom[{}] = {}".format(i,atom))
+        print(" arrays {} ".format(name[a]))
+        print(" arrays {} ".format(zch[a]))
+        print(" arrays {} {} {} ".format(coords[a][0],coords[a][1],coords[a][2]))
+        print(" arrays {} ".format(sitetype[a]))
+      if atom > 1: B.write("      ---\n")
+      B.write("    {:10s} {:5.1f}  {:15.8f} {:15.8f} {:15.8f} Type {:1s}\n".format(
+        name[a], zch[a], coords[a][0], coords[a][1], coords[a][2], sitetype[a]))
+    #  print "Shell {:3d}   {}".format(i+1,label[shell_type[i]])
+    B.write(" {:1s}  {:1d}\n".format(label[shell_type[i]][0].upper(),kng[i]))
+    n = 0
+    for k in range(kng[i]):
+      j = kstart[i]+k
+      n += 1
+      if shell_type[i] == 0:
+        B.write("{:6d} {:16.8f} {:14.8f}\n".format(n,ex[j],cs[j]))
+      elif shell_type == 1:
+        B.write("{:6d} {:16.8f} {:14.8f}\n".format(n,ex[j],cs[j]))
+      elif shell_type == -1:
+        B.write("{:6d} {:16.8f} {:14.8f} {:14.8f}\n".format(n,ex[j],cs[j],cp[j]))
+      else:
+        B.write("{:6d} {:16.8f} {:14.8f}\n".format(n,ex[j],cs[j]))
+  B.write("      ---\n")

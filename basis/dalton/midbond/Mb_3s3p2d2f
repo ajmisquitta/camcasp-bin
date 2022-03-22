@@ -1,0 +1,30 @@
+!
+! Large-1
+! 3s3p2d2f mid-bond set
+! Podeszwa et al. J. Phys. Chem. A, Vol. 110, No. 34, 2006
+!
+! S-TYPE FUNCTIONS
+!
+F   3   3
+  0.9   1.0  0.0  0.0
+  0.3   0.0  1.0  0.0
+  0.1   0.0  0.0  1.0
+!
+! P-TYPE FUNCTIONS
+!
+F   3   3
+  0.9   1.0  0.0  0.0
+  0.3   0.0  1.0  0.0
+  0.1   0.0  0.0  1.0
+!
+! D-TYPE FUNCTIONS
+!
+F   2   2
+  0.6   1.0  0.0
+  0.2   0.0  1.0
+!
+! F-TYPE FUNCTIONS
+!
+F   2   2
+  0.6   1.0  0.0
+  0.2   0.0  1.0

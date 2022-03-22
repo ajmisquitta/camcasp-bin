@@ -1,0 +1,147 @@
+TITLE H2O
+TITLE Basis: aug-cc-pVTZ
+TITLE CalculationType: PROPERTIES
+
+MEMORY        1000 MB 
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code Dalton
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE H2Oa at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file water.asc.movecs
+   H1-file h1A.data
+   IP 0.0 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      O2         8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      H3         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+
+MOLECULE H2Ob at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file water.asc.movecs
+   H1-file h1A.data
+   IP 0.0 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      O2         8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      H3         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G   Min-S-Exp 0.0
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+
+Set DF
+  Eta = 0.0 
+  Lambda = 0.0 
+  Redo-DF-on-rotation true
+End
+
+Set DF-INT
+  DF-TYPE-DIMER OO
+  DF-TYPE-MONOMER NN
+End
+
+Set E1exch
+  Overlap integrals Algorithm DF
+  Integral switch = 1
+End
+Set E1elst
+  Integral switch = 1
+End
+
+Begin Energy-Scan
+  Scan H2Oa with H2Ob
+  Energies Overlap & E1elst & E1exch
+  Units Bohr
+  Points
+    Skip-first-column
+    #include random4.geom
+  ---
+End
+
+Finish

@@ -1,0 +1,8 @@
+to replace the 
+basis "..." SPHERICAL
+line with
+<symbol> 1.00
+! basis "..." SPHERICAL
+
+:map t n^i! ^[O****^[jj^vllykO^[pa  1.00^[
+

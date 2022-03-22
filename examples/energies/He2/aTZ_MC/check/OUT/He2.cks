@@ -1,0 +1,165 @@
+TITLE He1 and He2
+TITLE Basis aug-cc-pVTZ and type MC
+TITLE MidBonds NONE and type WEIGHTED
+TITLE CalculationType: SAPT(DFT)
+
+MEMORY       4096 MB
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE He1 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file He2-A-asc.movecs format ASCII-2
+   IP     0.903600 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format GAMESS
+      Type MC
+      He         2.0        0.00000000       0.00000000       0.00000000  TYPE He
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/He
+      ---
+   End
+   Basis Aux
+      CARTESIAN
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      He         2.0        0.00000000       0.00000000       0.00000000  TYPE He
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/He
+      ---
+      He         0.0        0.00000000       0.00000000       5.60000000  TYPE He
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/He
+      ---
+   End
+END
+
+MOLECULE He2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file He2-B-asc.movecs format ASCII-2
+   IP     0.903600 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format GAMESS
+      Type MC
+      He         2.0        0.00000000       0.00000000       5.60000000  TYPE He
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/He
+      ---
+   End
+   Basis Aux
+      CARTESIAN
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      He         2.0        0.00000000       0.00000000       5.60000000  TYPE He
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/He
+      ---
+      He         0.0        0.00000000       0.00000000       0.00000000  TYPE He
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/He
+      ---
+   End
+END
+BEGIN GRID
+  Molecule He1
+  Angular 200
+  Radial  100
+END
+
+BEGIN GRID
+  Molecule He2
+  Angular 200
+  Radial  100
+END
+
+SET NEW-PROP
+  Kernel ALDA
+  DF  ( For constrained DF use: C-DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 1000.0
+    FD-DELTA = 0.01
+    FD-ALPHA = 1.0
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+  SOLVER LU ( Options: GELSS )
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule He1
+  Type NN
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule He2
+  Type NN
+  Print only normalization constraints
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+BEGIN E1exch
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+BEGIN E2disp
+  Use the N3 algorithm
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  Regularise Eta = 3.0
+  Integral Switch = 0
+  Amplitude-Type COUPLED
+END
+
+FINISH

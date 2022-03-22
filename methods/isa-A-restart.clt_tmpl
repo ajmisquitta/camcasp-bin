@@ -1,0 +1,67 @@
+Title  Template Cluster file for an isa-A-restart job
+
+! Notes
+! -----
+! An ISA A calculation uses the ISA A functional only.
+! This implies that different basis sets can be used for the
+! density-fitting (the AUX basis) and the atomic basis sets
+! that are used for the ISA expansions (the ATOMAUX basis).
+! HOWEVER, convergence seems more reliable if these are kept
+! the same. 
+!
+! Here we have assumed you have performed an ISA calculation
+! (any type) and have a *.ISA file present.
+! This job will restart the ISA-A algorithm using the ISA
+! shape-function expansions present in that file. 
+!
+! Restarts are useful when you need molecular properties
+! calculated to a higher accuracy. In this example we achieve this
+! using a potentially more accurate density-fitting with the 
+! Cartesian form of the AUX basis. 
+! 
+! AtomAux can use Cartesian GTOs in a RESTART but ONLY if no
+! iterations are performed (this is the default).
+!
+! CamCASP version: >= 6.0.14
+
+Molecule  MOL
+  UNITS  Bohr
+  IP     0.0 a.u.              ( the AC needs the IP. )
+  X   Z    Rx   Ry   Rz
+  ...
+End
+
+Show MOL in XYZ format         ( always a useful check )
+
+Run-Type
+  CamCASP-Only                 ( as this is a restart, you will already have the      )
+                               ( *.movecs file. So all you need is a new CamCASP file )
+  Molecule     MOL
+
+  ! In this example the AUX basis is aVTZ (RI basis) and ATOMAUX is aVQZ(RI)+ISAset
+  ! Here the AUX is the standard AUX basis with Cartesian GTOs.
+  ! The ATOMAUX basis should have the same s-functions as were
+  ! used in the original ISA-A calculation. The higher angular functions can 
+  ! be different.
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Spherical   No-ISA-Basis  ( this is the standard density-fitting basis )
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis  ( can be Cartesian for a RESTART )
+  ISA-Basis      set2   Min-S-exp-H = 0.2   
+                               ( convergence tends to be better with this setting )
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the actual MO file )
+
+  File-Prefix  MOL-ISA-A-restart  ( change this to something reasonable )
+
+  #METHOD      isa-A-restart   ( this will use the file isa-A-restart from the methods/ directory )
+
+End
+
+Finish
+

@@ -1,0 +1,38 @@
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule C2H2
+  Units Bohr
+  AC-Shift 0.104296    a.u.
+  IP       0.414262    a.u.
+  C   6.0    0.000000000    0.000000000   -1.136481209  Type C
+  C   6.0    0.000000000    0.000000000    1.136481210  Type C
+  H   1.0    0.000000000    0.000000000   -3.142992264  Type H
+  H   1.0    0.000000000    0.000000000    3.142992264  Type H
+End
+
+Run-Type
+  Properties
+  Molecule     C2H2
+  File-Prefix  C2H2_aVTZ
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Cartesian   Use-ISA-Basis
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis
+  ISA-Basis      set2   Min-S-exp-H = 0.0   
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           GRAC            ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     Psi4            ( DALTON2015, NWCHEM, etc )
+
+  ! MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file if available )
+
+  #METHOD      wxhole-pols
+
+End
+
+Finish
+

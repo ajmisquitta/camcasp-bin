@@ -1,0 +1,57 @@
+ ================================================================
+ Compiled on Sep 12 2012 at 14:26:47
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22334
+ Working directory: 
+     /scratch/alston/He2-DCaux-scan_14-30-08
+ Running on: mmp12
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{exch}(S2)            0.1141137E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1957368E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{2}_{ind}                -0.1969265E+00        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.1966332E+00        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.4326280E+00        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{disp}               -0.4444262E+02        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.5090301E+02        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.1064119E+01        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.1218805E+01        CM-1     DF :: NoReg :: PROP UC                                      
+E^{1}_{exch}(S2)            0.2956219E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5151759E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{2}_{ind}                -0.2545573E-01        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.2464329E-01        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.5462962E-01        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{disp}               -0.2359192E+02        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.2690769E+02        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.3320149E+00        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.3786786E+00        CM-1     DF :: NoReg :: PROP UC                                      
+E^{1}_{exch}(S2)            0.5893590E+01        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1000291E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{2}_{ind}                -0.3531644E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.2108902E-02        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.4592159E-02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{disp}               -0.1179890E+02        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.1332378E+02        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.7092414E-01        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.8009028E-01        CM-1     DF :: NoReg :: PROP UC                                      
+E^{1}_{exch}(S2)            0.2139441E+01        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3348217E+00        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{2}_{ind}                -0.2809290E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.4307350E-03        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.9499262E-03        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{disp}               -0.7728426E+01        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.8650347E+01        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.2354581E-01        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.2635458E-01        CM-1     DF :: NoReg :: PROP UC                                      
+--------------------------------------------------------------------------------

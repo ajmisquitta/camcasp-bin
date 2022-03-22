@@ -1,0 +1,33 @@
+ ================================================================
+ Compiled on Sep 12 2012 at 14:26:47
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22334
+ Working directory: 
+     /scratch/alston/water2_tzvpp_14-38-59
+ Running on: mmp12
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{exch}(S2)            0.1848879E+03        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1053812E+03        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9411196E+02        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.6674150E+02        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2425771E+02        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2982820E+02        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4698476E+01        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1322441E+02        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9205965E+00        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.7251373E+01        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1849292E+00        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4579911E+01        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4854926E-01        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3119905E+01        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6725593E-02        KJ/MOL   DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1649470E+01        KJ/MOL   mol-mol :: DF  :: NoReg                                     
+--------------------------------------------------------------------------------

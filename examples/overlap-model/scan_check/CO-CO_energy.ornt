@@ -1,0 +1,104 @@
+! To obtain the file with default values use:
+! $CAMCASP/bin/replace < CO-CO_energy.ornt
+! Use a standard redirect to place the output in a  new file
+! Alternatively use:
+! $CAMCASP/bin/replace < CO-CO_energy.ornt | $CAMCASP/bin/orient > CO-CO_energy.ornt.out
+
+UNITS BOHR
+
+Parameters
+      Sites      8 polarizable      8
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      C          Z     6
+      O          Z     8
+      C          Z     6
+      O          Z     8
+End
+
+Variables
+   Rx 0.0 B
+   Ry 0.0 B
+   Rz 0.0 B
+   alpha 0.0 D
+   Nx 0.0
+   Ny 0.0
+   Nz 0.0
+   Index 0
+End
+
+Molecule  CO_1 at  0.0 0.0 0.0 rotated by 0.0 about 1.0 0.0 0.0
+  ! Units BOHR
+  C1          0.00000000    0.00000000   -1.20270254   Type C
+  O1          0.00000000    0.00000000    0.90202691   Type O
+  #include CO_1_DMA2_L4.mom
+End
+Edit CO_1
+   #include CO_1.axes
+   Bonds Auto
+End
+Polarizabilities for CO_1
+   ! Assumed that the pols are in the local-axes
+   ! So they are read after axes are defined
+   Read rank <WSMLIMIT! 2>
+     #include CO_1_ref_wt4_L<WSMLIMIT!2>_static.pol
+   End
+   Limit rank <WSMLIMIT! 2> for +++
+       C1 O1
+End
+
+
+Molecule  CO_1 at  Rx  Ry  Rz ROTATED BY alpha ABOUT Nx  Ny  Nz
+  ! Units BOHR
+  C1          0.00000000    0.00000000   -1.20270254   Type C
+  O1          0.00000000    0.00000000    0.90202691   Type O
+  #include CO_1_DMA2_L4.mom
+End
+Edit CO_1
+   #include CO_1.axes
+   Bonds Auto
+End
+Polarizabilities for CO_1
+   ! Assumed that the pols are in the local-axes
+   ! So they are read after axes are defined
+   Read rank <WSMLIMIT! 2>
+     #include CO_1_ref_wt4_L<WSMLIMIT!2>_static.pol
+   End
+   Limit rank <WSMLIMIT! 2> for +++
+       C1 O1
+End
+
+Pairs
+   Dispersion damping factor <BETA!10.0>
+   Induction  damping factor <BETA!10.0>
+   #include <POTENTIAL!CO-CO.pot>
+End
+
+Units Bohr kJ/mol
+
+! For Iterated induction set Iterate ON
+! Control the number of iterations using the OPTIONS block
+Switch Induce On Iterate Off
+Options
+   ! Setting Iterations = -1 to stop all iterations
+   ! This gives the second-order induction energy
+   Induction Iterations -1  Convergence 1e-12
+End
+
+! Either calculate the energy for a single geometry using:
+! Energy Details
+! Or calculate energy for a set of geometries as follows:
+
+Energy Table Format f12.6 Print es er ind disp total
+   Variables
+   Index   Rx   Ry   Rz   alpha  Nx  Ny  Nz
+   #include <GEOMFILE!CO-CO.geom>
+End
+
+
+Finish

@@ -1,0 +1,7 @@
+All auxiliary bases are in TURBOMOLE format.
+
+The sv svp tz tzp tzvpp directories contain the J-basis sets. 
+These are to be used for fitting the density. The others should be
+used for fitting the transition densities.
+
+There are no auxiliary bases for the d-aug-cc-pVTZ main basis.

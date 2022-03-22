@@ -1,0 +1,243 @@
+CamCASP-commands
+
+! The grid matters here. These parameters should be sufficient.
+ 
+BEGIN GRID
+  Molecule  A
+  Angular 200
+  Radial  100
+END
+ 
+BEGIN GRID
+  Molecule  B
+  Angular 200
+  Radial  100
+END
+ 
+! Set this to FALSE as the auxiliary basis sets are type-MC
+ 
+SET DF
+  REDO-DF-ON-ROTATION   False
+END
+ 
+! Perform the OO-type density fitting for each of the monomers
+ 
+BEGIN DF
+  Molecule  A
+  Type OO
+  Eta    = 0.0 
+  Lambda = 0.0 
+  Gamma  = 0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+BEGIN DF
+  Molecule  B
+  Type OO
+  Eta    = 0.0 
+  Lambda = 0.0 
+  Gamma  = 0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 541
+End
+
+! Setting for the ISA calculation. But we do not perform the ISA here:
+! We read a pre-computed solution from file using the RESTART block.
+ 
+Begin Stockholder
+  Molecule  A
+  ISA-Algorithm A
+  DF = Drho
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  Solver BVLS    Alpha-Max = 0.5   ( Options are: LU, GELSS, BVLS )
+  !  Symmetry
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only Couple  Switch-On-Eps-Norm = 1.0e-04
+    Positive-W   Lambda = 0.0001 for Max-Alpha = 2.0  AUTO
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    NO-FIX  ( This should be used with the BVLS solver. Not recommended for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+  Restart
+    File    DEFAULT
+    Iterate No
+    Test    Yes
+  End
+End
+ 
+! Useful to calculate multipole to make sure it was all OK
+! Note that without iterations these may not come out accurate.
+ 
+Begin Multipoles
+  Molecule  A
+  DF without Constraints  Type ISA
+  Rank      4
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+Begin Multipoles
+  Molecule  A
+  Rank      4
+  DF without Constraints  Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+ 
+! Same for the second molecule
+ 
+Begin Stockholder
+  Molecule  B
+  DF = Drho
+  ISA-Algorithm A 
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  Solver BVLS    Alpha-Max = 0.5   ( Options are: LU, GELSS, BVLS )
+  !  Symmetry
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 60
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only Couple  Switch-On-Eps-Norm = 1.0e-04
+    Positive-W   Lambda = 0.0001 for Max-Alpha = 2.0  AUTO
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    NO-FIX  ( This should be used with the BVLS solver. Not recommended for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+  Restart
+    File   DEFAULT
+    Iterate No
+    Test    Yes
+  End
+End
+  
+Begin Multipoles
+  Molecule  B
+  DF without Constraints  Type ISA
+  Rank      4
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+Begin Multipoles
+  Molecule  B
+  Rank      4
+  DF without Constraints  Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+ 
+! Integral switches in the energy modules
+ 
+Set E1elst
+  Integral switch = 0
+End
+Set E1exch
+  ! Overlap integrals Algorithm DF without constraints
+  Integral switch = 0
+End
+ 
+! This is where the distributed density-overlap parameters are set.
+! We use the ISA-based partitioning on a density obtained using DF without
+! constraints. The ISA-based partitioning algorithm can be done
+! in basis-space (not a good idea) or in real-space. The latter is
+! much more accurate, but takes longer.
+! We set the grid parameters for the integration. These parameters
+! are known to work well.
+!
+! About the options:
+! Type    : which algorithm. ISA or DF. ISA is used here and it
+!           uses the ISA definition of the atoms-in-a-molecule.
+!           DF uses density-fitting and is less reliable.
+! DF-type : Used to define the density used in the partitioning. 
+!           Options are OO and RHO with or without constraints.
+!           In practice it is the constraints that matter most.
+!           The charge conservation constraint (LAMBDA) is a good 
+!           idea.
+! ISA-DIST-TYPE : Sets the kind of distribution scheme used with the
+!           ISA type of distribution. Options are BASIS and GRID.
+! DF-INTEGRAL-SWITCH : Sets the type of integral used for the 
+!           one-electron overlap integral. 1: no density fitting,
+!           0: density fitting. This has an effect only for TYPE DF.
+! Integration-Grid : Set the integration grid parameters used for the 
+!           ISA GRID option. A fine grid would use 60 radial and 400 angular
+!           points per atom, but this can be excessive.
+! ISA-Options : Set various options for the ISA partitioning. 
+!           TAIL-FIX can be used to 'fix' the ISA tails. This may or
+!           may not be a good idea. It seems to depend on how the tail
+!           fix is defined (obviously).
+! Print-Results : Print out the distribution results. Useful only when 
+!           testing the module as there can be a lot of information
+!           printed out.
+ 
+Set Dist-Dens-Overlap
+  Type          ISA
+  DF-Type       OO without constraints
+  ISA-DIST-TYPE GRID                            ( this is the more efficient algorithm )
+  Dimer-Neighbourhood  TYPE = OVR   EPS = 0.01  ( Controls the integral grids )
+  Integration-Grid  Radial 40  Angular 200      ( Integration grid quality )
+  ISA-Options       TAIL-FIX = False            ( Do not use the Tail-Fix for the ISA )
+  DF-INTEGRAL-SWITCH = 0                        ( Applies to TYPE DF only )
+  Print-Results No
+End
+
+! Set the integral switches to default to type OO integrals
+! This is adequate as long as we are computing first-order energies only.
+ 
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER   OO
+  DF-TYPE-DIMER     OO
+END
+
+SET DF 
+  REDO-DF-ON-ROTATION   False   ( Where possible, rotate the DF solution )
+END
+
+! Energy-scan for E(1)elst and overlap only. The former cost nothing
+! more and server as a check on the results.
+!
+! If you also include E1exch then you can make a plot of 
+! E1exch vs the total overlap 'energy' in the file energy_file.dat
+! and see if there is a correlation. There should be!
+!
+! E1elst will not be believable as we have used monomer basis sets
+! in this calculation, and we need at least a DC auxiliary basis to 
+! get this energy correctly.
+ 
+Begin Energy-Scan
+  Energy  E1elst & Overlap & E1exch 
+  Units Bohr Degree
+  ! The dimer geometries should be in a file called dimers.geom:
+  Points
+     Skip-First-Column  ( skips the INDEX column. Comment out if no INDEX present. )
+     File dimers.geom
+  ---
+End
+ 
+End-CamCASP-commands

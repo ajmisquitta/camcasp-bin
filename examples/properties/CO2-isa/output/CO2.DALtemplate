@@ -1,0 +1,21 @@
+INTGRL
+  CO2
+  Basis is aug-cc-pVTZ
+Spherical  Atomtypes=  3 Charge=   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! CO2
+!
+Charge=  8.0  Atoms=1 Blocks=4 1 1 1 1
+O1               0.00000000         0.00000000         2.19605057
+#include  aug-cc-pVTZ/O
+!
+Charge=  6.0  Atoms=1 Blocks=4 1 1 1 1
+C                0.00000000         0.00000000         0.00000000
+#include  aug-cc-pVTZ/C
+!
+Charge=  8.0  Atoms=1 Blocks=4 1 1 1 1
+O2               0.00000000         0.00000000        -2.19605057
+#include  aug-cc-pVTZ/O
+!

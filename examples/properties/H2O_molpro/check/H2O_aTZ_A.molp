@@ -1,0 +1,28 @@
+text, Properties:  H2O Method: PBE0
+memory,   1,G
+gprint,basis
+gthresh,energy=1d-8,orbital=1d-7,grid=1d-8
+text,H2O_aTZ_A
+ 
+charge=    0
+bohr
+noorient
+symmetry,nosym
+geometry={
+   O             0.00000000       0.00000000       0.00000000
+   H1           -1.45365196       0.00000000      -1.12168732
+   H2            1.45365196       0.00000000      -1.12168732
+}
+
+basis={
+set,orbital
+default,aug-cc-pVTZ
+}
+
+{ks,pbe0
+ save,2100.2
+}
+
+{matrop
+ export,2100.2,H2O_aTZ_A.movecs
+}

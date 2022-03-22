@@ -1,0 +1,22 @@
+Polarizabilities
+     O  O    10   10 =       O_10_10_A
+     O  O    10   20 =       O_10_20_A
+     O  O    10  22c =      O_10_22c_A
+     O  O   11c  11c =     O_11c_11c_A
+     O  O   11c  21c =     O_11c_21c_A
+     O  O   11s  11s =     O_11s_11s_A
+     O  O   11s  21s =     O_11s_21s_A
+     O  O    20   20 =       O_20_20_A
+     O  O    20  22c =      O_20_22c_A
+     O  O   21c  21c =     O_21c_21c_A
+     O  O   21s  21s =     O_21s_21s_A
+     O  O   22c  22c =     O_22c_22c_A
+     O  O   22s  22s =     O_22s_22s_A
+
+     H1  H1    10   10 =      H1_10_10_A
+     H1  H1    10  11c =     H1_10_11c_A
+     H1  H1   11c  11c =    H1_11c_11c_A
+     H1  H1   11s  11s =    H1_11s_11s_A
+     H2  H2   COPY   H1  H1
+
+End

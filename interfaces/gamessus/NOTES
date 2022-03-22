@@ -1,0 +1,12 @@
+Search for the following from the GAMESS(US) output file:
+ NUMBER OF CARTESIAN ATOMIC ORBITALS=         43
+ TOTAL NUMBER OF MOS IN VARIATION SPACE=      41
+ NUMBER OF ELECTRONS                          =    8
+ CHARGE OF MOLECULE                           =    0
+ SPIN MULTIPLICITY                            =    1
+ NUMBER OF OCCUPIED ORBITALS (ALPHA)          =    4
+ NUMBER OF OCCUPIED ORBITALS (BETA )          =    4
+ TOTAL NUMBER OF ATOMS                        =    3
+
+Quantities needed by interface code:
+

@@ -1,0 +1,108 @@
+! To obtain the file with default values use:
+! $CAMCASP/bin/replace < H2O2_energy.ornt
+! Use a standard redirect to place the output in a  new file
+! Alternatively use:
+! $CAMCASP/bin/replace < H2O2_energy.ornt | $CAMCASP/bin/orient > H2O2_energy.ornt.out
+
+UNITS BOHR
+
+Parameters
+      Sites     10 polarizable     10
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      O1         Z     8
+      H1         Z     1
+      H2         Z     1
+      O1         Z     8
+      H1         Z     1
+      H2         Z     1
+End
+
+Variables
+   Rx 0.0 B
+   Ry 0.0 B
+   Rz 0.0 B
+   alpha 0.0 D
+   Nx 0.0
+   Ny 0.0
+   Nz 0.0
+   Index 0
+End
+
+Molecule  water1 at  0.0 0.0 0.0 rotated by 0.0 about 1.0 0.0 0.0
+  ! Units BOHR
+  O1          0.10880900    0.00000000   -0.06077600   Type O1
+  H1         -0.16161460    0.00000000    1.75530702   Type H1
+  H2         -1.57933347    0.00000000   -0.78289890   Type H2
+  #include water1_DMA2_L4.mom
+End
+Edit water1
+   #include water1.axes
+   Bonds Auto
+End
+Polarizabilities for water1
+   ! Assumed that the pols are in the local-axes
+   ! So they are read after axes are defined
+   Read rank <WSMLIMIT! 2>
+     #include water1_ref_wt4_L<WSMLIMIT!2>_static.pol
+   End
+   Limit rank <WSMLIMIT! 2> for +++
+       O1 H1 H2
+End
+
+
+Molecule  water1 at  Rx  Ry  Rz ROTATED BY alpha ABOUT Nx  Ny  Nz
+  ! Units BOHR
+  O1          0.10880900    0.00000000   -0.06077600   Type O1
+  H1         -0.16161460    0.00000000    1.75530702   Type H1
+  H2         -1.57933347    0.00000000   -0.78289890   Type H2
+  #include water1_DMA2_L4.mom
+End
+Edit water1
+   #include water1.axes
+   Bonds Auto
+End
+Polarizabilities for water1
+   ! Assumed that the pols are in the local-axes
+   ! So they are read after axes are defined
+   Read rank <WSMLIMIT! 2>
+     #include water1_ref_wt4_L<WSMLIMIT!2>_static.pol
+   End
+   Limit rank <WSMLIMIT! 2> for +++
+       O1 H1 H2
+End
+
+Pairs
+   Dispersion damping factor <BETA!10.0>
+   Induction  damping factor <BETA!10.0>
+   #include <POTENTIAL!H2O2.pot>
+End
+
+Units Bohr kJ/mol
+
+! For Iterated induction set Iterate ON
+! Control the number of iterations using the OPTIONS block
+Switch Induce On Iterate Off
+Options
+   ! Setting Iterations = -1 to stop all iterations
+   ! This gives the second-order induction energy
+   Induction Iterations -1  Convergence 1e-12
+End
+
+! Either calculate the energy for a single geometry using:
+! Energy Details
+! Or calculate energy for a set of geometries as follows:
+
+Energy Table Format f12.6 Print es er ind disp total
+   Variables
+   Index   Rx   Ry   Rz   alpha  Nx  Ny  Nz
+   #include <GEOMFILE!H2O2.geom>
+End
+
+
+Finish

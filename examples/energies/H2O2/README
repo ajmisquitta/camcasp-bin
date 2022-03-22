@@ -1,0 +1,91 @@
+
+Water dimer
+===========
+Minimum energy dimer geometry from 
+Mas and Szalewicz, J. Chem. Phys. 104 (1996)
+
+Basis: Sadlej pVTZ/MC+
+
+The cluster file is water2.clt, so the command to run the calculation is
+
+$ runcamcasp.py H2O2 --clt water2.clt -d test -M 500
+
+"-M 500" specifies the memory for the job in MB. The default is 2000 MB.
+You may need to append "-q <queue>" where <queue> is the name of the
+batch queue that you wish to use, or "bg" to run the job in the
+background. The default is to run the job in the background. If you
+expect to use the same queue most or all of the time, set the
+environment variable QUEUE to this value -- e.g.
+export QUEUE=bg
+and then that will be taken as the default.
+
+The directory ./check/ contains copies of the files that
+should be generated for the job.
+
+
+Some minutes later ...
+
+$ ls test
+H2O2_A.dal  H2O2.bash   H2O2_B.out   H2O2.template  vectB.data
+H2O2_A.mol  H2O2_B.dal  H2O2.cks     OUT            water2.clt
+H2O2_A.out  H2O2_B.mol  H2O2_P.data  vectA.data     water2.clt.clout
+
+$ ls test/OUT
+H2O2_A.out  H2O2_B.out  H2O2.cks  H2O2.out  TMP_Memory_usage.dat
+
+H2O2_A.out and H2O2_B.out are the Dalton output files for the two
+monomer calculations. H2O2.out contains the output from the
+SAPT(DFT) calculation. To pick out the interaction energy terms from
+the output file, we use extract_saptdft.py (run "extract_saptdft.py
+--help" for details of the usage):
+
+$ extract_saptdft.py test
+kJ/mol       elst        exch         ind        exind       disp      exdisp      total
+test         -28.88477    23.80508   -10.52601     5.92262    -9.70338     1.64653   -17.73994
+
+Eint = -17.74 kJ/mol
+
+This calculation omits the higher-order induction terms, which are
+important for hydrogen-bonded systems such as this. We estimate their
+effect by carrying out a Hartree-Fock supermolecule calculation and
+subtracting off the Hartree-Fock equivalents of the terms that we have
+obtained by SAPT(DFT). What is left is a reasonable estimate of the
+higher-order induction terms. The data file for this procedure is
+deltahf.clt, which is very similar to the water2.clt data file, but
+includes the deltaHF keyword. We put the files into a different
+directory test_dHF:
+
+$ runcamcasp.py H2O2 --clt deltahf.clt -d test_dHF -M 500
+
+When this calculation has finished, the results are in the
+test_dHF/OUT directory:
+
+$ ls test_dHF/OUT
+H2O2_AB.out    H2O2_A.out    H2O2_B.out    H2O2.cks                H2O2.out
+H2O2_AB.out.0  H2O2_A.out.0  H2O2_B.out.0  H2O2-data-summary.data  TMP_Memory_usage.dat
+
+Use extract_saptdft.py to extract
+the energy components from both directories. The script assumes that
+the test_dHF directory belongs with the sapt-dft calculation in the
+test directory, and presents the results togther:
+
+$ extract_saptdft.py test test_dHF
+kJ/mol       elst        exch         ind        exind       disp       exdisp        dHF        total
+test         -28.88477    23.80508   -10.52601     5.92262    -9.70338     1.64653    -2.70162   -20.44156
+
+The total energy including the delta-HF correction is then -20.44 kJ/mol,
+in good (though somewhat fortuitous) agreement with the CCSD(T) value,
+for the same basis set, of -20.45 kJ/mol (Misquitta 2010)
+
+The check* and check_nwchem* directories contain previous results
+using Dalton and NWChem respectively. To see all the results, use
+$ extract_saptdft.py *
+kJ/mol           elst        exch         ind        exind       disp       exdisp        dHF        total
+check        -28.88477    23.80508   -10.52601     5.92262    -9.70338     1.64653    -2.70162   -20.44156
+check_nwchem 
+             -28.71150    24.87201   -10.84332     6.25785    -9.91698     1.71489    -2.70204   -19.32908
+test         -28.88477    23.80508   -10.52601     5.92262    -9.70338     1.64653    -2.70162   -20.44156
+
+The script looks only at directories, ignoring plain files. The
+results from NWChem are somewhat different from those from Dalton,
+because it treats the asymptotic correction differently. 

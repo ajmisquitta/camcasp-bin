@@ -1,0 +1,8 @@
+Axes
+  C   x from C  to O     y from C  to H1 
+  O   x from C  to O     y from C  to H1
+  H1  x from C  to H1    y from H1 to N
+  N   x between C and H3 y from C  to H1
+  H2  x from N  to H2    y from H2 to H3
+  H3  x from N  to H3    y from H3 to H2
+End

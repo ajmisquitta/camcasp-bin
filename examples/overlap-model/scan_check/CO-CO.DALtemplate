@@ -1,0 +1,30 @@
+INTGRL
+  CO_1 with CO_2
+  Basis is aug-cc-pVQZ and type MC
+Spherical  Atomtypes=  2 +   2  Charge=   0 +   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! CO_1
+!
+Charge=  6.0  Atoms=1 Blocks=5 1 1 1 1 1
+C1               0.00000000         0.00000000        -1.20270254
+#include  aug-cc-pVQZ/C
+!
+Charge=  8.0  Atoms=1 Blocks=5 1 1 1 1 1
+O1               0.00000000         0.00000000         0.90202691
+#include  aug-cc-pVQZ/O
+!
+!
+#molecule B
+!
+! CO_2
+!
+Charge=  6.0  Atoms=1 Blocks=5 1 1 1 1 1
+C2               0.00000000         0.00000000        -1.20270254
+#include  aug-cc-pVQZ/C
+!
+Charge=  8.0  Atoms=1 Blocks=5 1 1 1 1 1
+O2               0.00000000         0.00000000         0.90202691
+#include  aug-cc-pVQZ/O
+!

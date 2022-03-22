@@ -1,0 +1,7 @@
+AJM: 25 April 2016
+Sadlej-pVTZ basis sets with all shells augmented by one function
+    * alpha = alpha_diffuse/3.0
+
+These basis sets lead to severe linear dependencies and the resulting
+basis-truncation causes them to be worse than the Sadlej pVTZ.
+Therefore we do not recommend these basis sets.

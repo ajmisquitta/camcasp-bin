@@ -1,0 +1,111 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+Edit
+  NEIGHBOURS TYPE = OVR EPS = 0.0001 PRINT
+End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule  A
+  Angular 400
+  Radial  100
+END
+
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+SET DF
+  Solver LU (Options are LU and GELSS )
+END
+
+BEGIN DF
+  Molecule  A
+  Type     NN
+  Eta    =    0.0 
+  Lambda =    1.0 
+  Gamma  =    0.0
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule  A
+  Type     NN
+  Eta    = 0.0 
+  Lambda = 0.0 
+  Gamma  = 0.0
+  Print only normalization constraints
+END
+
+SET NEW-PROP
+  Kernel ALDA
+  DF  ( For constrained DF use: C-DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 600.0
+    FD-DELTA = 0.01
+    FD-ALPHA = 1.0
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+  SOLVER LU ( Options: GELSS )
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta    = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+BEGIN DF
+  Molecule A
+  Type NN
+  Print only normalization constraints
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN energy-scan
+  Scan molecule A with charge 1.0
+  Energies E2ind
+  Energy-file induction-scan
+  Points
+    !  Provide points file (created by Orient)
+    !  Give full path or put the file in the job directory
+    !  e.g.
+    !  file /home/ajs1/molecules/piracetam/aug-cc-pVDZ_-63/piracetam_vdW1.50.pts
+    !  or make a symbolic link grid.pts to the appropriate file
+    file  grid.pts
+  ---
+End
+
+Finish
+
+End-CamCASP-commands

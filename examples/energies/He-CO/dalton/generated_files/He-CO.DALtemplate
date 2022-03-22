@@ -1,0 +1,33 @@
+INTGRL
+  He with CO
+  Basis is aug-cc-pVTZ and type MC+
+Spherical  Atomtypes=  1 +   2  Charge=   0 +   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! He
+!
+Charge=  2.0  Atoms=1 Blocks=3 1 1 1
+He               0.00000000         0.00000000         0.00000000
+#include  aug-cc-pVTZ/He
+!
+!
+#midbond
+!
+Charge=0.0 Atoms=1 Blocks=3 1 1 1
+Mb         -0.09189630         0.00000000         3.17710851
+#include  midbond/Mb_3s2p1d
+!
+!
+#molecule B
+!
+! CO
+!
+Charge=  6.0  Atoms=1 Blocks=4 1 1 1 1
+C                1.15075100         0.00000000         6.81791000
+#include  aug-cc-pVTZ/C
+!
+Charge=  8.0  Atoms=1 Blocks=4 1 1 1 1
+O               -0.86333800         0.00000000         6.11810600
+#include  aug-cc-pVTZ/O
+!

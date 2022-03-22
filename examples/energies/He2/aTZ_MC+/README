@@ -1,0 +1,18 @@
+See the README in the aTZ_MC directory for more details.
+
+The command to run the calculation is the same:
+
+$ runcamcasp.py He2 --clt He2.clt -d test -q bg
+
+"-d" can be used as an abbreviation for "--directory". To see all the
+options for the runcamcasp.py command, just type
+$ runcamcasp.py --help
+
+The extract_saptdft.py script picks out the energy terms:
+
+$ extract_saptdft.py --units kelvin test
+kelvin      elst        exch         ind        exind       disp       exdisp       Eint
+test     -1.90353    13.27578    -0.32169     0.27352   -23.04467     0.67323   -11.04736
+
+So Eint = -11.047 K.
+

@@ -1,0 +1,35 @@
+! CO...CO energy scan
+
+Global
+  Units bohr Degrees
+  Overwrite yes
+End
+
+Molecule CO_1
+  I.P. 0.5150
+  C1  6  0.000000  0.000000  -1.20270254   type C
+  O1  8  0.000000  0.000000   0.902026905  type O
+End
+
+Molecule CO_2
+  I.P. 0.5150
+  C2  6  0.000000  0.000000  -1.20270254   type C
+  O2  8  0.000000  0.000000   0.902026905  type O
+End
+
+Files
+  Molecules CO_1 and CO_2
+  File-prefix CO-CO
+  Basis avqz type mc
+  !  Aux DC basis recommended for energy scan
+  Aux-basis avqz spherical type dc
+  Orient file
+  Process file
+  Sites file
+  Interface file
+  #include ../energy-scan-cmnds
+End
+
+Finish
+
+I.P.:  CO 0.5150

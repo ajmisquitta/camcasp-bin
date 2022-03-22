@@ -1,0 +1,24 @@
+! CamCASP : ISA/set-rt3 : H
+! A. J. Stone & A. J. Misquitta
+! 
+   1  s
+  16.4       1.0
+   1  s
+   9.5       1.0
+   1  s
+   5.5       1.0
+   1  s
+   3.2       1.0
+   1  s
+   1.8       1.0
+   1  s
+   1.1       1.0
+   1  s
+   0.6       1.0
+   1  s
+   0.35      1.0
+! Use these for very good tails -- when it converges! 
+   1  s
+   0.20      1.0
+   1  s
+   0.12      1.0

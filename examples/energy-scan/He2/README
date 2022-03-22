@@ -1,0 +1,45 @@
+He2 energy scan
+===============
+Energy scans can be performed in two ways:
+1) Using a monomer-centred (MC) auxiliary basis. I.e., auxiliary basis 
+functions on the monomer only (no functions on the location of the 
+partner).
+2) Using a dimer-centred (DC) auxiliary basis in which functions are 
+located on the monomer as well as the location of the (ghost) partner.
+
+The latter is more accurate and is the recommended approach. 
+
+Here we perform the energy scan of two helium atoms using both approaches.
+
+(1) He2-MCaux-scan.cks
+Basis: aTZ/MC
+Aux: aTZ/MC
+XC: PBE0/AC ALDAX+CHF
+Reference output: ref-MCaux-scan/
+
+(2) He2-DCaux-scan.cks
+Basis: aTZ/MC
+Aux: aTZ/DC
+XC: PBE0/AC ALDAX+CHF
+Reference output: ref-DCaux-scan/
+Notes: 
+  (1) Labels: The input file requires that you define the auxiliary basis sets
+      in the DC format with *DIFFERENT* site labels. 
+      Here we have used He1 and He2 as the site labels. If both had been
+      called 'He' CamCASP will get confused and will stop. 
+  (2) Coordinates: You don't need to worry about the coordinates of 
+      the atoms in the auxiliary basis definition. CamCASP will automatically
+      set the correct coordinates. What is assumed is that the ORDER of the
+      atoms is the same as MON-A + MON-B and that the order is identical in 
+      both auxiliary basis definitions. 
+      So you cannot have auxiliary basis sets for He1 in the order He1, He2 and 
+      auxiliary basis sets for He2 as He2,He1. Both should be in the same order:
+      I.e., either both He1,He2 or both He2,He1. 
+
+Running the jobs:
+=================
+$ runcamcasp He2-MCaux-scan -q <name of queue> --nochecks
+
+To run the job in the background use '-q bg'. The '--nochecks' is needed
+to suppress sanity checks from the runcamcasp script.
+

@@ -1,0 +1,33 @@
+INTGRL
+  formamide
+  Basis is sadlej
+Spherical  Atomtypes=  6 Charge=   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! formamide
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C                0.00000000         0.00000000         0.00000000
+#include  sadlej/C
+!
+Charge=  8.0  Atoms=1 Blocks=3 1 1 1
+O                2.29063151         0.00000000         0.00000000
+#include  sadlej/O
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H1              -1.13908247         1.77246836         0.00000000
+#include  sadlej/H
+!
+Charge=  7.0  Atoms=1 Blocks=3 1 1 1
+N               -1.45985298        -2.10205057         0.00000000
+#include  sadlej/N
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H2              -3.36209048        -1.98418554         0.00000000
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H3              -0.62710178        -3.82189185         0.00000000
+#include  sadlej/H
+!

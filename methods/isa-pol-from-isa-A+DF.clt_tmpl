@@ -1,0 +1,59 @@
+Title  Template Cluster file for isa-pol-from-isa-A+DF
+
+! Notes
+! -----
+! An ISA A+DF calculation uses the ISA A functional and the
+! density-fitting functional in a linear combination
+! determined by parameter zeta. 
+! This means that the two functionals must span the same
+! basis. Therefore we must have AUX == ATOM-AUX.
+! Further, as ATOM-AUX must use spherical GTOs, this means
+! that the AUX basis must also use spherical GTOs.
+!
+! For this calculation the AUX basis must use spherical GTOs
+! and this reduces the accuracy of the density-fitting, and 
+! consequently, the polarizabilities incurr errors. These
+! are by no means large, but if you need the highest accuracy,
+! perform this calculation using an ISA restart as 
+! described in method isa-pol-from-isa-A+DF-restart
+!
+! Check the validity of the ISA-A+DF solution before trusing the
+! ISA-Pol results! 
+!
+! CamCASP version: >= 6.0.14
+
+Molecule  MOL
+  UNITS  Bohr
+  IP     0.0 a.u.              ( the AC needs the IP. )
+  X   Z    Rx   Ry   Rz
+  ...
+End
+
+Show MOL in XYZ format         ( always a useful check )
+
+Run-Type
+  Properties
+  Molecule     MOL
+
+  ! In this example the AUX basis == ATOMAUX = aVTZ+ISAset2 : these must be identical or
+  ! the calculation will fail at the ISA stage.
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Spherical   Use-ISA-Basis  ( this basis must be spherical )
+  AtomAux-Basis  aVTZ   Type  MC   Spherical   Use-ISA-Basis  ( and identical to this.       )
+  ISA-Basis      set2   Min-S-exp-H = 0.2   
+                               ( convergence tends to be better with this setting )
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( needed for the Pol calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  File-Prefix  MOL-ISA-Pol-ISA-A+DF       ( change this to something reasonable )
+
+  #METHOD      isa-pol-from-isa-A+DF      ( this will use the file isa-pol-from-isa-A+DF from the methods/ directory )
+
+End
+
+Finish
+

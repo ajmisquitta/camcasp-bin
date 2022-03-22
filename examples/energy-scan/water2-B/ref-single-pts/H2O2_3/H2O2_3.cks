@@ -1,0 +1,167 @@
+TITLE H2Oa and H2Ob
+TITLE Basis aug-cc-pVTZ and type MC
+TITLE Midbonds NONE and type weighted
+TITLE CalculationType: SAPT(DFT)
+
+MEMORY       2048 MB
+
+SET Global_data
+  CamCASP-path /home/alston/CamCASP/current
+  Units Bohr cm-1
+  Scf-code DALTON
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE H2Oa at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectA.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type MC
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type MC
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+
+MOLECULE H2Ob at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectB.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type MC
+      O          8.0        0.00000000      -5.14540000       1.32850000  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/O
+      ---
+      H1         1.0        0.24458373      -5.14540000      -0.49124319  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.69823569      -5.14540000       2.02655587  TYPE H
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/H
+      ---
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type MC
+      O          8.0        0.00000000      -5.14540000       1.32850000  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      H1         1.0        0.24458373      -5.14540000      -0.49124319  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        1.69823569      -5.14540000       2.02655587  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+BEGIN GRID
+  Molecule H2Oa
+  Angular 100
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule H2Ob
+  Angular 100
+  Radial  60
+END
+
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule H2Oa
+  Type NN
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule H2Ob
+  Type NN
+  Print only normalization constraints
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+BEGIN E1exch
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+BEGIN E2disp
+  Use the N3 algorithm
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  Regularise Eta = 3.0
+  Integral Switch = 0
+  Amplitude-Type COUPLED
+END
+
+FINISH

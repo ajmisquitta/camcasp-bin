@@ -1,0 +1,39 @@
+Title  Benzene : Sadlej-pVTZ properties
+!
+Global
+  Units Bohr kJ/mol
+  Overwrite Yes
+End
+
+Molecule benzene
+  ! From Anthony: ~/Orient4.5.04/molecules/C6H6/display_V
+  IP 0.3397 a.u.
+  Units Bohr
+  C1   6.0    2.6462324347    0.0000000000    0.0000000000  Type C
+  C2   6.0    1.3231162173    2.2917045128    0.0000000000  Type C
+  C3   6.0   -1.3231162173    2.2917045128    0.0000000000  Type C
+  C4   6.0   -2.6462324347    0.0000000000    0.0000000000  Type C
+  C5   6.0   -1.3231162173   -2.2917045128    0.0000000000  Type C
+  C6   6.0    1.3231162173   -2.2917045128    0.0000000000  Type C
+  H1   1.0    4.7082995437    0.0000000000    0.0000000000  Type H
+  H2   1.0    2.3541497718    4.0775070135    0.0000000000  Type H
+  H3   1.0   -2.3541497718    4.0775070135    0.0000000000  Type H
+  H4   1.0   -4.7082995437    0.0000000000    0.0000000000  Type H
+  H5   1.0   -2.3541497718   -4.0775070135    0.0000000000  Type H
+  H6   1.0    2.3541497718   -4.0775070135    0.0000000000  Type H
+End
+
+Run
+  Properties
+  Molecule benzene
+  Basis Sadlej
+  File-prefix benzene_sadlej
+  Functional PBE0
+  Kernel ALDA+CHF
+  Orient files
+  Process file
+  Interface files
+  Sites file
+End
+
+Finish

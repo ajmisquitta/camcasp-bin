@@ -1,0 +1,58 @@
+Title Cluster template file for method wxhole-pols
+
+! NOTES
+! ========
+! Distributed polarizabilities using the weighted exchange-hole 
+! approximation 
+! [1] A. Hesselmann, JCP 136 (2012) 014104   (doi: 10.1063/1.3672236)
+! [2] A. Hesselmann, MolPhys 111 (2013) 1249 (doi: 10.1080/00268976.2013.787151)
+!
+! Here we combine this approximate kernel with the distributed polarizability
+! module in CamCASP (ISA-Pol) to compute non-local distributed polarizabilies
+!
+! In this technique an ISA calculation is first performed and this is followed
+! by an ISA-Pol calculation (using the ISA solution for the distribution).
+! If the ISA calculation has already been performed then use an ISA restart. 
+! See METHOD isa-A-restart and associated CLT file for an example.
+! 
+!
+! CamCASP version: >= 7.x
+!
+
+Molecule  MOL
+  UNITS  Bohr
+  IP         0.0 a.u.     ( the AC usually needs the IP. )
+  AC-SHIFT   0.0 a.u.     ( the AC-shift in a.u. for CS00 etc. )
+  X   Z    Rx   Ry   Rz
+  ...
+End
+
+Show MOL in XYZ format         ( always a useful check )
+
+Run-Type
+  Properties
+  Molecule     MOL
+
+  ! In this example the AUX basis is aVTZ+ISAset2 and ATOMAUX is aVQZ+ISAset
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Spherical   Use-ISA-Basis  ( this basis *could* be Cartesian )
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis  ( this *must* be Spherical )
+  ISA-Basis      set2   Min-S-exp-H = 0.2   
+                               ( convergence tends to be better with this setting )
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  ! MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file if available )
+
+  File-Prefix  MOL             ( change this to something reasonable )
+
+  #METHOD      wxhole-pols     ( this will use the file wxhole-pols from the methods/ directory )
+
+End
+
+Finish
+

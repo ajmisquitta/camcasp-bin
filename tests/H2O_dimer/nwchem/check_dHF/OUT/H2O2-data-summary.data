@@ -1,0 +1,29 @@
+              CamCASP version 6.0.045  (8cff4ae M)
+          The source code included local modifications
+      Compiled with ifort on 20 January 2020 at 19:41:31
+
+                    Running on: whirligig
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.2520557E+04        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1777915E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{exch}                0.1787549E+04        CM-1     DF :: NoReg ::                                              
+E^{1}_{int}                -0.7330077E+03        CM-1     DF :: NoReg ::                                              
+E^{2}_{ind}                -0.7786884E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(A)             -0.2561182E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(B)             -0.5225703E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(UC)            -0.6376999E+03        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}(S2)        0.3947250E+03        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP chf                      
+E^{2}_{ind,exch}(S2)(A)     0.1548835E+03        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP chf                      
+E^{2}_{ind,exch}(S2)(B)     0.2398415E+03        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP chf                      
+E^{2}_{ind,exch}(S2)(UC)    0.0000000E+00        CM-1     DF :: S2 :: AMP UC ::  :: NoReg                             
+E^{2}_{IND}                -0.3761898E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{IND}(A)             -0.9810206E+02        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{IND}(B)             -0.2780878E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind,exch}            0.4024986E+03        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(A)         0.1580161E+03        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(B)         0.2444825E+03        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+--------------------------------------------------------------------------------

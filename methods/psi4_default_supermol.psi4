@@ -1,0 +1,67 @@
+
+basis {
+   assign auga-sadlej-pvtz    # user-defined basis from CamCASP 5.9/6.0
+   assign Kr  midbond
+   assign Xe  midbond
+   assign Rn  midbond
+}
+
+df_basis_scf {
+   assign aug-cc-pVTZ-jkfit
+   assign Kr midbond-ri
+   assign Xe midbond-ri
+   assign Rn midbond-ri
+}
+
+df_basis_cc {
+   assign aug-cc-pVTZ-RI
+   assign Kr midbond-ri
+   assign Xe midbond-ri
+   assign Rn midbond-ri
+}
+
+set scf_type df
+set mp2_type df
+set cc_type  df
+set nat_orbs True 
+set freeze_core True
+
+energy('ccsd(t)',molecule=dimer)
+e_d_hf  = psi4.variable('SCF TOTAL ENERGY')
+e_d_mp2 = psi4.variable('MP2 TOTAL ENERGY')
+e_d_cc  = psi4.variable('CCSD(T) TOTAL ENERGY')
+
+#  We need the clean command when switching between systems with different 
+#  numbers of electrons/basis functions.
+
+clean()
+
+energy('ccsd(t)',molecule=monoA)
+e_mA_hf  = psi4.variable('SCF TOTAL ENERGY')
+e_mA_mp2 = psi4.variable('MP2 TOTAL ENERGY')
+e_mA_cc  = psi4.variable('CCSD(T) TOTAL ENERGY')
+
+clean()
+
+energy('ccsd(t)',molecule=monoB)
+e_mB_hf  = psi4.variable('SCF TOTAL ENERGY')
+e_mB_mp2 = psi4.variable('MP2 TOTAL ENERGY')
+e_mB_cc  = psi4.variable('CCSD(T) TOTAL ENERGY')
+
+clean()
+
+
+psi4.print_out("\n")
+psi4.print_out("CP-corrected HF/MP2/CCSD(T) interaction energies  \n\n")
+psi4.print_out("   Basis: augA-Sadlej-pVTZ+Mb  (DEFAULT!!!)       \n\n")
+psi4.print_out("----------------------------------------------------\n")
+e_hf  = (e_d_hf  - e_mA_hf  - e_mB_hf ) * psi_hartree2kJmol
+e_mp2 = (e_d_mp2 - e_mA_mp2 - e_mB_mp2) * psi_hartree2kJmol
+e_cc  = (e_d_cc  - e_mA_cc  - e_mB_cc ) * psi_hartree2kJmol
+psi4.print_out("  Eint[HF]      =   %10.6f  kJ/mol  \n" % (e_hf))
+psi4.print_out("  Eint[MP2]     =   %10.6f  kJ/mol  \n" % (e_mp2))
+psi4.print_out("  Eint[CCSD(T)] =   %10.6f  kJ/mol  \n" % (e_cc))
+psi4.print_out("----------------------------------------------------\n")
+
+
+

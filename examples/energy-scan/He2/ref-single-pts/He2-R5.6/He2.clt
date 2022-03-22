@@ -1,0 +1,31 @@
+! Helium dimer cluster file
+! =========================
+
+Global
+  CamCASP /home/alston/CamCASP/current
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE He1
+  I.P. 0.9036
+  He          2.0    0.0  0.0  0.0
+END
+
+MOLECULE He2
+  I.P. 0.9036
+  He          2.0    0.0  0.0  5.6
+END
+
+
+Files
+  Molecules He1 and He2
+  Basis aVTZ Type MC
+  Aux-basis-type MC
+  Func PBE0
+  Kernel ALDAX
+  File-prefix He2
+End
+
+Finish
+

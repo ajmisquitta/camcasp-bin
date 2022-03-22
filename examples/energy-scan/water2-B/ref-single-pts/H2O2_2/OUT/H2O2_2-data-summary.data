@@ -1,0 +1,31 @@
+ ================================================================
+ Compiled on Aug 29 2012 at 18:34:48
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22332
+ Working directory: 
+     /scratch/alston/H2O2_2_16-55-01
+ Running on: mmp12
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}                0.7123552E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1412923E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{2}_{ind}                -0.1743805E+03        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.2548491E+03        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.8734063E+02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{disp}               -0.6179229E+03        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.8462986E+03        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.5931249E+02        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.8123356E+02        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{ind}                -0.1189892E+03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(UC)            -0.1398179E+03        CM-1     DF :: PROP UC  :: REG eta =   3.0000                        
+E^{2}_{ind,exch}            0.1331946E+02        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: REG eta =   3.0000                      
+--------------------------------------------------------------------------------

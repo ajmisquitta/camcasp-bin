@@ -1,0 +1,53 @@
+! Helium dimer cluster file
+! =========================
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE He1
+  I.P. 0.9036
+  HOMO -0.6638
+  He          2.0    0.0  0.0  0.0
+END
+Molecule He1
+  Units BOHR
+    1  He          2.00     0.00000000    0.00000000    0.00000000   Type He
+End
+
+MOLECULE He2
+  I.P. 0.9036
+  HOMO -0.6638
+  He          2.0    0.0  0.0  5.6
+END
+Molecule He2
+  Units BOHR
+    1  He          2.00     0.00000000    0.00000000    5.60000000   Type He
+End
+
+
+Run
+  Sapt-dft
+  Molecules He1 and He2
+  Basis aVTZ Type MC+
+  Mid-bond 3s2p1d
+  Aux-basis aVTZ type DC+
+  SCFcode NWChem
+  ! SCFcode Dalton
+  Func PBE0
+  !  Comment out the AC line for NWChem
+  ! AC Multpole TANH 3.5 4.7
+  Kernel ALDA+CHF
+  File-prefix He2
+End
+ORIENT commands for He1 and He2
+ in file He2_energy.ornt
+NWChem file for He1 is He2_A.nw
+                                        
+NWChem file for He2 is He2_B.nw
+                                        
+CamCASP command file is He2.cks
+
+Finish
+ Exiting program cluster_operations

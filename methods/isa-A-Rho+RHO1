@@ -1,0 +1,194 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+Edit
+  NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Angular 200
+  Radial  40
+END
+
+SET NEW-PROP
+  Kernel ALDA
+  DF  ( For constrained DF use: C-DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 600.0
+    FD-DELTA = 0.01
+    FD-ALPHA = 1.0
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+  SOLVER LU ( Options: GELSS )
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Solver GELSS (Options are LU and GELSS )
+END
+
+# The Type of DF could be set to be OO and OV if the ALDA kernel is used.
+# Do we need DF for both monomers?
+
+BEGIN DF
+  Molecule    A
+  Type   NN
+  Eta    =    0.0
+  Lambda =    0.0
+  Gamma  =    0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+BEGIN DF
+  Molecule    B
+  Type   NN
+  Eta    =    0.0
+  Lambda =    0.0
+  Gamma  =    0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+
+# Set the parameters of the response module. 
+# LO = lower MO #
+# HI = upper MO #
+#   Here these are set to be MO 1 and the HOMO, resp.
+# In this example no regularization is used (Reg-Eta = -1.0). 
+# I'm not sure which is the best setting for the integral-switch.
+# DF-Type must be one of Dov or Dov-c. This will be used to define the 
+# transition density matrix elements needed for rho(1)
+
+Set Response
+  MO-Range LO = 1  HI = HOMO
+  Amplitude-Type = Coupled
+  Reg-Eta = -1.0
+  Integral-Switch = 0
+  DF-type = Dov
+End
+
+# Now perform an ISA calculation on the density rho + rho(1).
+# Reduce the tightness of the convergence thresholds (ESP-Norm is normally 1e-09)
+# as the ghost sites cause difficulties in the ISA convergence.
+# Also increase Max-Iter. 
+
+Begin ISA
+  Molecule  A         ( Check to make sure you want the response of A to field of B )
+                      ( or the other way around. In which case use Molecule B       )
+  DF = Drho + Rho(1)
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A
+  Solver  BVLS  ( usually more reliable than LU )
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm    = 1.0e-07  ( this is not as tight as a usual ISA-A calculation )
+    EPS-Q       = 1.0e-4
+    Max-Iter    = 320
+    W-Damping   = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+    Skip-Dummy-Sites  YES  ( very important to exclude dummy sites )
+  End
+  W-TAILS
+    NO-FIX                 ( Consider removing this. )
+    NO-FIX-Dummy-Sites     ( Never remove this! )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+BEGIN GRID
+  Angular 400
+  Radial  80
+END
+
+!  Calculate multipoles using the ISA atom-expansions
+Begin Multipoles
+  Molecule A      ( Check to make sure this is what you want )
+  DF Type ISA
+  Rank 4
+End
+
+!  Calculate multipoles using the density-fitted densities
+!  and the ISA shape-functions.
+Begin Multipoles
+  Molecule A      ( Check to make sure this is what you want )
+  DF Type ISA-GRID
+  Rank 4
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecule A      ( Check to make sure this is what you want )
+  Molecular-density
+    ISOdensity   = 0.001
+    Density-Type = RHO       ( don't use RHO-C as we have not used constraints in DF )
+    SLATER-MULTIPLIER = 5.0  ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.3 Bohr  ( step size of grid )
+  END
+  AIM-ATOMS
+    ISOdensity   = 0.001
+    AIM-METHOD   = ISA  Grid-based
+    Density-Type = RHO       ( don't use RHO-C as we have not used constraints in DF )
+    ATOMS        = ALL    ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN        = 1e-6   ( outer limit of scan determined to be radius at )
+                          ( which shape function is this value )
+    R-MAX        = 5.0 Bohr  ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.2 Bohr  ( step size of grid )
+  END
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecule A      ( Check to make sure this is what you want )
+  Molecular-density
+    ISOdensity   = 0.0001
+    Density-Type = RHO       ( don't use RHO-C as we have not used constraints in DF )
+    SLATER-MULTIPLIER = 5.0  ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.5 Bohr  ( step size of grid )
+  END
+  AIM-ATOMS
+    ISOdensity   = 0.0001
+    AIM-METHOD   = ISA  Grid-based
+    Density-Type = RHO       ( don't use RHO-C as we have not used constraints in DF )
+    ATOMS        = ALL    ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN        = 1e-6   ( outer limit of scan determined to be radius at )
+                          ( which shape function is this value )
+    R-MAX        = 5.0 Bohr  ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.3 Bohr  ( step size of grid )
+  END
+End
+
+End-CamCASP-commands

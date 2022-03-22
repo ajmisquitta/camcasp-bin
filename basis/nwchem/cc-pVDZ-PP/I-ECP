@@ -1,0 +1,39 @@
+! ELEMENTS                      REFERENCES
+! ---------                       ----------
+! O: B. Metz and H. Stoll, private communication (KAP)
+! Tl: B. Metz, M. Schweizer, H. Stoll, M. Dolg, W. Liu, Theor. Chem. Acc. 104, 22 (2000).
+! Ga-As, In-Sb, Pb-Bi: B. Metz, H. Stoll, M. Dolg, J. Chem. Phys. 113, 2563 (2000).
+! Se-Kr, Te-Xe, Po-Rn: K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and M. Dolg, J. Chem. Phys., in press (2003).
+! Cu, Zn, Ag, Cd, Au, Hg: D. Figgen, G. Rauhut, M. Dolg, and H. Stoll, Chem. Phys. 311, 227 (2005).
+! Y Zr Nb Mo Tc Ru Rh Pd : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+! I: K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+! Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+! 
+
+
+
+ECP
+I nelec 28
+I ul
+2      1.00000000             0.00000000       
+I S
+2     40.03337600            49.98964900       
+2     17.30057600           281.00655600       
+2      8.85172000            61.41673900       
+I P
+2     15.72014100            67.41623900       
+2     15.20822200           134.80769600       
+2      8.29418600            14.56654800       
+2      7.75394900            28.96842200       
+I D
+2     13.81775100            35.53875600       
+2     13.58780500            53.33975900       
+2      6.94763000             9.71646600       
+2      6.96009900            14.97750000       
+I F
+2     18.52295000           -20.17661800       
+2     18.25103500           -26.08807700       
+2      7.55790100            -0.22043400       
+2      7.59740400            -0.22164600       
+END
+

@@ -1,0 +1,44 @@
+! ORIENT localization file for He
+
+UNITS BOHR
+
+Parameters
+      Sites      2 polarizable      2
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      HE         Z     2
+End
+
+Molecule  He at  0.0 0.0 0.0
+  ! Units BOHR
+  HE          0.00000000    0.00000000    0.00000000   Type HE
+End
+
+Polarizabilities for He
+   Read rank  4 sites +++
+      HE      
+   #include He_aTZ_NL4_<INDEX!000>.pol
+   Limit rank <LIMIT! 2> for +++
+      HE      
+   Sum-rule test 1e-7
+   Localise <LOC!LS> test 1e-7 Limit <LIMIT! 2> sites +++
+      HE      
+End
+
+Edit He
+   #include <AXES!axes>
+End
+
+Polarizabilities for He
+   Write local limit <LIMIT! 2> file He_aTZ_L<LIMIT!2>_<INDEX!000>.pol sites +++
+      HE      
+   Print limit <LIMIT! 2> +++
+      HE      
+End
+
+Finish

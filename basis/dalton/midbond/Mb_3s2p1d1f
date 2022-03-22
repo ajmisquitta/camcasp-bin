@@ -1,0 +1,26 @@
+!
+! 3s2p1d1f ('Classic') mid-bond set
+! Korona et al. JCP 106, 5109 (1997)
+!
+! S-TYPE FUNCTIONS
+!
+F   3   3
+  0.800468  1.0  0.0  0.0
+  0.393863  0.0  1.0  0.0
+  0.195206  0.0  0.0  1.0
+!
+! P-TYPE FUNCTIONS
+!
+F   2   2
+  0.8025    1.0  0.0
+  0.3352    0.0  1.0
+!
+! D-TYPE FUNCTIONS
+!
+F   1   1
+  0.5       1.0
+!
+! F-TYPE FUNCTIONS
+!
+F   1   1
+  0.5       1.0

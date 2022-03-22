@@ -1,0 +1,70 @@
+
+!  Cluster file for OC...ClF
+
+Set Global
+  Units bohr degree
+End
+
+Molecule OC
+  Units angstrom
+  !  Geometry as in optimized dimer structure, B3LYP/Sadlej DFT-D3
+  I.P.  14.014 eV
+  C      6.0    0.0000000000     0.0000000000     0.0000000000
+  O      8.0    0.0000000000     0.0000000000    -1.12297094
+END
+Molecule OC
+  Units BOHR
+    1  C           6.00     0.00000000    0.00000000    0.00000000   Type C
+    2  O           8.00     0.00000000    0.00000000   -2.12210737   Type O
+End
+
+Molecule ClF
+  Units angstrom
+  !  Geometry as in optimized dimer structure, B3LYP/Sadlej DFT-D3
+  I.P. 0.4708
+  Cl    17.0    0.0000000000     0.0000000000     0.0000000000
+  F      9.0    0.0              0.0              1.67187409
+END
+Molecule ClF
+  Units BOHR
+    1  Cl         17.00     0.00000000    0.00000000    0.00000000   Type Cl
+    2  F           9.00     0.00000000    0.00000000    3.15938392   Type F
+End
+
+!  Change the rotation angles and translation distance to vary the geometry
+Rotate OC by 00 about 0.0 1.0 0.0
+ Molecule OC has been rotated by    0.0000 DEGREE
+  about the unit axis:   0.00000000   1.00000000   0.00000000
+Translate OC by 2.80 angstrom along 0.0 0.0 -1.0
+ 
+ Translating molecule OC
+ by   5.29123277 BOHR along   0.00000000   0.00000000  -1.00000000
+ Vector:   0.00000000   0.00000000  -5.29123277  BOHR
+Rotate ClF by 00 about 0.0 1.0 0.0
+ Molecule ClF has been rotated by    0.0000 DEGREE
+  about the unit axis:   0.00000000   1.00000000   0.00000000
+
+! Uncomment to create a PDB file of the dimer structure
+! Join OC ClF into OC-ClF
+! Write OC-ClF in PDB format
+
+Files
+  delta-hf
+  Molecules OC and ClF
+  scfcode nwchem
+  Functional PBE0
+  Kernel ALDA+CHF
+  Basis Sadlej type dc
+  Aux aug-cc-pVQZ
+  File-prefix OC-ClF
+  Interface files
+End
+ORIENT commands for OC and OC
+ in file OC-ClF_energy.ornt
+NWChem file for OC is OC-ClF_A.nw
+NWChem file for ClF is OC-ClF_B.nw
+NWChem file for OC...ClF is OC-ClF_AB.nw
+CamCASP command file is OC-ClF.cks
+
+Finish
+ Exiting program cluster_operations

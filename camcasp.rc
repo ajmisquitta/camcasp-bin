@@ -1,0 +1,35 @@
+#  Various user-settable parameters. If you require different values,
+#  change them in a copy of this file either in your home directory,
+#  for local defaults, or in the directory from which you submit
+#  your calculations.
+
+#  Number of processors that may be needed for a single SCF process,
+#  if not set elsewhere
+nproc 1
+
+#  The above number of processors will be used unless the specific ones
+#  set here are specified:
+#  Number of processors available for NWChem
+np_nwchem 1
+#  Number of processors available for Psi4
+np_psi4  1
+#  Number of processors available for CamCASP : this should normally be on the lower side
+np_camcasp  1
+#  (These may be different depending on whether the count is of cores
+#  or threads)
+
+#  Default memory for SCF and CamCASP (in GB)
+memory 8
+
+#  Whether to use direct integral management
+direct yes
+
+#  Default queue for jobs. Normally taken from the environment
+#  variable QUEUE but can be set here (and takes priority).
+#  queue bg
+
+#  Note that default values for the scratch directory and the number
+#  of processors are normally taken from the environment variables SCRATCH
+#  and CORES. It is not necessary to set a scratch directory for each
+#  job as a unique directory below $SCRATCH is created for each one.
+

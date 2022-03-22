@@ -1,0 +1,32 @@
+! CO2 ISA distributed multipoles
+! ==============================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule CO2
+  !  Vibrational ground state geometry from Herzberg
+  Units Angstrom
+  I.P.  0.5063
+  HOMO -0.4510
+  ! AC-SHIFT 0.11227
+  O1  8.0    0.0000000000    0.0000000000    1.1621        Type O
+  C   6.0    0.0000000000    0.0000000000    0.0000000000  Type C
+  O2  8.0    0.0000000000    0.0000000000   -1.1621        Type O
+End
+
+Run-type properties
+  Molecule CO2
+  scfcode psi4
+  Basis aVTZ
+  Aux-Basis       aVTZ  Cartesian  USE-ISA-Basis
+  Atom-Aux-Basis  aVTZ  Spherical  USE-ISA-Basis
+  ISA-Basis set2  Min-S-exp-H = 0.2
+  Kernel  ALDA+CHF
+  task isa-A-dma
+End
+
+Finish
+

@@ -1,0 +1,11 @@
+Job H2O_DZ starting at 22:11:58
+    Working directory = /home/andreas/tmp/H2O_DZ_02
+    Main directory    = /home/andreas/run/camcasp/H2O-wxhole2/H2O_DZ
+    Results directory = /home/andreas/run/camcasp/H2O-wxhole2/H2O_DZ/OUT
+    
+cwd = /home/andreas/tmp/H2O_DZ_02
+Parts: ['A', 'C']
+Starting CamCASP
+CamCASP finished normally at 22:13:00
+Job H2O_DZ finished at 22:13:00
+

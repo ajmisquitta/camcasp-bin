@@ -1,0 +1,57 @@
+#!/bin/bash
+
+help ()
+{
+  cat <<EOF
+Usage:
+$0 [--from] new-dir [--to] check-dir
+
+Replace each file in check-dir by the version in new-dir.
+
+EOF
+}
+
+die ()
+{
+  echo $1
+  exit 1
+}
+
+[[ $# -eq 0 ]] && help && exit
+
+newdir=""
+olddir=""
+while [[ $# -gt 0 ]]
+do
+  case $1 in
+    --help )
+      help
+      exit;;
+    -n | --from )
+      newdir=$2
+      shift;;
+    -o | --to )
+      olddir=$2
+      shift;;
+    * )
+      if [[ -z $newdir ]]; then
+        newdir=$1
+      elif [[ -z $olddir ]]; then
+        olddir=$1
+      else
+        die "Don't understand $1"
+      fi;;
+  esac
+  shift
+done
+
+echo copying files from $newdir to $olddir
+
+files="$(ls $olddir)"
+for file in $files
+do
+  echo $file
+  cp -p $newdir/$file $olddir
+done
+
+ls -l $olddir

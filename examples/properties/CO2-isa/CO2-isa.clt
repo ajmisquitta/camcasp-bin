@@ -1,0 +1,29 @@
+! CO2 distributed multipoles
+! ==========================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule CO2
+  !  Vibrational ground state geometry from Herzberg
+  Units Angstrom
+  I.P. 0.5063
+  O1  8.0    0.0000000000    0.0000000000    1.1621        Type O
+  C   6.0    0.0000000000    0.0000000000    0.0000000000  Type C
+  O2  8.0    0.0000000000    0.0000000000   -1.1621        Type O
+End
+
+Files
+  Properties
+  Molecule CO2
+  Basis aVTZ
+  Aux-basis aVTZ  Spherical
+  ISA-Aux set2
+  File-prefix CO2
+  #include /home/ajs1/camcasp/test/camcasp-5.8/data/camcasp-cmnds/isa-display
+End
+
+Finish
+

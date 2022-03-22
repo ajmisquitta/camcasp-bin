@@ -1,0 +1,35 @@
+found /scratch/ajs1 and DALTON_TMPDIR set to /scratch/ajs1
+
+   ***************************************** 
+   **** OUTPUT FROM DALTON SHELL SCRIPT **** 
+   ***************************************** 
+
+   DALTON release 2013.0
+
+   Invocation: /home/ajs1/camcasp-5.7/bin/dalton2013 -D -M 2500 -t /scratch/fastscratch/ajs1/HCONH2_10-27-00 HCONH2_A HCONH2_A
+
+   Mon Mar 10 10:27:01 GMT 2014
+
+   Calculation: HCONH2_A  (input files: HCONH2_A.dal and HCONH2_A.mol)
+   PID        : 3858
+   Input dir  : /scratch/fastscratch/ajs1/HCONH2_10-27-00
+   Scratch dir: /scratch/fastscratch/ajs1/HCONH2_10-27-00/DALTON_scratch_ajs1/HCONH2_A
+
+
+ DALTON: user specified work memory size used,
+         environment variable WRKMEM = "320000000"
+
+ Work memory size (LMWORK+2):   320000002 =  2.384 gigabytes; node   0
+
+   0: Directories for basis set searches:
+     /scratch/fastscratch/ajs1/HCONH2_10-27-00:/usr/local/dalton_gfortran_64/basis
+HCONH2_A.tar.gz has been copied to /scratch/fastscratch/ajs1/HCONH2_10-27-00
+Backup: renaming /scratch/fastscratch/ajs1/HCONH2_10-27-00/HCONH2_A.out to /scratch/fastscratch/ajs1/HCONH2_10-27-00/HCONH2_A.out.0
+----------------------------------------------------------
+2 informational messages have been issued by Dalton,
+output from 'grep -n INFO'  (max 10 lines):
+471:  INFO from READIN: Threshold for discarding integrals was    1.00D-16
+472:  INFO from READIN: Threshold is reset to minimum value       1.00D-15
+
+   Mon Mar 10 10:29:51 GMT 2014
+   ***************************************** 

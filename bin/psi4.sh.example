@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Usage:
+# psi4.sh <datafile> <outfile> [<cores>]
+
+# This script uses the environment-modules package to set the necessary
+# environment variables and paths
+# Load the psi4 module if not already loaded
+module is-loaded psi4 || module load psi4 && module list
+# or whatever is needed to set up Psi4
+
+# Included so that the job log shows where the executable was found
+type psi4
+
+# If the third argument is present and greater than 1, run in parallel,
+# using the specified number of cores.
+# "${3:-0}" provides "0" if $3 is unset.
+if (( ${3:-0} > 1 )); then
+  psi4 -n $3 $1 $2
+else
+  psi4 $1 $2
+fi
+
+# If psi4 is not in the PATH it is necessary to replace "psi4"
+# above by the full path to the psi4 executable, or to set
+# CamCASP/bin/psi4 as a symbolic link to it.
+
+exit
+
+#-------------------------
+
+For information: my psi4 module file is as follows:
+
+#%Module1.0          <--- this must be the first line
+
+conflict psi4
+set version  "1.4a1"
+
+set home "/usr/local/psi4"
+set camcasp "/home/ajs1/CamCASP"
+append-path PATH $home/bin
+append-path PSIPATH $camcasp/basis/psi4 $camcasp/basis/psi4/for-psi4-lib
+prepend-path PYTHONPATH $home/lib
+setenv PSI4_HOME $home
+setenv PSI_SCRATCH /scratch/ajs1/psi4
+

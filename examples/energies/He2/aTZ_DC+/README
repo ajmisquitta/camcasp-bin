@@ -1,0 +1,16 @@
+See the README in the aTZ_MC+ directory for more details.
+
+Again the command to run the calculation is:
+
+$ runcamcasp.py He2 --clt He2.clt -d test -q bg
+
+When the job has run:
+
+$ extract_saptdft.py --units kelvin test
+kelvin      elst        exch         ind        exind       disp       exdisp       Eint
+test     -1.89167    13.28740    -0.32429     0.27572   -23.11686     0.69999   -11.06972
+
+
+So we finally get a near-basis-converged interaction energy:
+Eint = -11.070 K.
+

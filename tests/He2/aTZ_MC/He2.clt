@@ -1,0 +1,35 @@
+! Helium dimer cluster file
+! =========================
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE He1
+  I.P. 0.9036
+  ! HOMO -0.6661
+  He          2.0    0.0  0.0  0.0
+END
+
+MOLECULE He2
+  I.P. 0.9036
+  ! HOMO -0.6661
+  He          2.0    0.0  0.0  5.6
+END
+
+
+Run
+  Sapt-dft
+  Molecules He1 and He2
+  SCFcode Dalton
+  Basis aVTZ Type MC
+  Aux-basis avtz type DC
+  Func PBE0
+  AC multpole TANH 3.5 4.7
+  Kernel ALDA+CHF
+  File-prefix He2
+End
+
+Finish
+

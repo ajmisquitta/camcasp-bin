@@ -1,0 +1,176 @@
+TITLE CO2
+TITLE Basis: aug-cc-pVTZ
+TITLE CalculationType: PROPERTIES
+
+MEMORY       2048 MB 
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE CO2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file CO2-A-asc.movecs format ASCII-2
+   IP     0.506300 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      O1         8.0        0.00000000       0.00000000       2.19605057  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/O
+      ---
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/C
+      ---
+      O2         8.0        0.00000000       0.00000000      -2.19605057  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVTZ/O
+      ---
+   End
+   Basis Aux
+        Spherical
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       2.19605057  TYPE O
+        Limit G  MIN-S-EXP = 0.0
+        #include-camcasp basis/auxiliary/ISA/set2/O
+        Symmetry Exclude = S
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+        Limit G  MIN-S-EXP = 0.0
+        #include-camcasp basis/auxiliary/ISA/set2/C
+        Symmetry Exclude = S
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      O2         8.0        0.00000000       0.00000000      -2.19605057  TYPE O
+        Limit G  MIN-S-EXP = 0.0
+        #include-camcasp basis/auxiliary/ISA/set2/O
+        Symmetry Exclude = S
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/O
+      ---
+   End
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule CO2
+  Angular 200
+  Radial  80
+END
+
+SET Lattice
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random   2000
+  Seed     1
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+
+BEGIN DF
+  Type RHO
+  Eta = 0.0
+  Lambda = 1000.0
+  Gamma = 0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+
+Begin ISA
+  DF = Drho-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A+DF  Zeta = 0.1
+  DF-PARAMETERS Lambda = 1000.0
+  Solver LU
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+!  Calculate multipoles using ISA densities
+Begin Multipoles
+  DF Type ISA
+  Rank 4
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecular-density
+    Slater-multiplier 5.0
+    isodensity 0.001
+    step = 0.3 bohr
+  END
+  AIM-ATOMS
+    AIM-METHOD  ISA  Grid-based with RHO-C
+    ATOMS = ALL  ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN = 1e-6  ( outer limit of scan determined to be radius at )
+                  ( which shape function is this value )
+    R-MAX = 5.0 Bohr ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                  ( multiple of Slater radius )
+    DR = 0.2 Bohr  ( step size of grid )
+    AIM-Method ISA Grid-Based with RHO-C
+    ISOdensity = 0.001
+  END
+End
+
+! Fine integration grid needed for DMA calculation
+
+BEGIN GRID
+  Molecule CO2
+  Angular 400
+  Radial  60
+END
+
+Begin GDMA
+  Bohr
+  !  Original DMA
+  Multipoles
+    Switch 0.0
+    Limit  5
+    Punch DMA_Z0_L5.mom
+  Start
+  !  Revised DMA
+  Multipoles
+    Switch 4.0
+    Limit  5
+    Punch DMA_Z4_L5.mom
+  Start
+End
+
+
+FINISH

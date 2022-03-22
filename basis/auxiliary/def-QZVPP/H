@@ -1,0 +1,69 @@
+! def-QZVPP RI basis
+! Consists of
+!  * QZ-s-kernel
+!  * cc-pVQZ-pol
+!  * (added by AJM) : aug-Q
+!
+! QZP
+! QZVP
+! QZPP
+! QZVPP
+! def-QZVP
+! def-QZVPP
+! h (6s4p3d2f1g)
+! h2 molecule, r=1.4115 bohr:
+!  MP2-energy (RI):    -0.03310159 H
+!  EMP2(RI) - EMP2:     4.158442   uH
+!  delta/|EMP2|:        0.122316   ppm
+! Ref.: C. Hättig, to be published.
+!
+!
+! QZ-s-kernel
+! h (6s)
+! auxiliary s functions optimized for QZVPP 
+! Ref.: C. Hättig, to be published.
+!
+   1  s
+ 45.3144   1.0
+   1  s
+ 6.149     1.0
+   1  s
+ 1.68393   1.0
+   1  s
+ 0.957278  1.0
+   1  s
+ 0.4168    1.0
+   1  s
+ 0.21261   1.0
+!
+!
+! aug-Q
+! Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+!
+   1  s
+ 0.99710780880E-01   1.0000000000
+   1  p
+ 0.94444585167E-01   1.0000000000
+   1  d
+ 0.30650358869       1.0000000000
+   1  f
+ 0.44795390000       1.0000000000
+   1  g
+ 0.59562780346       1.0000000000
+!
+! aug-Q
+! Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+!
+!    1  s
+!  0.95281907341E-01   1.0000000000
+!    1  p
+!  0.18989077313       1.0000000000
+!    1  d
+!  0.13954687713       1.0000000000
+!    1  f
+!  0.28801462388       1.0000000000
+!    1  g
+!  0.53719929557       1.0000000000
+!    1  h
+!   1.0512431837       1.0000000000
+!

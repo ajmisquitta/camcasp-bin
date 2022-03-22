@@ -1,0 +1,18 @@
+molecule {
+  O1            -0.050618        1.397406        0.000000
+  H11            0.429805        1.725714       -0.765273
+  H12            0.429805        1.725714        0.765273
+  @O2             0.058566       -1.519989        0.000000
+  @H21           -0.064945       -0.559464        0.000000
+  @H22           -0.826357       -1.890957        0.000000
+}
+
+memory 1 gb
+
+set basis aug-cc-pVDZ
+
+energy, wfn = energy('wPBE', return_wfn=True)
+fchk_writer = psi4.FCHKWriter(wfn)
+fchk_writer.write('H2Odimer_A.fchk')
+
+

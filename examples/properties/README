@@ -1,0 +1,31 @@
+NOTE:
+
+He, H2O, Formamide, Benzene:
+
+We suggest running these examples in order of increasing size.
+
+The results in these examples are *almost* what you would get with a 
+default properties calculation as described in the User's Guide. 
+The difference is that, to save time at the localization step, we have 
+reduced the number of points in the grid used for point-to-point 
+polarizabilities from the default of 2000 to 500. In the case of formamide
+it takes an couple of minutes or so to calculate
+the 22 million point-to-point polarizabilities that the 2000 point
+grid (at 11 frequencies) would generate, so we use the smaller grid
+for the tests. 
+
+Since the Benzene job takes almost an hour to complete, there is little to
+gain in reducing the number of point-to-point polarizabilities. Consequently
+we have used the default of 2000 points (22 million point-to-point
+polarizabilities) for this calculation.
+
+The smaller grids have been obtained using the line 
+OPTIONS TESTS
+in the FILES block in the Cluster input files.
+
+
+
+CO2-isa:
+
+This is an example of a job using the new ISA module. See
+CO2-isa/README for more details.

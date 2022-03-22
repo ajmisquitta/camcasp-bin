@@ -1,0 +1,152 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+! ISA A+DF for molecule A
+
+Edit A
+  NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+End
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  40
+END
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+END
+BEGIN DF
+  Molecule A
+  Type   OO
+  Eta    = 0.0
+  Lambda = 1.0
+  Gamma  = 0.0
+  Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
+END
+Begin ISA
+  Molecule A
+  DF = Doo-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A+DF  Zeta = 0.1
+  DF-PARAMETERS Lambda = 1000.0
+  Solver LU
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    FIX = ON  ( This can be set to OFF with the BVLS solver, buy recommended ON for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+! ISA A+DF for molecule B
+
+Edit B
+  NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+End
+BEGIN GRID
+  Molecule B
+  Angular 200
+  Radial  40
+END
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+END
+BEGIN DF
+  Molecule B
+  Type OO
+  Eta    = 0.0
+  Lambda = 1.0
+  Gamma  = 0.0
+  Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
+END
+Begin ISA
+  Molecule B
+  DF = Doo-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A+DF  Zeta = 0.1
+  DF-PARAMETERS Lambda = 1000.0
+  Solver LU
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    FIX = ON  ( This can be set to OFF with the BVLS solver, buy recommended ON for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+
+
+
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  100
+END
+
+BEGIN GRID
+  Molecule B
+  Angular 200
+  Radial  100
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+  DF-TYPE-DIMER   OO
+END
+
+SET DF
+  Eta    = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+BEGIN DF
+  Molecule A
+  Type OO
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule B
+  Type OO
+  Print only normalization constraints
+END
+
+BEGIN E1elst
+  Integral Switch =  1
+  Distribute
+END
+
+End-CamCASP-commands

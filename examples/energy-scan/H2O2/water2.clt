@@ -1,0 +1,48 @@
+! water cluster file
+! ==================
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE water1
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O1          8.0   0.0000000000    0.0000000000    0.0000000000
+  H1          1.0  -1.4536519600    0.0000000000   -1.1216873200
+  H2          1.0   1.4536519600    0.0000000000   -1.1216873200
+  I.P.  0.4638
+  ac-shift 0.13186
+END
+
+MOLECULE water2
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O1          8.0   0.0000000000    0.0000000000    0.0000000000
+  H1          1.0  -1.4536519600    0.0000000000   -1.1216873200
+  H2          1.0   1.4536519600    0.0000000000   -1.1216873200
+  I.P.  0.4638
+  ac-shift 0.13186
+END
+
+Rotate water2 by {alpha} about {Nx} {Ny} {Nz}
+Place water2 at {Rx} {Ry} {Rz}
+join water1 and water2 into dimer
+write dimer in pdb format
+
+Files
+  {task}
+  Molecules water1 and water2
+  File-prefix {job}
+  Basis {basis} Type {type}
+  Midbond 3s2p1d Type Weighted
+  Aux-basis aTZ
+  Func PBE
+  Kernel ALDA+CHF
+  !
+  Interface files
+End
+
+
+Finish

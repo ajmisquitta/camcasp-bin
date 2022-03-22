@@ -1,0 +1,627 @@
+
+
+    ******************************************************************
+    ***********  DALTON - An electronic structure program  ***********
+    ******************************************************************
+
+    This is output from DALTON (Release 2.0 rev. 0, Mar. 2005)
+
+    Celestino Angeli,         University of Ferrara,        Italy      
+    Keld L. Bak,              UNI-C,                        Denmark    
+    Vebjoern Bakken,          University of Oslo,           Norway     
+    Ove Christiansen,         Aarhus University,            Denmark    
+    Renzo Cimiraglia,         University of Ferrara,        Italy      
+    Sonia Coriani,            University of Trieste,        Italy      
+    Paal Dahle,               University of Oslo,           Norway     
+    Erik K. Dalskov,          UNI-C,                        Denmark    
+    Thomas Enevoldsen,        SDU - Odense University,      Denmark    
+    Berta Fernandez,          U. of Santiago de Compostela, Spain      
+    Christof Haettig,         Forschungszentrum Karlsruhe,  Germany    
+    Kasper Hald,              Aarhus University,            Denmark    
+    Asger Halkier,            Aarhus University,            Denmark    
+    Hanne Heiberg,            University of Oslo,           Norway     
+    Trygve Helgaker,          University of Oslo,           Norway     
+    Hinne Hettema,            University of Auckland,       New Zealand
+    Hans Joergen Aa. Jensen,  Univ. of Southern Denmark,    Denmark    
+    Dan Jonsson,              KTH Stockholm,                Sweden     
+    Poul Joergensen,          Aarhus University,            Denmark    
+    Sheela Kirpekar,          SDU - Odense University,      Denmark    
+    Wim Klopper,              University of Karlsruhe,      Germany    
+    Rika Kobayashi,           ANU Supercomputer Facility,   Australia  
+    Henrik Koch,              University of Trondheim,      Norway     
+    Andrea Ligabue,           University of Modena,         Italy      
+    Ola B. Lutnaes,           University of Oslo,           Norway     
+    Kurt V. Mikkelsen,        University of Copenhagen,     Denmark    
+    Patrick Norman,           University of Linkoeping,     Sweden     
+    Jeppe Olsen,              Aarhus University,            Denmark    
+    Martin J. Packer,         University of Sheffield,      UK         
+    Thomas B. Pedersen,       University of Lund,           Sweden     
+    Zilvinas Rinkevicius,     KTH Stockholm,                Sweden     
+    Elias Rudberg,            KTH Stockholm,                Sweden     
+    Torgeir A. Ruden,         University of Oslo,           Norway     
+    Kenneth Ruud,             University of Tromsoe,        Norway     
+    Pawel Salek,              KTH Stockholm,                Sweden     
+    Alfredo Sanchez de Meras, University of Valencia,       Spain      
+    Trond Saue,               University of Strasbourg,     France     
+    Stephan P. A. Sauer,      University of Copenhagen,     Denmark    
+    Bernd Schimmelpfennig,    Forschungszentrum Karlsruhe,  Sweden     
+    K. O. Sylvester-Hvid,     University of Copenhagen,     Denmark    
+    Peter R. Taylor,          University of Warwick,        UK         
+    Olav Vahtras,             KTH Stockholm,                Sweden     
+    David J. Wilson,          University of Oslo,           Norway     
+    Hans Agren,               KTH Stockholm,                Sweden     
+
+ ---------------------------------------------------------------------
+
+     NOTE:
+      
+     This is an experimental code for the evaluation of molecular
+     properties using (MC)SCF and CC wave functions. The authors
+     accept no responsibility for the performance of the code or
+     for the correctness of the results.
+      
+     The code (in whole or part) is provided under a licence and
+     is not to be reproduced for further distribution without
+     the written permission of the authors or their representatives.
+      
+     See the home page "http://www.kjemi.uio.no/software/dalton"
+     for further information.
+      
+     If results obtained with this code are published,
+     an appropriate citation would be:
+      
+     "Dalton, a molecular electronic structure program, Release 2.0
+     (2005), see http://www.kjemi.uio.no/software/dalton/dalton.html"
+
+     Date and time (Linux)  : Tue Sep  4 16:58:17 2012
+     Host name              : mmp12                                   
+
+ <<<<<<<<<< OUTPUT FROM GENERAL INPUT PROCESSING >>>>>>>>>>
+
+
+ Default print level:        0
+
+    Integral sections will be executed
+    "Old" integral transformation used (limited to max 255 basis functions)
+    Wave function sections will be executed
+
+Starting in Integral Section -
+
+
+
+ *************************************************************************
+ ****************** Output from HERMIT input processing ******************
+ *************************************************************************
+
+
+ Default print level:        1
+
+ * Nuclear model: Point charge
+
+ Calculation of one- and two-electron Hamiltonian integrals.
+
+
+ *************************************************************************
+ ****************** Output from READIN input processing ******************
+ *************************************************************************
+
+
+
+  Title Cards
+  -----------
+
+    H2Oa with H2Ob                                                        
+    Basis is aug-cc-pVTZ and type MC                                      
+
+  INFO from READIN: Threshold for discarding integrals was    1.00D-16
+  INFO from READIN: Threshold is reset to minimum value       1.00D-15
+
+
+                      SYMGRP:Point group information
+                      ------------------------------
+
+Point group: C1 
+
+   * Character table
+
+        |  E 
+   -----+-----
+    A   |   1
+
+   * Direct product table
+
+        | A  
+   -----+-----
+    A   | A  
+
+
+                             Isotopic Masses
+                             ---------------
+
+                           O          15.994915
+                           H1          1.007825
+                           H2          1.007825
+
+                       Total mass:    18.010565 amu
+                       Natural abundance:  99.730 %
+
+ Center-of-mass coordinates (A):    0.108715    4.196000    4.820667
+
+
+  Atoms and basis sets
+  --------------------
+
+  Number of atom types:     3
+  Total number of atoms:    3
+
+  label    atoms   charge   prim    cont     basis
+  ----------------------------------------------------------------------
+  O           1       8      58      46      [11s6p3d2f|5s4p3d2f]                         
+  H1          1       1      25      23      [6s3p2d|4s3p2d]                              
+  H2          1       1      25      23      [6s3p2d|4s3p2d]                              
+  ----------------------------------------------------------------------
+  total:      3      10     108      92
+  ----------------------------------------------------------------------
+  Spherical harmonic basis used.
+
+  Threshold for integrals:  1.00D-15
+
+
+  Cartesian Coordinates
+  ---------------------
+
+  Total number of coordinates:  9
+
+   1   O        x      0.0000000000
+   2            y      4.1960000000
+   3            z      4.7579000000
+
+   4   H1       x      1.6982356900
+   5            y      4.1960000000
+   6            z      4.0598441300
+
+   7   H2       x      0.2445837300
+   8            y      4.1960000000
+   9            z      6.5776431900
+
+
+   Interatomic separations (in Angstroms):
+   ---------------------------------------
+
+            O           H1          H2    
+            ------      ------      ------
+ O     :    0.000000
+ H1    :    0.971626    0.000000
+ H2    :    0.971626    1.538479    0.000000
+
+
+  Max interatomic separation is    1.5385 Angstroms
+  between atoms "H2    " and "H1    ".
+
+
+  Bond distances (angstroms):
+  ---------------------------
+
+                  atom 1     atom 2       distance
+                  ------     ------       --------
+  bond distance:  H1         O            0.971626
+  bond distance:  H2         O            0.971626
+
+
+  Bond angles (degrees):
+  ----------------------
+
+                  atom 1     atom 2     atom 3         angle
+                  ------     ------     ------         -----
+  bond angle:     H1         O          H2           104.690
+
+
+
+
+ Principal moments of inertia (u*A**2) and principal axes
+ --------------------------------------------------------
+
+   IA    0.630690         -0.500000    0.000000    0.866025
+   IB    1.192719          0.866025    0.000000    0.500000
+   IC    1.823409          0.000000    1.000000    0.000000
+
+
+ Rotational constants
+ --------------------
+
+ The molecule is planar.
+
+               A                   B                   C
+
+         801311.9041         423719.9706         277161.6506 MHz
+           26.728888           14.133777            9.245118 cm-1
+
+
+  Nuclear repulsion energy :    9.058053553181
+
+
+ ************************************************************************
+ ************************** Output from HERINT **************************
+ ************************************************************************
+
+
+ >>> Time used in HUCKEL is   0.00 seconds
+
+
+ >>> Time used in ONEDRV is   0.00 seconds
+
+
+ Number of two-electron integrals written:     4390020 ( 48.0% )
+ Megabytes written:                             50.270
+
+
+
+ >>> Time used in TWOINT is   0.40 seconds
+
+ >>>> Total CPU  time used in HERMIT:   0.42 seconds
+ >>>> Total wall time used in HERMIT:   1.00 seconds
+
+- End of Integral Section
+
+
+Starting in Wave Function Section -
+
+ Fermi-Amaldi/Tozer-Handy asymptotic correction
+   Parameters used:    0.4638D+00  0.3000D+01  0.4000D+01
+
+
+ Settings for DFT calculation:
+ -----------------------------
+
+     Default thresholds:                       0.10D-08    0.10D-09    0.20D-11
+     Default threshold for number of electrons:                        0.10D-01
+     DFT radial quadrature accuracy/ang. expansion order:  0.10E-12  35
+
+ *** Output from Huckel module :
+
+     Using EWMO model:          T
+     Using EHT  model:          F
+     Number of Huckel orbitals each symmetry:    7
+
+ EWMO - Energy Weighted Maximum Overlap - is a Huckel type method,
+ which normally is better than Extended Huckel Theory.
+ Reference: Linderberg and Ohrm, Propagators in Quantum Chemistry (Wiley, 1973)
+
+ Huckel EWMO eigenvalues for symmetry :  1
+          -20.677728      -1.583405      -0.784981      -0.694405      -0.623712
+           -0.236774      -0.173098
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ 
+     Date and time (Linux)  : Tue Sep  4 16:58:18 2012
+     Host name              : mmp12                                   
+
+ Title lines from integral program:
+       H2Oa with H2Ob                                                        
+       Basis is aug-cc-pVTZ and type MC                                      
+
+ Print level on unit LUPRI =   2 is   0
+ Print level on unit LUW4  =   2 is   5
+
+     Restricted, closed shell Kohn-Sham calculation.
+
+
+ Initial molecular orbitals are obtained according to
+ ".MOSTART EWMO  " input option.
+
+     Wave function specification
+     ============================
+     Number of closed shell electrons         10
+     Number of electrons in active shells      0
+     Total charge of the molecule              0
+
+     Number of active orbitals                 0
+     Total number of orbitals                 92
+
+     Spin multiplicity                         1
+     Total number of symmetries                1
+     Reference state symmetry                  1
+ 
+     This is a DFT calculation of type: PBE0
+ Weighted mixed functional:
+               HF exchange:    0.25000
+                      Pbex:    0.75000
+                      Pbec:    1.00000
+
+     Orbital specifications
+     ======================
+     Abelian symmetry species           1
+                                       --
+     Total number of orbitals          92
+     Number of basis functions         92
+
+      ** Automatic occupation of RKS orbitals **
+      -- Initial occupation of symmetries is determined from Huckel guess.                    
+      -- Initial occupation of symmetries is : --
+
+     Occupied SCF orbitals              5
+
+     Maximum number of Fock   iterations      0
+     Maximum number of DIIS   iterations     60
+     Maximum number of QC-SCF iterations     15
+     Threshold for SCF convergence     1.00D-06
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Automatic occupation of symmetries with  10 electrons.
+
+ Iter     Total energy    Error norm  Delta(E)    HF occupation
+ -----------------------------------------------------------------------------
+ Radial Quadrature : LMG scheme
+ Space partitioning: Original Becke partitioning
+ Radial integration threshold: 1e-13
+* Grid spacing
+   s-orbitals -->  0.142
+   p-orbitals -->  0.131
+   d-orbitals -->  0.123
+   f-orbitals -->  0.117
+ Value chosen:  0.117
+ AH =    30660.0000000000     
+* Inner grid point: 4.99383E-07
+* Outer point:
+   s-orbitals --> 14.622
+   p-orbitals --> 17.256
+   d-orbitals -->  9.713
+   f-orbitals -->  6.765
+ Value chosen: 17.256
+Constant c: 0.40318E-05
+Number of points:  131
+* Grid spacing
+   s-orbitals -->  0.142
+   p-orbitals -->  0.131
+   d-orbitals -->  0.123
+ Value chosen:  0.123
+ AH =    67.7400000000000     
+* Inner grid point: 1.06242E-05
+* Outer point:
+   s-orbitals --> 24.986
+   p-orbitals --> 13.206
+   d-orbitals -->  9.041
+ Value chosen: 24.986
+Constant c: 0.81045E-04
+Number of points:  103
+* Grid spacing
+   s-orbitals -->  0.142
+   p-orbitals -->  0.131
+   d-orbitals -->  0.123
+ Value chosen:  0.123
+ AH =    67.7400000000000     
+* Inner grid point: 1.06242E-05
+* Outer point:
+   s-orbitals --> 24.986
+   p-orbitals --> 13.206
+   d-orbitals -->  9.041
+ Value chosen: 24.986
+Constant c: 0.81045E-04
+Number of points:  103
+ Atom:    1*1 points=22690 compressed from 22690 (131 radial)
+ Atom:    2*1 points=21550 compressed from 21602 (103 radial)
+ Atom:    3*1 points=21578 compressed from 21602 (103 radial)
+ Number of grid points:    65818 Grid generation time:       0.0 s
+K-S electrons/energy :    9.99999945650896   -6.97907583517593 err:-.54E-06
+   1    -76.200687219824   1.80D+00  -7.62D+01    5
+K-S electrons/energy :    9.99999944829500   -6.97038543883072 err:-.55E-06
+   2    -76.357359362957   7.65D-01  -1.57D-01    5
+K-S electrons/energy :    9.99999945163640   -7.05387254851640 err:-.55E-06
+   3    -76.375509640011   3.10D-01  -1.82D-02    5
+K-S electrons/energy :    9.99999949413815   -6.98042827807015 err:-.51E-06
+   4    -76.378663455752   1.61D-01  -3.15D-03    5
+K-S electrons/energy :    9.99999948181962   -7.00432818263021 err:-.52E-06
+   5    -76.379687787392   7.89D-03  -1.02D-03    5
+K-S electrons/energy :    9.99999948191354   -7.00534669862369 err:-.52E-06
+   6    -76.379690630471   2.00D-04  -2.84D-06    5
+K-S electrons/energy :    9.99999948197090   -7.00535484105298 err:-.52E-06
+   7    -76.379690636940   2.79D-05  -6.47D-09    5
+K-S electrons/energy :    9.99999948197589   -7.00535168555854 err:-.52E-06
+   8    -76.379690637001   9.75D-07  -6.07D-11    5
+ DIIS converged in   8 iterations !
+
+
+ *** RHF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Hartree-Fock orbital energies, symmetry 1
+
+       -19.21620240    -1.03977922    -0.54603132    -0.40913146    -0.33268945
+        -0.01347362     0.02812849     0.08620239     0.10734881     0.11418824
+
+    E(LUMO) :    -0.01347362 au (symmetry 1)
+  - E(HOMO) :    -0.33268945 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.31921582 au
+
+ >>> Writing SIRIFC interface file <<<
+ Begin asymptotic correction computing
+ End asymptotic correction computing
+ >>>> Total CPU  time used in HARPOT:  13.57 seconds
+ >>>> Total wall time used in HARPOT:  14.00 seconds
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Automatic occupation of symmetries with  10 electrons.
+
+ Iter     Total energy    Error norm  Delta(E)    HF occupation
+ -----------------------------------------------------------------------------
+K-S electrons/energy :    9.99999948197589   -7.00535168555854 err:-.52E-06
+   1    -76.379690637001   1.62D-02   0.00D+00    5
+K-S electrons/energy :    9.99999948069409   -7.00954968718565 err:-.52E-06
+   2    -76.379632072078   1.27D-02   5.86D-05    5
+K-S electrons/energy :    9.99999948241046   -7.00647769447794 err:-.52E-06
+   3    -76.379647703426   7.44D-03  -1.56D-05    5
+K-S electrons/energy :    9.99999948191290   -7.00758483527906 err:-.52E-06
+   4    -76.379638464831   6.53D-04   9.24D-06    5
+K-S electrons/energy :    9.99999948184405   -7.00770917072021 err:-.52E-06
+   5    -76.379636031435   5.84D-05   2.43D-06    5
+K-S electrons/energy :    9.99999948184349   -7.00771274501912 err:-.52E-06
+   6    -76.379635964493   1.13D-05   6.69D-08    5
+K-S electrons/energy :    9.99999948184337   -7.00771126044406 err:-.52E-06
+   7    -76.379635978806   6.16D-07  -1.43D-08    5
+ DIIS converged in   7 iterations !
+
+
+ *** RHF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Hartree-Fock orbital energies, symmetry 1
+
+       -19.21302698    -1.03747850    -0.54380033    -0.40676416    -0.33030255
+         0.01158348     0.06648736     0.11838167     0.13129066     0.14032270
+
+    E(LUMO) :     0.01158348 au (symmetry 1)
+  - E(HOMO) :    -0.33030255 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.34188604 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+                    >>> FINAL RESULTS FROM SIRIUS <<<
+
+     Spin multiplicity:           1
+     Spatial symmetry:            1
+     Total charge of molecule:    0
+
+     Final DFT energy:            -76.379635978806
+     Nuclear repulsion:             9.058053553181
+     Electronic energy:           -85.437689531987
+
+     Final gradient norm:           0.000000616349
+
+ 
+     Date and time (Linux)  : Tue Sep  4 16:58:51 2012
+     Host name              : mmp12                                   
+
+     Molecular orbitals for symmetry species   1
+
+ Orbital          1        2        3        4        5
+   1  O   1s    -0.9966   0.0177   0.0000  -0.0008   0.0000
+   2  O   1s     0.0004  -0.8402   0.0000  -0.3338   0.0000
+   3  O   1s    -0.0071  -0.0042   0.0000  -0.0029   0.0000
+   4  O   1s    -0.0032   0.0355   0.0000  -0.2090   0.0000
+   5  O   1s    -0.0012  -0.0337   0.0000  -0.1009   0.0000
+   6  O   2px   -0.0034  -0.1370   0.3815   0.7112   0.0000
+   7  O   2py    0.0000   0.0000   0.0000   0.0000  -0.9335
+   8  O   2pz   -0.0019  -0.0791  -0.6607   0.4106   0.0000
+   9  O   2px    0.0011   0.0020  -0.0215  -0.0291   0.0000
+  10  O   2py    0.0000   0.0000   0.0000   0.0000   0.0215
+  11  O   2pz    0.0006   0.0011   0.0372  -0.0168   0.0000
+  12  O   2px    0.0011   0.0248  -0.0566  -0.0583   0.0000
+  13  O   2py    0.0000   0.0000   0.0000   0.0000  -0.0100
+  14  O   2pz    0.0007   0.0143   0.0981  -0.0336   0.0000
+  15  O   2px   -0.0001  -0.0027   0.0035   0.0141   0.0000
+  16  O   2py    0.0000   0.0000   0.0000   0.0000  -0.0424
+  17  O   2pz    0.0000  -0.0015  -0.0060   0.0082   0.0000
+  18  O   3d2-   0.0000   0.0000   0.0000   0.0000  -0.0050
+  19  O   3d1-   0.0000   0.0000   0.0000   0.0000  -0.0029
+  20  O   3d0   -0.0003  -0.0024  -0.0081   0.0007   0.0000
+  21  O   3d1+   0.0002   0.0008  -0.0054   0.0034   0.0000
+  22  O   3d2+  -0.0003  -0.0032   0.0046   0.0052   0.0000
+  23  O   3d2-   0.0000   0.0000   0.0000   0.0000  -0.0128
+  24  O   3d1-   0.0000   0.0000   0.0000   0.0000  -0.0074
+  25  O   3d0    0.0001  -0.0050  -0.0127  -0.0035   0.0000
+  26  O   3d1+  -0.0001   0.0006  -0.0085   0.0132   0.0000
+  27  O   3d2+   0.0001  -0.0080   0.0073   0.0090   0.0000
+  28  O   3d2-   0.0000   0.0000   0.0000   0.0000  -0.0059
+  29  O   3d1-   0.0000   0.0000   0.0000   0.0000  -0.0034
+  30  O   3d0    0.0004   0.0007   0.0031  -0.0076   0.0000
+  31  O   3d1+  -0.0002  -0.0013   0.0020   0.0084   0.0000
+  32  O   3d2+   0.0004  -0.0002  -0.0018  -0.0034   0.0000
+  33  O   4f3-   0.0000   0.0000   0.0000   0.0000  -0.0024
+  34  O   4f2-   0.0000   0.0000   0.0000   0.0000   0.0009
+  35  O   4f1-   0.0000   0.0000   0.0000   0.0000  -0.0025
+  36  O   4f0   -0.0003  -0.0013  -0.0012   0.0014   0.0000
+  37  O   4f1+   0.0000  -0.0002   0.0014   0.0005   0.0000
+  38  O   4f2+   0.0001   0.0003  -0.0015   0.0003   0.0000
+  39  O   4f3+  -0.0001  -0.0009   0.0008   0.0019   0.0000
+  40  O   4f3-   0.0000   0.0000   0.0000   0.0000  -0.0012
+  41  O   4f2-   0.0000   0.0000   0.0000   0.0000   0.0000
+  42  O   4f1-   0.0000   0.0000   0.0000   0.0000  -0.0009
+  43  O   4f0    0.0008  -0.0003  -0.0009  -0.0014   0.0000
+  44  O   4f1+   0.0001  -0.0002  -0.0011   0.0001   0.0000
+  45  O   4f2+  -0.0004  -0.0003  -0.0011   0.0013   0.0000
+  46  O   4f3+   0.0003  -0.0008   0.0011   0.0003   0.0000
+  47  H1  1s    -0.0032  -0.3851   0.6075   0.3613   0.0000
+  48  H1  1s     0.0027   0.1163  -0.0794  -0.0074   0.0000
+  49  H1  1s     0.0028   0.1585  -0.1793  -0.0635   0.0000
+  50  H1  1s     0.0000   0.0014  -0.0033   0.0028   0.0000
+  51  H1  2px   -0.0001   0.0116  -0.0145  -0.0020   0.0000
+  52  H1  2py    0.0000   0.0000   0.0000   0.0000  -0.0113
+  53  H1  2pz    0.0001  -0.0056   0.0012   0.0089   0.0000
+  54  H1  2px   -0.0013   0.0109  -0.0317  -0.0123   0.0000
+  55  H1  2py    0.0000   0.0000   0.0000   0.0000  -0.0314
+  56  H1  2pz    0.0006  -0.0055   0.0015   0.0274   0.0000
+  57  H1  2px   -0.0007  -0.0043  -0.0003   0.0060   0.0000
+  58  H1  2py    0.0000   0.0000   0.0000   0.0000  -0.0233
+  59  H1  2pz    0.0003   0.0016  -0.0056   0.0106   0.0000
+  60  H1  3d2-   0.0000   0.0000   0.0000   0.0000   0.0045
+  61  H1  3d1-   0.0000   0.0000   0.0000   0.0000  -0.0019
+  62  H1  3d0   -0.0003   0.0009  -0.0029   0.0012   0.0000
+  63  H1  3d1+  -0.0006   0.0020  -0.0027  -0.0037   0.0000
+  64  H1  3d2+   0.0007  -0.0023   0.0058   0.0011   0.0000
+  65  H1  3d2-   0.0000   0.0000   0.0000   0.0000   0.0061
+  66  H1  3d1-   0.0000   0.0000   0.0000   0.0000  -0.0032
+  67  H1  3d0   -0.0001  -0.0001  -0.0030   0.0031   0.0000
+  68  H1  3d1+  -0.0002   0.0002   0.0005  -0.0013   0.0000
+  69  H1  3d2+   0.0002  -0.0002   0.0020  -0.0005   0.0000
+  70  H2  1s    -0.0032  -0.3851  -0.6075   0.3613   0.0000
+  71  H2  1s     0.0027   0.1163   0.0794  -0.0074   0.0000
+  72  H2  1s     0.0028   0.1585   0.1793  -0.0635   0.0000
+  73  H2  1s     0.0000   0.0014   0.0033   0.0028   0.0000
+  74  H2  2px    0.0000   0.0009   0.0063   0.0067   0.0000
+  75  H2  2py    0.0000   0.0000   0.0000   0.0000  -0.0113
+  76  H2  2pz   -0.0002   0.0128   0.0132  -0.0062   0.0000
+  77  H2  2px   -0.0001   0.0007   0.0146   0.0176   0.0000
+  78  H2  2py    0.0000   0.0000   0.0000   0.0000  -0.0314
+  79  H2  2pz   -0.0015   0.0122   0.0282  -0.0243   0.0000
+  80  H2  2px   -0.0001  -0.0007   0.0050   0.0122   0.0000
+  81  H2  2py    0.0000   0.0000   0.0000   0.0000  -0.0233
+  82  H2  2pz   -0.0007  -0.0045  -0.0026  -0.0001   0.0000
+  83  H2  3d2-   0.0000   0.0000   0.0000   0.0000   0.0006
+  84  H2  3d1-   0.0000   0.0000   0.0000   0.0000   0.0049
+  85  H2  3d0    0.0010  -0.0031  -0.0061   0.0033   0.0000
+  86  H2  3d1+   0.0002  -0.0007  -0.0034  -0.0022   0.0000
+  87  H2  3d2+   0.0000   0.0000  -0.0006  -0.0001   0.0000
+  88  H2  3d2-   0.0000   0.0000   0.0000   0.0000   0.0003
+  89  H2  3d1-   0.0000   0.0000   0.0000   0.0000   0.0069
+  90  H2  3d0    0.0003  -0.0002  -0.0013   0.0003   0.0000
+  91  H2  3d1+   0.0001   0.0001  -0.0033  -0.0032   0.0000
+  92  H2  3d2+   0.0000  -0.0001   0.0005   0.0011   0.0000
+
+
+
+ >>>> Total CPU  time used in SIRIUS :     32.61 seconds
+ >>>> Total wall time used in SIRIUS :     33.00 seconds
+
+ 
+     Date and time (Linux)  : Tue Sep  4 16:58:51 2012
+     Host name              : mmp12                                   
+
+- End of Wave Function Section
+
+ >>>> Total CPU  time used in DALTON:  33.03 seconds
+ >>>> Total wall time used in DALTON:  34.00 seconds
+
+ 
+     Date and time (Linux)  : Tue Sep  4 16:58:51 2012
+     Host name              : mmp12                                   

@@ -1,0 +1,37 @@
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule NH3
+  Units Bohr
+  AC-Shift 0.113560    a.u.
+  IP       0.397873    a.u.
+  N   7.0   0.000000000    0.000000000    0.127818064   Type N
+  H   1.0   1.771300934    0.000000000   -0.592068734   Type H
+  H   1.0  -0.885650467   -1.533991606   -0.592068734   Type H
+  H   1.0  -0.885650467    1.533991606   -0.592068734   Type H
+End
+
+Run-Type
+  Properties
+  Molecule     NH3
+  File-Prefix  NH3_aVTZ
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Cartesian   Use-ISA-Basis
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis
+  ISA-Basis      set2   Min-S-exp-H = 0.0   
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           GRAC            ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     Psi4            ( DALTON2015, NWCHEM, etc )
+
+  ! MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file if available )
+
+  #METHOD      wxhole-pols
+
+End
+
+Finish

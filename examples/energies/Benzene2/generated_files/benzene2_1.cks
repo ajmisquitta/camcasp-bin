@@ -1,0 +1,487 @@
+TITLE benzene1 and benzene2
+TITLE Basis sadlej and type MC+
+TITLE Midbonds 3S2P1D and type weighted
+TITLE CalculationType: SAPT(DFT)
+
+MEMORY       4096 MB
+
+SET Global_data
+  CamCASP-path /home/am592/CamCASP/5.5-dev
+  Units Bohr cm-1
+  Scf-code Dalton
+  XC-func PBE
+  Overwrite yes
+END
+
+MOLECULE benzene1 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectA.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      C1         6.0        2.64623243       0.00000000       0.00000000  TYPE C1
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C2         6.0        1.32311622       2.29170451       0.00000000  TYPE C2
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C3         6.0       -1.32311622       2.29170451       0.00000000  TYPE C3
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C4         6.0       -2.64623243       0.00000000       0.00000000  TYPE C4
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C5         6.0       -1.32311622      -2.29170451       0.00000000  TYPE C5
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C6         6.0        1.32311622      -2.29170451       0.00000000  TYPE C6
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      H1         1.0        4.70829954       0.00000000       0.00000000  TYPE H1
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         1.0        2.35414977       4.07750701       0.00000000  TYPE H2
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H3         1.0       -2.35414977       4.07750701       0.00000000  TYPE H3
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H4         1.0       -4.70829954       0.00000000       0.00000000  TYPE H4
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H5         1.0       -2.35414977      -4.07750701       0.00000000  TYPE H5
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H6         1.0        2.35414977      -4.07750701       0.00000000  TYPE H6
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      Mb    0.0        0.00000000       0.00000000       3.59048100  TYPE Mb
+        #include-camcasp basis/gamess_us/midbond/Mb_3s2p1d
+      ---
+      C1         0.0        2.64623243       0.00000000       7.18096200  TYPE C1
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C2         0.0        1.32311622      -2.29170451       7.18096200  TYPE C2
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C3         0.0       -1.32311622      -2.29170451       7.18096200  TYPE C3
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C4         0.0       -2.64623243       0.00000000       7.18096200  TYPE C4
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C5         0.0       -1.32311622       2.29170451       7.18096200  TYPE C5
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C6         0.0        1.32311622       2.29170451       7.18096200  TYPE C6
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      H1         0.0        4.70829954       0.00000000       7.18096200  TYPE H1
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         0.0        2.35414977      -4.07750701       7.18096200  TYPE H2
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H3         0.0       -2.35414977      -4.07750701       7.18096200  TYPE H3
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H4         0.0       -4.70829954       0.00000000       7.18096200  TYPE H4
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H5         0.0       -2.35414977       4.07750701       7.18096200  TYPE H5
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H6         0.0        2.35414977       4.07750701       7.18096200  TYPE H6
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      C1         6.0        2.64623243       0.00000000       0.00000000  TYPE C1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C2         6.0        1.32311622       2.29170451       0.00000000  TYPE C2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C3         6.0       -1.32311622       2.29170451       0.00000000  TYPE C3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C4         6.0       -2.64623243       0.00000000       0.00000000  TYPE C4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C5         6.0       -1.32311622      -2.29170451       0.00000000  TYPE C5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C6         6.0        1.32311622      -2.29170451       0.00000000  TYPE C6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      H1         1.0        4.70829954       0.00000000       0.00000000  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        2.35414977       4.07750701       0.00000000  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H3         1.0       -2.35414977       4.07750701       0.00000000  TYPE H3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         1.0       -4.70829954       0.00000000       0.00000000  TYPE H4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H5         1.0       -2.35414977      -4.07750701       0.00000000  TYPE H5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H6         1.0        2.35414977      -4.07750701       0.00000000  TYPE H6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      Mb    0.0        0.00000000       0.00000000       3.59048100  TYPE Mb
+        #include-camcasp basis/auxiliary/midbond/Mb_3s2p1d
+      ---
+      C1         0.0        2.64623243       0.00000000       7.18096200  TYPE C1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C2         0.0        1.32311622      -2.29170451       7.18096200  TYPE C2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C3         0.0       -1.32311622      -2.29170451       7.18096200  TYPE C3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C4         0.0       -2.64623243       0.00000000       7.18096200  TYPE C4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C5         0.0       -1.32311622       2.29170451       7.18096200  TYPE C5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C6         0.0        1.32311622       2.29170451       7.18096200  TYPE C6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      H1         0.0        4.70829954       0.00000000       7.18096200  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         0.0        2.35414977      -4.07750701       7.18096200  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H3         0.0       -2.35414977      -4.07750701       7.18096200  TYPE H3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         0.0       -4.70829954       0.00000000       7.18096200  TYPE H4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H5         0.0       -2.35414977       4.07750701       7.18096200  TYPE H5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H6         0.0        2.35414977       4.07750701       7.18096200  TYPE H6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+
+MOLECULE benzene2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectB.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      C1         0.0        2.64623243       0.00000000       0.00000000  TYPE C1
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C2         0.0        1.32311622       2.29170451       0.00000000  TYPE C2
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C3         0.0       -1.32311622       2.29170451       0.00000000  TYPE C3
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C4         0.0       -2.64623243       0.00000000       0.00000000  TYPE C4
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C5         0.0       -1.32311622      -2.29170451       0.00000000  TYPE C5
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C6         0.0        1.32311622      -2.29170451       0.00000000  TYPE C6
+        Limit P
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      H1         0.0        4.70829954       0.00000000       0.00000000  TYPE H1
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         0.0        2.35414977       4.07750701       0.00000000  TYPE H2
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H3         0.0       -2.35414977       4.07750701       0.00000000  TYPE H3
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H4         0.0       -4.70829954       0.00000000       0.00000000  TYPE H4
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H5         0.0       -2.35414977      -4.07750701       0.00000000  TYPE H5
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H6         0.0        2.35414977      -4.07750701       0.00000000  TYPE H6
+        Limit S
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      Mb    0.0        0.00000000       0.00000000       3.59048100  TYPE Mb
+        #include-camcasp basis/gamess_us/midbond/Mb_3s2p1d
+      ---
+      C1         6.0        2.64623243       0.00000000       7.18096200  TYPE C1
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C2         6.0        1.32311622      -2.29170451       7.18096200  TYPE C2
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C3         6.0       -1.32311622      -2.29170451       7.18096200  TYPE C3
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C4         6.0       -2.64623243       0.00000000       7.18096200  TYPE C4
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C5         6.0       -1.32311622       2.29170451       7.18096200  TYPE C5
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C6         6.0        1.32311622       2.29170451       7.18096200  TYPE C6
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      H1         1.0        4.70829954       0.00000000       7.18096200  TYPE H1
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         1.0        2.35414977      -4.07750701       7.18096200  TYPE H2
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H3         1.0       -2.35414977      -4.07750701       7.18096200  TYPE H3
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H4         1.0       -4.70829954       0.00000000       7.18096200  TYPE H4
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H5         1.0       -2.35414977       4.07750701       7.18096200  TYPE H5
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H6         1.0        2.35414977       4.07750701       7.18096200  TYPE H6
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      C1         0.0        2.64623243       0.00000000       0.00000000  TYPE C1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C2         0.0        1.32311622       2.29170451       0.00000000  TYPE C2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C3         0.0       -1.32311622       2.29170451       0.00000000  TYPE C3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C4         0.0       -2.64623243       0.00000000       0.00000000  TYPE C4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C5         0.0       -1.32311622      -2.29170451       0.00000000  TYPE C5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C6         0.0        1.32311622      -2.29170451       0.00000000  TYPE C6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      H1         0.0        4.70829954       0.00000000       0.00000000  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         0.0        2.35414977       4.07750701       0.00000000  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H3         0.0       -2.35414977       4.07750701       0.00000000  TYPE H3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         0.0       -4.70829954       0.00000000       0.00000000  TYPE H4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H5         0.0       -2.35414977      -4.07750701       0.00000000  TYPE H5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H6         0.0        2.35414977      -4.07750701       0.00000000  TYPE H6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      Mb    0.0        0.00000000       0.00000000       3.59048100  TYPE Mb
+        #include-camcasp basis/auxiliary/midbond/Mb_3s2p1d
+      ---
+      C1         6.0        2.64623243       0.00000000       7.18096200  TYPE C1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C2         6.0        1.32311622      -2.29170451       7.18096200  TYPE C2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C3         6.0       -1.32311622      -2.29170451       7.18096200  TYPE C3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C4         6.0       -2.64623243       0.00000000       7.18096200  TYPE C4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C5         6.0       -1.32311622       2.29170451       7.18096200  TYPE C5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C6         6.0        1.32311622       2.29170451       7.18096200  TYPE C6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      H1         1.0        4.70829954       0.00000000       7.18096200  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        2.35414977      -4.07750701       7.18096200  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H3         1.0       -2.35414977      -4.07750701       7.18096200  TYPE H3
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         1.0       -4.70829954       0.00000000       7.18096200  TYPE H4
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H5         1.0       -2.35414977       4.07750701       7.18096200  TYPE H5
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H6         1.0        2.35414977       4.07750701       7.18096200  TYPE H6
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+BEGIN GRID
+  Molecule benzene1
+  Angular 100
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule benzene2
+  Angular 100
+  Radial  60
+END
+
+SET NEW-PROP
+  Kernel ALDAX
+  Kernel-Eps 1.0e-8
+  DF
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OV
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print Nothing
+END
+BEGIN DF
+  Molecule benzene1
+  Type OV
+  Print Nothing
+END
+BEGIN DF
+  Molecule benzene2
+  Type OV
+  Print Nothing
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+BEGIN E1exch
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  New-Prop
+  Integral Switch =  1
+END
+BEGIN E2disp
+  Use the N3 algorithm
+  New-Prop
+  Integral Switch =  1
+END
+
+FINISH

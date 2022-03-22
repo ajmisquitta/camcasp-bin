@@ -1,0 +1,21 @@
+AJM: 28 April 2016
+Sadlej-pVTZ basis sets augmented as follows:
+
+    * Start from the aug-Salej basis
+    * remove any diffuse functions with exponents < 0.03 a.u.
+    * Do one of the following:
+       * If possible, augment the outer shell with one diffuse exponent
+         alpha = alpha_min/3.0
+         If alpha < 0.03 a.u., discard this exponent.
+       * Include one shell with l = lmax+1 and the first exponent < 1.0 a.u taken from the
+         previous shell. If there is no exponent < 1.0 a.u., choose one closest to 1.0 a.u.
+
+H : [3S,2P,1d]
+C : [5S,3P,2D,1f]
+N : [5S,3P,2D,1f]
+O : [6S,3P,2D,1f]
+F : [6s,3p,2d,1f]
+S : [7s,5p,2d,1f] 
+Br: [10s,8p,5d,3f]
+I : [11s,9p,6d,3f]
+

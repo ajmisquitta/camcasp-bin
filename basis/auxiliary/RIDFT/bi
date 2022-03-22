@@ -1,0 +1,66 @@
+
+# RCS #####################################################################
+# $Id: bi,v 1.3 1996/11/25 13:23:59 karin Exp $ 
+# $Log: bi,v $
+# Revision 1.3  1996/11/25 13:23:59  karin
+# complete set of nicknames added
+#
+# Revision 1.2  1996/09/27 14:19:34  karin
+# complete set of nicknames added
+#
+# Revision 1.1  1996/07/08 10:13:01  karin
+# Initial revision
+# 
+# RCS #####################################################################
+###########################################################################
+$jbas
+#
+#AUXILIARY BASIS SET FOR Bi
+#
+#
+*
+bi 78-mwb-opt
+bi ecp-78-mwb-SVP
+bi def-SVP
+bi def-SV(P)
+bi ecp-78-mwb-TZVP
+bi def-TZVP
+#  (5s3p3d1f1g)/ [4s3p3d1f1g]  {2111/111/111/1/1}
+# RI-J atom energy:                                  dev(DFT): 0.002 mH
+# RI-J BiH3 :                                        dev(DFT): 0.076 mH
+# RI-J BiF3 :                                        dev(DFT): 0.128 mH
+# s functions optimized and contracted for Bi atom
+# d functions interpol. betweeen Pb--Po
+# p functions from auxp (p contraction calc. on BiH3)
+# f exponent = 2* eta(d) Basis/1.095
+# g function exp = 2* eta(d) Basis
+# contraction tested on BiF3
+*
+    2  s
+     1.843003            .221667214D+00
+     0.908852           -.732911816D+00
+    1  s
+     0.473618            .412653525D+00
+    1  s
+     0.255509            .263466283D+00
+    1  s
+     0.139481            .102888186D+00
+    1  p
+     0.9894532413       -.108679202D-02
+    1  p
+     0.394991            .297911781D-01
+    1  p
+     0.164579           -.880491660D-02
+    1  d
+     1.1164465          -.514269660D-02
+    1  d
+     .43619655           .131631135D-01
+    1  d
+     .17489500           .786501316D-02
+    1  f
+     .3853881278        1.0
+    1  g
+     .42200000          1.0
+*
+###########################################################################
+$end

@@ -1,0 +1,53 @@
+ ================================================================
+ Compiled on Jun 12 2018 at 14:16:30
+    Compiler : gfortran
+    Version  : unknown
+ VCS BASE repository version:
+     0c8518c3372db9cffcb8a23b197ec7da216e3f4e
+ Working directory: 
+     /scratch/fastscratch/ajs1/He2_11-00-52/camcasp
+ Running on: whirligig
+ ================================================================
+
+
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.1071968E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6497204E+01        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{exch}                0.6497369E+01        CM-1     DF :: NoReg ::                                              
+E^{1}_{int}                 0.5425401E+01        CM-1     DF :: NoReg ::                                              
+E^{2}_{ind}                -0.2685127E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(A)             -0.1342563E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(B)             -0.1342564E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.2339753E-02        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}(S2)        0.5551016E-02        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP cks                      
+E^{2}_{ind,exch}(S2)(A)     0.2775507E-02        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP cks                      
+E^{2}_{ind,exch}(S2)(B)     0.2775510E-02        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP cks                      
+E^{2}_{ind,exch}(S2)(UC)    0.0000000E+00        CM-1     DF :: S2 :: AMP UC ::  :: NoReg                             
+E^{2}_{IND}                 0.3043176E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{IND}(A)              0.1521587E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{IND}(B)              0.1521589E-02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind,exch}            0.5728302E-02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(A)         0.2864150E-02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(B)         0.2864152E-02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{disp}               -0.1310821E+02        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.1358473E+02        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.8064441E-01        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.8357609E-01        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{ind}                -0.1363777E-02        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(A)             -0.6818883E-03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(B)             -0.6818885E-03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(UC)            -0.1224879E-02        CM-1     DF :: PROP UC  :: REG eta =   3.0000                        
+E^{2}_{ind,exch}(S2)        0.2778088E-02        CM-1     DF :: S2 :: AMP C :: REG eta =   3.0000 :: PROP cks         
+E^{2}_{ind,exch}(S2)(A)     0.1389044E-02        CM-1     DF :: S2 :: AMP C :: REG eta =   3.0000 :: PROP cks         
+E^{2}_{ind,exch}(S2)(B)     0.1389045E-02        CM-1     DF :: S2 :: AMP C :: REG eta =   3.0000 :: PROP cks         
+E^{2}_{ind,exch}(S2)(UC)    0.0000000E+00        CM-1     DF :: S2 :: AMP UC ::  :: REG eta =   3.0000                
+E^{2}_{IND}                 0.1414636E-02        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{IND}(A)              0.7073176E-03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{IND}(B)              0.7073184E-03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind,exch}            0.2778413E-02        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+E^{2}_{ind,exch}(A)         0.1389206E-02        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+E^{2}_{ind,exch}(B)         0.1389207E-02        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+--------------------------------------------------------------------------------

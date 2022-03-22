@@ -1,0 +1,25 @@
+Experimental IP's from the "Computational Chemistry Comparison and Benchmark DataBase"
+https://cccbdb.nist.gov
+
+
+#molecule  IP [au]      reference [doi]
+# 
+   he      0.90356      10.18434/T4D303
+   ne      0.79250	10.18434/T4D303
+   ar      0.57913	10.18434/T4D303 
+   h2      0.56690      10.18434/T4D303
+   hf      0.59240      10.18434/T4D303
+   h2o     0.46304      10.18434/T4D303
+   nh3     0.39763      10.18434/T4D303
+   ch4     0.49979      10.18434/T4D303
+   n2      0.57259      10.18434/T4D303
+   hcn     0.50016      10.18434/T4D303
+   co      0.51501      10.18434/T4D303
+   co2     0.50630      10.18434/T4D303
+   c2h2    0.42225      10.18434/T4D303
+   c2h4    0.39248      10.18434/T4D303
+   c2h6    0.44062      10.18434/T4D303
+   c3h8    0.42298      10.18434/T4D303
+   c6h6    0.33993      10.18434/T4D303
+
+

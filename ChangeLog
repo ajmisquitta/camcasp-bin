@@ -1,0 +1,1717 @@
+2022-02-21 AJM 
+	* src/isa_analysis.F90: Allow zero and negative powers of r in 
+	subroutine calculate_ISA_atom_radii
+	* src/isa_main.F90: New commands:
+	BEGIN ISA
+	  ...
+	  EXPERIMENTAL <logical (default=False>
+	  ...
+	  CONVERGENCE
+	  	 ...
+		 COMPARISON-TYPE  [ABSOLUTE (default) | RELATIVE]
+		 ...
+	  END
+	Where, EXPERIMENTAL toggles on the experimental parts of the ISA module, and COMPARISON-TYPE
+	can be an absolute or relative test for convergence. The latter applies to the KL-divergence
+	tests only. 
+
+	At present, the only experimental calculation is the local-axis frame calculation.
+	* src/isa_misc_operations.F90: Implemented absolute and relative convergence tests for the 
+	KL-divergence. New subroutine local_axis_frame() to compute local axis frames using the
+	Q-matrix. This subroutine is still incomplete.
+	* src/isa_parameters.F90: More parameters for the above features. Also changes to the 
+	radii_powers() array to include n = 0, -1.
+	* src/num_integrals.F90: Largely a clean-up of the code and inclusion of many comments
+	in subroutine DistMultipoleIntegrals_primitive_aux_stockholder(). 
+	Change to subroutine r_pow_n_integrals() to include optional argument Outer_Limit_r 
+	which, if present and > 0.0, sets an outer limit to the integration. I used this to decide
+	on which parts of the density are needed to compute the integrals of powers of r. 
+	* src/tools/cluster_file_interface.F90: Extensive re-organisation and staging for use of 
+	types for some of the parameter groups. Main parser changes are:
+	RUN-TYPE
+	   ...
+	   AUX-BASIS ... [ONLY-ISA-BASIS] [ONLY-ISA-BASIS-FOR-DUMMY-SITES] [EXCLUDE-DUMMY-SITES]
+	   ATOM-AUX-BASUS ... ditto ...
+	   ...
+	END
+	These extra commands do the following:
+	ONLY-ISA-BASIS: Causes the basis to be constructed from the ISA s-function basis only. This
+	 	will only be applied if USE-ISA-BASIS is also present. All higher ranking basis 
+		functions are removed.
+	ONLY-ISA-BASIS-FOR-DUMMY-SITES: Use only the ISA s-function basis for any dummy site.
+	EXCLUDE-DUMMY-SITES: Will exclude all dummy sites from the basis.
+
+	These commands are applied independently to te AUX and ATOM-AUX basis sets. The commands
+	can be used all together, in this case EXCLUDE-DUMMY-SITES takes precedence over the 
+	other two.
+
+2022-01-11 AJM *** 2022 ***
+	****************************************************************************
+	*******   2022   2022   2022   2022   2022   2022   2022   2022  ***********
+	****************************************************************************
+
+	Reorganising the ISA codes to make the convergence tests more logical, and also
+	to include the KL-divergence metrics as one of the possible ways of 
+	testing for convergence. Re-organisation has meant that the code is now shorter.
+	* isa_misc_operations.F90 isa_parameters.F90 isa_main.F90
+
+2021-12-03 AJM 7.2.2 001
+	* src/isa_main.F90: Major changes to the organisation of the ISA convergence
+	tests, analysis code and the updates of w and D expansions. The old code was 
+	poorly organised and did not enable the move to using the KL-divergence to test
+	convergence. 
+
+	W-MIXING: this has been changed to mix shape-functions for ALL sites if 
+	the ISA algorithm has not converged. Previously only those sites that were not
+	converged were mixed, but I think this was a mistake as it could lead to 
+	inconsistencies in the shape-functions at any particular iteration.
+	--> Tests on H2O indicate that this approach works. W-MIX-FRACTION = 0.2 - 0.3
+	with SKIP-ITERATIONS = 20 reduces iteractions from 41 to 33 with no difference
+	in the solution. 
+
+	This leads me to wonder just what kind of speed-up we could expect with a DIIS
+	algorithm!
+
+	* src/isa_misc_operations.F90 and isa_shapefunc.F90: Changed some prints to use
+	debug3 inplace of verbose. This seems more appropriate for prints of large vectors
+
+	* src/isa_parameters.F90: Default value of w_mix_skip_iterations set to 20.
+
+2021-11-21 AJM 7.2.2 000
+	Using KL in place of F for Kullback-Leibler divergence. 
+	Changes in the following code:
+	* src/isa_IO.F90
+	* src/isa_main.F90
+	* src/isa_misc_operations.F90
+	* src/isa_parameters.F90
+	* src/isa_shapefunc.F90
+	* src/num_integrals.F90
+	* src/type_operations_secondary.F90
+	* src/types_secondary.F90
+
+	Re-orgaised the ISA parameters and related subroutines. 
+	Changed parameter names to group them more logically.
+	Converted some parameters from integer codes to strings to make their
+	values more obvious.
+	* src/isa_parameters.F90
+	* src/isa_main.F90
+	* src/isa_misc_operations.F90
+
+
+
+2021-10-21 AJM  7.2.1 001
+	* methods/: more changes to make the ISA-based methods achieve high accuracies
+	while retaining their computational efficiency.
+	* src/display.F90: Trivial change to add explicit return.
+
+2021-10-08 AJM BUG FIXES in DF  : New DF parameter defaults
+	* VERSION 7.2.1 000
+	* src/df_Tmat.F90: BUG FIX in subroutine make_T_MO_mono_GEN_noTAO: Index mapping
+	error between the Iint() - constructed in the mol%aux basis - and TMO() integrals
+	- constructed in the atomic aux basis, one atom at a time. k_indx_in_molaux was not
+	correctly defined, but the error would have shown up only for very large system
+	for which the block size was less than the number of aux functions on the atom. 
+	* src/df_monomer.F90: "BUG FIX" It's in quotes as this is not really a bug. 
+	When DF_type RHO is used the OO dolution is not created. This is OK, but under some
+	conditions this would cause the DF to be repeated and this could be a waste of CPU.
+	For example, in an ISA calculation the DF TYPE RHO would be used, but when the 
+	moments were to be calculated, that module would make a call to df_monomer for
+	DF TYPE OO, and therefore the DF solution would be re-calculated. For a large system
+	with GELSS as the solver, this could add many hours to the calculation time. 
+	I have simplified the way df_monomer.F90 solves for the various DF-TYPES and 
+	have inserted comments in the code to describe how it now works.
+	Unless DF-TYPE = RHO, the RHO solution is now created directly from the OO 
+	solution. This will avoid unnecessary DF solutions.
+	* src/df_data.F90: Added space for Dvv_c and Dvv_c_par but as yet neither are filled
+	by df_monomer.F90. I believe that the rational for this was that the Dvv solution 
+	is only needed for the E(2)exch-disp energy and this term is almost always computed 
+	using un-constrained DF. So Dvv is created, but not Dvv_c. 
+	**WARNING** This restriction may need to be revisited sometime.
+	* methods: Updated all methods to use new recommendations for DF and Kernel:
+	DF: lambda = 1.0 is now the default.
+	KERNEL: F-MAX = 600.0 is the default.
+	Aux-Basis now uses SPHERICAL GTOs by default.
+	* tools/cluster_file_interface.F90: Changed DF Lambda = 1.0 from 1000.0
+
+	Lambda = 1000.0 led to symmetry-breaking in large symmetric systems. It is far better
+	to keep lambda small and to use Spherical GTOs for the auxiliary basis.
+
+	Auxiliary basis sets with spherical GTOs are more likely to preserve molecular 
+	symmetries, particularly when global constraints are used in the density-fitting.
+
+2021-09-23 AJM
+	* src/isa_main.F90: New options to the parser:
+	CONVERGENCE
+	   ...
+	   KL-OPTIONS [TAIL-FIX [=] {ON | OFF (default)}]
+	END
+	to control the use the tail-fix in the KL-divergence calculation.
+	W-TAILS
+	  NO-FIX
+	  or
+	  FIX [=] {ON | OFF}
+	  ...
+	END
+	Just a more logical option to 'NO-FIX'.
+	* src/integrals.F90: Added timer commands to multipole integral routines.
+
+2021-09-22 AJM 
+	* src/basis_operations.F90: Modification in subroutine compare_sites to use a 
+	fractional comparison of coordinates rather than absolute comparison. This was needed
+	as round-off led to sites being deemed different for larger systems (C54H18).
+
+2021-09-21 AJM New method for energy-scan in DC-Aux basis
+	* methods/elst-energy-scan-DCaux and elst-energy-scan-DCaux.clt_tmpl: Method
+	for energy scans using a DC auxiliary basis. 
+	* methods/elst-energy-scan-MCaux and elst-energy-scan-MCaux.clt_tmpl: Corresponding
+	method for MC auxiliary basis. Renamed older files and updated contents and 
+	added comments.
+	* src/energy_scan.F90: Improvement to parser and updated comments at place
+	where molecules are updated. Now the MC|DC aux cases are more clearly explained.
+	
+2021-09-21 AJM BUG FIX in Cluster : AC not set 
+	* src/tools/cluster_file_operations.F90: BUG FIX. AC was not being used in
+	Psi4 command files.
+
+2021-08-24 AJM After a vacation on Loch Lomond. Re-instated parts of the 
+	environment report and compiler info in the CamCASP output file.
+	* src/camcasp.F90: Activated environment report.
+	* Makefile: Same.
+	* x86-64/gfortran/exe/Flags: Added -fexternal-blas to get the compiler to 
+	use optimised BLAS for MATMUL()
+
+2021-08-14 AJM Corrections to re-enable DALTON 
+	* ./src/tools/cluster_file_interface.F90: Fixes to recognise 'AC NONE' in the 
+	Psi4 command files.
+	* bin/camcasp.py: Fixes for DALTON. DALTON2020 now correctly supported.
+	* bin/runcamcasp.py: Many small changes. Important ones related to DALTON.
+	Now picks up the number of cores on which to run.
+	* bin/dalton.sh: New file that is the wrapper to run DALTON.
+
+2021-07-05 AJM BUG FIXES and imrovements to METHODS
+	* methods/dens-ovr-integrals: Set REDO-DF-ON-ROTATION FALSE and compute E(1)exch 
+	by default.
+	* methods/psi4_default_supermol.psi4: Using psi4.variable() instead of get_variable().
+	Also using NAT_ORBS True to use Natural Orbitals by default.
+	* src/basis_parser.F90: Stability improvement to recognise that MC+ and MC+BS are 
+	synonymous, and same for DC+ and DC+BS.
+	* src/tools/potential_operations.F90: BUG FIXES to parser to recognise components 
+	correctly. Also added comments to (hopefully) improve readability of the code.
+	* utilities/potential_fitting.py: Using python env correctly.
+
+2021-06-17 AJM BUG FIX in Cluster
+	* src/tools/molecule_operations_cluster.F90: Was incorrectly reporting errors
+	when ION-CHARGES AUTO was used. 
+
+2021-06-15 AJM Changes to methods and some bug fixes
+	* methods/: Updates to isa-A, isa-A-dma, isa-A-restart, isa-pol-* to use new 
+	settings for integration grids and BVLS.
+	* isa_main.F90: Less prints.
+	* pol_main.F90, pol_parameters.F90: BUG FIX Centre of molecule was not defined.
+	* autocorrelation.F90: BUG FIX as above
+
+2021-06-10 AJM ISA improvements : more control over the numerical integrals
+	Changed BVLS ALPHA-MAX default to 0.5 as this was more appropriate and 
+	leads to solutions close to the best LU solutions (but without the 
+	potential for negative ISA tails.
+	* dist_moments.F90: New option:
+		INTEGRATION-OPTIONS  [GRID-ALGORITHM [=] <0 (default),1>]
+	Allows selection of the integration algorithm used for numerical grids.
+	* isa_main.F90 isa_integrals.F90 isa_parameters.F90: New option:
+	    INTEGRATION-OPTIONS  [GRID-ALGORITHM [=] <0 (default),1>]
+	As above. Also changed default ALPHA-MAX to 0.5. 
+	* num_integrals.F90: Added parser:
+	SET [NUMERICAL-INTEGRAL-PARAMETERS | NUM-INT-PARS]
+	  ...
+	END 
+	to set parameters used in this module. At present these include only the 
+	integration grid quality parameters. 
+	* num_integration_grid.F90: Changes to subroutine construct_integration_grid to 
+	the way Quality is used. Quality is now either 0, or between 111 to 666, all inclusive.
+	* main_parser.f90: Inluded parser from num_integrals.F90.
+
+2021-06-08 AJM ISA and BVLS : New options to control where bounds are applied
+	* src/isa_main.F90: New options:
+	SOLVER BVLS [ ALPHA-MIN [=] min-exp (default: 0.0)] [ ALPHA-MAX [=] max-exp (default: 2.0)]
+	The ALPHA-MIN and ALPHA-MAX values allow control over where the BVLS bounds are 
+	applied. They are applied only to s-shells in which all exponents in the contraction
+	are between the two bounds. This lets us apply bounds to the diffuse part of the 
+	ISA basis and leave the more local parts to do what they need. It should give 
+	the solver the flexibility of LU with the control of BVLS. 
+	* src/isa_parameters.F90 and src/isa_misc_operations.F90: Related changes.
+	* docs/users_guide.tex: Added description.
+	
+2021-06-06 AJM 7.2.0 001
+	* interfaces/nwchem/Makefile: Updated to remove the static flags that 
+	caused some installations of gcc to fail to link correctly. 
+	* methods/psi4_default_saptdft.psi4: Updated for options in Psi4 1.4
+	* src/SRCS.list: Updated and order of files correcte.
+	* src/tools/cluster_file_interface.F90: Setting SOSCF = False to avoid
+	convergence issues as SOSCF is not always reliable and can lead to 
+	excessive iterations for systems without convergence issues. 
+	It is probably best to set it to True on a case-by-case basis.
+
+2021-06-04 AJM Merge of branches isa_convergence and wxhole-model into develop
+	* VERSION 7.2.0 000
+	* Importang changes:
+	*    wXhole model for polarizabilities (Andreas)
+	*    More efficient DF (uses far less storage)
+	*    ISA : Significantly faster (by an order of magnitude for large systems)
+	           Better convergence, analysis of density tails.
+			   Properties calculated without TAIL-FIX: more reliable
+			   Kullbach-Leibler information loss can be used more reliably to monitor 
+			   convergence.
+			   
+
+2021-06-04 AJM BUG FIXES and change to F-MAX to remove kernel instability
+	* VERSION 7.1.1 001
+	* bin/camcasp.py: BUG FIX to allow use of molecules defined using the JOIN command
+	in the Cluster file. 
+	* methods/energy-scan: Changed REDO-DF-ON-ROTATION = FALSE as it should not be 
+	needed. I think that it was set to true due to a bug in the energy_scan.F90 
+	but this was fixed on 2020-06-05
+	* methods/isa-A: Commented out 'Solver GELSS' from the DF so that it defaults to LU.
+	GELSS is very slow and is best used only when LU fails due to linear dependencies. 
+	* src/e2disp.F90: Changes to output so that XI(w) is printed out (and flushed) for 
+	each w value. This would give us a better idea of the status of the module. 
+	* src/tools/cluster_file_interface.F90: Changed to kernel parameter : F-MAX = 600.0
+	This seems to result in better numerical stability in the kernel. With the previous
+	value of 1000.0 there were numerical instabilities for some frequencies, for some geometries
+	and some basis sets in the pyridine dimer. It was really quite a specific instability
+	that was seen only in the Hb1 double-H-bonded geometry. My original tests on the 
+	choice of this parameter had suggested using 400.0, so I do not know why I had 
+	subsequently increased it to 1000.0. 
+	*************************************************************************************
+	NOTE: The root cause of the instability remains unknown. It seems to be associated
+	with the correlation kernel (removing it removes the instability). I have derived a 
+	form of the correlation kernel that should be more numerically stable in the 
+	low-density limit. See Book 5 pages 122-139 for notes and the derivation. 
+	*************************************************************************************
+
+2021-05-05 AJM  Kernel stability changes
+	* src/e2disp.F90: Changed the way prints are made so that there is an indication
+	of how far the module has progressed in computing contributions from the list of 
+	frequencies.
+	* src/tools/cluster_file_interface.F90: Changed Kernel default parameters:
+	F-MAX = 600     ( from 1000)
+	RHO-EPS = 1e-8  ( same as before )
+	These have been extensively tested on pyridine2 in the double-H-bonded Min1-Hb1
+	and stacked Min2-S2 dimer geometries.
+	Reason for change: Numerical instabilities for the Min1-Hb1 dimer at large
+	separations using the augA-Sadlej-pVTZ MC+ basis. These seem to be associated
+	with the PW91c correlation kernel and are likely because fc can become positive
+	when the density gets small enough. By reducing F-MAX we cutoff the contributions 
+	from fxc earlier (i.e. for larger density values) and so reduce the chance of 
+	encountering the instability. 
+	NOTE: I have as yet not understood the actual cause of the problem, but do know that 
+	it vanishes if the PW91c kernel is removed. Other codes use the VWN correlation 
+	kernel.
+	* methods/energy_scan: Changed REDO-DF-ON-ROTATION to False. It was set to True 
+	when a bug in the code required this in molecule..Q scans. This was fixed on 2020-06-05.
+
+2021-04-28 
+	* dev/dev-docs: New directory containing documents related to development. 
+	At present they are important historical documents related to the code and 
+	algorithms and numerical stability.
+
+2021-04-27 AJM Version 7.1.0 : Huge speedup in DF and ISA.
+	* methods: All ISA methods now compute moments using the DF with constraints. 
+	This saves the code from re-computing the DF.
+	* bin/camcasp.py: Comments added to explain how output files are copied back to the 
+	results directory.
+	* src/df_integrals_for_df.F90: Removed some commented out code lines that are now 
+	superfluous. 
+	* src/gdma/gdma.F90: Removed lines about cmax = 16 that were not needed. 
+	* src/num_integrals.F90: BUG FIX: Corrected the sign of F(BASIS). 	
+	* src/prop_UCKS.F90: BUG FIX: the propagator type(real_matrix) :: C needs to be 
+	in memory. This bug caused seg faults when using the UCKS kernel.
+	* src/types_integrals.F90: Comments added to integral types and new type(DF_3indx) 
+	included. This is still in development and is intended to store 3-index quantities
+	used in density-fitting.
+	* docs/pictures/: Added two figures from Devin Mulvey (Ken Jordan's student) which
+	illustrate the speedup of the DF and ISA module in this version of CamCASP.
+
+2021-02-02 AJM BUG FIX 
+	* bin/camcasp.py: BUG FIX: Correct number of threads used when running CamCASP.
+	It was previously set to 2 and could not be overriden with the setting in 
+	camcasp.rc. 
+	
+2021-01-30 AJM Complete re-write of df_Tmat.F90 to compute all monomer T integrals without TAO
+	* src/df_Tmat.F90: New routine make_T_MO_mono_GEN_noTAO to compute all kinds of T-matrices
+	without storing TAO. The routine has been generalised to allow any kind of MO limits 
+	so that, in principle, we can implement things like frozen-core, truncated virtual 
+	spaces, etc. 
+	---> This routine should be modified to allow multiple T-matrices to be 
+	computed simultaneously so that the TAO calculations are not repeated.
+	* src/df_integral_utilities.F90 and src/df_integrals_for_df.F90: Modified to use 
+	subroutine make_T_MO_mono_GEN_noTAO. 
+
+	These changes have been tested on He, He2 and H3N..CO. 
+
+	Changes to come: the MO index limits need to be a part of the T-matrix spec. 
+	So these need to be stored in the type(twoe2indx) (and other integral types).
+	Then we would be able to truncate the MO spaces and have the truncation information
+	directly linked to the integrals. At present there is no way to know which 
+	integral object is which: we record neither MO limits or auxiliary basis limits 
+	or constraints used. All that's recorded are things like the mapping used to 
+	pack indices (absolutely needed), the integral switch (so we know of some of the 
+	approximations used to compute the integrals), and a few other bits of information.
+
+
+2021-01-21 AJM Continuation of previous changes  7.0.4
+	I've now modified the integral module to compute the T_MO OO and NN integrals
+	for both monomers using the new integral routines. 
+	The T_MO OV integrals are still computed using the older routine and so 
+	require the full TAO integrals to be on disk. 
+	There are inefficiencies in the way the DF is done as the T_MO integrals
+	may be computed multiple times and hence the TAO integrals will then
+	be re-computed each time. This will happen when:
+	1) Constraints are changed
+	2) DF is performed for, say, OO, and then for OV or NN. For each case the 
+	T_MO integrals will be recomputed, and hence so will the TAO. 
+	This is wasteful and we need **one** pass only that computes the TAO and 
+	then transforms to create all the TMO integrals needed. 
+
+	Routines changed are the same as those below.
+
+	Tested on monomer property calculations and He2 SAPT(DFT). 
+
+2021-01-21 AJM Density-Fitting Type OO (and also NN) no longer computes TAO
+	This is a relatively small change in the DF code, but the implications 
+	may be significant as we now no longer compute the TAO matrix for DF types OO 
+	and also NN, though the NN case is not yet activated. This is done by computing
+	TAO for each site in turn, and performing the transformation to TMO before 
+	moving to the next site. There are still changes needed to the code to 
+	avoid excessive file writes and to activate the algorithm for NN and OV too. 
+	* src/df_Tmat.F90: New routines here: subroutine make_T_MO_mono_NN_noTAO and 
+	subroutine make_T_AO_site. The former is a re-write of make_T_MO_mono_NN that
+	computes the TAO matrix for each site in turn. These are overwritten, so that 
+	the TAO matrix is never on disk. In principle this code can be parallelised 
+	as the transformation is now manifestly done on each site in mol%aux in turn.
+	Tested on He, He2, CO in a variety of aux basis sets. 
+	* src/df_integral_utilities.F90: Hack to use the new T-matrix routines listed
+	above.
+	* src/df_integrals_for_df.F90: Ditto.
+
+2021-01-19 AJM GDMA : Switch = 3.0 
+	* methods/dma-only methods/isa-A+DF-dma methods/isa-A-dma: GDMA commands to used
+	Smoothing Switch = 3 (it's an integer). The GDMA code uses a default of 3 but 
+	the Cluster code writes command files with 4 as the switch. These have been changed to 
+	use 3 which should result in smoother domains.
+	* src/tools/cluster_file_interface.F90: Same as the above.
+
+2021-01-14 AJM ISA : Flags to control application of TAIL-FIX to Multipoles and F[rho]
+	VERSION 7.0.3
+	* src/isa_main.F90: Kullbach-Leibler information-loss (F[rho]) now calculated 
+	without the TAIL-FIX. This can be controlled via new parameter KL_ApplyTailFix 
+	in isa_parameters.F90, but this is currently FALSE. Removal of the tail-fix 
+	leads to systematic reduction of F[rho] as the iterations progress. So the 
+	information-loss will be able to be used to monitor convergence, but this still 
+	needs to be done.
+	* src/isa_parameters.F90: New parameter KL_ApplyTailFix. Also re-organised 
+	parameters with the intent of grouping them into types. 
+	* src/num_integrals.F90: In subroutine KL_Fa_calculation: small changes to comments.
+	* src/dist_moments.F90: New command:
+	ISA-OPTIONS [TAIL-FIX {ON | OFF (default)}]
+	Allows the TAIL-FIX to be included or not in the distribution calculations.
+	* src/tools/cluster_file_interface.F90: Psi4 command files now include the SOSCF keyword 
+	to invoke the second-order SCF for better convergence. 
+	* docs/users_guide.tex: Updated MULTIPOLES section.
+
+2021-01-13 AJM ***COVID*** 
+	Look at the date of the previous commit! It's been a crazy year. 
+	* interfaces/psi4/readfchk.py: Converted to use Python3
+
+2020-07-23 AJM Modified all wxhole *clt failures
+	* examples/wxhole-tests/*.clt: Modified to include up-to-date commands around
+	PBE0/aTZ IPs and AC-shifts.
+
+2020-07-23 AJM Increasing accuracy of integration grids for multipole moments
+	* src/num_integrals.F90: Higher accuracy for default grids for moments. 
+	* data/IPs_and_AC-Shifts_PBE0aTZ.dat: New data file of IPs and AC-shifts 
+	for molecules used in wxhole model parameterization.
+
+2020-07-17 AJM and AH : wxhole model now has a new option to impose TRK sum-rule
+	* new file: examples/wxhole-tests/C2H2.clt
+	* new file: examples/wxhole-tests/CO.clt
+	* new file: examples/wxhole-tests/CO2.clt
+	* modified: methods/wxhole-pols
+	* modified: src/Dependencies
+	* modified: src/SRCS.list
+	* new file: src/pol_IO.F90
+	* renamed:  src/polarizability.F90 -> src/pol_main.F90
+	* new file: src/pol_parameters.F90
+	* renamed:  src/wxholePol.F90 -> src/pol_wxhole.F90
+	
+	The polarizability.F90 module has been re-structured and split into parts.
+	This is to make it easier to use in future developments.
+
+
+2020-07-16 AJM 
+	* src/wxholePol.F90: Made into a module.
+	* src/polarizability.F90: Using this module from above.
+	* src/Dependencies: Updated
+	* x86-64/gfortran/exe/Flags: Updated for new machines.
+
+2020-07-14 AJM Merging wxhole2 and isa-analysis into develop
+
+2020-06-24 AJM better print outs in the Density overlap model
+	* src/overlap_model.F90
+
+2020-06-24 AJM Suppressing prints in the ISA
+	* src/isa_main.F90 isa_misc_operations.F90 isa_shapefunc.F90
+
+2020-06-08 AJM EXPERIMENTAL CODE to use atom grids in integrations
+	* src/dist_moments.F90: Using multipole moment integrals with algorithm=1
+	* src/isa_integrals.F90: Same for T-integrals
+	* src/isa_parameters.F90: Introducing parameters to control which algorithm to use.
+	* src/num_integrals.F90: EXPERIMENTAL CODE to calculate all major ISA integrals using
+	atom grids.
+
+2020-06-05 AJM BUG FIXES and improvements to numerical intergals #GRIDS
+	* src/num_integrals.F90: BUG FIX in subroutine r_pow_n_integrals: r_dist was 
+	incorrectly calculated. Now fixed. 
+	Other Improvements: More efficient grid usage  #GRIDS
+		Thus far I have used either molecular grids (with locality through neighbourhoods),
+		or have tried to use atomic grids but have given up (unless grids from neighbours
+		was also included) due to losses in accuracy. I *finally* understand the source
+		of the inaccuracy: the way the mol%atoms%grid field is currently created is
+		by taking the molecular grid and piecing it up into atomic parts. But this cannot be
+		done: the weights in the molecular grids are computed for the grid as a whole. 
+		Additionally, grids extend (by default) to the Slater radius of the atoms as it is
+		assumed that neighbours take over from there. So using the integration grid of an
+		individual atom in a molecule leads to errors that can be quite large. 
+
+		The solution is to create atomic integration grids for each atom by pretending that
+		no other atoms exist. This can be done using subroutine create_integration_grid. 
+		To ensure adequate accuracies, the size of this grid and its extent needs to be 
+		increased. This is where the new Quality option to this subroutine becomes
+		useful. For an atomic grid integration Quality=4 (HIGH) is a good choice. This
+		increases the grid point density and extent. Higher qualities are also possible.
+
+		These changes have been made in subroutine r_pow_n_integrals and 
+		in subroutine Fa_calculation (which can use a lower quality grid). They can also 
+		be introduced in the other routines, particularly the numerically intensive T-integral
+		calculation done in subroutine Chi_rho_w_overlap, the kernel integrals and the 
+		multipole integrals. 
+
+		Basically this is a means to finely control numerical integration in the code.
+
+2020-06-05 AJM Improvements in numerical integration grid creation
+	* src/num_integration_grid.F90: New option Quality in subroutine create_integration_grid
+	This allows grids to be defined to set quality levels:
+	0: use parameters in the supplied grid, and >0: use pre-defined grid quality.
+	This should be used across CamCASP to ensure a uniform quality control of all 
+	grids.
+
+2020-06-05 AJM BUG FIX in isa_IO.F90
+	* src/dist_moments.F90: comment added
+	* src/isa_IO.F90 : BUG FIX in subroutine identify_atom: coordinates needed to be
+	compared to a precision less than that used to write them out to the ISA file.
+
+2020-06-05 AJM BUG FIX in energy_scan.F90 for molecule..Q case
+	* src/energy_scan.F90: BUG FIX: In molecule..Q scan when REDO DF was false
+	there would be an error arising from the fact that the probe molecule is a 
+	charge. Fixed using additional logic to test for this case.
+
+2020-06-05 AJM BUG FIX in Cluster: Psi4 now uses correct basis.
+	* src/tools/cluster_file_interface.F90: BUG FIX in subroutine write_psi4_1 now uses
+	the correct basis name array so Psi4 properties files are written out correctly.
+
+2020-06-05 AJM Updates/corrections to many METHOD
+	* methods/*: Recent tests have exposed issues with ISA and ISA-Rho+Rho1 methods, and 
+	also the elst-energy-scan method. These have been fixed/improved.
+
+2020-05-25 AJM Python: /usr/bin/env python<N>
+	* All Python codes now use the environment path rather than an absolute path.
+	This makes them more portable across platorms.
+
+2020-05-22 AJM
+	* src/num_integrals.F90: BUG FIX in subroutine calculate_ISA_atom_radii, and 
+	fix to Fa_calculation to improve numerical stability.
+	* src/isa_analysis.F90: Minor fix to print statement.
+	* src/isa_shapefunc.F90: BUG FIX to correctly open tail-fn file in all
+	cases.
+	* src/isa_main.F90: Print shape-func basis expansion even if the ISA has not
+	converged.
+
+2020-05-20 AJM Introduced AIM radii calculations in the ISA analysis
+	* src/isa_analysis.F90: new module to analyse ISA AIMs
+	* types_secondary.F90 and type_operations_secondary.F90: Changes to type(atom_properties).
+	* Other ISA modules: changes to use new types and to compute radii.
+	* Dependencies and SRCS.list updated
+
+Changing version of develop to 7.0.0 as it will form the next major release
+
+Merged release-6.1 into develop : Version 6.1.0 patch 000
+
+2020-04-30 AJM
+	Corrections in the logic of the main ISA module. Now restarts and normal runs
+	seem to be correctly handled, and tail-iterations also seem sensible.
+
+	methods/isa-A: reinstated the Tail-Fix as it does seem to accelerate convergence,
+	even for BVLS.
+
+2020-04-29 AJM  Mom & Dad's anniversary
+	TYPES: type(atom_properties) :: contains properties of AIMs
+	type(atom) now contains a field type(atom_properties) :: atom_prop
+
+	subroutine fill_type_atom_prop  to fill in fields in this type. 
+	subroutine copy_type_atom_properties to perform A = B for this type.
+
+	Commit #2
+
+	ISA module uses the new type(atom_prop). Data is correctly printed.
+	RENAMED subroutine fill_type_atom_prop -> fill_type_atom_properties
+
+2020-04-27 AJM
+	ISA code considerably shortened and tidied up. Inconsistencies in the *_atoms.ISA file
+	and Tail-Fix settings corrected. r2+Gauss-Log weighting made the default.
+	Distributed multipoles are now calculated even if the ISA has not converged, but 
+	in this case a 'NOT CONVERGED' string is included in the moments files. 
+	Distributed polarizabilities are computed in either case, but now warnings 
+	are clearly printed if ISA is not converged.
+
+2020-04-24 AJM
+	Information loss functionals now calculated and printed at each step. Still not
+	used to determine convergence as I am not sure how to do this. 
+	Tests passed on H2O 3-site and 6-site models. F^a values for H2O 3-sites agree
+	with those in Wheatley and Gopal (PCCP 2012, 14, 2087–2091).
+	
+2020-04-23 AJM 
+	Included fields atoms%Fa_GRID and atoms%Fa_BASIS in type(atoms). These are 
+	meant to store the values of the Fa functional (information loss) for these
+	atoms. Other routines modified to handle the new fields. Other minor changes
+	to formatting in ISA output
+	* src/isa_IO.F90
+	* src/isa_main.F90
+	* src/isa_shapefunc.F90
+	* src/type_operations_secondary.F90
+	* src/types_secondary.F90
+
+2020-04-20 AJM 
+	* isa_main.F90 isa_IO.F90: New names for all ISA code
+	* isa_*.F90: Fragmented the original stockholder.F90 module into seven modules
+	These are more managable and are also logically connected. 
+
+2020-04-20  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/submit_camcasp.py: Reorganised. Construction of scheduler
+	headers all handled by headers.py.
+
+2020-04-19 AJM
+	* bin/submit_camcasp.py: Attempting to read environment variables the 
+	way it is done in runcamcasp.py. Still problem with the code.
+	* bin/depend.pl: re-instated the code.
+
+2020-04-18 AJM
+	* src/tools/cluster_file_interface.F90: Write out charge and multplicity in 
+	Psi4 input file in subroutine write_psi4_1
+
+2020-03-19  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* src/gdma/dma.F90 (dmaql0,dmaqlm): Old code using obsolete
+	computed go-to updated.
+
+2020-03-10 AJM
+	* bin/runcamcasp.py: Made default queue 'batch'
+	* bin/submit_camcasp.py: Made consistent with runcamcasp.py. Now variables are read
+	from camcasprc using camcasp:CamRC. Fixed BUG in generating PBS file: MEMORY had to be
+	defined. 
+
+	* src/stockholder.F90: Corrected correction made yesterday. And introduced missing
+	implicit none statements.
+
+2020-03-09  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* src/stockholder.F90 (StockholderModule): bug fix: added missing
+	initialisation of Rmin after line 5219.
+	* src/function_expansion_operations.F90: bug fix: initialised
+	LUse_Atom_Neighbours_in_Aux1=.false.
+	* check files in tests directory: updated with new results.
+
+2020-03-06  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* SRCS* and Dependencies* files moved from misc to src.
+	* Makefile and Makefile_body changed accordingly.
+	* bin/make_src_tarfile constructs CamCASP_src.tgz containing all
+	files needed for compilation from source.
+
+2020-02-21  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/setup.py, update_public_repo: bin/no_{scfcode} used as flag
+	for uninstalled scfcodes.
+	* runcamcasp.py: checks that the specified scfcode is installed,
+	and to use Psi4 as the default SCF code.
+	* users_guide.tex: modified to specify Psi4 as the default SCF
+	code and to change the example accordingly. Also other minor amendments.
+
+2020-02-14  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/update_public_repo:
+	The distributed version now has the same organisation as the main
+	site, with executables in <arch>/<compiler> directories, so that
+	users of the source code can just add the source directory and run
+	make.
+	* bin/setup.py:
+	Minor changes.
+
+2020-02-12 AJM  BUG FIX in readfchk.py (Psi4 interface)
+
+	* interfaces/psi4/readfchk.py: BUG FIXES: Firstly, the use of fixed format reading
+	of data from lines containing I and N= (data lines, mainly at start) led to errors
+	for large systems with large basis sets. This has been fixed though the read is still
+	done with fixed format (i.e., particular ranges of the line are read into the
+	data variables) so it is fragile and needs to be completely re-written. Additionally,
+	when the basis space is truncated (large systems with large basis sets) then there
+	was an error writing out the energies and MO coefficients. FIXED.
+	*** Thanks to Devin Mulvey from Ken Jodran's group for spotting this.
+
+2020-02-09 AJM  IMPORTANT  VERSION 6.0.050
+
+Energy-Scan and Overlap-Model made to work with molecules with off-atomic
+sites. In these cases, the AtomAux basis will be different and have different sites from
+the Aux basis (used in the density-fitting). The codes, particularly energy_scan.F90, assumed
+that the distributed density-overlap used sites from the Aux basis. This was reasonable as
+long as the distribution was done using the density-fitting algorithm. With the ISA-based
+distribution the AtomAux basis should be used. To take care of both cases, I have enforced
+the rule that
+	1) Unless explicitly defined, AtomAux = Aux.
+	2) All distribution schemes use AtomAux.
+This means that for a density-fitting based distribution define only the Aux basis. 
+This would automatically set AtomAux = Aux and all will be well. Then for an ISA-based
+distribution, define the appropriate AtomAux basis (as should be done). The distribution
+will be done correctly in both cases.
+
+Neighbourhoods: 
+----------------
+These are used to speed up integral evaluation. But the neighbourhood
+of a particular site is usually defined only within a basis. So when you have two basis
+sets with potentially different numbers of sites, then we have the question of what are 
+the neighbouring sites of a:Aux (site a in Aux) in the AtomAux basis. This arises when
+we wish to evaluate a function expansion in the Aux basis (the density expansion) on
+a grid of points around a site b:AtomAux. 
+This occurs in subroutine DistDensOverlap_ISA_basis_alg1. 
+Resolution: 
+-----------
+Use subroutine map_site_onto_site to take a site with given coordinates and find
+the nearest neighbour in the sites in another basis. So any site in Aux can be 
+mapped onto a site in AtomAux. Then the neighbours of the sites in the two basis
+sets can be exchanged as needed. Of course it is not fool-proof, but it will work
+for the most part. 
+
+To handle some of these changes I had to make changes to type(atom) and type(molecule)
+
+Energy-Scan
+-----------
+New names for the multipole expanded energies: ELST(MP), POL(MP) and DISP(MP).
+
+	* src/types_secondard.F90: New field in type(atom)%WhichBasis='AUX'/'AUX1','AUX2'/'AtomAux' 
+	to record which basis from type(molecule) was used to create the atom.
+	type(molecule)%AtomCoord(3:nTypeAtom) rather than 3:nsitesaux as it was originally.
+	This is the correct dimension as the number of atoms in the molecule will be governed
+	by the number of sites in mol%AtomAux.
+	* src/type_operations_secondary.F90: In subroutine update_type_FuncExpansion the field
+	A%WhichBasis is used to determine the basis type (AUX or ATOMAUX) and the update
+	now correctly uses the correct coordinates (ref_coord_aux or AtomCoord_ref).
+	* src/molecule_operations.F90: subroutine find_site_neighbours_dimer_molecule uses
+	AtomCoord (from ATOMAUX) rather than coord_aux (from AUX). This was done as the 
+	'dimer_molecule' made by subroutine make_dimer_molecule uses the atom coordinates
+	rather than those in the auxiliary basis. 
+	* src/molecular_parser.F90: Additional statements to fill in the type(atom)%WhichBasis
+	field using the supplied basis information.
+	* src/num_integration_grid.F90: New subroutine construct_integration_grid that uses only
+	type(IntegrationGrid). Data about sites etc are passes explicitly and not via type(molecule).
+	This makes it possible to create integration grids for any assembly without the need for
+	the structures in type(molecule).
+	* src/function_expansion_operations.F90: New subroutine map_site_onto_site to do the site
+	mapping described above. Subroutine MolRho2AtomRho_FuncExpansion_1 which creates the 
+	atom function expansions from the molecular one now has the optional argument WhichBasis
+	to control which basis (AUX or ATOMAUX) is to be used to create the atomic function expansions.
+	* src/density_overlap.F90: Subroutine DistDensOverlap_ISA_grid_alg1 can now handle
+	cases for which the sites in AUX and ATOMAUX differ. Also added a new subroutine 
+	symmetrize_DistDensOverlap_AtomAux to work with matrices created for the sites in ATOMAUX.
+	* src/stockholder.F90: Function expansions for the shape-functions are given
+	WhichBasis='SHAPE' as they are distinct from the AUX and ATOMAUX basis types.
+	* src/energy_scan_parameters.f90: Changed names for the multipole-expanded energies. See
+	above.
+	* src/energy_scan.F90: A number of changes to allow the module to correctly work
+	with distribution schemes based on both the AUX and ATOMAUX basis sets. Also added 
+	better error trapping with the check_info calls. 
+	
+2020-02-08  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* tests/test_H2O_dimer_scan: New test using batch_camcasp.py
+	* Minor corrections to some python scripts
+	* tests/README updated
+
+2020-01-22  Anthony Stone  <ajs1@cam.ac.uk>
+	* Test scripts tidied up. All output now in the test_report file.
+	* tests/H2O_props/{dalton,nwchem,psi4}/H2O.axes: Correct axes
+	definition added. (Null definition was incorrect.) Check output
+	updated.
+	* Python script indentation changed to 4 spaces.
+	* More python scripts converted to python3.
+	* src/tools/cluster_file_interface.F90: psi4 convergence
+	value changed to 1e-11. Test check output files updated.
+
+2020-01-02 BUG FIXES to Python codes
+	* bin/camcasp.py: In python3 the iterator for a dictionary is just Dict.items()
+	* utilities/potential_fitting.py: Made python3
+
+	* src/tools/potential_operations.F90: BUG FIX: Due to sign error VARY-RHO-L did not 
+	operate as expected and RHO terms may not have been relaxed in an optimization.
+
+	* bin/version.py: BUG FIX Variable made logical rather than char.
+
+	* bin/extract_saptdft.py: BUG FIF in handling errors in the dHF term.
+
+2019-12-23  Anthony Stone  <ajs1@cam.ac.uk>
+	* Python test scripts converted to python3
+	* nwchem midbond file names corrected
+	* INSTALL file updated
+
+2019-12-04 BUG FIX
+	* bin/camcasp.py: BUG FIX needed to pass string to env variable.
+
+2019-12-02 Improvements to extract_saptdft.py
+	* bin/extract_saptdft.py: This code has long been fragile in the sense that missing
+	energies could cause it to fail and this would involve a sometimes tedious elimination of
+	the directories with failed calculations. Now the code is more robust and errors are
+	trapped more logically. Additionally, with the new --errors flag, calculations for 
+	which errors have occurred (in either the dHF or E2int parts) are indicated with 
+	an 'ERR', and a summary of all failures is provided at the end of the output.
+
+2019-11-28 AJM more improvements to Python codes : 6.0.048
+	* bin/camcasp.py: Class CamRC to read and store data from camcasp.rc/.camcasprc
+	This class makes reading the file and passing data sensible.
+	* bin/runcamcasp.py: Correction to one var and using class CamRC so code is now
+	shorter and easier to follow.
+
+2019-11-27 AJM Improvements to ISA : better tail analysis and handling of dummy atoms : 6.0.047
+	* src/stockholder.F90: Much better tail analysis to extract local IPs. Using 
+	Hodges' and Wheatley's Gauss-Log weighting scheme.
+	* src/tools/molecule_operations_cluster.F90: Dummy atoms with no type or
+	with Type DUM are ignored, but those with any other type are treated as 
+	part of the molecule. This means we can now use dummy sites in the ISA
+	relatively easily.
+	* src/tools/cluster_file_interface.F90: Better handling of dummy sites.
+
+2019-11-27 AJM Python code changes : 6.0.046
+	Significant changes to all Python codes:
+	* Now all use Python3
+	* Use of environment settings rationalised: 
+		1) command-line options to runcamcasp.py
+		2) settings in *.clt file
+		3) camcasp.rc in CWD
+		4) ${HOME}/.camcasprc
+		5) ${CAMCASP}/camcasp.rc (note name change)
+		6) Environment variables
+	* Current environment variables as applicable to the job can be printed 
+	with --testenv flag to runcamcasp.py
+	* Better error trapping.
+
+	Codes changed:
+
+	Major changes in these:
+	* bin/camcasp.py: Changes to class Job and many other changes associated
+	with new handling of variables.
+	* bin/runcamcasp.py: Extensive changes to way settings are handled.
+	* bin/version.py: Made to work with non-Git code. In this case, sensible
+	values are given to variables so compilation proceeds.
+
+	Minor changes in these: Mainly conversion to Python3 and 4 char indent.
+	* bin/extract_ct.py
+	* bin/extract_saptdft.py
+	* bin/extract_supermol_energy.py
+	* bin/localize.py
+	* bin/read_scan.py
+	* bin/setup.py
+	* bin/switch_binaries.py
+
+	New file:
+	* camcasp.rc: this is the equivalent of ${HOME}/.camcasprc
+
+	Updated source lists:
+	* misc/SRCS_cluster.list
+	* misc/SRCS_process.list
+
+	Modified to run with new codes. Tests passed with Psi4 except H2O_props.
+	* tests/run_tests.py
+
+2019-10-27 AJM BVLS in ISA  : 6.0.045
+	* src/stockholder.F90: Introduced BVLS solver as an option in the ISA solvers.
+	This allows for bounded LLSq (iterated QR). Activated for ISA-A and B1/B2 only. For
+	hybrid ISA methods (A+DF and DF+ISA) the bounds are currently in-active, but there is 
+	no reason why they cannot be made active in subroutine define_bvls_bounds.
+	* src/molecule_parser.F90: Removed incorrect and obsolete comments re. ISA basis sets.
+	* src/matrix_operations_types.F90: Added subroutine llsq_bvls to solve linear eqs using BVLS.
+	* src/bvls.f90: Increased default number of iterations from 3N to 10N.
+	* src/types_secondary.F90: Corrections to comments and more comments to type(molecule).
+
+2019-10-24 AJM BVLS solver
+	* src/bvls.f90: Added BVLS LLSQ with bounds solver. License is LGPL. 
+
+2019-10-23 AJM
+	* src/display.F90: BUG FIX in subroutine determine_R_w_min: R_w_min is now determined
+	correctly. The inequality used was exactly the opposite of what was needed. 
+	* src/stockholder.F90: BUG FIX in subroutine shape_function_analysis_exp:best_fit_algorithm
+	The algorithm did not work correctly when the shape-function went negative at small R. 
+	Now, as with the above change in display.F90, the search for Rmax starts from large R
+	and this fixes the problem. I've also added an additional check to ensure that Rmin and Rmax
+	are sensible. 
+
+2019-09-13 AJM 6.0.044 More additions to the UG and improvements to output of WRITE-POTENTIAL
+	* docs/users_guide.tex: Extensive example included to illustrate how the ENERGY/MODEL 
+	module works when analysing a potential and and for getting files ready for Orient.
+	* src/tools/potential_operations.F90: More commenting and got file names to be 
+	printed so the User knows where the output of the WRITE-POTENTIAL module has gone. 
+	* VERSION 6.0.044
+
+2019-09-12 AJM 6.0.043 many additions to the Users' Guide and small changes elsewhere
+	* methods/isa-A-Rho+RHO1: New method. Still for a specific system but it works and
+	server as a model for a proper template for an ISA calculation on a Rho(0)+Rho(1) density.
+	* src/tools/cluster_energy.F90: Comment makes it clear that module Energy is the
+	ENERGY and MODEL module.
+	* src/tools/cluster_operations.F90: Parser accepts both 'ENERGY' and 'MODEL' to access
+	module Energy. The latter name makes more sense when the potential relaxation is
+	performed and the former for when the energy is evaluated.
+	* src/tools/potential_operations.F90: More comments and corrections to comments. Changed
+	the sub-commands to ANCHORS to PRIORS-AS-STARS (to use stars) and PRIORS-AS-VALUES
+	to use values (instead of stars).
+	* VERSION 6.0.043: When was 042 committed?
+
+2019-09-11 AJM Many improvements and fixes to the Orient interface and potential handling
+	* src/orient_interface_routines.F90: Corrections to subroutine write_term to correctly
+	and far more logically handle the various cases. Extensive comments included to help
+	make the logic clearer. 
+	* src/tools/potential_operations.F90: Improvements to much of this module. Parser made
+	more rational and logical, and much more flexibility in the handling of the relaxation
+	options (VARY-RHO etc.). Still inconsistencies remain and the parser should be improved.
+	* x86-64/ifort/exe/Flags: Corrections as LIBS was not being passed on to the 
+	Makefiles. This seemed to be because of leading spaces in the definitions. 
+	This may be a bug in the BASH shell. 
+	* docs/users_guide.tex: Lots of updates mainly in the sections describing the Orient
+	interface and the way potential relaxation is performed. These sections are likely 
+	still incomplete.
+
+2019-08-06 AJM 6.0.041 Many changes 
+	* src/orient_interface_routines.F90: Extensive comments that describe the algorithms
+	used. These took me a long time to write as the logic used in these interface
+	routines could be complex.
+	* src/display.F90: Again extensive comments. Also corrected the defaults in some
+	parts (SECTION). Other cosmetic changes to the module. The accompanying documentation
+	in the Users Guide has been updated.
+	* src/overlap_model.F90: Corrections to parser and comments. 
+	* src/free_format_reader.F90: Comment to clarify that read_single and read_double can 
+	be used to read arrays.
+	* src/tools/cluster_file_interface.F90: Mid-bond names rationalised. Support for NWChem
+	and Psi4 in subroutine get_midbond_name
+	* src/tools/potential_operations.F90: BUG FIX in subroutine AnalysePotential. Arrays terms
+	and ternsComb initialized to 0.0 to avoid surprising results when ANALYSE is used 
+	multiple times. 
+	* bin/execute.py: Included some checks suggested by Mary. 
+	* basis/psi4/aug-cc-pvdz-sp.gbs: basis set for Psi4 library.
+	* docs: Updates to users_guide.tex, added Abbreviations.tex, BIBLIOGRAPHY.bib,
+	Macros.tex.
+	* VERSION: 6.0.041
+
+
+2019-01-31 AJM 6.0.040 Psi4 interface fixed. Change of units from MB to GB
+	* bin/camcasp.py: Added MEMORY to PBS submission script.
+	* bin/execute.py: Change of units from MB to GB (default). 
+	* bin/runcamcasp.py: Same
+	* interfaces/psi4/README: Updates for modifying Psi4 to write FCHK file correctly.
+	* interfaces/psi4/readfchk.py: BUGS fixed and works with correct FCHK file.
+	* interfaces/psi4/writer.cc: This is a file needed to fix Psi4 1.3 (pre-rel)
+	* src/tools/cluster_file_interface.F90: Made MB1/2/3 the default instead of the
+	more cumbersome 3s2p1d etc. specs for the mid-bond sets.  Changes to Psi4 command
+	files. 
+
+2019-01-21 AJM 6.0.036 BUG FIX in Cluster
+	* src/tools/cluster_file_operations.F90: Bug fix in writing out Mid-Bond file names.
+	It was using Mb1 only. 
+
+2018-12-17 AJM 6.0.035 Minor corrections
+	* docs/users_guide.tex: Updates. But far from consistent with 
+	current version of code. 
+	* examples/: Corrections to Cluster file commands.
+	* interfaces/psi4/readfchk.py: Corrections to work with Psi4 1.3
+	* src/tools/cluster_file_interface.F90: Minor correction to comments.
+
+2018-10-05 AJM  More on the Psi4 interface
+	* src/tools/cluster_file_interface.F90: More tidying up of the 
+	code. Corrections and updates to the parser and comments. 
+	More integration with Psi4: now the command files for Psi4 SAPT
+	and SAPT(DFT) calculations can be written using the calculation types:
+	  PSI4-SAPT and PSI4-SAPT(DFT)
+	However, note that the submission scripts will not correctly run 
+	Psi4 on its own, so more work is needed here.
+	* methods: Psi4 methods updated and SAPT and SAPT(DFT) methods added.
+	* bin/runcamcasp.py: Change to the way mpstat is queried. This should now
+	work correctly when it is not present. Also, MULTIPOLE is accepted
+	as equivalent to MULTPOLE for the DALTON AC.
+
+
+2018-10-02 AJM 6.0.034 Interface to Psi4 1.2 and newer
+	* interfaces/psi4/readfchk.py: Modified to read the strange 
+	FCHK files produced by Psi4 1.2 and newer (git versions).
+	* src/tools/cluster_file_interface.F90: Tidy up of parts of the
+	code related to basis types and ability to write Psi4 inputs
+	for MC+BS basis sets in addition to DC+BS.
+	Included support for GRAC calculations with Psi4 1.2 and later.
+
+2018-08-03 AJM 6.0.033 BUG FIX (thanks to Mary)
+	* src/df_parameters.F90: BUG FIX in df_type_str lengths.
+
+2018-07-25 AJM 6.0.032 Better METHODS, bug fixes
+	* basis/nwchem/: Added mofifications to augA-sadlej, def2-qzvpp
+	* bin/batch_camcasp.py: Included Psi4 in the list.
+	* methods: new methods and corrections to others
+	* src/overlap_model.F90: Minor changes to variables for consistency
+	* src/df_main.F90: Comments in the DF-TYPE part of the parser
+	* src/df_monomer.F90: Corrections to comments.
+	* src/df_parameters.F90: Additions to parameters
+	* src/display.F90: ISODENSITY == ISA-DENSITY
+	* src/molecule_parser.F90: Minor formatting change
+	* src/type_operations_secondary.F90: BUG FIX in subroutine update_type_molecule
+	This caused an error with the MC/DC basis case for molecules with different 
+	numbers of atoms. Now the dimer is correctly created.
+	* src/tools/cluster_file_operations.F90: Made (more) consistent with
+	Orient 4.8 and newer. Midbonds can now be defined using Mb1/Mb2/Mb3.
+	New RUN-TYPE option: ORIENT-ONLY.
+	* src/tools/cluster_operations.F90: Minor formatting.
+
+2018-06-18 AJM 6.0.031
+	* src/e2ind.F90: Minor correction to comment.
+	* src/energy_scan.F90: Minor correction to comment.
+	* misc/IP.txt: Additions
+	* doc/users_guide.tex: Correction
+
+2018-04-06 AJM 6.0.030 
+	* src/tools/cluster_file_interface.F90: Included the line
+	  Types <number of types>
+	in the Orient Parameters block. Needed for large systems.
+	* bin/execute.py: Bug fix in the output. Scratch dir now printed
+	correctly
+	* interfaces/psi4/readfchk.py: BUG FIX for cases when orbitals
+	are removed from the variational space and NMOS < NBASIS.
+	* src/display.F90: Rationalization of the input for the molecular
+	and atomic sections. Possibly better handling of the inner and outer
+	radii used in the construction of the surfaces by moving inwards
+	from outside the atom. Needed for cases when the ISA shape-function
+	gets negative at small distances (possible for ghost sites).
+	* basis/psi4/: Updated the augA-Sadlej-pVTZ basis sets with the
+	version 2 of the basis. This version has more diffuse f-functions.
+	* basis/auxiliary/ISA/set2/: Basis sets for Ca and K.
+
+2018-02-22  Anthony Stone  <ajs1@cam.ac.uk>
+	* Corrections to the tests in the tests directory.
+
+2018-02-06 AJM 6.0.029 BUG FIX in ALDA kernel
+	* src/prop_ALDA.F90: BUG FIX. Incorrect use of subroutine
+	define_type fixed. Now it is possible to use the ALDA kernel.
+
+2018-01-08 AJM 6.0.028 (what happened to 6.0.027?)
+	* src/response.F90: BUG FIX in subroutine Response_rho1_ind
+	* src/tools/cluster_file_interface.F90: Added more basis sets.
+	* bin/CamCASP.bash: Change for *.basis files created for Psi4.
+	* bin/execute.py: Uses environment variable $PSI4_HOME for Psi4 
+	binary. 
+
+2017-09-11  AJM VERSION 6.0.026
+	* src/common.F90: In subroutine get_available_file: if the file prefix is
+	blank then a default is used.
+	* src/num_integrals.F90: Clearer comments in subroutine Chi_rho_w_overlap.
+	* basis/dalton/aug-cc-pVTZ/Zn: Corrections to basis set. 
+	* x86-64/ifort/exe/Flags: Updated to include flags for pepito.
+	* utilities/EmpiricalPotentials.F90: Added units to output.
+
+2017-08-09  AJM BUG FIXES in Cluster
+	* src/tools/cluster_operations.F90: jobname was not initialized to ''. This
+	caused cascading problems.
+	* src/tools/cluster_file_interface.F90: Sensible default for fileprefix if
+	none was provided. Also made a sensible for jobname.
+
+2017-07-14  Anthony Stone  <ajs1@cam.ac.uk>
+	New directory tests, containing a series of test scripts. The
+	script bin/run_tests.py runs any or all of these and reports
+	success or failure. See the tests/README file for details. The
+	tests use the same calculations as in some of the examples files,
+	but are self-contained and do not touch the examples directory.
+
+07-07-2017 AJM  VERSION 6.0.025
+	BUG FIXES in distributed density-overlap module and generation of 
+	numerical integration grid. As a consequence of the latter fix the 
+	numerical integrals are significantly faster.
+
+	* src/types_primary.F90: Corrections to routines to consistently
+	use NoRelease flag.
+	* src/types_secondary.F90: Added comments about neighbours.
+	* src/type_operations_primary.F90: MAJOR CHANGE and BUG FIX:
+	New optional argument to subroutine define_type_real_matrix and
+	subroutine define_type_real_vector: destroy_if_defined (default=FALSE).
+	If a type is defined and these routines are called then an error is
+	flagged unless destroy_if_defined=TRUE. This was done to trap unexpected
+	re-defines of important types.
+
+	* src/stockholder.F90: Fixes to subroutine Iterative_Stockholder_Atoms_restart
+	due to the above changes.
+	* bin/runcamcasp.py: Correction to correctly parse 'GRAC'. The downside
+	is that there must be spaces before the 'AC' in the AC line.
+	* bin/extract_saptdft.py: More transparent definitions of the interaction
+	energy terms.
+	* bin/localize.py: BUG FIX: subdir needed to be set up after variables were
+	defined.
+	* src/density_overlap.F90: BUG FIX in the ISA/BASIS algorithm in 
+	subroutine DistDensOverlap_ISA_basis. The AtomAux basis needed to be
+	used rather than Aux.
+	* src/e2ind.F90: Minor corrections to comments.
+	* src/num_integration_grid.F90: BUG FIX: The atom integration grids
+	were defaulting to very large grid sizes. Now fixed to use the grid
+	parameters defined in the GRID...END block. 
+	* src/overlap_integrals.F90: BUG FIX in subroutine overlap2. Leps may not
+	have been defined in some cases.
+	* src/tools/cluster_file_interface.F90: Accepts LOCALISE as a keyword for 
+	the localization RUN-TYPE.
+	* src/tools/potential_operations.F90: Lots of new code to analyse the
+	dispersion models for combination rules. 
+
+2017-06-27  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* docs/users_guide.tex: Further changes
+	* distrib/: Distribution files updated
+	* bin/batch_camcasp.py: minor update
+
+2017-06-13  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/runcamcasp.py, src/tools/cluster_file_interface.F90,
+	src/tools/cluster_operations.F90: File-prefix spec in the .clt
+	file is redundant, since it must be the same as the job name. Now
+	passed directly to cluster from runcamcasp.py.
+
+2017-06-06  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* docs/users_guide.tex: description of runcamcasp.py script updated.
+
+2017-05-30  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/runcamcasp.py, bin/camcasp.py, bin/execute.py: Extensive
+	changes. All job control parameters, whether in the .clt file, in
+	a .camcasprc file, or on the command line, are handled in
+	runcamcasp.py, and passed via camcasp.py.submit to execute.py
+	without further processing. This provides a simpler hierarchy of
+	priority -- usually command line > .camcasprc > .clt file >
+	default. However many defaults are effectively unset, and it is
+	strongly recommended to use .camcasprc files to set approriate
+	defaults. It is now possible to have a .camcasprc file in each
+	project directory (i.e. the directory from which the runcamcasp.py
+	script is invoked) so different defaults can be set for different
+	projects. If there is no .camcasprc file in the project directory,
+	a global ~/.camcasprc file is used, if available. There is a
+	specimen .camcasprc file in the main CamCASP directory.
+
+26-05-2017 AJM Various small bugs fixed 
+	* misc/IP.txt: More info added.
+	* src/tools/cluster_operations.F90: Minor change.
+	* src/tools/cluster_rotation.F90: BUG FIX in BOND function.
+
+26-05-2017 AJM BUG FIX in e2ind.F90 code
+	VERSION 6.0.024
+	* src/e2ind.F90: BUG FIX in new E2IND code. Arrays N4 and M4 were
+	defined with the wrong 4th index for monomer B.
+
+24-05-2017 AJM Working version of new E2IND code and all scripts
+	VERSION 6.0.023
+	* src/e2ind.F90: Final (!) changes to E2IND code. Now output is
+	in line with other parts of the code.
+	* src/type_operations_primary.F90: Corrections to define_type
+	subroutines. Changed 'openit' to 'keep_in_memory'.
+	* bin/extract_ct.py: Simpler commands. Can now use --unit to set the
+	output units. Use --S2 for the induction energies with S2 approx.
+	* bin/extract_saptdft.py:
+	* bin/execute.py and runcamcasp.py: Corrected usage of --wait.
+
+23-05-2017 AJM E2IND code without the S^2 approximation : VERSION 6.0.022
+	* src/e2ind.F90: New code for the E2IND (no S^2) calculation. Code works
+	correctly (judged by multiple tests on water dimer and helium dimer), 
+	but output needs to be tidied up and interfaced with rest of CamCASP.
+	* src/e1exch.F90: Minor changes to make subroutine make_D_matrix 
+	accessible to rest of code.
+	* src/df_integral_list.f90: Tidied up code to make integrals easier to
+	search for and to list all symmetry-equivalent forms of the integrals.
+	* src/type_operations_primary.F90: New optional argument OPENIT in 
+	subroutine define_type_real_matrix and define_type_real_vector. If 
+	OPENIT = .TRUE. then the object is defined and opened. This saves 
+	three additional lines of code for each call to define_type!
+	* src/matrix_operations_types.F90: Minor alteration
+	* misc/SRCS.list: Corrected.
+	* misc/Dependencies: Updated.
+
+19-05-2017 AJM BUG FIXES in Psi4 interface 
+	* src/tools/cluster_file_interface.F90: BUG FIX in subroutine write_psi4_1:
+	file name for sitenames should have used a '_' rather than a '-'.
+	* other minor commits
+
+18-05-2017 AJM VERSION 6.0.021 : Merge of dev-psi4 into dev-ajm-6.0 
+	Anthony's branch for the Psi4 interface to CamCASP is now merged with
+	the development branch dev-ajm-6.0
+
+	About .camcasprc
+	  This file can (at present) contain the following:
+	     nproc  <number of cores per parallel job>
+		 wait   <wait time in seconds for job submission>
+		 mpstat [yes | no]
+	  The wait time can be overriden by an explicit --wait command in 
+	  runcamcasp.py
+
+18-05-2017 AJM
+	* src/energy_scan.F90: Allow local UNITS in the dimer geometry file.
+
+16-05-2017 AJM VERSION 6.0.020 : Changes to scripts to handle DaLTON2016.2.2 (AJM patch)
+	DALTON2016.2 has been patched to better handle the asymptotic correction.
+	I have used a new command in the *.dal file to enable part of the
+	patch and so some scripts have been accordingly modified. The change is
+	activated by the AC line in the Cluster file:
+	  AC [LB94 | MULTPOLE] [LINEAR | GRAC | TANH] [VARSHIFT | FIXSHIFT (default)] [...]
+	The new commands are VARSHIFT and FIXSHIFT (detault). Only one must be used.
+	VARSHIFT:
+		Variable shift algorithm that DALTON2016 uses. This is the original and 
+		unstable algorithm. In this case the molecular IPs will be used in the
+		*.dal files.
+	FIXSHIFT:
+		Fixed shift algorithm that I have implemented. This requires that the
+		AC-SHIFT variable/s for the molecule/s are present in the *.clt file.
+		This is the recommended way to use the AC in DALTON2016.
+	* bin/camcasp.py: Modifications to the make_dal function to write out the
+	new AC commands for DALTON2016.2.2
+	* bin/runcamcasp.py: Changes for DALTON2016.2.2.
+
+	This change is unrelated to the above:
+	* bin/execute.py: New command --wait to control the wait times for running
+	codes. Use --wait 1 for speedy runs, but this comes with the possibility that
+	codes will be run without properly checking the system load.
+
+2017-05-11  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* Psi4 basis sets added or modified in basis/psi4. Psi4 basis sets
+	may only contain comment at the start or immediately following the
+	terminating **** of the previous basis set.
+
+	* bin/readfchk.py: Code to read .sitenames file failed if no type
+	was specified.
+
+	* bin/extract_saptdft.py: Minor change to handle Psi4 output.
+
+	* src/tools/cluster_file_interface.F90 (write_psi4_2): New routine
+	and other changes to set up files for sapt(dft) and delta-hf
+	calculations using Psi4.
+
+	* bin/execute.py: Now reads $HOME/.camcasprc if it exists.
+	Currently it understands entries
+	nproc <n> (number of processors that may be needed for a single
+	  SCF calculation)
+	wait <p> <w> (pause before trying to start another process, and
+	  base wait time before checking the load again (sec))
+	mpstat yes (for Linux: use the mpstat program to calculate the
+	  instantaneous load)
+
+05-05-2017 AJM  VERSION 6.0.019  ISA can use Cartesian GTOs in RESTART
+	* bin/runcamcasp.py: Restored from an earlier version as a buggy version
+	had been committed.
+	* src/stockholder.F90: Removed a restriction on the AtomAux basis to allow
+	Cartesian GTOs for a RESTART. This is only possible if no iterations are
+	performed.
+	* methods: updated the isa-A-restart and isa-A+DF-restart methods
+	to make it clear that the AtomAux basis could use Cartesian GTOs.
+
+29-04-2017 AJM BUG FIX
+	* src/tools/cluster_file_operations.F90: BUG FIX in writing out Psi4 commands.
+	Python (used by Psi4) is picky about indents!
+	* src/common.F90: Correction to subroutine copy_from_file_to_file to remove
+	leading space when writing out data to file.
+
+2017-04-27  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/localize.py: Default Hlimit changed to 2.
+
+26-04-2017 AJM  Support for Psi4 supermolecular command files ::  VERSION 6.0.018
+	BUG FIX in generating dimer geometries
+
+	* methods/psi4_default_supermol.psi4: Default commands for CCSD(T) supermolecular
+	interaction energy. This version includes the basis set names.
+	* src/precision.F90: two more lengths for character strings:
+	  llchar  = 120
+	  lllchar = 180
+	* src/tools/cluster_file_operations.F90: Support for Psi4 supermolecular
+	interaction energy command files:
+	SCF-CODE/DFT-CODE  PSI4
+	From the basis set definitions, at presnent only the mid-bond set is used in
+	generating the file. The other basis sets still need to be included by 
+	hand.
+	By default, the commands in methods/psi4_default_supermol.psi4 will be
+	used.
+	If user-defined commands are needed, use 
+
+	#include <file name> ! this will take the file from the specified path
+	or
+	#methods <file name> ! this will take the file from $CAMCASP/methods/
+
+	In both cases the commands should be between the lines:
+	BEGIN-MISC-COMMANDS
+	....
+	END-MISC-COMMANDS
+
+	The mechanism is identical to the CAMCASP-COMMANDS mechanism.
+
+	* src/common.F90: New subroutine copy_from_file_to_file
+	* src/dimer_geometry.F90: BUG FIX: Random dimers were not being
+	generated correctly for non-planar molecules. Spotted by Boris Fain.
+	Anthony has fixed it and I have added lots of comments explaining
+	the algorithm in more detail.
+
+	* Tweaks to execute.py after performing many tests on a 20-core machine.
+
+2017-04-25  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* interfaces/psi4/readfchk.py: Now believed to construct .movecs
+	file in correct Dalton format.
+	* src/gdma/gdma_interface_routines.F90: Now OK for Psi4
+	* src/global_data.f90, src/molecule_parser.F90: Accept Psi4
+	SCFcode. Currently treated in CamCASP as Dalton.
+	* basis/gamess_us/cc-pVTZ/Ne: Typo corrected.
+	* bin/execute.py: Code to handle Psi4 wavefunctions
+	* src/tools/cluster_file_interface.F90: Accepts Psi4 SCFcode and
+	sets up files appropriately. Currently only for properties
+	calculations.
+
+22-04-2017 AJM
+	* basis/nwchem/for-nwchem-lib/: More basis sets to be included in the NWChem
+	basis library.
+
+	* basis/psi4/: Added basis sets for Psi4
+
+21-04-2017 AJM (after my vacation!)
+	* bin/runcamcasp.py and bin/camcasp.py: Corrections to allow alternative asymptotic
+	corrections.
+
+2017-03-29  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* methods/: New methods ind-energy-scan, elst-energy-scan
+	* Other minor changes
+
+2017-03-22  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/localize.py: --polfile specifies polarizability file;
+	--polfile-prefix replaces previous --polfile.
+	--debug provided as synonym for --keep (i.e.don't delete temporary
+	files)
+	* src/stockholder.F90: Force error exit if ISA fails to converge.
+	* bin/runcamcasp.py: Implement "import" command in .clt file
+	* src/tools/cluster_file_interface.F90: consequent change to
+	accept but ignore import command.
+	* bin/execute.py: Minor changes to log
+	* ind-energy-scan and elst-energy-scan methods added.
+
+21-03-2017 AJM VERSION 6.0.017
+	* bin/camcasp_version.bash: Link the ChangeLog and VERSION files too. This
+	will make identifying the version easier.
+	* bin/localize.py: Help provides information on the construction of the
+	Cluster file for localization.
+	* methods/: Updates and corrections.
+	* src/molecule_parser.F90: Subroutine create_molecule returns an error code
+	if the AUX basis has not been read.
+	* src/tools/process_data.F90: BUG FIXES in printing out weights. Due to
+	format statement limitations, small weights were being printed as 0.0
+	* src/tools/cluster_file_interface.F90: Allow basis USER-DEF for
+	the AUX and ATOM-AUX basis sets in addition to the MAIN basis. These
+	basis sets must be in basis/auxiliary/user-def/
+	Syntax:
+	AUX-BASIS       USER-DEF [...]
+	ATOMAUX-BASIS   USER-DEF [...]
+	This is useful for testing new basis sets.
+
+	The Orient localization command file can now be created for both OLD and
+	NEW non-local polarizability formats. This is done by specifying
+
+	ORIENT   POL-FORMAT { OLD | NEW (default)}
+
+	If RUN-TYPE is LOCALIZATION only those file related to the localization are
+	created.
+
+2017-04-18  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/runcamcasp.py: Removed --delete. --add, --abort, --add flags
+	-- now deprecated in favour of --ifexists.
+
+03-03-2017 AJM 
+	I've been trying to get CamCASP to work without defining an
+	auxiliary basis. This is proving difficult as I have made the assumption
+	that we have a non-null aux basis in many parts of the code. Nevertheless
+	a few changes to the error checks related to null basis sets 
+	are probably sensible and these are what I have made in the following modules:
+	* src/types_primary.F90: In subroutine reclaim_type_basis_set if basis%size == 0
+	then no reclaim is performed.
+	* src/basis_operations.F90: In subroutine set_basis_size if the basis 
+	has not been read in (basis%readin = .false.) then the basis size is set to 0.
+	* src/molecule_parser.F90: In subroutine create_molecule if the auxiliary 
+	basis has not been defined the code prints a warning instead of stopping.
+
+	* methods/dma-only: Modified to calculate both Z0 and Z4 DMA moments
+
+27-02-2017 AJM BUG FIX in Cluster
+	*  src/tools/cluster_file_interface.F90: BUG FIX: I had mistakenly
+	changed all 'midbond's to 'MidBond's, but directory names should have
+	stayed the same. Fixed now.
+
+22-02-2017 AJM VERSION 6.0.016
+	* Corrections and additions scrips:
+	  localize.py: Much more information written into files.
+	  execute.py: Removed mpstat from load calculation.
+	  extract_saptdft.py: minor change to parser.
+	* src/tools/cluster_file_interface.F90: Allow AC to be switched off in
+	NWChem file.
+	* src/tools/process_data.F90: Allow AXES, SITES and PDEF to be set by
+	localize.py. So these are now all Python variables.
+
+30-01-2017 AJM VERSION 6.0.015 
+	* src/polarizability.F90: BUG FIX: format B is now printed out for a standard
+	cDF calculation of the polarizability.
+	* src/tools/cluster_file_interface.F90: Added RUN-TYPE LOCALISATION that creates
+	files for a polarizability localisation.
+	* src/tools/process_data.F90: Change to parser: PDEF == MODEL.
+	* bin/localize.py: Many changes. Weight 3 with Coeff 1e-3 is now default.
+	Limits for models are all set to 3. We now recommend making hlimit = wsmlimit.
+	Finally, information about the localization settings is printed in the
+	final polarizability and potenial files.
+
+
+24-01-2017 AJM 
+	* interfaces/psi4/: New directory with H2O example included. As yet no code present.
+
+	* methods/: Included MO-FILE in all the restart templates.
+	* src/tools/cluster_file_interface.F90: Addition to comments of parser.
+
+23-01-2017 AJM Added methods and template Cluster files
+	János Ángyán passed away yesterday. He was the one who initiated the discussion
+	of the method that is now ISA-Pol. This was when I was on a visiting 
+	position in Nancy. 
+
+	* methods/: Modified the methods files and added many (not all) Cluster 
+	templates for the methods. These are not yet tested so there will be
+	errors, but this will form a starting point for future methods.
+
+19-01-2017 AJM VERSION 6.0.014
+	* src/basis_operations.F90: BUG FIX in subroutine compare_basis_sets: the
+	basis arrays can be compared only if their dimensions are the same. 
+	* src/dist_moments.F90: Much better comments about the algorithms and 
+	significant simplification of the code associated with the ISA.
+	The code is now able to handle more cases than before.
+
+	* src/free_format_reader.F90: New option 
+	#INCLUDE-METHOD  <file>  
+	or  
+	#METHOD  <file>
+	This will include <file> from  $CAMCASP/methods/ which is now the new location
+	of all CamCASP methods that were originally in $CAMCASP/data/camcasp-cmnds/
+
+	* src/stockholder.F90: Code global variables tidied up. Subroutine names 
+	made more informative. More tests. And shape-function analysis done even 
+	if we do not have convergence. 
+	--------------------------------------------------------------------------
+	BUG HERE: 
+	 In this case the shape-function file names will still include the 
+	 string 'CONV' when it should be 'NO-CONV'.
+	 But this can be fixed later.
+	--------------------------------------------------------------------------
+
+	* src/tools/cluster_file_interface.F90: New options in the parset to allow
+	more control over the choice of basis sets in the Atom-Aux and Aux basis sets.
+	RUN-TYPE
+	  [SAPT(DFT) | SAPT | {DELTAHF | DELTA-HF} | PROPERTIES | SUPERMOL | CAMCASP-ONLY]
+	  ...
+	  {MAIN-BASIS | BASIS} <basis> [of] TYPE <type of basis>   [SPHERICAL | CARTESIAN]
+	  {AUX-BASIS | AUX} <auxiliary basis> [TYPE <type of aux basis>]        +++
+	                [SPHERICAL | CARTESIAN]  [ USE-ISA-BASIS | NO-ISA-BASIS (default)]
+	  {ATOMAUX-BASIS | ATOM-AUX } [NO] [<auxiliary basis>]                  +++
+	                [TYPE <auxiliary basis type>]  [SPHERICAL | CARTESIAN]  +++
+	                [ USE-ISA-BASIS (default) | NO-ISA-BASIS ]
+	  {ISA-AUX | ISA-BASIS}  +++
+	                [SET1 | SET2 (default)| SET3 | GISA | USR ]             +++
+	                [MIN-S-EXP-H [=] <value (0.0)>]                         +++
+	                [MIN-S-EXP-DUMMY [=] <value (default=0.2)>]             +++
+	                [DUMMY-SYMM-LIMIT [=] <value (default = S)>]
+	  {ISA-ATOMAUX | ISA-BASIS}  +++
+	                [SET1 | SET2 (default)| SET3 | GISA | USR ]             +++
+	                [MIN-S-EXP-H [=] <value (0.0)>]                         +++
+	                [MIN-S-EXP-DUMMY [=] <value (default=0.2)>]             +++
+	                [DUMMY-SYMM-LIMIT [=] <value (default = S)>]
+	  MIDBOND/MID-BOND <name of MidBond basis>/NONE +++
+	     [and/of] TYPE WEIGHTED/COM
+	  ...
+	  #METHOD <file>
+	  or 
+	  #INCLUDE-METHOD <file>
+	  ...
+	END
+
+	The CAMCASP-ONLY run-type causes only the CamCASP file to be written. At present
+	this option causes the type of file to be decided based on the number of 
+	molecules present, but the code works only if one molecule is present. 
+
+	The AUX and ATOM-AUX basis sets now accept the options USE-ISA-BASIS (to use the
+	ISA basis settings) or NO-ISA-BASIS (to not use these settings).
+	If USE-ISA-BASIS is present, then if the ISA basis for this basis type is defined,
+	it will be used.
+
+	The ISA basis sets are defined using the ISA-AUX and ISA-ATOMAUX commands. If the
+	ISA basis sets for the two are to be the same, then use the command ISA-BASIS
+	as this will apply the basis definition to both ISA basis sets.
+
+	Finally we have the #METHOD or #INCLUDE-METHOD command that allows the
+	user to include methods from the $CAMCASP/methods/ directory.
+
+	* methods/ : New directory with all CamCASP methods that were formerly in 
+	data/camcasp-cmnds/
+
+
+24-Nov-2016 AJM VERSION 6.0.013 
+	More tidying up in stockholder.F90: Checks on basis sets now allow the use
+	of Atom-Aux basis sets in the molecule with ISA type A+DF and DF+ISA. Of course,
+	the Aux and Atom-Aux basis sets need to be identical in this case.
+	Symmetry should now be possible in the ISA procedure when the Atom-Aux basis
+	sets are used. Other changes are related, but mostly minor
+	* src/basis_operations.F90
+	* src/molecule_operations.F90
+	* src/overlap_model.F90
+	* src/stockholder.F90
+
+22-Nov-2016 AJM VERSION 6.0.012 (what happnened to 011?)
+	Streamlined calculations of ISA-Pol. Better and easier creation of input files
+	with three basis sets. More command files in data/camcasp-cmnds
+
+	Also some changes to fix issues related to the DISTRIBUTE function in 
+	module e1elst. There still is a bug in this module, but now it will 
+	result in a proper error message. 
+
+02-Nov-2016 AJM VERSION 6.0.010 alpha : debugged version
+	This version has been debugged quite significantly. In almost all cases the bugs
+	found (and fixed) were associated with there being more sites in Atom-Aux compared
+	with Aux. Atom-Aux is the auxiliary basis set associated with the atoms and Aux is
+	associated with the molecule. 
+
+	Tests passed: H2O (aQZ) ISA : Cartesian Aux; Atom-Aux with sites moved; 
+	5 sites in Atom-Aux. 
+
+	* src/dist_moments.F90: BUG FIX in output. Now no error when more sites in Atom-Aux
+	compared with Aux. Also, if the ISA (basis-space) algorithm cannot be used, the
+	ISA-GRID algorithm is automatically chosen. A warning is printed in this case.
+	* src/function_expansion_operations.F90: BUG FIXES in subroutine evaluate_FuncExpansion_neighbours_n
+	and subroutine evaluate_FuncExpansion_neighbours_1. 
+	Fixes problems encountered when there were more sites in Atom-Aux than in Aux.
+	New, optional, argument Use_Atom_Neighbours_in_Aux1 allows control over the
+	type of neighbourhood used. This is the job of the calling routine!
+	Also, errors better handled. 
+	* src/num_integrals.F90: BUG FIXES in subroutine Chi_rho_w_overlap to handle
+	Atom-Aux different from Aux.
+	* src/num_integration_grid.F90: BUG FIXES: The radii() array is now not passed
+	to subroutine construct_atom_integration_grids from subroutine construct_molecular_integration_grid
+	as we cannot be sure that the radii() correspond to the atoms in mol%atoms().
+	Also, StartIndices() now correctly defined.
+
+	* src/stockholder.F90: BUG FIX in a check on basis type for A+DF and DF-ISA.
+
+01-Nov-2016 AJM VERSION 6.0.009 alpha version for testing
+	CamCASP can now handle different basis sets/sites in mol%aux and mol%atoms
+	--------------------------------------------------------------------------
+	The code has been modified to disconnect the molecular auxiliary basis from the
+	atomic auxiliary basis sets. That is, mol%aux is now formally different
+	from mol%AtomAux which consists of the basis sets in mol%atoms()%aux. 
+	The integration grids are also split with the molecular grid based on 
+	the sites in mol%aux and the atomic grids (contained in mol%atoms()%grid)
+	based on the atomic positions. 
+	Finally, neighbourhoods defined for the sites in mol%aux are in mol%NeighbourList(,)
+	and those for the atomic sites are in mol%atoms()%NeighbourList. We also have
+	an additional list that contains sites in mol%aux that are in the neighbourhood
+	of an atomic site; this is in mol%atoms()%NeighbourList_aux1.
+	Changes have been made to most, but almost certainly not all, routines
+	to handle these changes correctly. 
+	Tests:
+	Only limited tests so far: tested properties calculation for H2O with 
+	Cartesian mol%aux and Spherical mol%atoms()%aux. Also did a limited
+	test where more sites were included in mol%atoms(). 
+	Recent code changes in :
+	* src/dist_moments.F90
+	* src/num_integrals.F90
+	* src/polarizability.F90
+
+2016-11-01  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* bin/read_scan.py: Added option --sum to output the sum of the
+	selected data columns.
+
+
+29-Oct-2016 AJM  New fields in type(atom) for neighbours of the atom from mol%aux
+	* src/basis_operations.F90
+	* src/molecule_operations.F90
+	* src/molecule_parser.F90
+	* src/types_secondary.F90
+
+24-Oct-2016 AJM VERSION 6.0.008
+	* VERSION: 6.0.008
+	* src/basis_operations.F90: New subroutine molbasis_to_atombasis.
+	* src/density_overlap.F90: Change to comments.
+	* src/dist_moments.F90: Using new call to subroutine DistMultipoleIntegrals_primitive_aux_stockholder
+	* src/edit.F90: Some more functions to the parser.
+	* src/molecule_operations.F90: Significant changes to subroutine find_site_neighbours.
+	Also changes to other routines that use neighbourhoods.
+	* src/molecule_parser.F90: Removed legacy code and changes for new calls to
+	subroutine find_site_neighbours
+	* src/num_integrals.F90: In subroutine DistMultipoleIntegrals_primitive_aux_stockholder:
+	lots of changes. Now the code can handle two types of basis sets: 
+	MOL-AUX: for mol%aux
+	ATOM-AUX: for mol%atoms()%aux
+	* src/num_integration_grid.F90: Included code to create the atomic integration
+	grids.
+	* src/polarizability.F90: In subroutine dist_polarizabilities_ISA:
+	Correction to comments and using new call to subroutine DistMultipoleIntegrals_primitive_aux_stockholder
+	* src/type_operations_secondary.F90: In subroutine update_type_molecule: Neighbours
+	for both molecule and atom are created; the latter only if atoms are defined.
+	* src/types_secondary.F90: New field atom%grid for integration grid for atom.
+	* docs/users_guide.tex: Begun changes for version 6.0.xxx
+
+2016-10-24  Anthony Stone  <ajs1@cam.ac.uk>
+
+	* src/energy_scan.F90 (energy_scan_parser): Accepts [READ|FILE] file
+	inside the POINTS loop to read from the specified file. The file
+	may contain a POINTS line that resets the number of points. If
+	echo_lines is on it is turned off while the file is read. Anything
+	in the file after the specified number of points is ignored.
+	* ISA/set2/Ne added.
+	* bin/read_scan.py script to generate an Orient map file from the
+	energy-scan output.
+
+01-Sept-2016 AJM VERSION 6.0.007 : BUG FIXES and improvements to distributed density overlap
+	* src/density_overlap.F90: 
+	BUG FIX:
+	  In the call to  make_dimer_molecule() the FillBasisSets flag is now set to TRUE.
+	  This forces the basis set fields to be filled. This is needed as the integration 
+	  grid routine subroutine construct_molecular_integration_grid uses the fields
+	  in mol%aux.
+
+	NEW COMMAND:
+	  POSITIVE-RHO-ONLY [TRUE | FALSE]
+	This can be used to force the ISA-GRID partitioning to use only positive
+	total electronic density contributions.
+
+	* src/tools/cluster_file_interface.F90
+	BUG FIX (?)
+	  Commented out the lines that designate ISA basis sets as 'Type SP'. I'm 
+	  not sure why this is needed, and it causes problems when doing a 
+	  SAPT(DFT) energy calculation.
+
+23-August-2016 AJM VERSION 6.0.006 : Faster ISA-Pol
+	* src/overlap_integrals.F90: BUG FIX: In subroutine overlap2_shell: Leps may
+	not have been defined. Now it is.
+	* src/polarizability.F90: Faster ISA-Pol code: the code computes only the 
+	upper triangle of the pol matrix. The lower triangle is obtained
+	as the transpose of the upper.
+	*** Another commit with even faster code. This is not final.
+
+	VERSION 6.0.007
+	*** Still more changes to polarizability.F90: The ISA-Pol algorithm is
+	now 11 times faster than the last commit (6.0.006), and around 22 times faster
+	than Version 6.0.005
+	The Q_int integrals that are evaluated in real-space are now pre-computed and
+	stored for the duration of the calculation.
+
+31-July-2016 AJM fixed problem with aQZ S basis sets
+	* basis/: DALTON needs exponents ordered, or it re-orders them. But this
+	causes an inconsistency with CamCASP. Fixed S aQZ basis sets.
+
+30-July-2016 AJM VERSION 6.0.005 (on GIT repo)
+	* basis/dalton/aug-cc-pVDZ/S: New basis sets for S
+	* basis/dalton/aug-cc-pVQZ/S
+	* basis/gamess_us/aug-cc-pVDZ/S
+	* basis/gamess_us/aug-cc-pVQZ/S
+	* VERSION: 6.0.005
+	* docs/users_guide.tex: Updates
+	* misc/Dependencies: Updated
+	* src/common.F90: Changes in subroutine open_file to allow appending to
+	an existing file.
+	* src/molecule_parser.F90: Allow MO-FILE NONE.
+	* src/polarizability.F90: New format for polarizabilities.
+
+27-July-2016 AJM VERSION 6.0.004
+	* src/tools/cluster_file_interface.F90: Change to properties file
+	commands.
+	* src/polarizability.F90: Modifications to subroutine write_orient to
+	include information about the frequencies in the non-local pol file.
+	* bin/execute.py: Reverted to version 23039. Anthony's load management 
+	did not work when more than a handful of jobs were submitted
+	and I did not think this could be fixed.
+
+01-July-2016 AJM VERSION 6.0.003
+	* src/main_parser.f90: Change to allow the next one:
+	* src/edit.F90: Allows MOLECULE A or B
+	* src/df_main.F90: Allows MOLECULE A or B
+	* src/polarizability.F90: Allows MOLECULE A or B
+	And also allows the perturbation file and polarizability
+	file prefixes to be set using
+	  POL-FILE  DEFAULT
+	  PERT-FILE DEFAULT
+	to use the default file names.
+	* src/num_integration_grid.F90: Allows MOLECULE A or B
+	* src/lattice.F90: Allow variables lowlim and hilim to be public.
+	* src/overlap_integrals.F90: Small correction to comments.
+	* src/stockholder.F90: Allows MOLECULE A or B
+	So the molecule name is not needed. And also, in a restart, the FILE may be
+	specified as
+	  FILE   DEFAULT
+	This will use a file name <mol_name>_atoms.ISA
+	* bin/localize.py: Place dispersion model in a file with 'ref' in the name.
+	This makes the file name consistent with the names used for the other files.
+	* bin/execute.py: Use correct number of processors for NWChem
+	* bin/runcamcasp.py: Set default number of processors to 1.
+	* data/camcasp-cmnds/isa-display: Corrected
+	* data/camcasp-cmnds/isa-pol-from-isa-restart: New command file for an ISA-Pol
+	calculation with a restart from a prior ISA calculation.
+
+28-June-2016 AJM VERSION 6.0.002
+	* src/df_parameters.F90: Cosmetic changes.
+	* src/df_integrals.F90: More sensible error info numbers.
+	* src/df_main.F90: Tidy up of parser.
+	* src/df_monomer.F90: Attempting to fix a bug in the code that causes Dvv not
+	to be filled when the DF module is called a few times in certain orders.
+
+27-June-2016 AJM VERSION 6.0.001
+	* ISA-based distributed polarizabilities and ISA-GRID-based distributed
+	multipoles
+	* src/ISA_IO.F90: Formatting correction.
+	* src/dist_moments.F90: New algorithm for the ISA-based
+	distributed multipole moments using a grid-based method.
+	* src/molecular_orbitals.F90: Better error handling in subroutine read_mos_energies_ascii_2
+	* src/multipole_transformation_matrices.F90: New subroutine 
+	transform_primitive_multipole_integrals_1indx to transform primitive
+	multipole integrals of the form M(k,pqr), where k is an auxiliry basis
+	index.
+	* src/num_integrals.F90: New subroutine DistMultipoleIntegrals_primitive_aux_stockholder
+	to calculate the primitive distributed multipole moments of the aux basis functions
+	using the ISA for the distribution.
+	* src/parameters.f90: New parameter par_min_rank = 0
+	* src/polarizability.F90: ISA-DistPol: New algorithm to distribute
+	polarizabilities using the ISA. Activate using:
+	  DIST-POL-ALG  ISA-GRID
+	Needs to have an ISA restart/calculation.
+	* src/type_operations_secondary.F90: BUG FIX in subroutine update_type_molecule.
+	When molB_indx is not specified the pointer B should not be set.
+	* misc/IP.txt: Updated
+	* basis/dalton/aug-cc-pVTZ/Zn: New basis.
+	* bin/camcasp.py: Corrections for PBS scheduler.
+	* bin/extract_saptdft.py: Added kcal/mol option for UNITS.
+	* docs/users_guide.tex: Minor updates.
+	* Makefile_body: Added env var ${PAR} to compilation command.
+	* osx/gfortran/debug/Flags: Updates
+	* osx/gfortran/exe/Flags: Updates
+	* utilities/ORIENT2DMACRYS.pl: Corrections. Made up-to-date with DMACRYS.
+	* utilities/plot-levels.py: Updates

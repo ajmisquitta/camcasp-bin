@@ -1,0 +1,30 @@
+OC-ClF
+======
+
+This is an example of a system involving two different molecules, and
+also an example of halogen bonding. The procedure is as for the H2O2
+example; see the README for that if necessary. The commands needed are
+
+$ runcamcasp.py OC-ClF --clt OC-ClF.clt -d test --direct -q batch
+$ runcamcasp.py OC-ClF --clt OC-ClF_dHF.clt -d test_dHF --direct -q batch
+
+(Change the -q argument to specify a different queue is necessary.)
+These calculations take about 10 mins cpu in all. When they have
+finished:
+
+extract_saptdft.py *
+kJ/mol           elst        exch         ind        exind       disp       exdisp        dHF        total
+check        -21.84589    34.43826   -30.33337    26.11255   -15.13359     2.09137    -7.60966   -12.28034
+check_nwchem 
+             -22.56375    35.88388   -32.23402    27.86258   -15.54804     2.17934    -7.60942   -12.02944
+test         -21.84589    34.43826   -30.33337    26.11255   -15.13359     2.09137    -7.60966   -12.28034
+
+The `check' directories contain calculations using Dalton-2013, while
+the `check_nwchem' calculations used NWChem. The results are slightly
+different because of the different treatment of asymptotic correction.
+The method used by CamCASP if Dalton is used can be specified in the
+cluster file as
+  AC multpole tanh 3.0 4.0
+and is generally found to give good results. Unfortunately this method
+is not available with NWChem, but the results are not usually very
+different.

@@ -1,0 +1,39 @@
+TITLE  PROCESS file to write the CASIMIR input
+!    for formamide
+! Usage: process < HCONH2_casimir.prss > HCONH2_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>.casimir
+
+Set Global-data
+   CamCASP /home/ajs1/camcasp-5.7
+   Units  BOHR  DEGREE
+   Overwrite
+   Echo Off
+End
+
+
+Molecule formamide
+  Units BOHR
+  C           6.00    0.00000000    0.00000000    0.00000000   Type C
+  O           8.00    2.29063151    0.00000000    0.00000000   Type O
+  H1          1.00   -1.13908247    1.77246836    0.00000000   Type H1
+  N           7.00   -1.45985298   -2.10205057    0.00000000   Type N
+  H2          1.00   -3.36209048   -1.98418554    0.00000000   Type H2
+  H3          1.00   -0.62710178   -3.82189185    0.00000000   Type H3
+End
+
+Read local pols for formamide
+   Use ascii file HCONH2_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>_0f10.pol
+   Maximum rank  <WSMLIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Limit rank to <HLIMIT! 1> for sites +++
+       H1 H2 H3
+   Frequencies STATIC + 10
+End
+
+Write
+   File-prefix HCONH2
+   CASIMIR file for formamide +++
+      and formamide +++
+      with cutoff 0.0001
+End
+
+Finish

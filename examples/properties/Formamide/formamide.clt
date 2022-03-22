@@ -1,0 +1,31 @@
+! Formamide cluster file
+! ======================
+
+Global
+  Units Bohr degrees
+  Overwrite yes
+End
+
+Molecule formamide
+  Units Bohr
+  I.P. 0.3745
+  C    6.0      0.0000000000        0.0000000000        0.0000000000
+  O    8.0      2.2906315140        0.0000000000        0.0000000000
+  H1   1.0     -1.1390824747        1.7724683628        0.0000000000
+  N    7.0     -1.4598529795       -2.1020505657        0.0000000000
+  H2   1.0     -3.3620904774       -1.9841855358        0.0000000000
+  H3   1.0     -0.6271017798       -3.8218918498        0.0000000000
+End
+
+Files
+  Molecule formamide
+  Basis Sadlej
+  Options Tests
+  File-prefix HCONH2
+  Orient file
+  Process file
+  Sites file
+  Interface files
+End
+
+Finish

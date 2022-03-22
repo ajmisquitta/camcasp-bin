@@ -1,0 +1,49 @@
+#!/bin/bash
+
+#  Find all .clt files in the examples directories and insert the path
+#  of the CamCASP installation if necessary.
+#  Usage:
+#    set_path [-x] [-d]
+#  If the -d flag is present, just delete the CamCASP line.
+#  Otherwise, if the -x flag is present, comment out the CamCASP line,
+#  and in any case, replace the argument by the value of the CAMCASP
+#  environment variable.
+
+die () {
+  echo $1
+  exit 1
+}
+
+suppress=""
+delete=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --help )
+    cat <<EOF
+Find all .clt files in the examples directories and insert the path
+of the CamCASP installation if necessary.
+Usage:
+  set_path [-x]
+If the -x flag is present, comment out the CamCASP line.
+In any case, replace the argument by the value of the CAMCASP
+environment variable.
+EOF
+    exit;;
+    -x )
+    suppress='s/^/!/';;
+    -d )
+    delete='yes';;
+    * )
+    die "$1 not recognized";;
+  esac
+  shift
+done
+
+[[ -z $CAMCASP && -z $suppress ]] && die "The CAMCASP environment variable must be set before using this script"
+[[ -n $suppress ]] || [[ -e $CAMCASP/bin/make_links.pl ]] || die "The CAMCASP environment variable is not set correctly"
+
+if [[ -z delete ]]; then
+find . -name \*.clt -print -exec perl -p -i.bak -e "if (/^!? *CamCASP/) {s/^!//; $suppress; s:CamCASP .*$:CamCASP $CAMCASP:;}" {} \;
+else
+find . -name \*.clt -print -exec perl -n -i.bak -e "print unless /^!? *CamCASP/;" {} \;
+fi

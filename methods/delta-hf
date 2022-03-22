@@ -1,0 +1,65 @@
+CamCASP-commands
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  100
+END
+
+BEGIN GRID
+  Molecule B
+  Angular 200
+  Radial  100
+END
+
+SET PROPAGATOR
+  Type CHF
+  DF without constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta    = 0.0
+  Lambda = 0.0
+  Solver LU
+  REDO-DF-ON-ROTATION  True
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule A
+  Type NN
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule B
+  Type NN
+  Print only normalization constraints
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+BEGIN E1exch
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+
+FINISH
+End-CamCASP-commands

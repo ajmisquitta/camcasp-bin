@@ -1,0 +1,48 @@
+
+basis {
+   # assign auga-sadlej-pvtz    # user-defined basis from CamCASP 5.9/6.0
+   assign {BASIS} 
+   assign Kr  midbond
+   assign Xe  midbond
+   assign Rn  midbond
+}
+
+df_basis_scf {
+   # assign aug-cc-pvtz-jkfit
+   assign {JK_BASIS}
+   assign Kr midbond-ri
+   assign Xe midbond-ri
+   assign Rn midbond-ri
+}
+
+df_basis_cc {
+   # assign aug-cc-pvtz-ri
+   assign {RI_BASIS}
+   assign Kr midbond-ri
+   assign Xe midbond-ri
+   assign Rn midbond-ri
+}
+
+set scf_type df
+set mp2_type df
+set cc_type  df
+set freeze_core True
+
+
+set {
+  scf_type  df
+  sapt_dft_functional     {FUNC}
+  sapt_dft_do_dHF         {DO_DHF}
+  sapt_dft_grac_shift_a   {AC_SHIFT_A}
+  sapt_dft_grac_shift_b   {AC_SHIFT_B}
+  sapt_dft_do_hybrid      True
+  SAPT_DFT_EXCH_DISP_FIXED_SCALE  DISP
+  do_ind_exch_sinf        True
+  do_disp_exch_sinf       True
+}
+
+
+energy('sapt(dft)',molecule=dimer)
+
+
+

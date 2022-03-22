@@ -1,0 +1,19 @@
+The file names used here need to be consistent with the atom names
+used in src/atoms.f90
+
+
+Basis sets from:
+
+https://bse.pnl.gov/bse/portal
+
+Instructions:
+-------------
+* Wherever possible use the Optimized General Contractions.
+* ORDER basis functions from larger to smaller exponents.
+  This is needed as some codes (DALTON) re-order basis functions
+  to have this order. This can then cause basis inconsistencies
+  as CamCASP would not know the new order. 
+* DALTON basis set downloaded from the portal will not be in the
+  correct format. Use the code utilities/emsl2dalton/emsl2dalton
+  to write them out in the correct format.
+  *** This code does not ORDER the basis functions ***

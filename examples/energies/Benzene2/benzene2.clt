@@ -1,0 +1,63 @@
+Title Benzene dimer : {basis} {type}
+
+Set Global-data
+  ! Units used here must be consistent with those used in the geometry file:
+  Units Bohr Degree
+  Echo No
+  Overwrite
+End
+
+!  However different units may be used in the molecule geometry definition
+Molecule benzene1
+  !   Geometry from Herzberg
+  IP 0.3397 a.u.
+  Units Angstrom
+  C1   6.0   polar  1.397   90    0
+  C2   6.0   polar  1.397   90   60
+  C3   6.0   polar  1.397   90  120
+  C4   6.0   polar  1.397   90  180
+  C5   6.0   polar  1.397   90  240
+  C6   6.0   polar  1.397   90  300
+  H1   1.0   polar  2.481   90    0
+  H2   1.0   polar  2.481   90   60
+  H3   1.0   polar  2.481   90  120
+  H4   1.0   polar  2.481   90  180
+  H5   1.0   polar  2.481   90  240
+  H6   1.0   polar  2.481   90  300
+End
+Molecule benzene2
+  !   Geometry from Herzberg
+  IP 0.3397 a.u.
+  Units Angstrom
+  C1   6.0   polar  1.397   90    0
+  C2   6.0   polar  1.397   90   60
+  C3   6.0   polar  1.397   90  120
+  C4   6.0   polar  1.397   90  180
+  C5   6.0   polar  1.397   90  240
+  C6   6.0   polar  1.397   90  300
+  H1   1.0   polar  2.481   90    0
+  H2   1.0   polar  2.481   90   60
+  H3   1.0   polar  2.481   90  120
+  H4   1.0   polar  2.481   90  180
+  H5   1.0   polar  2.481   90  240
+  H6   1.0   polar  2.481   90  300
+End
+
+Rotate benzene2 by {alpha} about {Nx} {Ny} {Nz}
+Place benzene2 at {Rx} {Ry} {Rz}
+
+Run-Type
+  {task}
+  Molecules benzene1 and benzene2
+  File-prefix {job}
+  Main-Basis  {basis} Type {type}
+  Midbond     3s2p1d  Type Weighted
+  Aux-basis   aTZ
+  Func PBE
+  Kernel ALDA
+  !
+  Memory 4 GB
+End
+
+
+Finish

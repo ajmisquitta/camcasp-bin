@@ -1,0 +1,1 @@
+batch_SAPT.pl benzene2 -geom random-grid_points.dat -clt benzene2.clt --dalton-direct -q bg

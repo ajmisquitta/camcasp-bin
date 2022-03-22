@@ -1,0 +1,83 @@
+Polarizabilities
+     C  C    10   10 =       C_10_10_A
+     C  C    10  21c =      C_10_21c_A
+     C  C    10  21s =      C_10_21s_A
+     C  C   11c  11c =     C_11c_11c_A
+     C  C   11c  11s =     C_11c_11s_A
+     C  C   11c   20 =      C_11c_20_A
+     C  C   11c  22c =     C_11c_22c_A
+     C  C   11c  22s =     C_11c_22s_A
+     C  C   11s  11s =     C_11s_11s_A
+     C  C   11s   20 =      C_11s_20_A
+     C  C   11s  22c =     C_11s_22c_A
+     C  C   11s  22s =     C_11s_22s_A
+     C  C    20   20 =       C_20_20_A
+     C  C    20  22c =      C_20_22c_A
+     C  C    20  22s =      C_20_22s_A
+     C  C   21c  21c =     C_21c_21c_A
+     C  C   21c  21s =     C_21c_21s_A
+     C  C   21s  21s =     C_21s_21s_A
+     C  C   22c  22c =     C_22c_22c_A
+     C  C   22c  22s =     C_22c_22s_A
+     C  C   22s  22s =     C_22s_22s_A
+
+     O  O    10   10 =       O_10_10_A
+     O  O    10  21c =      O_10_21c_A
+     O  O    10  21s =      O_10_21s_A
+     O  O   11c  11c =     O_11c_11c_A
+     O  O   11c  11s =     O_11c_11s_A
+     O  O   11c   20 =      O_11c_20_A
+     O  O   11c  22c =     O_11c_22c_A
+     O  O   11c  22s =     O_11c_22s_A
+     O  O   11s  11s =     O_11s_11s_A
+     O  O   11s   20 =      O_11s_20_A
+     O  O   11s  22c =     O_11s_22c_A
+     O  O   11s  22s =     O_11s_22s_A
+     O  O    20   20 =       O_20_20_A
+     O  O    20  22c =      O_20_22c_A
+     O  O    20  22s =      O_20_22s_A
+     O  O   21c  21c =     O_21c_21c_A
+     O  O   21c  21s =     O_21c_21s_A
+     O  O   21s  21s =     O_21s_21s_A
+     O  O   22c  22c =     O_22c_22c_A
+     O  O   22c  22s =     O_22c_22s_A
+     O  O   22s  22s =     O_22s_22s_A
+
+     H1  H1    10   10 =      H1_10_10_A
+     H1  H1   11c  11c =    H1_11c_11c_A
+     H1  H1   11c  11s =    H1_11c_11s_A
+     H1  H1   11s  11s =    H1_11s_11s_A
+
+     N  N    10   10 =       N_10_10_A
+     N  N    10  21c =      N_10_21c_A
+     N  N    10  21s =      N_10_21s_A
+     N  N   11c  11c =     N_11c_11c_A
+     N  N   11c  11s =     N_11c_11s_A
+     N  N   11c   20 =      N_11c_20_A
+     N  N   11c  22c =     N_11c_22c_A
+     N  N   11c  22s =     N_11c_22s_A
+     N  N   11s  11s =     N_11s_11s_A
+     N  N   11s   20 =      N_11s_20_A
+     N  N   11s  22c =     N_11s_22c_A
+     N  N   11s  22s =     N_11s_22s_A
+     N  N    20   20 =       N_20_20_A
+     N  N    20  22c =      N_20_22c_A
+     N  N    20  22s =      N_20_22s_A
+     N  N   21c  21c =     N_21c_21c_A
+     N  N   21c  21s =     N_21c_21s_A
+     N  N   21s  21s =     N_21s_21s_A
+     N  N   22c  22c =     N_22c_22c_A
+     N  N   22c  22s =     N_22c_22s_A
+     N  N   22s  22s =     N_22s_22s_A
+
+     H2  H2    10   10 =      H2_10_10_A
+     H2  H2   11c  11c =    H2_11c_11c_A
+     H2  H2   11c  11s =    H2_11c_11s_A
+     H2  H2   11s  11s =    H2_11s_11s_A
+
+     H3  H3    10   10 =      H3_10_10_A
+     H3  H3   11c  11c =    H3_11c_11c_A
+     H3  H3   11c  11s =    H3_11c_11s_A
+     H3  H3   11s  11s =    H3_11s_11s_A
+
+End

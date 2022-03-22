@@ -1,0 +1,57 @@
+!  cc-pVTZ-PP  EMSL  Basis Set Exchange Library  4/12/16 2:26 AM
+! Elements                             References
+! --------                             ----------
+! Ga-As,In-Sb, Tl-Bi   : K.A. Peterson, J. Chem. Phys. 119, 11099 (2003).
+! Se-Kr, Te-Xe, Po-Rn  : K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and
+! M. Dolg, J. Chem. Phys. 119, 11113 (2003).
+! Cu, Zn, Pd, Ag, Au, Hg: K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+! Y Zr Nb Mo Tc Ru Rh Pd     : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+! I    : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+! Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+! 
+
+BASIS "ao basis" PRINT
+! BASIS SET: (10s,11p,9d,1f) -> [5s,4p,3d,1f]
+Br    S
+   9659.3900000              0.0003710             -0.0001520        
+   1455.9600000              0.0025710             -0.0010080        
+    325.9140000              0.0084850             -0.0036090        
+     46.5657000              0.0782220             -0.0278720        
+     18.2469000             -0.3971490              0.1513170        
+      3.8020100              0.6858640             -0.3514970        
+      1.7863200              0.4868190             -0.4107030        
+Br    S
+      0.6027140              1.0000000        
+Br    S
+      0.2840140              1.0000000        
+Br    S
+      0.1202710              1.0000000        
+Br    P
+    492.1870000              0.0004720             -0.0001580        
+     92.3642000              0.0054940             -0.0013440        
+     27.0718000             -0.0880300              0.0246160        
+      7.2653900              0.3434850             -0.1125320        
+      3.4848100              0.5102080             -0.1797750        
+      1.6404800              0.2486310             -0.0736610        
+      0.6485700              0.0222010              0.3487340        
+      0.2564070             -0.0004190              0.5579480        
+      0.0953040              0.0006560              0.2664560        
+Br    P
+      0.7666000              1.0000000        
+Br    P
+      0.1182000              1.0000000        
+Br    D
+    338.9960000              0.0015240        
+    103.2170000              0.0156730        
+     42.3638000              0.0724000        
+     18.4356000              0.1863030        
+      8.3725400              0.3238810        
+      3.8022200              0.3745340        
+      1.6867700              0.2574180        
+Br    D
+      0.6775200              1.0000000        
+Br    D
+      0.2553000              1.0000000        
+Br    F
+      0.5606000              1.0000000        
+END

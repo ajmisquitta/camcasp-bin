@@ -1,0 +1,158 @@
+#!/bin/bash
+
+help ()
+{
+  cat <<EOF
+Usage:
+$0 [-j] jobname [-d directory] [-clt cluster-file] [ -e | -p ] [ options ] -ip I.P.
+
+Create the generated input files and the output files for an example job.
+
+Run the command in the example directory. The script will run the 
+SAPT(DFT) calculation in the specified sub-directory, using
+runSAPT (if -e specified) or runprops (if -p) and put the generated
+input files and the output files in the appropriate places. If the
+clusterfile is not specified it is taken to be \$job.clt. The default
+directory is "check". If the directory already exists it will be
+deleted along with its contents.
+
+Options:
+-unit [ cm-1 | Kelvin ] Specify the units in which results are tabulated
+        by the search.pl script. Default kJ/mol.
+-skip   Don't do the calculation (assumed already done) -- just update
+        the files.
+
+Note that the jobname must correspond to the file-prefix specified in the
+.clt file.
+EOF
+}
+
+die ()
+{
+  echo $1
+  exit 1
+}
+
+
+[[ $# -eq 0 ]] && help && exit
+
+dir="check"
+job=""
+clt=""
+which=""
+unit=""
+skip=""
+while [[ $# -gt 0 ]]
+do
+  case $1 in
+    -d )
+      dir=$2
+      cd $2
+      shift;;
+    -e )
+      which="energies"
+      out1="output"
+      out2="";;
+    -ip )
+      ip=$2
+      shift;;
+    -j )
+      job=$2
+      shift;;
+    -p )
+      which="properties"
+      out1="output_1"
+      out2="output_2";;
+    -clt )
+      clt=$2
+      shift;;
+    -unit )
+      unit="--$2"
+      shift;;
+    -skip )
+      skip="skip";;
+    * )
+      if [[ -z $job ]]; then
+        job=$1
+      else
+        die "Don't understand $1"
+      fi
+  esac
+  shift
+done
+
+[[ -z $which ]] && die "Must specify -e (energies) or -p (properties)"
+[[ -z $job ]] && die "No jobname specified"
+[[ -z $clt ]] && clt=$job.clt
+[[ -e $clt ]] || die "No file $clt in this directory"
+
+here=$PWD
+if [[ -z $skip ]]; then
+  runSAPT $job -clt $clt -d $dir -y -q $QUEUE || exit 1
+# if [[ $which = "energies" ]]; then
+#   runSAPT $job -clt $clt -d $dir -y -q $QUEUE -M 500 || exit 1
+# elif [[ $which = "properties" ]]; then
+#   runprops $job -clt $clt -d $dir -y -ip $ip  -q $QUEUE -M 500 || exit 1
+# fi
+fi
+
+#  If there's no backup directory, make it, but remove the svn files.
+if [[ ! -d generated_files.bak ]]; then
+  cp -pr generated_files generated_files.bak 
+  rm -rf generated_files.bak/.svn
+fi
+cd generated_files
+files=$(ls)
+rm -f $files
+cd ../$dir
+cp -p $files ../generated_files
+cd $here
+
+
+until [[ -d $dir/OUT && -e $dir/OUT/$job.out ]]
+do
+  sleep 10
+done
+sleep 1
+
+
+#  If there's no backup directory, make it, but remove the svn files.
+if [[ ! -d $out_1.bak ]]; then
+  cp -pr $out1 $out1.bak
+  rm -rf $out1.bak/.svn
+fi
+cd $out1
+files=$(ls)
+rm -f files
+cd $here
+echo "# ls $dir" 
+ls $dir
+cd $dir/OUT
+echo "# ls $dir/OUT"
+ls
+cp -p $files $here/$out1
+
+if [[ $which = "energies" ]]; then
+  cd $here
+  search.pl -h -k saptdft $unit --label "$1" $dir/OUT/$job.out
+  exit 0
+fi
+
+cd $here/$dir
+localize $job --axes ../$job.axes
+cd $here
+
+if [[ ! -d $out2.bak ]]; then
+  cp -pr $out2 $out2.bak 
+  rm -rf $out2.bak/.svn
+fi
+cd $out2
+files=$(ls)
+rm -f files
+cd $here/$dir
+echo "# ls $dir"
+ls
+cp -p $files $here/$out2
+
+
+

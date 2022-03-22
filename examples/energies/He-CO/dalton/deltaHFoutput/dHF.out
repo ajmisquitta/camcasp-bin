@@ -1,0 +1,496 @@
+      CamCASP version .  Wed 12 Sep 2012 14:30:04 BST
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+Starting on 13-09-2012 at 11:53:31.128
+ 
+ ================================================================
+ Compiled on Sep 12 2012 at 14:26:47
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22334
+ Working directory: 
+     /scratch/alston/dHF_11-53-15
+ Running on: mmp12
+ ================================================================
+
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE He and CO
+TITLE Basis aug-cc-pVTZ and type DC+
+TITLE Midbonds 3S2P1D and type weighted
+TITLE CalculationType: DELTA-HF
+
+
+MEMORY       2048 MB
+ Memory Manager initialized with             2147483648  bytes
+
+
+SET Global_data
+  CamCASP-path /home/alston/CamCASP/current
+  Units Bohr cm-1
+  Scf-code DALTON
+  Overwrite yes
+END
+
+
+MOLECULE He at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectA.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type DC+
+      He         2.0        0.00000000       0.00000000       0.00000000  TYPE He
+      Mb    0.0       -0.09189630       0.00000000       3.17710851  TYPE Mb
+      C          0.0        1.15075100       0.00000000       6.81791000  TYPE C
+      O          0.0       -0.86333800       0.00000000       6.11810600  TYPE O
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type DC+
+      He         2.0        0.00000000       0.00000000       0.00000000  TYPE He
+    LIMITING basis on this site upto G symmetry
+      Mb    0.0       -0.09189630       0.00000000       3.17710851  TYPE Mb
+      C          0.0        1.15075100       0.00000000       6.81791000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O          0.0       -0.86333800       0.00000000       6.11810600  TYPE O
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for He
+    1         HE    2.00     0.0000     0.0000     0.0000
+    2         MB    0.00    -0.0919     0.0000     3.1771
+    3          C    0.00     1.1508     0.0000     6.8179
+    4          O    0.00    -0.8633     0.0000     6.1181
+ Molecular charge   =     0
+ Molecular IP       =     0.000000 CM-1
+ Number of molecular orbitals =   129
+     Occupied orbitals        =     1
+     Virtual  orbitals        =   128
+ Main basis: Size   =   129
+             Shells =    43
+             Type   = DC+
+             Atoms  =     1
+       Sites(Main)  =     4
+       Site Types   =     4
+             GTOs   = Spherical
+ Aux  basis: Size   =   376
+             Shells =    82
+             Type   = DC+
+        Sites(Aux)  =     4
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : vectA.data Type BINARY
+============================================================
+
+
+MOLECULE CO at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectB.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type DC+
+      He         0.0        0.00000000       0.00000000       0.00000000  TYPE He
+      Mb    0.0       -0.09189630       0.00000000       3.17710851  TYPE Mb
+      C          6.0        1.15075100       0.00000000       6.81791000  TYPE C
+      O          8.0       -0.86333800       0.00000000       6.11810600  TYPE O
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type DC+
+      He         0.0        0.00000000       0.00000000       0.00000000  TYPE He
+    LIMITING basis on this site upto G symmetry
+      Mb    0.0       -0.09189630       0.00000000       3.17710851  TYPE Mb
+      C          6.0        1.15075100       0.00000000       6.81791000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O          8.0       -0.86333800       0.00000000       6.11810600  TYPE O
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for CO
+    1         HE    0.00     0.0000     0.0000     0.0000
+    2         MB    0.00    -0.0919     0.0000     3.1771
+    3          C    6.00     1.1508     0.0000     6.8179
+    4          O    8.00    -0.8633     0.0000     6.1181
+ Molecular charge   =     0
+ Molecular IP       =     0.000000 CM-1
+ Number of molecular orbitals =   129
+     Occupied orbitals        =     7
+     Virtual  orbitals        =   122
+ Main basis: Size   =   129
+             Shells =    43
+             Type   = DC+
+             Atoms  =     2
+       Sites(Main)  =     4
+       Site Types   =     4
+             GTOs   = Spherical
+ Aux  basis: Size   =   376
+             Shells =    82
+             Type   = DC+
+        Sites(Aux)  =     4
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : vectB.data Type BINARY
+============================================================
+BEGIN GRID
+  Molecule He
+  Angular 100
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 110-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+BEGIN GRID
+  Molecule CO
+  Angular 100
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 110-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+SET PROPAGATOR
+  Type CHF
+  DF without constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+ DF-INT parameters set.
+
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+ WARNING: Merge problem when creating the dimer in make_dimer_2
+   Sites in AUX < Sites in MAIN: aux=           4  main=            8
+   Resorting to concatenation of basis sets instead.
+   This happens when the monomers are identical. It may not be serious.
+ WARNING: in subroutine make_dimer_2 line         2022
+ Problem merging AUX basis sets for dimer
+ INFO =            1
+BEGIN DF
+  Molecule He
+  Type NN
+  Print only normalization constraints
+END
+ 
+Tests of DF for He
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .01139
+End of tests for He
+ Normalization tests for fitted density of He
+  \int \rho(r) dr = 2.00000
+Differs from expected value of     2 by .00000
+ End of normalization tests
+BEGIN DF
+  Molecule CO
+  Type NN
+  Print only normalization constraints
+END
+ 
+Tests of DF for CO
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .01188
+End of tests for CO
+ Normalization tests for fitted density of CO
+  \int \rho(r) dr = 14.00000
+Differs from expected value of    14 by .00000
+ End of normalization tests
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+ E^{1}_{elst}                             =   -4.3306429     CM-1
+ Electron--electron energy =    949171.44     CM-1
+ Electron--nuclear (A) energy =   -949239.96     CM-1
+ Electron--nuclear (B) energy =   -949175.97     CM-1
+ Nuclear --Nuclear  energy =    949240.17     CM-1
+ 
+BEGIN E1exch
+  Integral Switch =  1
+END
+ E^{1}_{exch}(S2) =    25.592300     CM-1
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+ 
+  INDUCTION CALCULATION 
+ 
+  Parameters same. Skipping DF for He
+OV DF finished for He
+ E^{2}_{ind}                              =   -3.1438822     CM-1
+     E^{2}_{ind}(A) =   -2.2748687     CM-1
+     E^{2}_{ind}(B) =  -0.86901355     CM-1
+  Density-fitted propagator was used.
+ E^{2}_{ind}(UC)                          =   -1.3061939     CM-1
+     E^{2}_{ind}(A)(UC) =  -0.56268477     CM-1
+     E^{2}_{ind}(B)(UC) =  -0.74350917     CM-1
+  Propagator type : chf
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}                         =    1.2079990     CM-1
+     E^{2}_{ind,exch}(A) =   0.37348595     CM-1
+     E^{2}_{ind,exch}(B) =   0.83451303     CM-1
+ E^{2}_{ind,exch}(UC)                     =    0.0000000     CM-1
+     E^{2}_{ind,exch}(A)(UC) =    0.0000000     CM-1
+     E^{2}_{ind,exch}(B)(UC) =    0.0000000     CM-1
+ ---------------------------------
+ 
+BEGIN E2ind
+  Use the DF algorithm
+  Regularise Eta = 3.0
+  Integral Switch = 0
+  Amplitude-Type COUPLED
+END
+ 
+  INDUCTION CALCULATION 
+ 
+ E^{2}_{ind}                              =  -0.22001770     CM-1
+     E^{2}_{ind}(A) =  -0.25829592     CM-1
+     E^{2}_{ind}(B) =   0.38278220E-01 CM-1
+  Density-fitted propagator was used.
+ E^{2}_{ind}(UC)                          =  -0.23306930     CM-1
+     E^{2}_{ind}(A)(UC) =  -0.27871499     CM-1
+     E^{2}_{ind}(B)(UC) =   0.45645685E-01 CM-1
+  Propagator type : chf
+ Regularization was used. Eta =    3.00000000000000     
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}                         =   0.13603547     CM-1
+     E^{2}_{ind,exch}(A) =   0.70685805E-01 CM-1
+     E^{2}_{ind,exch}(B) =   0.65349668E-01 CM-1
+ E^{2}_{ind,exch}(UC)                     =    0.0000000     CM-1
+     E^{2}_{ind,exch}(A)(UC) =    0.0000000     CM-1
+     E^{2}_{ind,exch}(B)(UC) =    0.0000000     CM-1
+ ---------------------------------
+ Regularization was used. Eta =    3.00000000000000     
+ ---------------------------------
+ 
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                0.22
+ matrix_write                          4051                0.04
+ update_molecular_geometry              178                0.00
+ update_molecular_orbitals              178                0.00
+ construct_molecular_integratio           2                0.00
+ df_parser                                4                0.15
+ df_dimer                                42                0.07
+ df_int_for_df                          155                0.12
+ make_integrals_for_df                  159                0.12
+ make_s_matrix_coulomb                    1                0.00
+ diagonal_1index                          4                0.00
+ fill_Smat_subsets                        1                0.00
+ matrix_read                            364                0.03
+ make_T_dimer                             1                0.07
+ diagonal_2index                          3                0.00
+ matmult_types                         3938                0.06
+ matrix_write_part                    19201                0.01
+ scale_trans_mat_types                    5                0.01
+ solve_df_equations_lu                   14                0.00
+ lineq_solver_lu                          9                0.02
+ matrix_read_rows                     16781                0.01
+ lineq_lu_iter                           13                0.01
+ df_monomer                              92                0.08
+ df_make_I                                3                0.00
+ make_T_AO_mono                           2                0.02
+ make_T_MO_mono_NN                        2                0.03
+ test_df                                  2                0.00
+ matvec_types                            18                0.00
+ fill_subset                              6                0.01
+ calculate_e1elst_mol                     1                0.00
+ df_int                                 159                0.04
+ make_twoeint                            49                0.03
+ make_D_S_D                              49                0.03
+ make_oneeint                           102                0.02
+ twoindx_1e_int_MO                       54                0.01
+ transform_2index                        54                0.00
+ calculate_e1exchS2                       1                0.00
+ overlap_integrals                       18                0.00
+ open_gen_2eint                          28                0.03
+ close_gen_2eint                         28                0.00
+ calculate_e2ind                          2                0.03
+ init_DF_algorithm                        1                0.02
+ densfit_prop                             2                0.02
+ init_prop                                2                0.02
+ make_h1                                  2                0.01
+ add_2e_ints_to_Hessians                  4                0.02
+ adddiag                                  4                0.00
+ make_h2                                  2                0.00
+ make_misc_df                             4                0.00
+ make_Dtilde                              4                0.00
+ nuclear_X                               34                0.00
+ make_amplitudes                          8                0.00
+ calculate_e2exchind                      2                0.03
+ llsq_lu_types_2                          4                0.00
+ DIaux                                    4                0.00
+ ====================================
+ 
+ 
+Maximum memory defined is :             2048 MB                                      
+Maximum memory used is    :               73 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   90
+ ======================================
+    1 TMP____000                                 D: atom: HE atom in molecule He
+    2 TMP____001                                 D: atom: MB atom in molecule He
+    3 TMP____002                                  D: atom: C atom in molecule He
+    4 TMP____003                                  D: atom: O atom in molecule He
+    5 TMP____004                                               C      MOs for He
+    6 TMP____005                                          E      Energies for He
+    7 TMP____006                                               C      MOs for He
+    8 TMP____007                                                P densmat for He
+    9 TMP____008                                 D: atom: HE atom in molecule CO
+   10 TMP____009                                 D: atom: MB atom in molecule CO
+   11 TMP____010                                  D: atom: C atom in molecule CO
+   12 TMP____011                                  D: atom: O atom in molecule CO
+   13 TMP____012                                               C      MOs for CO
+   14 TMP____013                                          E      Energies for CO
+   15 TMP____014                                               C      MOs for CO
+   16 TMP____015                                                P densmat for CO
+   17 TMP_Doo_ab                                        Doo_ab  DF sol for He_CO
+   18 TMP_S___ab                                   S_____AB 2-e 2-indx integrals
+   19 TMP____016                            G  1-index diagonal integrals for He
+   20 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+   21 TMP_S____b                                   S____B_B 2-e 2-indx integrals
+   22 TMP____019                                   S____A_B 2-e 2-indx integrals
+   23 TMP____020                                   S___A_AB 2-e 2-indx integrals
+   24 TMP____021                                   S___B_AB 2-e 2-indx integrals
+   25 TMP_Too_ab                                   T_MOOOAB 2-e 2-indx integrals
+   26 TMP_Tov_ab                                   T_MOOVAB 2-e 2-indx integrals
+   27 TMP_Tvo_ab                                   T_MOVOAB 2-e 2-indx integrals
+   28 TMP____017                            G  2-index diagonal integrals for He
+   29 TMP_Dov_ab                                        Dov_ab  DF sol for He_CO
+   30 TMP_Dvo_ab                                        Dvo_ab  DF sol for He_CO
+   31 TMP____018                                          I_____XA 1-e integrals
+   32 TMP_D____a                                           D  Full DF sol for He
+   33 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   34 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   35 TMP_Drho_a                                          Drho Density DF for He
+   36 TMP_Doo__a                                OO part of D  Full DF sol for He
+   37 TMP_Dov__a                                OV part of D  Full DF sol for He
+   38 TMP_Dvv__a                                VV part of D  Full DF sol for He
+   39 TMP____022                                          I_____XB 1-e integrals
+   40 TMP_D____b                                           D  Full DF sol for CO
+   41 TMP_TAO__b                                   T_AO___B 2-e 2-indx integrals
+   42 TMP_T____b                                   T_MO___B 2-e 2-indx integrals
+   43 TMP_Drho_b                                          Drho Density DF for CO
+   44 TMP_Doo__b                                OO part of D  Full DF sol for CO
+   45 TMP_Dov__b                                OV part of D  Full DF sol for CO
+   46 TMP_Dvv__b                                VV part of D  Full DF sol for CO
+   47 TMP____023                                          OOOOAABB 2-e integrals
+   48 TMP____024                                          NUCBOOAA 1-e integrals
+   49 TMP____025                                          NUCAOOBB 1-e integrals
+   50 TMP____026                                          OVRLOOAB 1-e integrals
+   51 TMP____027                                          OOOOABAB 2-e integrals
+   52 TMP____028                                          NUCAOOAB 1-e integrals
+   53 TMP____029                                          NUCBOOAB 1-e integrals
+   54 TMP____030                                          OOOOAAAB 2-e integrals
+   55 TMP____031                                          OOOOABBB 2-e integrals
+   56 TMP____032                           C_a  static density-fitted propagator
+   57 TMP____033                                       H1-matrix  for monomer He
+   58 TMP____034                                          OVOVAAAA 2-e integrals
+   59 TMP____035                                          VVOOAAAA 2-e integrals
+   60 TMP____036                                       H2-matrix  for monomer He
+   61 TMP____037                                 H21 = H2 * H1 : mol indx =    1
+   62 TMP____038                          fH2D = -4.0 * H2 * D : mol indx =    1
+   63 TMP____039                           C_b  static density-fitted propagator
+   64 TMP____040                                       H1-matrix  for monomer CO
+   65 TMP____041                                          OVOVBBBB 2-e integrals
+   66 TMP____042                                          VVOOBBBB 2-e integrals
+   67 TMP____043                                       H2-matrix  for monomer CO
+   68 TMP____044                                 H21 = H2 * H1 : mol indx =    2
+   69 TMP____045                          fH2D = -4.0 * H2 * D : mol indx =    2
+   70 TMP____046                                          DTIL__XB 1-e integrals
+   71 TMP____047                                          NUCB__XA 1-e integrals
+   72 TMP____048                                          DTIL__XA 1-e integrals
+   73 TMP____049                                          NUCA__XB 1-e integrals
+   74 TMP____051                                          NUCBOVAA 1-e integrals
+   75 TMP____052                                          OVOOAABB 2-e integrals
+   76 TMP____053                                          NUCAOVBB 1-e integrals
+   77 TMP____054                                          OOOVAABB 2-e integrals
+   78 TMP____055                                          OVRLVOAB 1-e integrals
+   79 TMP____056                                          OOVOABAB 2-e integrals
+   80 TMP____057                                          NUCAVOAB 1-e integrals
+   81 TMP____058                                          OOVOAAAB 2-e integrals
+   82 TMP____059                                          OVOOAAAB 2-e integrals
+   83 TMP____060                                          OVRLOVAB 1-e integrals
+   84 TMP____061                                          OVOOABAB 2-e integrals
+   85 TMP____062                                          NUCBOVAB 1-e integrals
+   86 TMP____063                                          OVOOABBB 2-e integrals
+   87 TMP____064                                          OOOVABBB 2-e integrals
+   88 TMP____065                                          I____XAB 1-e integrals
+   89 TMP____066                                          NUCA_XAB 1-e integrals
+   90 TMP____067                                          NUCB_XAB 1-e integrals
+ --------------------------------------
+ 
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.4330643E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2559230E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{2}_{ind}                -0.3143882E+01        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(UC)            -0.1306194E+01        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.1207999E+01        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{ind}                -0.2200177E+00        CM-1     DF :: PROP chf :: REG eta =   3.0000                        
+E^{2}_{ind}(UC)            -0.2330693E+00        CM-1     DF :: PROP UC  :: REG eta =   3.0000                        
+E^{2}_{ind,exch}            0.1360355E+00        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP chf               
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: REG eta =   3.0000                      
+--------------------------------------------------------------------------------
+
+Ending on 13-09-2012 at 11:53:50.790

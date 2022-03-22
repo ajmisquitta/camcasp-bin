@@ -1,0 +1,16 @@
+molecule{
+  o
+  h 1 roh
+  h 1 roh 2 ahoh
+
+  roh = 0.957
+  ahoh = 104.5
+}
+
+
+set basis cc-pVDZ
+set scf print 1
+
+energy, wfn = energy('wPBE', return_wfn=True)
+fchk_writer = psi4.FCHKWriter(wfn)
+fchk_writer.write('H2O-pvdz.fchk')

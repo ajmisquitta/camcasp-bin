@@ -1,0 +1,41 @@
+12-Sep-2008
+Basis sets obtained from:
+http://www.ipc.uni-karlsruhe.de/tch/tch1/TBL/tbl.html
+
+The basis set directories of form *-2 are the "def2" basis sets.
+
+Ref.
+[1] D. Andrae, U. Haeussermann, M. Dolg, H. Stoll, H. Preuss; Theor. Chim.
+Acta 77, 123 (1990)     
+[2] M. Kaupp, P. V. Schleyer, H. Stoll, H. Preuss; J. Chem. Phys. 94, 1360 (1991)
+[3] B. Metz, H. Stoll, M. Dolg; J. Chem. Phys. 113, 2563 (2000).
+[4] Bergner, Kuechle, Stuttgart, Arbeitsbericht 1990
+[5] K. A. Peterson, D. Figgen, E. Goll, H. Stoll; M. Dolg, J. Chem. Phys 119,
+11113 (2003)    
+[6] M. Dolg, H. Stoll, A. Savin; H. Preuss, Theor. Chim. Acta 75, 173(1989)
+[7] M. Dolg, H. Stoll, H. Preuss; Theor. Chim. Acta 85,441(1993)       
+[8] B. Metz, M. Schweizer, H. Stoll, M. Dolg, W. Liu; Theor. Chem. Acc. 104, 22(2000)
+[9] A. Bergner, M. Dolg, W. Kuechle, H. Stoll, H. Preuss; Mol. Phys. 80, 1431
+(1993) 
+[10] X. Cao, M. Dolg; J. Chem. Phys. 115, 7348 (2001)
+[10a]W. Kuechle, M. Dolg, H. Stoll, H. Preuss; Mol. Phys 74, 1245 (1991)
+[10b]P. Schwerdfeger, M. Dolg, W.H.E. Schwarz, G.A. Bowmaker, P.D.W. Boyd; J.
+Chem. Phys. 91, 1762 (1989)
+[10c] A. Nicklass, M. Dolg, H. Stoll, H. Preuss; J. Chem. Phys. 94,1360 (1991)
+[11] F. Weigend, R. Ahlrichs; Phys. Chem. Chem. Phys. 7, 3297(2005)
+[12] A. Schaefer, H. Horn, R. Ahlrichs; J. Chem. Phys. 97, 2571 (1992)  
+[13] A. Schaefer, C. Huber, R. Ahlrichs; J. Chem. Phys.; 100, 5829 (1994)
+[14] K. Eichkorn, F. Weigend, O. Treutler, R. Ahlrichs; Theor. Chem. Acc. 97,
+119 (1997)      
+[15] F. Weigend; Phys. Chem. Chem. Phys. 8, 1057(2006)
+[16] K. Eichkorn, F. Weigend, O. Treutler, R. Ahlrichs; Theor. Chem. Acc. 97,
+119 (1997)      
+[16a] F. Weigend, F. Furche, R. Ahlrichs; J. Chem. Phys. 119, 12753 (2003)
+[17] F. Weigend, M. Haeser, H. Patzelt, R. Ahlrichs; Chem. Phys. Lett. 294,
+143 (1998)      
+[18] A. Hellweg, C. Haettig, S. Hoefener, W. Klopper; Theoretical Chemistry Accounts 117, 587(2007)
+[18a] C. Haettig; Phys. Chem. Chem. Phys. 7, 59(2005)   
+[18b] F. Weigend, A.  Koehn, C. Haettig; J. Chem. Phys. 116, 3175 (2002)
+[19] F. Weigend; Phys. Chem. Chem. Phys. 4, 4285 (2002)         
+[20] F.  Weigend; J. Chem. Phys., accepted
+[21] R. Ahlrichs, K. May; Phys. Chem. Chem. Phys. 2, 943 (2000)

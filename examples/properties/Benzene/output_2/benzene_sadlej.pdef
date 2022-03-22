@@ -1,0 +1,35 @@
+Polarizabilities
+     C1  C1    10   10 =      C1_10_10_A
+     C1  C1    10   20 =      C1_10_20_A
+     C1  C1    10  21c =     C1_10_21c_A
+     C1  C1    10  22c =     C1_10_22c_A
+     C1  C1   11c  11c =    C1_11c_11c_A
+     C1  C1   11c   20 =     C1_11c_20_A
+     C1  C1   11c  21c =    C1_11c_21c_A
+     C1  C1   11c  22c =    C1_11c_22c_A
+     C1  C1   11s  11s =    C1_11s_11s_A
+     C1  C1   11s  21s =    C1_11s_21s_A
+     C1  C1    20   20 =      C1_20_20_A
+     C1  C1    20  21c =     C1_20_21c_A
+     C1  C1    20  22c =     C1_20_22c_A
+     C1  C1   21c  21c =    C1_21c_21c_A
+     C1  C1   21c  22c =    C1_21c_22c_A
+     C1  C1   21s  21s =    C1_21s_21s_A
+     C1  C1   22c  22c =    C1_22c_22c_A
+     C1  C1   22s  22s =    C1_22s_22s_A
+     C2  C2   COPY   C1  C1
+     C3  C3   COPY   C1  C1
+     C4  C4   COPY   C1  C1
+     C5  C5   COPY   C1  C1
+     C6  C6   COPY   C1  C1
+
+     H1  H1    10   10 =      H1_10_10_A
+     H1  H1   11c  11c =    H1_11c_11c_A
+     H1  H1   11s  11s =    H1_11s_11s_A
+     H2  H2   COPY   H1  H1
+     H3  H3   COPY   H1  H1
+     H4  H4   COPY   H1  H1
+     H5  H5   COPY   H1  H1
+     H6  H6   COPY   H1  H1
+
+End

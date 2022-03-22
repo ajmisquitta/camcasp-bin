@@ -1,0 +1,54 @@
+! ORIENT localization file for formamide
+
+UNITS BOHR
+
+Parameters
+      Sites      7 polarizable      7
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      C          Z     6
+      O          Z     8
+      H1         Z     1
+      N          Z     7
+      H2         Z     1
+      H3         Z     1
+End
+
+Molecule  formamide at  0.0 0.0 0.0
+  ! Units BOHR
+  C           0.00000000    0.00000000    0.00000000   Type C
+  O           2.29063151    0.00000000    0.00000000   Type O
+  H1         -1.13908247    1.77246836    0.00000000   Type H1
+  N          -1.45985298   -2.10205057    0.00000000   Type N
+  H2         -3.36209048   -1.98418554    0.00000000   Type H2
+  H3         -0.62710178   -3.82189185    0.00000000   Type H3
+End
+
+Polarizabilities for formamide
+   Read rank  4 sites +++
+       C O H1 N H2 H3
+   #include HCONH2_NL4_<INDEX!000>.pol
+   Limit rank <LIMIT! 2> for +++
+       C O H1 N H2 H3
+   Sum-rule test 1e-7
+   Localise <LOC!LS> test 1e-7 Limit <LIMIT! 2> sites +++
+       C O H1 N H2 H3
+End
+
+Edit formamide
+   #include <AXES!axes>
+End
+
+Polarizabilities for formamide
+   Write local limit <LIMIT! 2> file HCONH2_L<LIMIT!2>_<INDEX!000>.pol sites +++
+       C O H1 N H2 H3
+   Print limit <LIMIT! 2> +++
+       C O H1 N H2 H3
+End
+
+Finish

@@ -1,0 +1,121 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+Edit
+  ! NOTE:
+  ! If you get total charge violations > 0.01e then consider
+  ! reducing EPS or using TYPE = ALL. The latter is often 
+  ! required for heavily delocalised systems
+  !
+  NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Angular 200
+  Radial  40
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+END
+SET DF
+  Solver GELSS (Options are LU and GELSS - use latter for properties )
+END
+
+BEGIN DF
+  Type   OO
+  Eta    =    0.0
+  Lambda =    1.0
+  Gamma  =    0.0
+  Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
+END
+
+! Moderate or low-accuracy grids needed at this stage.
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 311
+End
+
+Begin ISA
+  DF = Doo-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A
+  Solver BVLS    Alpha-Max = 0.5   ( Options are: LU, GELSS, BVLS )
+  !  Symmetry
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+  Convergence
+    Convergence-Type W
+    EPS-Norm    = 1.0e-09
+    EPS-Q       = 1.0e-4
+    Max-Iter    = 120
+    W-Damping   = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 0
+  End
+  W-TAILS
+    FIX = ON  ( This can be set to OFF with the BVLS solver, buy recommended ON for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+! Set very-high quality grids for the multipole moments
+Set Num-Int-Pars
+  Grid-Quality   Dist-Mom  = 651
+End
+
+!  Calculate multipoles using the ISA atom-expansions
+Begin Multipoles
+  Rank 4
+  DF with Constraints  Type ISA
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+
+!  Calculate multipoles using the density-fitted densities
+!  and the ISA shape-functions. 
+Begin Multipoles
+  Rank 4
+  DF with Constraints  Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecular-density
+    ISOdensity   = 0.001
+    Density-Type = RHO-C
+    SLATER-MULTIPLIER = 5.0  ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.3 Bohr  ( step size of grid )
+  END
+  AIM-ATOMS
+    ISOdensity   = 0.001
+    AIM-METHOD   = ISA  Grid-based
+    Density-Type = RHO-C
+    ATOMS        = ALL    ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN        = 1e-6   ( outer limit of scan determined to be radius at )
+                          ( which shape function is this value )
+    R-MAX        = 5.0 Bohr  ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.2 Bohr  ( step size of grid )
+  END
+End
+
+End-CamCASP-commands

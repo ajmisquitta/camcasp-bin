@@ -1,0 +1,42 @@
+! ORIENT localization file for H2O
+
+UNITS BOHR
+
+Parameters
+      Sites      4 polarizable      4
+      Types      4
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      O          Z     8
+      H          Z     1
+End
+
+Molecule  H2O at  0.0 0.0 0.0
+  ! Units BOHR
+  O           0.00000000    0.00000000    0.00000000   Type O
+  H1         -1.45365196    0.00000000   -1.12168732   Type H
+  H2          1.45365196    0.00000000   -1.12168732   Type H
+End
+
+Polarizabilities for H2O
+   Read Pairs File H2O_aTZ_NL4_{INDEX}.pol
+   Limit all rank {LIMIT}
+   Sum-rule test 1e-7
+   Localise {LOC} test 1e-7 Limit {LIMIT}
+End
+
+Edit H2O
+   #include {AXES}
+End
+
+Polarizabilities for H2O
+   Write all local ranks 1 to {LIMIT} file H2O_aTZ_L{LIMIT}_{INDEX}.pol
+   Print all local ranks 1 to {LIMIT}
+End
+
+Finish

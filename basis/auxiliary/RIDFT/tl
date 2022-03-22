@@ -1,0 +1,64 @@
+
+# RCS #####################################################################
+# $Id: tl,v 1.4 1996/11/25 13:23:59 karin Exp $ 
+# $Log: tl,v $
+# Revision 1.4  1996/11/25 13:23:59  karin
+# complete set of nicknames added
+#
+# Revision 1.3  1996/09/27 14:23:11  karin
+# complete set of nicknames added
+#
+# Revision 1.2  1996/08/23 12:48:58  karin
+# p contraction coefficients added
+#
+# Revision 1.1  1996/08/23 12:07:34  karin
+# Initial revision
+# 
+# RCS #####################################################################
+$jbas
+#
+#AUXILIARY BASIS SET FOR Tl
+#
+#
+*
+tl 78-mwb-opt
+tl ecp-78-mwb-SVP
+tl def-SVP
+tl def-SV(P)
+tl ecp-78-mwb-TZVP
+tl def-TZVP
+#  (5s3p3d1f1g)/ [3s3p2d1f1g]  {311/111/21/1/1}
+# RI-J atom energy:                                  dev(DFT): 0.008 mH
+# RI-J TlCl :                                        dev(DFT): 0.060 mH
+# RI-J TlCl3:                                        dev(DFT): 0.360 mH
+# s,d functions optimized and contracted for Tl atom
+# p functions from auxp  (p contraction calc. on TlH)
+# f exponent = 2* eta(d) Basis/1.095
+# g function exp = 2* eta(d) Basis
+*
+    3  s
+     1.727780            .803917578D-01
+     0.705119           -.321463559D+00
+     0.319791            .274333031D+00
+    1  s
+     0.155412            .763979188D-01
+    1  s
+     0.077372            .244148734D-01
+    1  p
+     .75528963          .105588855D-01
+    1  p
+     .30151283         -.270909806D-01
+    1  p
+     .12563034         -.768288799D-02
+    2  d
+     0.669850          -.841698700D-02
+     0.262904           .299009550D-01
+    1  d
+     0.105149           .124235184D-01
+    1  f
+      .266667          1.0
+    1  g
+      .292000          1.0
+*
+###########################################################################
+$end

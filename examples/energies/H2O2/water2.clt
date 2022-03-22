@@ -1,0 +1,53 @@
+! water cluster file
+! ==================
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE water1
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O1          8.0   0.0000000000    0.0000000000    0.0000000000
+  H1          1.0  -1.4536519600    0.0000000000   -1.1216873200
+  H2          1.0   1.4536519600    0.0000000000   -1.1216873200
+  I.P.  0.4638
+  ac-shift 0.13186
+END
+
+MOLECULE water2
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O1          8.0   0.0000000000    0.0000000000    0.0000000000
+  H1          1.0  -1.4536519600    0.0000000000   -1.1216873200
+  H2          1.0   1.4536519600    0.0000000000   -1.1216873200
+  I.P.  0.4638
+  ac-shift 0.13186
+END
+
+! Now get the dimer in the geometry for which the interaction energy
+! is close to the global minimum
+! Geometry taken from Mas and Szalewicz, J. Chem. Phys. 104 (1006)
+
+Rotate water1 by 119.18561 degrees about 0.0 1.0 0.0
+Place water1 at 0.108809 0.0 -0.060776
+Show water1
+
+Rotate water2 by 144.73623 degrees about 0.670441 -0.670441 -0.317831
+Place water2 at -0.096483 0.0 5.590288
+Show water2
+
+Run-Type
+  SAPT(DFT)
+  Molecules     water1 and water2
+  Main-Basis    Sadlej  Type DC+
+  Aux-basis     aTZ     Type DC+
+  Midbond       3s2p1d  Type Weighted
+  Func PBE0
+  AC            multpole tanh 3.0 4.0
+  kernel        ALDA+CHF
+  File-prefix   H2O2
+End
+
+Finish

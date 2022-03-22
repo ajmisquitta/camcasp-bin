@@ -1,0 +1,5 @@
+This is a calculation of distributed polarisabilities using the WXHole model 
+(see DOI:10.1063/1.3672236 DOI:10.1080/00268976.2013.787151)
+
+Run as:
+$ runcamcasp.py H2O_DZ --clt H2O.clt

@@ -1,0 +1,147 @@
+TITLE H2O
+TITLE Basis: cc-pVDZ
+TITLE CalculationType: PROPERTIES
+
+MEMORY          8 GB 
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code NWCHEM
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE H2O at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file H2O_DZ-A-asc.movecs format ASCII-2
+   IP     0.463800 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format NWCHEM
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        #include-camcasp basis/nwchem/cc-pVDZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/nwchem/cc-pVDZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        #include-camcasp basis/nwchem/cc-pVDZ/H
+      ---
+   End
+   Basis Aux
+        Spherical
+        Units Bohr
+        Format TURBOMOLE
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/cc-pVDZ/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/cc-pVDZ/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/cc-pVDZ/H
+      ---
+   End
+END
+
+
+Edit
+  ! For strongly delocalised systems reduce EPS or use TYPE = ALL
+  ! or else you will see large charge-violations in the ISA step.
+  NEIGHBOURS TYPE = OVR EPS = 0.01 PRINT
+End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  ! We need larger grids for the polarizability integration
+  Angular 590
+  Radial  100
+END
+
+SET Lattice
+  ! These settings define the point-to-point lattice.
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random   2000
+  Seed     1
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+SET DF
+  Solver LU (Options are LU and GELSS )
+END
+
+BEGIN DF
+  Molecule H2O
+  Type NN
+  Eta = 0.0
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+
+Begin ISA
+  DF = Drho-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  !  Use zeta = 0.1 for multipoles, 0.9 for density partitioning
+  ISA-Algorithm A
+  Solver LU
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+BEGIN Polarizability
+  DIST-ALG ISA-GRID   ( this sets the ISA-GRID-based partitioning )
+  ! Sq-freq  0.0      ( use this if you want only static pols )
+  Quad   10           ( and this is you want 1+10 static+freq-dependent pols )
+                      ( the settings in QUAD determine the frequencies )
+  Invert No           ( Do not invert the molecule )
+  Spherical           ( spherical tensor form of polarizabilities )
+  Rank 4              ( maximum rank )
+
+  Calculate only total and distributed polarizabilities and perturbations
+  Print only static total pols upto rank 2
+
+  ! Use the weighted exchange-hole method
+  WXhole
+  Dshift 0.4
+  OM2scal 1.8
+  Dist
+
+  ! Print options: use default names for the files:
+  Pert-file DEFAULT
+  Pol-file  DEFAULT
+END
+
+
+FINISH

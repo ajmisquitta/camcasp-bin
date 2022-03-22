@@ -1,0 +1,69 @@
+The scripts in this directory run some standard tests of the CamCASP
+program. Success or failure depends on agreement with previous results
+in check directories. They are normally run via the run_tests.py
+script, using the command
+
+run_tests.py [test test ...] [--scfcode scfcode scfcode ...] [options] [&]
+
+If no test is specified, all tests are run in turn. The SCF code may
+be dalton, nwchem or psi4. If the --scfcode option is omitted, all
+installed SCF codes are used in turn. The calculations are run in the
+background if "&" is specified. The results for the first five tests
+below are automatically checked against previous calculations and
+reported in a test_report file. There may be small differences from
+the check results, owing to differences between systems.
+
+When all tests have been completed, run
+  run.tests.py [test ...] [--scfcode ...] --clean
+to tidy up. This doesn't remove the test_report files but renames them
+as previous_test_report. Some of the tests produce a lot of big output
+files, especially the H2Oprops and H2O_dimer_scan tests, so it is
+important to clean up.
+
+
+
+Currently the tests are:
+
+He2
+  Run calculations on the helium dimer using the four basis set types
+  MC, MC+, DC and DC+. Only the dalton program is used here.
+
+H2O_dimer
+  Run sapt-dft and delta-hf calculations on the water dimer in its
+  equilibrium geometry.
+
+H2O_dimer_psi4
+  Run sapt-dft and delta-hf calculations on the water dimer in its
+  equilibrium geometry, using the sapt(dft) code in Psi4 itself,
+  rather than CamCASP. Currently this is under development and (at
+  version 1.3.2) does not give correct results.
+
+CO2-isa
+  Run an ISA-dma calculation on the CO2 molecule, using the specified
+  SCF code, and check the resulting ISA multipole moments.
+
+H2Oprops
+  Run an ISA-pol calculation on the water molecule, using the
+  specified SCF code, localize the polarizabilities and compute and
+  check the dispersion coefficients. This test depends on the Orient
+  program to carry out the localization.
+
+formamide-isa
+  Run an ISA-dma calculation on the formamide molecule, and check the
+  resulting ISA multipole moments. This similar to the CO2-isa test,
+  but the calculation is submitted to the batch queue using the
+  submit_camcasp.py script. In this case the results have to be
+  checked separately when the batch job is complete, following
+  instructions given by the script.
+
+H2O_dimer_scan
+  Use the batch_camcasp.py script to submit a series of calculations
+  to the batch queue for the H2O dimer at a number of different
+  geometries. Again the results have to be checked separately when all
+  the calculations are complete.
+
+
+The calculations are carried out in sub-directories of the
+CamCASP/tests directory. The check files are in the same
+subdirectories. 
+

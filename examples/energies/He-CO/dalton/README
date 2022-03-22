@@ -1,0 +1,15 @@
+Reference energies from a very large basis calculation:
+SAPT(DFT)
+ B97-2/AC   23.2643    -1.5530     1.4510   -46.0097     1.3673   -21.4801 
+ PBE0/AC    23.9471    -1.5975     1.4928   -46.5649     1.4109   -21.3116 
+
+
+ \delta_HF = -1.4282 cm-1
+
+  B97-2/AC + \delta_HF   -22.9083  cm-1 
+  PBE0/AC + \delta_HF    -22.7398  cm-1
+
+We have a problem with our He induction energies. This seems reminicent of 
+the Argon problems and that one was associated with DALTON. One symptom is 
+unusually large off-diagonal DF violations. We see the same here too. Though 
+less than with Argon.

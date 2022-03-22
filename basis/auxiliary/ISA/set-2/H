@@ -1,0 +1,20 @@
+! CamCASP : ISA/set1 : H
+! A. J. Misquitta : 9 Sept 2013
+!
+   1  s
+  16.0     1.0
+   1  s
+   8.0     1.0
+   1  s
+   4.0     1.0
+   1  s
+   2.0     1.0
+   1  s
+   1.0     1.0
+   1  s
+   0.5     1.0
+   1  s
+   0.25    1.0
+! Skip the most diffuse exponent:
+!  1  s
+!  0.125   1.0

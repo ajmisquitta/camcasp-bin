@@ -1,0 +1,54 @@
+! H2O properties calculation
+! ==========================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule H2O
+  I.P. 12.62063 eV
+  ! Vibrationally averaged geom.
+  O   8.0    0.0000000000    0.0000000000    0.0000000000  Type O
+  H1  1.0   -1.4536519600    0.0000000000   -1.1216873200  Type H
+  H2  1.0    1.4536519600    0.0000000000   -1.1216873200  Type H
+End
+Molecule H2O
+  Units BOHR
+    1  O           8.00     0.00000000    0.00000000    0.00000000   Type O
+    2  H1          1.00    -1.45365196    0.00000000   -1.12168732   Type H
+    3  H2          1.00     1.45365196    0.00000000   -1.12168732   Type H
+End
+
+Files
+  Molecule H2O
+  Basis aVTZ
+  Options Tests
+  File-prefix H2O_aTZ
+  Orient file
+  Process file
+  Sites file
+  Interface file
+The INTERFACE cluster command is now redundant and is ignored
+  SCFcode Molpro
+End
+ORIENT display commands for H2O are in file H2O_aTZ_display.ornt
+ORIENT commands for H2O in file H2O_aTZ.ornt
+PROCESS commands to write the CASIMIR input for H2O
+are in file H2O_aTZ_casimir.prss
+PROCESS commands for H2O in file H2O_aTZ.prss
+Molpro file for H2O is H2O_aTZ_A.molp
+Cannot use symmetry with Molpro interface
+ Cartesian size of the basis is          105
+ nocc =            5
+ nvir =          100
+ Memory needed for this calculation is            8  GB
+ But using the declared memory of            8  GB
+ Spherical size of the basis is           92
+ nocc =            5
+ nvir =           87
+CamCASP command file is H2O_aTZ.cks
+SITES for H2O are in file H2O_aTZ.sites
+
+Finish
+ Exiting program cluster_operations

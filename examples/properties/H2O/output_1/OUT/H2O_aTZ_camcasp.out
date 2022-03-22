@@ -1,0 +1,598 @@
+      CamCASP version 5.5.00  Fri 16 Jul 2010 08:49:08 BST
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+Starting on 21-07-2010 at 14:10:53.209
+ 
+ ================================================================
+ Compiled on Jul 16 2010 at 08:49:08
+    Compiler : pgf90
+    Version  : unknown
+ VCS BASE repository version:
+     21014
+ Working directory: 
+     /scratch/fastscratch/ajs1/H2O_aTZ_14-10-09
+ Running on: whirligig
+ ================================================================
+
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with                1073741824  bytes
+TITLE H2O
+TITLE Basis: aug-cc-pVTZ
+TITLE CalculationType: PROPERTIES
+
+
+MEMORY        500 MB
+ Memory Manager initialized with                 524288000  bytes
+
+
+SET Global_data
+  CamCASP-path /home/ajs1/camcasp-5.5
+  Units Bohr cm-1
+  Scf-code Dalton
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE H2O at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectA.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+    LIMITING basis on this site upto G symmetry
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for H2O
+    1          O    8.00     0.0000     0.0000     0.0000
+    2         H1    1.00    -1.4537     0.0000    -1.1217
+    3         H2    1.00     1.4537     0.0000    -1.1217
+ Molecular charge   =     0
+ Occupied orbitals  =     5
+ Virtual  orbitals  =    87
+ Size of main basis =    92
+ Size of aux  basis =   246
+ Number of atoms    =     3
+ Number of sites    =     3
+ Number of site types =     2
+ Shells in main basis =    32
+ Shells in aux  basis =    56
+ Spherical functions for the main basis
+ Cartesian functions for the aux basis
+============================================================
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN GRID
+  Molecule H2O
+  Angular 100
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 110-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+SET Lattice
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random    500
+  Seed     1
+END
+ End of LATTICE section. Resuming rest of routine
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+ DF-INT parameters set.
+
+
+BEGIN DF
+  Molecule H2O
+  Type NN
+  Eta = 0.0
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for H2O
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: 0.00001
+End of tests for H2O
+
+
+BEGIN Polarizability
+  Molecule H2O
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank 2
+  Calculate only total polarizabilities and perturbations
+  Print only static total pols upto rank 2
+  Pert-file H2O_aTZ_lim2.0_4.0_p2000_f11
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+ options  RANDOM  4.0000    2.0000    1.0000
+ Lattice created for H2O
+ Type of lattice = RANDOM
+ Number of lattice points =           500
+ 
+ End of Module LATTICE
+ =====================
+ 
+      The perturbation matrix is written in file:
+ H2O_aTZ_lim2.0_4.0_p2000_f11.p2p                                                
+       Polarizability calculations for w^2 =    0.000000000000000     
+       i.e., w =     0.000000000000000     
+ 
+ 
+ Total polarizability calculation (not distributed):
+    Spherical tensor form
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+ Order:    0 by    0
+ -0.4703910E-11
+
+ Order:    0 by    1
+ -0.4921546E-07 -0.7753798E-12  0.1221182E-21
+
+ Order:    0 by    2
+  0.1061451E-06  0.3939766E-11 -0.8282919E-21 -0.1698334E-06 -0.2922749E-22
+
+ Order:    1 by    1
+  0.9265597E+01 -0.8316772E-07 -0.3326374E-14
+ -0.8316802E-07  0.9908062E+01  0.3488736E-17
+ -0.3326374E-14  0.3488736E-17  0.8622754E+01
+    Isotropic polarizability:  0.9265471E+01
+  Anisotropic polarizability:  0.1113110E+01
+
+ Order:    1 by    2
+ -0.4854429E+01  0.1989811E-07  0.9393667E-14 -0.3329452E+01 -0.5895847E-15
+ -0.1346503E-06 -0.1048329E+02 -0.3434381E-15 -0.3359032E-06  0.9853248E-14
+ -0.2440000E-14 -0.8570711E-15 -0.4620008E+01 -0.5577422E-14 -0.6907590E-10
+
+ Order:    2 by    2
+  0.3856791E+02  0.1658298E-05 -0.9507690E-14  0.3333745E+00  0.5346612E-15
+  0.1658298E-05  0.5356367E+02  0.5660340E-15  0.1829036E-06 -0.1957470E-13
+ -0.9507690E-14  0.5660340E-15  0.3938111E+02  0.1243674E-13 -0.6208880E-09
+  0.3333745E+00  0.1829029E-06  0.1243674E-13  0.4012247E+02  0.5076041E-15
+  0.5346612E-15 -0.1957470E-13 -0.6209227E-09  0.5076041E-15  0.3863308E+02
+
+       Polarizability calculations for w^2 =  -4.3686833258999033E-005
+       i.e., w =    6.6096015960872435E-003 i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -1.3086170231362943E-003
+       i.e., w =    3.6174811998630957E-002 i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -9.1101992354376132E-003
+       i.e., w =    9.5447363690348272E-002 i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -3.9063234475954833E-002
+       i.e., w =    0.1976442118453127      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -0.1372089115424966     
+       i.e., w =    0.3704172128053672      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -0.4555097719045920     
+       i.e., w =    0.6749146404580301      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =   -1.599969916430539     
+       i.e., w =     1.264899172436498      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =   -6.860442717529413     
+       i.e., w =     2.619244684547324      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =   -47.76034461955072     
+       i.e., w =     6.910885950408292      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =   -1430.636998325477     
+       i.e., w =     37.82376235021415      i  
+ 
+ Calculating total polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+ Perturbation matrix written in file H2O_aTZ_lim2.0_4.0_p2000_f11.p2p
+
+
+BEGIN DF
+  Molecule H2O
+  Type NN
+  Eta = 0.0005
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for H2O
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: 0.00001
+End of tests for H2O
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+BEGIN Polarizability
+  Molecule H2O
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank  4
+  Calculate only distributed polarizabilities
+  Print only static distributed pols upto rank 1
+  Print pols for Orient
+  Pol-file H2O_aTZ_0.0005_1000_f11_NL4
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+      The polarization matrix is written in file:
+ H2O_aTZ_0.0005_1000_f11_NL4.pol                                                 
+       Polarizability calculations for w^2 =    0.000000000000000     
+       i.e., w =     0.000000000000000     
+ 
+ 
+ Distributed polarizability calculation
+    Spherical tensor form
+ 
+ Order:    0 by    0 for sites   1 and   1
+  0.3228571E-01
+
+ Order:    0 by    0 for sites   1 and   2
+ -0.1614289E-01
+
+ Order:    0 by    0 for sites   1 and   3
+ -0.1614283E-01
+
+ Order:    0 by    0 for sites   2 and   2
+  0.6168140E-01
+
+ Order:    0 by    0 for sites   2 and   3
+ -0.4553851E-01
+
+ Order:    0 by    0 for sites   3 and   3
+  0.6168134E-01
+
+ Order:    0 by    1 for sites   1 and   1
+  0.2412330E+00  0.1645464E-06 -0.7523318E-16
+
+ Order:    0 by    1 for sites   1 and   2
+ -0.9770481E-01 -0.6013545E-01 -0.5079618E-16
+
+ Order:    0 by    1 for sites   1 and   3
+ -0.9770466E-01  0.6013525E-01 -0.4618702E-16
+
+ Order:    0 by    1 for sites   2 and   2
+  0.1225039E+00  0.2520913E+00  0.1744496E-15
+
+ Order:    0 by    1 for sites   2 and   3
+ -0.2479906E-01  0.1919558E+00 -0.1319940E-15
+
+ Order:    0 by    1 for sites   3 and   3
+  0.1225038E+00 -0.2520911E+00  0.1781811E-15
+
+ Order:    1 by    1 for sites   1 and   1
+  0.7999765E+01 -0.2234088E-06 -0.2733437E-14
+ -0.2234091E-06  0.8303948E+01 -0.2715594E-15
+ -0.2733437E-14 -0.2715594E-15  0.1122234E+02
+    Isotropic polarizability:  0.9175349E+01
+  Anisotropic polarizability:  0.3081759E+01
+
+ Order:    1 by    1 for sites   1 and   2
+ -0.1476920E+01 -0.6820570E+00 -0.5764562E-15
+ -0.3377667E-01 -0.1704320E+01 -0.1928569E-14
+  0.9371465E-15  0.5706293E-15 -0.2860489E+01
+    Isotropic polarizability: -0.2013910E+01
+  Anisotropic polarizability:  0.1745553E+01
+
+ Order:    1 by    1 for sites   1 and   3
+ -0.1476920E+01  0.6820569E+00 -0.5302163E-15
+  0.3377674E-01 -0.1704320E+01  0.2119606E-14
+  0.9913843E-15 -0.4943622E-15 -0.2860489E+01
+    Isotropic polarizability: -0.2013910E+01
+  Anisotropic polarizability:  0.1745553E+01
+
+ Order:    1 by    1 for sites   2 and   2
+  0.3350760E+01  0.4724544E+00 -0.8520208E-15
+  0.4724544E+00  0.2975613E+01  0.2635041E-15
+ -0.8520208E-15  0.2635041E-15  0.5525345E+01
+    Isotropic polarizability:  0.3950573E+01
+  Anisotropic polarizability:  0.2520909E+01
+
+ Order:    1 by    1 for sites   2 and   3
+  0.1523235E+00 -0.2542433E+00  0.3021367E-15
+  0.2542433E+00  0.7435303E+00 -0.8170824E-15
+  0.3648798E-15  0.7855976E-15 -0.1102260E+01
+    Isotropic polarizability: -0.6880215E-01
+  Anisotropic polarizability:  0.1690900E+01
+
+ Order:    1 by    1 for sites   3 and   3
+  0.3350759E+01 -0.4724542E+00 -0.1029144E-14
+ -0.4724542E+00  0.2975613E+01 -0.2209221E-15
+ -0.1029144E-14 -0.2209221E-15  0.5525345E+01
+    Isotropic polarizability:  0.3950573E+01
+  Anisotropic polarizability:  0.2520910E+01
+
+       Polarizability calculations for w^2 =  -4.3686833258999033E-005
+       i.e., w =    6.6096015960872435E-003 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -1.3086170231362943E-003
+       i.e., w =    3.6174811998630957E-002 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -9.1101992354376132E-003
+       i.e., w =    9.5447363690348272E-002 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -3.9063234475954833E-002
+       i.e., w =    0.1976442118453127      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -0.1372089115424966     
+       i.e., w =    0.3704172128053672      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -0.4555097719045920     
+       i.e., w =    0.6749146404580301      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =   -1.599969916430539     
+       i.e., w =     1.264899172436498      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+ WARNING: Array capacity of memory manager exceeded.
+ Required array length is         10001
+       Polarizability calculations for w^2 =   -6.860442717529413     
+       i.e., w =     2.619244684547324      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =   -47.76034461955072     
+       i.e., w =     6.910885950408292      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =   -1430.636998325477     
+       i.e., w =     37.82376235021415      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+ Polarization matrix written in file H2O_aTZ_0.0005_1000_f11_NL4.pol
+
+
+BEGIN GRID
+  Molecule H2O
+  ! No parameters specified. Defaults will be used.
+END
+Using 80-point Euler-MacLaurin radial quadrature
+Using 590-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+BEGIN GDMA
+                                     G D M A
+
+                                 by Anthony Stone
+
+                         version 2.2, 11 January 2006
+
+               Distributed Multipoles from Gaussian wavefunctions
+
+
+
+Starting at 14:11:18 on 21 Jul 2010 
+  Molecule H2O
+ WARNING: in subroutine situs_interface_to_gdma line           293
+ Largest degree of contraction not set correctly at present.
+  ! FILE <check point file from GAUSSIAN>
+  ! Using a hydrogen radius of 0.325 Angstrom = 0.614 a.u.
+  Bohr
+  Multipoles
+    Switch 4
+    Limit  4
+    Limit  1  H1
+    Radius H1  0.614
+    Limit  1  H2
+    Radius H2  0.614
+    Punch H2O_aTZ_DMA2_L4.mom
+WARNING: string truncated
+  Start
+
+                         Distributed Multipole Analysis
+
+Standard DMA for products of primitives with exponent greater than 4.00000
+Using 80-point Euler-MacLaurin radial quadrature
+Using 590-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+Positions and radii in bohr
+Multipole moments in atomic units, ea_0^k for rank k
+
+O          x =  0.000000  y =  0.000000  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.400551
+|Q1| =   0.378689  Q10  =  -0.378689
+|Q2| =   1.530532  Q20  =   0.133063  Q22c =   1.524737
+|Q3| =   3.262696  Q30  =   1.247639  Q32c =  -3.014727
+|Q4| =   7.201227  Q40  =  -3.783724  Q42c =   5.297911  Q44c =   3.077862
+
+H1         x = -1.453652  y =  0.000000  z = -1.121687
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.200276
+|Q1| =   0.047428  Q10  =   0.043816  Q11c =   0.018155
+
+H2         x =  1.453652  y =  0.000000  z = -1.121687
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.200276
+|Q1| =   0.047428  Q10  =   0.043816  Q11c =  -0.018155
+
+Total multipoles
+referred to origin at x =   0.000000,  y =    0.000000,  z =    0.000000
+                   Q00  =   0.000000
+|Q1| =   0.740351  Q10  =  -0.740351
+|Q2| =   2.167457  Q20  =   0.070018  Q22c =   2.166326
+|Q3| =   4.703293  Q30  =   1.981846  Q32c =  -4.265355
+|Q4| =   8.832941  Q40  =  -4.691035  Q42c =   6.280551  Q44c =   4.070592
+
+CPU time used:      0m11.629s          Total:      0m11.629s
+END
+
+Finished GDMA at 14:11:30 on 21 Jul 2010 
+
+
+FINISH
+ End of Input file. Stopping.
+
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                0.60
+ matrix_write                          1657                0.18
+ matmult_types                         1532                0.08
+ construct_molecular_integratio           2                0.00
+ df_parser                                2                0.10
+ df_monomer                              27                0.14
+ df_int_for_df                           35                0.11
+ make_integrals_for_df                   35                0.11
+ df_make_I                                1                0.00
+ make_s_matrix_coulomb                    3                0.00
+ diagonal_1index                          4                0.00
+ make_s_matrix_constraints                2                0.00
+ matrix_read                            202                0.03
+ make_T_AO_mono                           1                0.02
+ diagonal_2index                          1                0.00
+ matrix_write_part                     5262                0.02
+ make_T_MO_mono_NN                        3                0.09
+ matrix_read_rows                      5206                0.01
+ scale_trans_mat_types                    3                0.03
+ solve_df_equations_lu                    6                0.00
+ lineq_solver_lu                         25                0.10
+ lineq_lu_iter                           25                0.02
+ test_df                                  2                0.00
+ matvec_types                             2                0.00
+ fill_subset                              7                0.01
+ densfit_prop                            22                0.24
+ init_prop                               22                0.14
+ df_int                                   3                0.13
+ make_twoeint                             2                0.01
+ make_D_S_D                               2                0.01
+ make_h1_h2                               1                0.09
+ make_kernel_OVOV_ALDA                    1                0.09
+ make_kernel_integrals                    1                0.09
+ make_kernel_integrals:kernel_i           1                0.09
+ Chi_fxc_Chi_ALDAKernel                   1                0.08
+ makechf_direct                           2                0.00
+ adddiag                                  2                0.00
+ polarizabilities                        11                0.00
+ make_pol                              2541                0.01
+ make_perturbation_matrices              11                0.02
+ make_alphaPP                            11                0.01
+ dist_polarizabilities                   11                0.02
+ ====================================
+
+
+ Maximum memory defined is (MB) :                       500
+ Maximum memory used is    (MB) :                        24
+
+ # ==NOTE: Length of logging arrays exceeded. Needed         13549
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   28
+ ======================================
+    1 TMP____000                                              C      MOs for H2O
+    2 TMP____001                                         E      Energies for H2O
+    3 TMP____002                                              C      MOs for H2O
+    4 TMP____003                                               P densmat for H2O
+    5 TMP____004                                          I_____XA 1-e integrals
+    6 SAV_D_c__a                                          D  Full DF sol for H2O
+    7 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+    8 TMP____005                           G  1-index diagonal integrals for H2O
+    9 TMP____006                                   SC___A_A 2-e 2-indx integrals
+   10 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   11 TMP____007                           G  2-index diagonal integrals for H2O
+   12 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   13 TMP____008                                DI      Vector to store  D^t * I
+   14 TMP_Dooc_a                               OO part of D  Full DF sol for H2O
+   15 TMP_Dovc_a                               OV part of D  Full DF sol for H2O
+   16 TMP____009                                DI      Vector to store  D^t * I
+   17 SAV_D____a                                          D  Full DF sol for H2O
+   18 TMP_Doo__a                               OO part of D  Full DF sol for H2O
+   19 TMP_Dov__a                               OV part of D  Full DF sol for H2O
+   20 TMP_Dvv__a                               VV part of D  Full DF sol for H2O
+   21 TMP____011                                          OVOVAAAA 2-e integrals
+   22 TMP____012                                          VVOOAAAA 2-e integrals
+   23 TMP____013                                        H1-matrix  for monomer A
+   24 TMP____014                                        H2-matrix  for monomer A
+   25 TMP____015                                   KERAXAXA 1-e 2-indx integrals
+   26 TMP____016                         Rho : OO part of D  Full DF sol for H2O
+   27 TMP____017                                               H21 A   = H2 * H1
+   28 TMP____018                                         fH2D A   = 4.0 * H2 * D
+ --------------------------------------
+ 
+
+Ending on 21-07-2010 at 14:11:30.368

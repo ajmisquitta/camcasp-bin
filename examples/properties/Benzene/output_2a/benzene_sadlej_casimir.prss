@@ -1,0 +1,45 @@
+TITLE  PROCESS file to write the CASIMIR input
+!    for benzene
+! Usage: process < benzene_sadlej_casimir.prss > benzene_sadlej_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>.casimir
+
+Set Global-data
+   CamCASP /home/am592/CamCASP/5.5-dev
+   Units  BOHR  DEGREES
+   Overwrite
+   Echo Off
+End
+
+
+Molecule benzene
+  Units BOHR
+  C1          6.00    2.64623243    0.00000000    0.00000000   Type C
+  C2          6.00    1.32311622    2.29170451    0.00000000   Type C
+  C3          6.00   -1.32311622    2.29170451    0.00000000   Type C
+  C4          6.00   -2.64623243    0.00000000    0.00000000   Type C
+  C5          6.00   -1.32311622   -2.29170451    0.00000000   Type C
+  C6          6.00    1.32311622   -2.29170451    0.00000000   Type C
+  H1          1.00    4.70829954    0.00000000    0.00000000   Type H
+  H2          1.00    2.35414977    4.07750701    0.00000000   Type H
+  H3          1.00   -2.35414977    4.07750701    0.00000000   Type H
+  H4          1.00   -4.70829954    0.00000000    0.00000000   Type H
+  H5          1.00   -2.35414977   -4.07750701    0.00000000   Type H
+  H6          1.00    2.35414977   -4.07750701    0.00000000   Type H
+End
+
+Read local pols for benzene
+   Use ascii file benzene_sadlej_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>_0f10.pol
+   Maximum rank  <WSMLIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Limit rank to <HLIMIT! 1> for sites +++
+       H1 H2 H3 H4 H5 H6                                                        
+   Frequencies STATIC + 10
+End
+
+Write
+   File-prefix benzene_sadlej
+   CASIMIR file for benzene +++
+      and benzene +++
+      with cutoff 0.0001
+End
+
+Finish

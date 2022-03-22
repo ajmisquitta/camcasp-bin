@@ -1,0 +1,215 @@
+Here's an example of the use of the runcamcasp.py script to run a
+properties calculation. If you only specify one molecule in the
+cluster file, it's assumed that you want to calculate its properties.
+
+The Cluster input file is called He.clt, but the "file-prefix" used to 
+label the job is He_aTZ, so we need to tell the script to use two
+different names. 
+
+The vertical IP of Helium is 0.9036 a.u.
+
+Change "bg" to the name of the batch queue you want to use, or leave
+it unchanged to run the job in the background. This calculation only
+takes a few seconds.
+
+$ runcamcasp.py He_aTZ --clt He.clt -q bg
+Setting up files in directory He_aTZ
+See He_aTZ/He.clt.clout for output of CLUSTER
+This is a properties calculation with SCF program dalton2013
+...
+(Wait for a while)
+...
+Job He_aTZ finished
+Finished at Tue Feb 25 11:55:48 GMT 2014
+
+The first part of the calculation is complete. The input files are in
+the directory He_aTZ, along with the Dalton output file He_aTZ_A.out
+and the Dalton eigenvectors He_aTZ-A-asc.movecs:
+$ ls He_aTZ
+He_aTZ-A-asc.movecs  He_aTZ_A.out         He_aTZ.cks          He_aTZ.prss   He.clt.clout
+He_aTZ_A.dal         He_aTZ.bash          He_aTZ.DALtemplate  He_aTZ.sites  OUT
+He_aTZ_A.mol         He_aTZ_casimir.prss  He_aTZ.ornt         He.clt
+
+The main output files are in the subdirectory OUT:
+$ ls He_aTZ/OUT
+He_aTZ_0.0005_1000_f11_NL4.pol  He_aTZ_DMA2_L4.mom
+He_aTZ_A.out                    He_aTZ_lim2.0_4.0_p2000_f11.p2p
+He_aTZ_A.out.0                  He_aTZ.out
+He_aTZ.cks                      TMP_Memory_usage.dat
+He_aTZ-data-summary.data
+
+
+We have the (non-local) distributed polarizabilities at 11 frequencies
+to rank 4 in file He_aTZ_0.0005_1000_f11_NL4.pol. The point-to-point
+polarizabilities at 11 frequencies are in file
+He_aTZ_lim2.0_4.0_p2000_f11.p2p, and distributed multipole moments 
+in file He_aTZ_DMA2_L4.mom. The CamCASP output is in He_aTZ.out.
+
+The directory output_1 contains these files from a previous calculation,
+except for the large point-to-point polarizability response file and
+the memory usage file.
+
+We now move on to the localization.
+===================================
+
+We would usually need to define a local-axis file for this step, but
+there is clearly no need to do so for Helium, so we move on to the
+localize.py script. Localisation is a null operation here, but the
+script also carries out the refinement of the polarizabilities and
+calculates the dispersion coefficients.
+
+$ cd He_aTZ
+$ localize.py He_aTZ 
+Can't find axis definition file He_aTZ.axes or ../He_aTZ.axes
+Using global axes at all sites
+Using polarizability file OUT/He_aTZ_0.0005_1000_f11_NL4.pol
+Splitting OUT/He_aTZ_0.0005_1000_f11_NL4.pol into individual frequencies ...  done
+Localizing polarizabilities using LW procedure ...
+000 001 002 003 004 005 006 007 008 009 010  ... done
+Preparing to refine the local polarizabilities
+Using axis definition file He_aTZ.axes
+Using p2p file OUT/He_aTZ_lim2.0_4.0_p2000_f11.p2p
+ Splitting point-to-point pols for He_aTZ
+ Frequencies :            0  to           10
+ Number of points in grid :          500
+ Total p2p pols per frequency :       125250
+ Split p2p pols in files with prefix : He_aTZ_010
+Splitting the point-to-point polarizability file ...  done
+Refining the local polarizabilities
+000 001 002 003 004 005 006 007 008 009 010 
+Refinement finished
+Refined localized polarizabilities, static and at imaginary frequency,
+are in He_aTZ_ref_wt4_L2_0f10.pol
+Calculating the dispersion coefficients ...   done
+Dispersion coefficients are in He_aTZ_ref_wt4_L2_casimir.out.
+The dispersion potential, in Orient form, is in He_aTZ_wt4_L2_C10.pot.
+
+The localization procedure produces a large number of files. Most of
+them are not needed, but some are not deleted immediately in case
+problems arise. To tidy up, run the command
+$ localize.py H2O_aTZ --clean
+
+The remaining files are then:
+$ ls
+He_aTZ-A-asc.movecs    He_aTZ.ornt                He_aTZ_ref_wt4_L2_008.out
+He_aTZ_A.dal           He_aTZ.pdef                He_aTZ_ref_wt4_L2_009.out
+He_aTZ_A.mol           He_aTZ.prss                He_aTZ_ref_wt4_L2_010.out
+He_aTZ_A.out           He_aTZ_ref_wt4_L2_000.out  He_aTZ_ref_wt4_L2_0f10.pol
+He_aTZ.axes            He_aTZ_ref_wt4_L2_001.out  He_aTZ_ref_wt4_L2_casimir.data
+He_aTZ.bash            He_aTZ_ref_wt4_L2_002.out  He_aTZ_ref_wt4_L2_casimir.out
+He_aTZ_casimir.prss    He_aTZ_ref_wt4_L2_003.out  He_aTZ.sites
+He_aTZ.cks             He_aTZ_ref_wt4_L2_004.out  He_aTZ_wt4_L2_C10.pot
+He_aTZ.DALtemplate     He_aTZ_ref_wt4_L2_005.out  He.clt
+He_aTZ_L2_0f10.pol     He_aTZ_ref_wt4_L2_006.out  He.clt.clout
+He_aTZ_NL4_static.pol  He_aTZ_ref_wt4_L2_007.out  OUT
+
+Copies of most of the new files are in output_2. They include:
+
+He_aTZ.axes
+  This file was generated automatically, as no axes file was provided.
+  It is empty, which means that global axes were used.
+
+He_aTZ_NL4_static.pol
+  This contains the static non-local distributed polarizabilities to
+  rank 4. It generally includes charge-flow polarizabilities, but
+  since we have only one site thay are all essentially zero.
+
+He_aTZ_ref_wt4_L2_0f10.pol
+  contains the refined polarizabilities as an ASCII (human-readable)
+  file. A word about this file name: 
+  He_aTZ  = job name
+  ref     = refined using the WSM procedure
+  wt4     = weight (4) was used in the refinement (see User's Guide)
+  L2      = maximum rank is 2
+  0f10    = Static + 10 frequencies. So the first set are the static
+            polarizabilities, and the next 10 sets are the
+	    polarizabilities at imaginary frequency, used to calculate
+	    the dispersion coefficients. Frequencies are those
+	    obtained using the default quadrature grid (see the Users'
+	    Guide).
+
+He_aTZ_ref_wt4_L2_???.out
+  These are the output files from the refinement procedure, one for
+  each frequency. They report the fitted parameters and the quality of
+  the fit.
+
+He_aTZ_wt4_L2_C10.pot
+  contains the dispersion coefficients, in a suitable form for pasting
+  into an Orient data file. The dispersion coefficients for He should
+  all be isotropic, but there are some small anisotropic terms:
+
+  He  He             C6             C7             C8             C9             C10
+    00   00   0   1.489030         0.0          9.418719         0.0          30.05366
+    00   20   2  0.2845324E-05     0.0         0.1199425E-03     0.0         0.5464224E-03
+    00   22c  2     0.0            0.0         0.9487474E-04     0.0         0.4477323E-03
+    00   40   4     0.0            0.0         0.6167314E-04     0.0         0.2142415E-03
+    00   42c  4     0.0            0.0         0.5987854E-04     0.0         0.2080872E-03
+    00   44c  4     0.0            0.0        -0.1350275E-03     0.0        -0.4692339E-03
+    20   00   2  0.2845324E-05     0.0         0.1199425E-03     0.0         0.5464224E-03
+    22c  00   2     0.0            0.0         0.9487474E-04     0.0         0.4477323E-03
+    40   00   4     0.0            0.0         0.6167314E-04     0.0         0.2142415E-03
+    42c  00   4     0.0            0.0         0.5987854E-04     0.0         0.2080872E-03
+    44c  00   4     0.0            0.0        -0.1350275E-03     0.0        -0.4692339E-03
+  End
+
+  These arise from the lack of full rotational symmetry in the random
+  array of points used to generate the point-to-point polarizabilities.
+  The magnitude of these anisotropic terms gives an indication of the
+  extent of the asymmetry, but the effect on the truly non-zero terms is
+  small. To see this we need to consider another file:
+
+He_aTZ.pdef
+  This file is generated automatically unless it's already present in
+  this directory or the one above when the localize.py script is run.
+  It generally takes account of some of the symmetry, but can usually
+  be improved. In the present case the generated file is
+Polarizabilities
+     He  He    10   10 =      He_10_10_A
+     He  He   11c  11c =    He_11c_11c_A
+     He  He   11s  11s =    He_11s_11s_A
+     He  He    20   20 =      He_20_20_A
+     He  He   21c  21c =    He_21c_21c_A
+     He  He   21s  21s =    He_21s_21s_A
+     He  He   22c  22c =    He_22c_22c_A
+     He  He   22s  22s =    He_22s_22s_A
+
+End
+  However the three dipole polarizabilities and the five quadrupole
+  polarizabilities are all equal by symmetry. (The off-diagonal
+  polarizabilities, which are all zero, have been omitted
+  automatically.) The definition file can be improved by taking
+  account of the full symmetry:
+Polarizabilities
+     He  He    10   10 =      He_10_10_A
+     He  He   11c  11c =      He_10_10_A
+     He  He   11s  11s =      He_10_10_A
+     He  He    20   20 =      He_20_20_A
+     He  He   21c  21c =      He_20_20_A
+     He  He   21s  21s =      He_20_20_A
+     He  He   22c  22c =      He_20_20_A
+     He  He   22s  22s =      He_20_20_A
+
+End
+  (Note that the parameter names He_10_10_A and He_20_20_A are
+  arbitrary; they are computer-generated, and there is no significance
+  to their form except that they do describe the nature of each
+  polarizability.) If we replace the automatically-generated
+  He_aTZ.pdef with this one, the localization procedure will use it.
+  The --force option is needed to force re-fitting:
+
+$ localize.py He_aTZ --force
+
+  The dispersion coefficients are now
+  He  He             C6             C7             C8             C9             C10
+    00   00   0   1.489029         0.0          9.418736         0.0          30.05376
+  End
+
+  (Lines containing only zero coefficients are not printed.) The values
+  of the properly non-zero coefficients have changed very slightly.
+
+  In the second calculation of the polarizabilities there are only two
+  parameters to fit instead of eight. This makes little difference
+  here, but for large molecules it is helpful to take account of
+  symmetry in this way, as it helps to stabilize the fitting process
+  and reduces the time taken.
+

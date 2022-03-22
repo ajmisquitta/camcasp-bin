@@ -1,0 +1,374 @@
+$cbas
+*
+############################# TURBOMOLE basis sets #############################
+*
+he SVP
+he def-SVP
+he SV(P)
+he def-SV(P)
+# he    (4s3p) / [3s2p]     {211/21}  
+#  MP2-energy (RI):    -0.02502111 H
+#  EMP2(RI) - EMP2:    29.625681   uH
+#  delta/|EMP2|:        0.388578   ppm
+# Ref.: Weigend, Häser, Patzelt, Ahlrichs, CPL 294 (1998) 143.
+*
+   2  s
+   24.71889717             .26232950 
+    5.35952422             .74373221 
+   1  s                            
+    1.56023734            1.00000000
+   1  s                           
+     .55343668            1.00000000
+   2  p                          
+    6.94853275            -.26439504
+    3.47887085            1.62594634
+   1  p                         
+    1.23998485            1.00000000
+*
+he TZVP
+he def-TZVP
+# he    (4s3p) / [4s3p]     {1111/111}
+#  MP2-energy (RI):    -0.02668491 H
+#  EMP2(RI) - EMP2:    22.190065   uH
+#  delta/|EMP2|:        0.271997   ppm
+# Ref.: Weigend, Häser, Patzelt, Ahlrichs, CPL 294 (1998) 143.
+* 
+   1  s
+   24.71889717             .26232950
+   1  s
+    5.35952422             .74373221
+   1  s
+    1.56023734            1.00000000
+   1  s
+     .55343668            1.00000000
+   1  p
+    6.94853275            -.26439504
+   1  p
+    3.47887085            1.62594634
+   1  p
+    1.23998485            1.00000000
+*
+he TZVPP
+he def-TZVPP
+# he (4s3p2d)
+#  MP2-energy (RI):    -0.03318688 H
+#  EMP2(RI) - EMP2:     4.618807   uH
+#  delta/|EMP2|:        0.008865   ppm
+# Ref.: Weigend, Häser, Patzelt, Ahlrichs, CPL 294 (1998) 143.
+*
+   1  s
+   24.71889717            1.00000000 
+   1  s
+    5.35952422            1.00000000 
+   1  s
+    1.56023734            1.00000000 
+   1  s
+     .55343668            1.00000000 
+   1  p
+    6.94853275            1.00000000 
+   1  p
+    3.47887085            1.00000000 
+   1  p
+    1.23998485            1.00000000 
+   1  d
+    4.23344660            1.00000000 
+   1  d
+    2.34280951            1.00000000 
+*
+he QZP
+he QZVP
+he QZPP
+he QZVPP
+he def-QZVP
+he def-QZVPP
+# he (6s4p3d2f1g)
+#  MP2-energy (RI):    -0.03541773 H
+#  EMP2(RI) - EMP2:     2.743680   uH
+#  delta/|EMP2|:        0.009832   ppm
+# Ref.: C. Hättig, to be published.
+*
+-> he QZ-s-kernel
+-> he cc-pVQZ-pol
+*
+he QZ-s-kernel
+# he (6s)
+# auxiliary s functions optimized for QZVPP 
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 73.1306   1.0
+   1  s
+ 16.2161   1.0
+   1  s
+ 5.3589    1.0
+   1  s
+ 2.10351   1.0
+   1  s
+ 0.800137  1.0
+   1  s
+ 0.406207  1.0
+*
+###############################  Dunning DZ sets  ##############################
+*
+he cc-pVDZ
+# he    (3s2p) 
+#  MP2-energy (RI):    -0.02582449 H
+#  EMP2(RI) - EMP2:     3.845844   uH
+#  delta/|EMP2|:        0.008272   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+  16.985710431       1.0000000000
+   1  s
+  3.5895822131       1.0000000000
+   1  s
+ 0.56732036282       1.0000000000
+   1  p
+  5.1632496043       1.0000000000
+   1  p
+  1.8631232694       1.0000000000
+*
+he aug-cc-pVDZ
+# he    (4s3p) 
+# anion:
+#  MP2-energy (RI):    -0.02876376 H
+#  EMP2(RI) - EMP2:     1.307049   uH
+#  delta/|EMP2|:        0.159658   ppm
+# neutral atom:
+#  MP2-energy (RI):    -0.02695827 H
+#  EMP2(RI) - EMP2:     4.241821   uH
+#  delta/|EMP2|:        0.020070   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> he cc-pVDZ
+-> he aug-D
+*
+he aug-D
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 0.33983194740       1.0000000000
+   1  p
+ 0.54428914669       1.0000000000
+*
+###############################  Dunning TZ sets  ##############################
+*
+he cc-pVTZ
+# he    (5s4p2d) 
+#  MP2-energy (RI):    -0.03313412 H
+#  EMP2(RI) - EMP2:     3.444099   uH
+#  delta/|EMP2|:        0.005475   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+  23.476785180       1.0000000000
+   1  s
+  5.0583697048       1.0000000000
+   1  s
+  1.1854258656       1.0000000000
+   1  s
+ 0.64142538607       1.0000000000
+   1  s
+ 0.23980749063       1.0000000000
+   1  p
+  7.3694323551       1.0000000000
+   1  p
+  3.5138284206       1.0000000000
+   1  p
+  1.3223975385       1.0000000000
+   1  p
+ 0.50249792118       1.0000000000
+   1  d
+  4.8572892242       1.0000000000
+   1  d
+  2.4757914715       1.0000000000
+*
+he aug-cc-pVTZ
+# he    (6s5p3d)
+# anion:
+#  MP2-energy (RI):    -0.03511266 H
+#  EMP2(RI) - EMP2:     3.409099   uH
+#  delta/|EMP2|:        0.007218   ppm
+# neutral atom:
+#  MP2-energy (RI):    -0.03361734 H
+#  EMP2(RI) - EMP2:     3.470087   uH
+#  delta/|EMP2|:        0.006777   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> he cc-pVTZ
+-> he aug-T
+*
+he aug-T
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 0.87263816280E-01   1.0000000000
+   1  p
+ 0.24000663932       1.0000000000
+   1  d
+  0.80340665713      1.0000000000
+*
+###############################  Dunning QZ sets  ##############################
+*
+he cc-pVQZ
+# he    (5s4p3d2f) 
+#  MP2-energy (RI):    -0.03547387 H
+#  EMP2(RI) - EMP2:     4.129990   uH
+#  delta/|EMP2|:        0.014807   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> he cc-pVQZ-s-kernel
+-> he cc-pVQZ-pol
+*
+he cc-pVQZ-s-kernel
+# he (5s)
+# auxiliary s functions optimized for cc-pVQZ
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+   29.251976741        1.0
+   1  s
+   6.3479959175        1.0
+   1  s
+   3.0141166013        1.0
+   1  s
+  0.83396087296        1.0
+   1  s
+  0.47964730615        1.0
+*
+he cc-pVQZ-pol
+# he (4p3d2f1g)
+# auxiliary pdfg polarization functions optimized for cc-pVQZ
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  p
+   8.6905135631        1.0
+   1  p
+   2.5796767548        1.0
+   1  p
+   1.1943303704        1.0
+   1  p
+  0.71278867940        1.0
+   1  d
+   7.2944834617        1.0
+   1  d
+   4.3632208275        1.0
+   1  d
+   1.7345900404        1.0
+   1  f
+   4.3507069127        1.0
+   1  f
+   2.7082979618        1.0
+*
+he aug-cc-pVQZ
+# he    (6s5p4d3f) 
+# anion:
+#  MP2-energy (RI):    -0.03728507 H
+#  EMP2(RI) - EMP2:     5.425189   uH
+#  delta/|EMP2|:        0.157608   ppm
+# neutral atom:
+#  MP2-energy (RI):    -0.03572032 H
+#  EMP2(RI) - EMP2:     3.811300   uH
+#  delta/|EMP2|:        0.014037   ppm
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+-> he cc-pVQZ
+-> he aug-Q
+*
+he aug-Q
+# Ref.: Weigend, Köhn, Hättig, JCP 116 (2002) 3175. 
+*
+   1  s
+ 0.19724856721       1.0000000000
+   1  p
+ 0.34379380795       1.0000000000
+   1  d
+ 0.64223309212       1.0000000000
+   1  f
+  1.0504747245       1.0000000000
+*
+###############################  Dunning 5Z sets  ##############################
+*
+he cc-pV5Z
+# he    (6s5p4d3f2g1h) 
+#  MP2-energy (RI):    -0.03640577 H
+#  EMP2(RI) - EMP2:     0.737773   uH
+#  delta/|EMP2|:        0.001105   ppm
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+  69.9577         1.0
+   1  s
+  15.5692         1.0
+   1  s
+  5.02694         1.0
+   1  s
+  1.99746         1.0
+   1  s
+ 0.847999         1.0
+   1  s
+ 0.373257         1.0
+   1  p
+  14.2414         1.0
+   1  p
+   4.7851         1.0
+   1  p
+  3.28814         1.0
+   1  p
+  1.89933         1.0
+   1  p
+ 0.772218         1.0
+   1  d
+  11.0572         1.0
+   1  d
+  5.76223         1.0
+   1  d
+  3.52006         1.0
+   1  d
+  1.34009         1.0
+   1  f
+  8.29146         1.0
+   1  f
+  5.45011         1.0
+   1  f
+  2.26714         1.0
+   1  g
+  8.22031         1.0
+   1  g
+  4.15982         1.0
+   1  h
+    5.848         1.0
+*
+he aug-cc-pV5Z
+# he    (7s6p5d4f3g2h) 
+# anion:
+#  MP2-energy (RI):    -0.03759490 H
+#  EMP2(RI) - EMP2:     2.793257   uH
+#  delta/|EMP2|:        0.086560   ppm
+# neutral atom:
+#  MP2-energy (RI):    -0.03653325 H
+#  EMP2(RI) - EMP2:     0.747533   uH
+#  delta/|EMP2|:        0.002807   ppm
+# Ref.: C. Hättig, to be published.
+*
+-> he cc-pV5Z
+-> he aug-5
+*
+he aug-5
+# he (1s1p1d1f1g1h)
+# Ref.: C. Hättig, to be published.
+*
+   1  s
+ 0.180966  1.0
+   1  p
+ 0.337228  1.0
+   1  d
+ 0.547327  1.0
+   1  f
+ 0.860101  1.0
+   1  g
+ 1.18946   1.0
+   1  h
+ 2.2244    1.0  
+*
+$end

@@ -1,0 +1,46 @@
+! ORIENT localization file for CO_1
+
+UNITS BOHR
+
+Parameters
+      Sites      3 polarizable      3
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      C          Z     6
+      O          Z     8
+End
+
+Molecule  CO_1 at  0.0 0.0 0.0
+  ! Units BOHR
+  C1          0.00000000    0.00000000   -1.20270254   Type C
+  O1          0.00000000    0.00000000    0.90202691   Type O
+End
+
+Polarizabilities for CO_1
+   Read rank  4 sites +++
+       C1 O1
+   #include CO-CO_NL4_<INDEX!000>.pol
+   Limit rank <LIMIT! 2> for +++
+       C1 O1
+   Sum-rule test 1e-7
+   Localise <LOC!LS> test 1e-7 Limit <LIMIT! 2> sites +++
+       C1 O1
+End
+
+Edit CO_1
+   #include <AXES!axes>
+End
+
+Polarizabilities for CO_1
+   Write local limit <LIMIT! 2> file CO-CO_L<LIMIT!2>_<INDEX!000>.pol sites +++
+       C1 O1
+   Print limit <LIMIT! 2> +++
+       C1 O1
+End
+
+Finish

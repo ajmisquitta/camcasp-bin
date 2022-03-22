@@ -1,0 +1,5 @@
+This is a polarisability calculation using the Molpro SCF program.
+
+Run as:
+$ runcamcasp.py H2O_aTZ --clt H2O.cl
+

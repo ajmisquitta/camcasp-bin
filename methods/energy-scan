@@ -1,0 +1,47 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule B
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER   OO
+  DF-TYPE-DIMER     OO
+END
+
+SET DF
+  Eta    = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  False
+  Solver LU
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN energy-scan
+  ! scan molecule B with molecule A
+  Energies E1exch E1elst
+  Energy-file energy-scan
+  ! see user's guide for details
+  Points
+    !  Provide points file (created by Orient)
+    !  Give full path or put the file in the job directory
+    !  e.g.
+    !  file /home/ajs1/molecules/piracetam/aug-cc-pVDZ_-63/piracetam_vdW1.50.pts
+    !  or make a symbolic link grid.pts to the appropriate file
+    file  grid.pts
+  ---
+End
+
+End-CamCASP-commands

@@ -1,0 +1,25 @@
+ ================================================================
+ Compiled on Sep 12 2012 at 14:26:47
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22334
+ Working directory: 
+     /scratch/alston/water2-test7-sw1-redoDF-DCaux-CartGTO_13-59-44
+ Running on: mmp12
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{exch}(S2)            0.2574782E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2911739E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1412902E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}                0.6884468E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1720857E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}                0.2693385E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1823271E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}                0.3313552E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+--------------------------------------------------------------------------------

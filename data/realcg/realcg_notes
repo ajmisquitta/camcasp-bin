@@ -1,0 +1,20 @@
+These files contain coupling coefficients <j1k1,j2k2|JK> for coupling
+two angular momenta or spherical tensors, expressed in real components
+j1k1 and j2k2, into coupled components JK, also in real form. The file
+realcg_j1_j2 contains the coupling coefficients for the angular
+momenta j1 and j2. Only the nonzero coefficients are listed. Each line
+of the file describes one nonzero coefficient in the form
+l1 l2 L i1 i2 i3 i4
+where l1, l2 and L are integers indexing the angular momentum
+components. l1 and l2 index the components of j1 and j2 respectively:
+0  1  2  3  4  5  6  ...
+0  1c 1s 2c 2s 3c 3s ...
+while L indexes the coupled function JK as follows:
+0   1   2   3   4   5   6   7   8   9  ...
+00  10  11c 11s 20  21c 21s 22c 22s 30 ...
+The value of the coefficient is (i1/i2)sqrt(i3/i4). These
+coefficients may be pure imaginary, in which case i3<0. sqrt(-n)
+always means +i*sqrt(n). The transformation matrix between the
+uncoupled functions |j1k1,j2k2> and the coupled functions |JK> is
+unitary. 
+

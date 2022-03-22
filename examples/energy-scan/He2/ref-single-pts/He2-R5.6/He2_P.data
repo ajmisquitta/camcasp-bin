@@ -1,0 +1,16 @@
+He1 and He2 : aug-cc-pVTZ : MC
+ &TRN
+  ISITDALT=T, OUT=F, TOLER=15, DIMER=F, BLKMB=F,  SPHG=T,
+  MEMTRAN= 200000000,
+  basis='sssspppddsssspppdd',
+  tags='aaaaaaaaabbbbbbbbb'
+ &END
+ 
+ &CCINP
+   CCPRINT=F, VCRIT=1.0D-14, TOLITER=1.0D-12
+ &END
+ 
+ &INPUTCOR
+  SAPTKS=T, E3IND=T, E30XI=T,
+  PRINT=F, MEMSAPT= 200000000
+ &END

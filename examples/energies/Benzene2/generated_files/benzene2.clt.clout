@@ -1,0 +1,68 @@
+Title Benzene dimer : Sadlej MC+
+
+! IP 0.3397 a.u.
+!
+Set Global-data
+  CamCASP /home/am592/CamCASP/5.5-dev
+  Units Bohr Degree
+  Echo No
+Molecule benzene1
+  Units BOHR
+    1  C1          6.00     2.64623243    0.00000000    0.00000000   Type C1
+    2  C2          6.00     1.32311622    2.29170451    0.00000000   Type C2
+    3  C3          6.00    -1.32311622    2.29170451    0.00000000   Type C3
+    4  C4          6.00    -2.64623243    0.00000000    0.00000000   Type C4
+    5  C5          6.00    -1.32311622   -2.29170451    0.00000000   Type C5
+    6  C6          6.00     1.32311622   -2.29170451    0.00000000   Type C6
+    7  H1          1.00     4.70829954    0.00000000    0.00000000   Type H1
+    8  H2          1.00     2.35414977    4.07750701    0.00000000   Type H2
+    9  H3          1.00    -2.35414977    4.07750701    0.00000000   Type H3
+   10  H4          1.00    -4.70829954    0.00000000    0.00000000   Type H4
+   11  H5          1.00    -2.35414977   -4.07750701    0.00000000   Type H5
+   12  H6          1.00     2.35414977   -4.07750701    0.00000000   Type H6
+End
+Molecule benzene2
+  Units BOHR
+    1  C1          6.00     2.64623243    0.00000000    0.00000000   Type C1
+    2  C2          6.00     1.32311622    2.29170451    0.00000000   Type C2
+    3  C3          6.00    -1.32311622    2.29170451    0.00000000   Type C3
+    4  C4          6.00    -2.64623243    0.00000000    0.00000000   Type C4
+    5  C5          6.00    -1.32311622   -2.29170451    0.00000000   Type C5
+    6  C6          6.00     1.32311622   -2.29170451    0.00000000   Type C6
+    7  H1          1.00     4.70829954    0.00000000    0.00000000   Type H1
+    8  H2          1.00     2.35414977    4.07750701    0.00000000   Type H2
+    9  H3          1.00    -2.35414977    4.07750701    0.00000000   Type H3
+   10  H4          1.00    -4.70829954    0.00000000    0.00000000   Type H4
+   11  H5          1.00    -2.35414977   -4.07750701    0.00000000   Type H5
+   12  H6          1.00     2.35414977   -4.07750701    0.00000000   Type H6
+End
+ Molecule benzene2 has been rotated by  180.0000 DEGREE
+  about the unit axis:   1.00000000   0.00000000   0.00000000
+  SAPT(DFT)
+  Molecules benzene1 and benzene2
+  File-prefix benzene2_1
+  Basis Sadlej Type MC+
+  Midbond 3s2p1d Type Weighted
+  Aux-basis aTZ
+  Func PBE
+  Kernel ALDAX
+  !
+  Interface files
+  Memory 4 GB
+  Options No-3rd-order
+End
+TEMPLATE file is benzene2_1.template
+P.data file is benzene2_1_P.data
+ Cartesian size of basis is          327
+ Max nocc =           21
+ nvir =          306
+ Memory needed for this calculation is          630  MB
+ But using the declared memory of         4096  MB
+ Spherical size of the basis is          314
+ nocc =           21
+ nvir =          293
+CamCASP command file is benzene2_1.cks
+
+
+Finish
+ Exiting program cluster_operations

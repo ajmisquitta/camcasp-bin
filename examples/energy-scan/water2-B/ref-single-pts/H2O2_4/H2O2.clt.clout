@@ -1,0 +1,69 @@
+! H2O properties calculation
+! ==========================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+  CamCASP /home/alston/CamCASP/current
+End
+
+Molecule H2Oa
+  I.P. 0.4638 a.u.
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O   8.0    0.0000000000    0.0000000000    0.0000000000 Type O
+  H1  1.0   -1.4536519600    0.0000000000   -1.1216873200 Type H
+  H2  1.0    1.4536519600    0.0000000000   -1.1216873200 Type H
+End
+Molecule H2Oa
+  Units BOHR
+    1  O           8.00     0.00000000    0.00000000    0.00000000   Type O
+    2  H1          1.00    -1.45365196    0.00000000   -1.12168732   Type H
+    3  H2          1.00     1.45365196    0.00000000   -1.12168732   Type H
+End
+
+Molecule H2Ob
+  I.P. 0.4638 a.u.
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O   8.0    0.0000000000    0.0000000000    0.0000000000 Type O
+  H1  1.0   -1.4536519600    0.0000000000   -1.1216873200 Type H
+  H2  1.0    1.4536519600    0.0000000000   -1.1216873200 Type H
+End
+Molecule H2Ob
+  Units BOHR
+    1  O           8.00     0.00000000    0.00000000    0.00000000   Type O
+    2  H1          1.00    -1.45365196    0.00000000   -1.12168732   Type H
+    3  H2          1.00     1.45365196    0.00000000   -1.12168732   Type H
+End
+
+Rotate H2Ob by 120.00 degrees about  0.0000 -1.0000 0.0000
+ Molecule H2Ob has been rotated by  120.0000 DEGREE
+  about the unit axis:   0.00000000  -1.00000000   0.00000000
+Place H2Ob at 0.0000 4.1960 4.7579
+
+Join H2Oa and H2Ob into H2O2
+Show H2O2 in PDB format
+PDB output for H2O2 in file H2O2.pdb
+
+Files
+  SAPT(DFT)
+  Molecules H2Oa and H2Ob
+  Basis aVTZ Type MC
+  Aux-basis  aVTZ Type MC
+  File-prefix H2O2_4
+End
+TEMPLATE file is H2O2_4.DALtemplate
+P.data file is H2O2_4_P.data
+ Cartesian size of basis is          105
+ Max nocc =            5
+ nvir =          100
+ Memory needed for this calculation is          500  MB
+ But using the declared memory of         2048  MB
+ Spherical size of the basis is           92
+ nocc =            5
+ nvir =           87
+CamCASP command file is H2O2_4.cks
+
+Finish
+ Exiting program cluster_operations

@@ -1,0 +1,117 @@
+ ================================================================
+ Compiled on Apr 28 2014 at 10:39:50
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22752
+ Working directory: 
+     /scratch/fastscratch/ajs1/CO-CO_19-24-28
+ Running on: whirligig
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{exch}(S2)            0.8046540E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.6032942E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8670594E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1990225E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4321116E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1317217E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1936512E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3287386E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1959595E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5710662E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1536453E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3929552E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1720503E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3976585E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1812594E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5067574E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1490915E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.6529571E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.7846696E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2265555E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1004403E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.8196375E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6007570E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1140380E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2616504E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1018201E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9247057E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2775064E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1110100E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.8538840E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4263947E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}                0.5393218E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.7032131E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1634609E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1347251E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4513835E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1920190E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5882243E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9734312E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1317318E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1447148E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5930702E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8372102E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3019600E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8264605E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2988876E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1876087E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3230181E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6688194E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1266931E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1519953E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4104317E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4728606E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2056921E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.5720722E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1582312E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4426079E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1425587E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8288093E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1217639E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1252356E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3611594E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1417952E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4860668E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6976102E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2072362E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6303307E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1392186E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.3451638E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.7561958E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.3913437E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.9111564E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1469246E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3786684E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2135903E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1956114E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1358785E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4029585E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.3574551E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.8255557E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.5598917E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1577487E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1575983E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5816788E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.7590469E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2031174E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.5887905E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1819047E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1071739E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1592767E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9955064E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2269503E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1038219E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3159059E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1727023E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3343082E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1518245E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3078896E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1412857E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5547512E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+--------------------------------------------------------------------------------

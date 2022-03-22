@@ -1,0 +1,78 @@
+# FC      := ifort -check uninit -traceback
+FC      := ifort
+FC2     := ifort
+CC      := icc
+BIN     := 
+MOD     := mod
+DEBUG   :=
+FFLAGS  := -O3 ${DEBUG} -DIFC -DCADPAC -DGAMESS -DSAPT2002 \
+           -DSIGNED_INTEGER -DF2003 \
+           -mp1 -assume byterecl -heap-arrays 2048  \
+           -funroll-loops -qopt-matmul -parallel -mkl
+           #-w -fpp# \
+           # -xSSE4.2 -arch=SSE4.2 -msse4.2 -funroll-loops
+           # -parallel -openmp
+FFLAGS2 := -O2 -DIFC -DCADPAC -DGAMESS -DSAPT2002 -DSIGNED_INTEGER  \
+           -funroll-loops -qopt-matmul -parallel -mkl
+           #-w -fpp# \
+           # -xSSE4.2 -arch=SSE4.2 -msse4.2 -funroll-loops
+           # -parallel -openmp
+FFLAGS3 := ${FFLAGS2}
+CFLAGS  := -O3
+LDFLAGS := -static -static-intel -static-libgcc -qopenmp-link=static -mkl # -Wl,-t
+# -Wl,-t to list all object-file sources
+CTAGS   := ctags >tags
+DEPEND  := makedepend
+
+ifeq ($(MACHINE),whirligig)
+LIBDIRS := -L/usr/lib/gcc/x86_64-linux-gnu/7 # -L/usr/lib/x86_64-linux-gnu/atlas
+LIBS  := -llapack -lcblas -lpthread -lmatmul -lf77blas -lgfortran -lquadmath
+endif
+
+ifeq ($(MACHINE),blackadder)
+LIBS   := -L/home/ajm/ATLAS/Linux_HAMMER64SSE2_2/lib/ -llapack -lcblas \
+       -lf77blas -latlas -L/usr/lib64/ -lg2c
+endif
+
+ifeq ($(MACHINE),tati)
+LIBS  := -L/home/am592/ATLAS/GotoBLAS2/ -lgoto2 -lpthread \
+  -L/usr/lib/ -lgfortran
+endif
+
+ifeq ($(MACHINE),mmp12)
+LIBS  := -L/home/alston/lib/ATLAS/lib/ -llapack -lcblas -lf77blas -latlas \
+    -L/usr/lib/ -lgfortran
+endif
+
+ifeq ($(MACHINE),comanche)
+FFLAGS := ${FFLAGS}  \
+           -xSSE4.2 -arch=SSE4.2 -msse4.2 -funroll-loops -qopt-matmul
+           # -parallel -openmp
+FFLAGS2 := ${FFLAGS2}  \
+           -xSSE4.2 -arch=SSE4.2 -msse4.2 -funroll-loops -qopt-matmul
+           # -parallel -openmp
+LIBS  := -L/home/alston/lib/atlas-3.8.4-gcc4.4.6/lib -llapack -lcblas -lf77blas -latlas \
+    -L/usr/lib64/ -lgfortran
+endif
+
+ifeq ($(MACHINE),pepito)
+LIBS  := -lpthread -lmatmul -lm -ldl -lgfortran -lquadmath \
+     -L/opt/intel/current/mkl/lib/intel64_lin/ -mkl -lmkl_blas95_lp64 -lmkl_lapack95_lp64 \
+     -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -qopenmp
+endif
+
+ifeq ($(MACHINE),spasrv12)
+LIBS  := -lpthread -lmatmul -lm -ldl -lgfortran -lquadmath \
+     -L/opt/ajm/intel/current/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64_lin/ -mkl -lmkl_blas95_lp64 -lmkl_lapack95_lp64 \
+     -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -qopenmp
+#LIBS  := -L/home/alston/Programs/OpenBLAS_spasrv12/ -lopenblas \
+#     -L/usr/lib/gcc/x86_64-linux-gnu/4.8/ -lgfortran   \
+#     -lmatmul -lm -ldl -lgfortran -lquadmath -liomp5 -lpthread
+endif
+
+ifeq ($(MACHINE),threadripper)
+LIBS  := -lpthread -lmatmul -lm -ldl -lgfortran -lquadmath \
+     -L/home/alston/intel/oneapi/mkl/2021.3.0/lib/intel64/ -mkl -lmkl_blas95_lp64 -lmkl_lapack95_lp64 \
+     -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -qopenmp
+ endif
+

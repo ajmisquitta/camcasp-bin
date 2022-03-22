@@ -1,0 +1,146 @@
+#!/bin/bash
+
+. ../../bin/functions
+
+function help {
+  cat <<EOF
+Usage: $0 [--test] name [[--type] type]
+Available tests are:
+He2, with (basis) type mc (default), mc+, dc or dc+,
+H2O2, with (kernel) type ALDA+CHF or ALDAX+CHF,
+He-CO, mc+ basis and ALDAX kernel,
+EOF
+}
+
+[[ $# -eq 0 ]] && help && exit 0
+
+name=""
+type=""
+units=""
+flags=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --help )
+      help
+      exit 0;;
+    --test )
+      name=$2
+      shift;;
+    --type )
+      type=$2
+      shift;;
+    --kernel )
+      kernel=$2
+      shift;;
+    * )
+      if [[ -z $name ]]; then
+        name=$1
+      elif [[ -z $type ]]; then
+	type=$1
+      else
+        die "$1 not understood"
+      fi;;
+  esac
+  shift
+done
+
+job=$name
+flags=""
+check_job=""
+case $name in
+  He2 )
+    job=He2_atz
+    clt=he2.clt
+    units="--Kelvin"
+    ip=0.9036
+    [[ -z $type ]] && type=MC
+    type=$(perl -e "\$b=\"$type\"; \$b=~tr/a-z/A-Z/; print \$b")
+#   flags="--daltoncks"
+    echo "Basis type $type";;
+  H2O2 )
+    job=H2O2
+    clt=water2.clt
+    ip=0.4638
+    [[ -z $type ]] && type="ALDAX+CHF"
+    type=$(perl -e "\$b=\"$type\"; \$b=~tr/a-z/A-Z/; print \$b") 
+    echo "Kernel $type";;
+  He-CO )
+    job=He-CO
+    clt=He-CO.clt
+    [[ -z $type ]] && type=dalton
+    units="--cm-1";;
+  Benzene2 )
+    clt=benzene2.clt;;
+  * )
+    echo "No test for $name. Available tests are He2 and H2O2."
+    exit 1;;
+esac
+[[ -z $check_job ]] && check_job=$job
+
+
+if [[ $name = "He2" ]]; then
+  cd $name/aTZ_$type || die "No example $name $type"
+  [[ -d test ]] && rm -rf test
+  echo "See $name/aTZ_$type/He2.log for job information"
+  runSAPT $job -clt $clt -d test $flags &> He2.log || exit 1
+elif [[ $name = "H2O2" ]]; then
+  cd $name/$type || die "No example $name $type"
+  [[ -d test ]] && rm -rf test
+  [[ $type == "ALDA+CHF" ]] && flags="--dalton-cks"
+  echo "runSAPT $job -clt $clt -d test $flags"
+  echo "See $name/$type/H2O2.log for job information"
+  runSAPT $job -clt $clt -d test $flags &> H2O2.log || exit 1
+elif [[ $name = "He-CO" ]]; then
+  cd $name/$type || die "No example $name $type"
+  [[ -d test ]] && rm -rf test
+  echo "runSAPT $job -clt $clt -d test"
+  echo "See $name/$type/He-CO.log for job information"
+  runSAPT $job -clt $clt -d test &> He-CO.log || exit 1
+fi
+
+
+sleep 2
+echo "Please wait ..."
+
+while [[ ! -e test/OUT/${job}.out ]]
+do
+  sleep 1
+done
+
+echo "Please wait ..."
+
+echo "Comparing check output with test results."
+echo "search.pl -h -k saptdft $units -str NoReg \\"
+echo "  --label 'Reference:' output/${check_job} --label 'This calculation:' test/OUT/${job}"
+search.pl -h -k saptdft $units -str "NoReg" \
+   --label "Reference:" output/${check_job} \
+   --label "This calculation:" test/OUT/${job}
+
+#  echo "Press ctrl-Q in xxdiff window to exit xxdiff and continue"
+#  xxdiff output/${check_job}.out test/OUT/${job}.out
+
+if [[ $name == He2 ]]; then
+  echo "Test finished"
+  exit 0
+fi
+
+echo "SAPT(DFT) finished. Starting delta_HF."
+
+rm -rf dHF
+runSAPT dHF --clt deltahf.clt $flags &> dHF.log || exit 1
+
+sleep 2
+echo "Please wait ..."
+
+while [[ ! -e dHF/OUT/dHF.out ]]
+do
+  sleep 5
+done
+
+echo "Comparing check output with test results."
+echo "search_deltaHF.pl -h -k deltaHF $units --label 'Reference:' deltaHFoutput/dHF" \
+ "--label 'This calculation:' dHF/OUT/dHF"
+search_deltaHF.pl -h $units \
+      --label "Reference:" deltaHFoutput/dHF \
+      --label "This calculation:" dHF/OUT/dHF
+

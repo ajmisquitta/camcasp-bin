@@ -1,0 +1,16 @@
+CO_1 and CO_2 : aug-cc-pVQZ : MC
+ &TRN
+  ISITDALT=T, OUT=F, TOLER=15, DIMER=F, BLKMB=F,  SPHG=T,
+  MEMTRAN= 268435456,
+  basis='sssssspppppddddfffggsssssspppppddddfffggsssssspppppddddfffggsssssspppppddddfffgg',
+  tags='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb'
+ &END
+ 
+ &CCINP
+   CCPRINT=F, VCRIT=1.0D-14, TOLITER=1.0D-12
+ &END
+ 
+ &INPUTCOR
+  SAPTKS=T, E3IND=T, E30XI=T,
+  PRINT=F, MEMSAPT= 268435456
+ &END

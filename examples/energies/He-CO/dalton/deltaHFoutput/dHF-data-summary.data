@@ -1,0 +1,27 @@
+ ================================================================
+ Compiled on Sep 12 2012 at 14:26:47
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22334
+ Working directory: 
+     /scratch/alston/dHF_11-53-15
+ Running on: mmp12
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.4330643E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2559230E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{2}_{ind}                -0.3143882E+01        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(UC)            -0.1306194E+01        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.1207999E+01        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+E^{2}_{ind}                -0.2200177E+00        CM-1     DF :: PROP chf :: REG eta =   3.0000                        
+E^{2}_{ind}(UC)            -0.2330693E+00        CM-1     DF :: PROP UC  :: REG eta =   3.0000                        
+E^{2}_{ind,exch}            0.1360355E+00        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP chf               
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: REG eta =   3.0000                      
+--------------------------------------------------------------------------------

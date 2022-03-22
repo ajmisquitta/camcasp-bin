@@ -1,0 +1,34 @@
+This example illustrates the new ISA (iterated spherical atoms)
+module, and also the MULTIPOLES module which calculates distributed
+multipoles from the ISA results, and the DISPLAY module, which can
+generate isodensity surfaces for the whole molecule or for individual
+ISA atoms. The latter can be used as input to the Orient programs to
+display the surfaces.
+
+The example applies the ISA method to the CO2 molecule, using the
+Dunning aug-cc-pVTZ basis. The cluster file is CO2-isa.clt, but it
+needs a little editing: please replace "${CAMCASP}" in the cluster file
+(which the program doesn't understand) with the full path name of your
+CamCASP main directory (e.g. "camcasp-5.8").
+
+Then the job submission command is
+
+$ runcamcasp.py CO2 --clt CO2-isa.clt -d avtz-isa --direct -q bg
+
+Results should appear in the avtz-isa/OUT directory. The directory
+output contains our results for this example.
+
+The program output in avtz-isa/OUT/CO2.out contains the results of the
+ISA procedure, followed by multipole moments calculated from the ISA
+densities. These multipole moments are what we now recommend, but the
+output also contains results from the GDMA program, both the original
+version ("Standard DMA") and the modified version, with the switch
+parameter set to 4.0. (See the gdma documentation in
+camcasp-5.8/docs/gdma_manual.pdf.)
+
+The avtz-isa/OUT directory also contains information about the ISA
+weight functions for each atom, and grids describing the isodensity
+surfaces for the molecule (CO2_1.00E-03_iso.grid) and for each atom
+(AIM-isosurface_<atom>.grid.) These are all calculated at an electron
+density of 0.001 a.u.
+

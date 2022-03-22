@@ -1,0 +1,32 @@
+Title "  water1 Method DFT with Functional: PBE0 "
+Scratch_dir <SCRATCHDIR>
+Memory        8 GB
+Start H2O2_A
+ 
+Charge     0
+Geometry Units Bohr nocenter noautoz noautosym
+   O1              0.10880900       0.00000000      -0.06077600
+   H1             -0.16161460       0.00000000       1.75530702
+   H2             -1.57933347       0.00000000      -0.78289890
+   bqO1           -0.09648300       0.00000000       5.59028800
+   bqH1            0.77186787       1.45365210       6.30032236
+   bqH2            0.77186805      -1.45365182       6.30032273
+   bqmb            0.00376528       0.00000007       3.64787605
+End
+Basis "ao basis" SPHERICAL
+      *          library     aug-cc-pVTZ
+      bqO*       library  O  aug-cc-pVTZ-sp  file /home/ajs1/CamCASP/basis/nwchem/for-nwchem-lib/                          
+      bqH*       library  H  aug-cc-pVTZ-sp  file /home/ajs1/CamCASP/basis/nwchem/for-nwchem-lib/                          
+      bqmb       library  B  mb-3s3p2d2f  file /home/ajs1/CamCASP/basis/nwchem/for-nwchem-lib/                          
+End
+set lindep:tol 1e-5
+dft
+   direct
+   grid fine
+   iterations 60
+   convergence energy 1e-11
+   xc PBE0
+   Mult 1
+   CS00  0.06580
+end
+task DFT energy

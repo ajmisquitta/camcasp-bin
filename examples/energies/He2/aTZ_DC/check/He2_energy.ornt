@@ -1,0 +1,100 @@
+! To obtain the file with default values use:
+! $CAMCASP/bin/replace < He2_energy.ornt
+! Use a standard redirect to place the output in a  new file
+! Alternatively use:
+! $CAMCASP/bin/replace < He2_energy.ornt | $CAMCASP/bin/orient > He2_energy.ornt.out
+
+UNITS BOHR
+
+Parameters
+      Sites      6 polarizable      6
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      He         Z     2
+      He         Z     2
+End
+
+Variables
+   Rx 0.0 B
+   Ry 0.0 B
+   Rz 0.0 B
+   alpha 0.0 D
+   Nx 0.0
+   Ny 0.0
+   Nz 0.0
+   Index 0
+End
+
+Molecule  He1 at  0.0 0.0 0.0 rotated by 0.0 about 1.0 0.0 0.0
+  ! Units BOHR
+  He          0.00000000    0.00000000    0.00000000   Type He
+  #include He1_DMA2_L4.mom
+End
+Edit He1
+   #include He1.axes
+   Bonds Auto
+End
+Polarizabilities for He1
+   ! Assumed that the pols are in the local-axes
+   ! So they are read after axes are defined
+   Read rank <WSMLIMIT! 2>
+     #include He1_ref_wt4_L<WSMLIMIT!2>_static.pol
+   End
+   Limit rank <WSMLIMIT! 2> for +++
+       He
+End
+
+
+Molecule  He2 at  Rx  Ry  Rz ROTATED BY alpha ABOUT Nx  Ny  Nz
+  ! Units BOHR
+  He          0.00000000    0.00000000    5.60000000   Type He
+  #include He2_DMA2_L4.mom
+End
+Edit He2
+   #include He2.axes
+   Bonds Auto
+End
+Polarizabilities for He2
+   ! Assumed that the pols are in the local-axes
+   ! So they are read after axes are defined
+   Read rank <WSMLIMIT! 2>
+     #include He2_ref_wt4_L<WSMLIMIT!2>_static.pol
+   End
+   Limit rank <WSMLIMIT! 2> for +++
+       He
+End
+
+Pairs
+   Dispersion damping factor <BETA!10.0>
+   Induction  damping factor <BETA!10.0>
+   #include <POTENTIAL!He2.pot>
+End
+
+Units Bohr kJ/mol
+
+! For Iterated induction set Iterate ON
+! Control the number of iterations using the OPTIONS block
+Switch Induce On Iterate Off
+Options
+   ! Setting Iterations = -1 to stop all iterations
+   ! This gives the second-order induction energy
+   Induction Iterations -1  Convergence 1e-12
+End
+
+! Either calculate the energy for a single geometry using:
+! Energy Details
+! Or calculate energy for a set of geometries as follows:
+
+Energy Table Format f12.6 Print es er ind disp total
+   Variables
+   Index   Rx   Ry   Rz   alpha  Nx  Ny  Nz
+   #include <GEOMFILE!He2.geom>
+End
+
+
+Finish

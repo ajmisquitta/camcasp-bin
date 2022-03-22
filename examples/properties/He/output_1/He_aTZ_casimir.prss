@@ -1,0 +1,32 @@
+TITLE  PROCESS file to write the CASIMIR input
+!    for He
+! Usage: process < He_aTZ_casimir.prss > He_aTZ_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>.casimir
+
+Set Global-data
+   CamCASP /home/ajs1/camcasp-5.5
+   Units  BOHR  DEGREE
+   Overwrite
+   Echo Off
+End
+
+
+Molecule He
+  Units BOHR
+  HE          2.00    0.00000000    0.00000000    0.00000000   Type HE
+End
+
+Read local pols for He
+   Use ascii file He_aTZ_ref_wt<WEIGHT!4>_L<WSMLIMIT!2>_0f10.pol
+   Maximum rank  <WSMLIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Frequencies STATIC + 10
+End
+
+Write
+   File-prefix He_aTZ
+   CASIMIR file for He +++
+      and He +++
+      with cutoff 0.0001
+End
+
+Finish

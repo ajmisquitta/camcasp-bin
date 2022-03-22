@@ -1,0 +1,220 @@
+TITLE benzene
+TITLE Basis: sadlej
+TITLE CalculationType: PROPERTIES
+
+MEMORY        500 MB 
+
+SET Global_data
+  CamCASP-path /home/am592/CamCASP/5.5-dev
+  Units Bohr cm-1
+  Scf-code Dalton
+  XC-func PBE
+  Overwrite yes
+END
+
+MOLECULE benzene at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file vectA.data
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      C1         6.0        2.64623243       0.00000000       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C2         6.0        1.32311622       2.29170451       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C3         6.0       -1.32311622       2.29170451       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C4         6.0       -2.64623243       0.00000000       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C5         6.0       -1.32311622      -2.29170451       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      C6         6.0        1.32311622      -2.29170451       0.00000000  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      H1         1.0        4.70829954       0.00000000       0.00000000  TYPE H
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         1.0        2.35414977       4.07750701       0.00000000  TYPE H
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H3         1.0       -2.35414977       4.07750701       0.00000000  TYPE H
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H4         1.0       -4.70829954       0.00000000       0.00000000  TYPE H
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H5         1.0       -2.35414977      -4.07750701       0.00000000  TYPE H
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H6         1.0        2.35414977      -4.07750701       0.00000000  TYPE H
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      C1         6.0        2.64623243       0.00000000       0.00000000  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C2         6.0        1.32311622       2.29170451       0.00000000  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C3         6.0       -1.32311622       2.29170451       0.00000000  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C4         6.0       -2.64623243       0.00000000       0.00000000  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C5         6.0       -1.32311622      -2.29170451       0.00000000  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      C6         6.0        1.32311622      -2.29170451       0.00000000  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/C
+      ---
+      H1         1.0        4.70829954       0.00000000       0.00000000  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H2         1.0        2.35414977       4.07750701       0.00000000  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H3         1.0       -2.35414977       4.07750701       0.00000000  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H4         1.0       -4.70829954       0.00000000       0.00000000  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H5         1.0       -2.35414977      -4.07750701       0.00000000  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+      H6         1.0        2.35414977      -4.07750701       0.00000000  TYPE H
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVTZ/H
+      ---
+   End
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule benzene
+  Angular 100
+  Radial  60
+END
+
+SET Lattice
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random    500
+  Seed     1
+END
+SET NEW-PROP
+  Kernel ALDAX
+  Kernel-Eps 1.0e-8
+  Constrained-DF
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OV
+END
+
+BEGIN DF
+  Molecule benzene
+  Type OV
+  Eta = 0.0 
+  Lambda = 1000.0 
+  Print only normalization constraints
+END
+
+BEGIN Polarizability
+  Molecule benzene
+  New-Prop
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank 2
+  Calculate only total polarizabilities and perturbations
+  Print only static total pols upto rank 2
+  Pert-file benzene_sadlej_lim2.0_4.0_p2000_f11
+END
+
+BEGIN DF
+  Molecule benzene
+  Type OV
+  Eta = 0.0005 
+  Lambda = 1000.0 
+  Print only normalization constraints
+END
+SET NEW-PROP
+  Kernel ALDAX
+  Kernel-Eps 1.0e-8
+  Constrained-DF
+END
+BEGIN Polarizability
+  Molecule benzene
+  New-Prop
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank  4
+  Calculate only distributed polarizabilities
+  Print only static distributed pols upto rank 1
+  Print pols for Orient
+  Pol-file benzene_sadlej_0.0005_1000_f11_NL4
+END
+
+BEGIN GRID
+  Molecule benzene
+  ! No parameters specified. Defaults will be used.
+END
+
+BEGIN GDMA
+  Molecule benzene
+  ! FILE <check point file from GAUSSIAN>
+  ! Using a hydrogen radius of 0.325 Angstrom = 0.614 a.u.
+  Bohr
+  Multipoles
+    Switch 4
+    Limit  4
+    Limit  1  H1
+    Radius H1  0.614
+    Limit  1  H2
+    Radius H2  0.614
+    Limit  1  H3
+    Radius H3  0.614
+    Limit  1  H4
+    Radius H4  0.614
+    Limit  1  H5
+    Radius H5  0.614
+    Limit  1  H6
+    Radius H6  0.614
+    Punch benzene_sadlej_DMA2_L4.mom
+  Start
+END
+
+FINISH

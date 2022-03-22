@@ -1,0 +1,30 @@
+This calculation can be carried out in this directory with the command
+
+$ runcamcasp.py He2 --clt He2.clt --directory test -q bg
+
+(Don't type the $ here -- it's the Linux command prompt, and is shown
+to distinguish Linux commands from other text.)
+This will create a new subdirectory called "test" and run the
+calculation there in the background "bg". An alternative is "-q batch"
+which sends the job to the Linux batch queue -- useful for big jobs
+but not needed here.
+
+When the job has run we want to extract the energy components from the
+CamCASP output file. The command knows where to find it in the job
+directory:
+
+$ extract_saptdft.py --unit kelvin test
+
+kelvin      elst        exch         ind        exind       disp       exdisp       total
+test     -1.43903     8.45121    -0.00348     0.00724   -18.50000     0.11106   -11.37301
+
+The extract_saptdft.py script outputs energies in kJ/mol by default,
+but the more conventional unit for the helium dimer energy is kelvin,
+which is specified with the "--unit kelvin" flag. The total energy to
+second order here is -11.373 K.
+
+The subdirectory check in this directory contains the results of our
+calculation for this system. To check that you have got the same
+results, just use
+
+$ extract_saptdft.py --unit kelvin test check

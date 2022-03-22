@@ -1,0 +1,37 @@
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule HCN
+  Units Bohr
+  AC-Shift 0.129258    a.u.
+  IP       0.511758    a.u.
+  H   1.0   0.000000000    0.000000000    3.067848655   Type H
+  C   6.0   0.000000000    0.000000000    1.054345462   Type C
+  N   7.0   0.000000000    0.000000000   -1.124886713   Type N
+End
+
+Run-Type
+  Properties
+  Molecule     HCN
+  File-Prefix  HCN_aVTZ
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Cartesian   Use-ISA-Basis
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis
+  ISA-Basis      set2   Min-S-exp-H = 0.0   
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           GRAC            ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     Psi4            ( DALTON2015, NWCHEM, etc )
+
+  ! MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file if available )
+
+  #METHOD      wxhole-pols
+
+End
+
+Finish
+

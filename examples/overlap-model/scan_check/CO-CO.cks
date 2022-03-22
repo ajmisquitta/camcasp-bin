@@ -1,0 +1,141 @@
+TITLE CO_1 and CO_2
+TITLE Basis aug-cc-pVQZ and type MC
+TITLE Midbonds NONE and type weighted
+TITLE CalculationType: SAPT(DFT)
+
+MEMORY       2048 MB
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE CO_1 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file CO-CO-A-asc.movecs format ASCII-2
+   IP     0.515000 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type MC
+      C1         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+        #include-camcasp basis/gamess_us/aug-cc-pVQZ/C
+      ---
+      O1         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVQZ/O
+      ---
+   End
+   Basis Aux
+      Spherical
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      C1         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/C
+      ---
+      O1         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/O
+      ---
+      C2         0.0        0.00000000       0.00000000      -1.20270254  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/C
+      ---
+      O2         0.0        0.00000000       0.00000000       0.90202691  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/O
+      ---
+   End
+END
+
+MOLECULE CO_2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file CO-CO-B-asc.movecs format ASCII-2
+   IP     0.515000 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type MC
+      C2         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+        #include-camcasp basis/gamess_us/aug-cc-pVQZ/C
+      ---
+      O2         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+        #include-camcasp basis/gamess_us/aug-cc-pVQZ/O
+      ---
+   End
+   Basis Aux
+      Spherical
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      C1         0.0        0.00000000       0.00000000      -1.20270254  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/C
+      ---
+      O1         0.0        0.00000000       0.00000000       0.90202691  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/O
+      ---
+      C2         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/C
+      ---
+      O2         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/O
+      ---
+   End
+END
+BEGIN GRID
+  Molecule CO_1
+  Angular 200
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule CO_2
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN energy-scan
+  ! scan molecule B with molecule A
+  Energies E1exch E1elst
+  Energy-file CO-CO-energies
+  Random
+    Points 50
+    Radial 1
+    dRmin -1.0
+    dRmax +1.0
+    write CO-CO-pts.dat
+  End
+End
+
+
+FINISH

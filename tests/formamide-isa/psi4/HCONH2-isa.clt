@@ -1,0 +1,33 @@
+Title  Formamide aug-cc-pVTZ
+
+
+Molecule formamide
+     !  Geometry optimized  nwchem  B3LYP avtz
+     Units bohr
+     I.P. 10.16 eV  ( from NIST web-book )
+     HOMO  -0.32860
+     C      6.0     0.73690219    -0.29016270     0.00000000
+     O      8.0    -0.41965533    -2.26421099     0.00000000
+     N      7.0    -0.33761508     2.03824113     0.00000000
+     H1     1.0     2.82092994    -0.20596490     0.00000000
+     H2     1.0    -2.23332780     2.19617606     0.00000000
+     H3     1.0     0.72278745     3.61139057     0.00000000
+End
+
+Run-type properties
+  Molecule formamide
+  scfcode psi4
+  Basis aVTZ
+  Aux-Basis       aVTZ  Cartesian  USE-ISA-Basis
+  Atom-Aux-Basis  aVTZ  Spherical  USE-ISA-Basis
+  ISA-Basis set2  Min-S-exp-H = 0.2
+  Kernel  ALDA+CHF
+  task isa-A-dma
+End
+
+Finish
+
+HOMO input -> calculated
+-0.281961 -> -0.373523
+-0.32774 -> -0.329403
+-0.32857 -> -0.328602

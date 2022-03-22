@@ -1,0 +1,76 @@
+!  aug-cc-pVTZ-PP  EMSL  Basis Set Exchange Library  4/12/16 2:33 AM
+! Elements                             References
+! --------                             ----------
+! Ga-As,In-Sb, Tl-Bi   : K.A. Peterson, J. Chem. Phys. 119, 11099 (2003).
+! Se-Kr, Te-Xe, Po-Rn  : K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and
+! M. Dolg, J. Chem. Phys. 119, 11113 (2003).
+! Cu, Zn, Pd, Ag, Au, Hg: K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+! Y Zr Nb Mo Tc Ru Rh Pd     : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+! I    : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+! Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+! 
+
+
+! Elements                             References
+! --------                             ----------
+! Ga-As,In-Sb, Tl-Bi   : K.A. Peterson, J. Chem. Phys., 119, 11099 (2003).
+! Se-Kr, Te-Xe, Po-Rn  : K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and M. Dolg, J. Chem. Phys., 119, 11113 (2003).
+! Cu, Zn, Pd, Ag, Au, Hg: K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+! Y Zr Nb Mo Tc Ru Rh Pd : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+! I    : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+! Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+! 
+
+
+BASIS "ao basis" PRINT
+! BASIS SET: (11s,10p,9d,3f,2g) -> [6s,6p,5d,3f,2g]
+Cu    S
+   1946.3500000              0.0001730             -0.0000430             -0.0000850             -0.0003310        
+    277.9450000              0.0009580             -0.0001730             -0.0004180              0.0007840        
+     60.0108000             -0.0139320              0.0021820              0.0051250             -0.0199370        
+     37.5138000              0.0666720             -0.0132150             -0.0280790             -0.0064730        
+     10.9688000             -0.4144860              0.0954600              0.2066260              0.4304630        
+      2.3353600              0.7319850             -0.2048920             -0.6763950             -2.3103570        
+      0.9775800              0.4735590             -0.2429550              0.0068900              2.2981990        
+      0.1858870              0.0288600              0.2128160              1.6771590              0.3918090        
+      0.0948510             -0.0143780              0.5320730             -0.4592680             -2.2238270        
+Cu    S
+      0.0403630              1.0000000        
+Cu    S
+      0.0172000              1.0000000        
+Cu    P
+    395.0250000              0.0002060             -0.0000510             -0.0001220             -0.0003940        
+     64.7808000              0.0038720             -0.0007000             -0.0012420             -0.0013450        
+     17.8335000             -0.0831640              0.0170850              0.0352160              0.0791750        
+      4.3595800              0.3467890             -0.0814680             -0.1894850             -0.5949390        
+      2.0181600              0.4867620             -0.1198010             -0.2432280             -0.4104190        
+      0.9023120              0.2722850             -0.0599620              0.0252340              1.0418980        
+      0.3122900              0.0339860              0.2354600              0.5801290              0.3430100        
+      0.1156800             -0.0036900              0.5603760              0.4825400             -0.8397400        
+Cu    P
+      0.0417450              1.0000000        
+Cu    P
+      0.0151000              1.0000000        
+Cu    D
+    134.0680000              0.0029660             -0.0036790              0.0045260        
+     42.2407000              0.0273300             -0.0338610              0.0423250        
+     16.5467000              0.1001680             -0.1283960              0.1662100        
+      7.0122700              0.2319250             -0.3011240              0.4031220        
+      3.0244600              0.3392610             -0.3197480              0.0713050        
+      1.2646100              0.3452250              0.0845510             -0.7108880        
+      0.4962380              0.2466370              0.5018780             -0.1463320        
+Cu    D
+      0.1731340              1.0000000        
+Cu    D
+      0.0604000              1.0000000        
+Cu    F
+      5.1411000              1.0000000        
+Cu    F
+      1.2848000              1.0000000        
+Cu    F
+      0.4587000              1.0000000        
+Cu    G
+      3.4525000              1.0000000        
+Cu    G
+      1.3831000              1.0000000        
+END

@@ -1,0 +1,53 @@
+!  cc-pVTZ-PP  EMSL  Basis Set Exchange Library  4/12/16 2:23 AM
+! Elements                             References
+! --------                             ----------
+! Ga-As,In-Sb, Tl-Bi   : K.A. Peterson, J. Chem. Phys. 119, 11099 (2003).
+! Se-Kr, Te-Xe, Po-Rn  : K.A. Peterson, D. Figgen, E. Goll, H. Stoll, and
+! M. Dolg, J. Chem. Phys. 119, 11113 (2003).
+! Cu, Zn, Pd, Ag, Au, Hg: K.A. Peterson and C. Puzzarini, Theor. Chem. Acc., 114, 283 (2005)
+! Y Zr Nb Mo Tc Ru Rh Pd     : K.A. Peterson, D. Figgen, M. Dolg, H. Stoll, Energy-consistent relativistic pseudopotentials and correlation consistent basis sets for the 4d elements Y-Pd, Journal of Chemical Physics 126, 124101 (2007).
+! I    : K. A. Peterson, B. C. Shepler, D. Figgen, H. Stoll, On the spectroscopic and thermochemical properties of ClO, BrO, IO, and their anions, Journal of Physical Chemistry A 110, 13877 (2006).
+! Hf Ta W Re Os Ir Pt: D. Figgen, K.A. Peterson, M. Dolg, and H. Stoll, Energy-consistent pseudopotentials and correlation consistent basis sets for the 5d elements Hf-Pt, Journal of Chemical Physics 130, 164108 (2009).
+! 
+BASIS "ao basis" PRINT
+! #BASIS SET: (10s,9p,8d,2f,1g) -> [5s,5p,4d,2f,1g]
+Ru    S
+    208.2500000              0.0005230             -0.0001750             -0.0001820             -0.0006350        
+     18.8471000             -0.0449130              0.0148030              0.0052730              0.0517470        
+     11.7818000              0.2576260             -0.0875270             -0.0785570             -0.3171890        
+      7.3619500             -0.2091300              0.0842820             -0.0138970              0.3298480        
+      4.2777100             -0.5106620              0.1549110              0.5479870              0.6270530        
+      1.1910700              0.8032470             -0.3381410             -1.4980850             -3.4222090        
+      0.5485680              0.4984140             -0.3160050              0.4795000              3.8479480        
+      0.1386940              0.0337660              0.2835260              2.1402540             -1.6239260        
+      0.0676510             -0.0120940              0.6092730             -1.4545610             -0.6032230        
+Ru    S
+      0.0301410              1.0000000        
+Ru    P
+     22.7753000             -0.0015440             -0.0001480             -0.0000630              0.0011030        
+     14.2340000              0.0257710             -0.0091740             -0.0114610             -0.0225190        
+      5.9875500             -0.1865980              0.0813740              0.0999930              0.1821610        
+      1.6392400              0.4427740             -0.2361250             -0.3036410             -0.7313300        
+      0.8278800              0.4781510             -0.2943330             -0.3638860             -0.4901170        
+      0.4090100              0.2083690              0.0150980              0.1659350              1.5235390        
+      0.1718770              0.0246350              0.6560890              0.7005450             -0.0391820        
+      0.0712710             -0.0002190              0.4389440              0.3189430             -0.8661830        
+Ru    P
+      0.0292260              1.0000000        
+Ru    D
+     25.8838000              0.0015230             -0.0015510              0.0026560        
+      7.5925500             -0.0181620              0.0190350             -0.0337600        
+      2.7129300              0.1096910             -0.1257740              0.2929230        
+      1.3970800              0.2915970             -0.3632850              0.6173710        
+      0.6825650              0.3620440             -0.2793510             -0.3625300        
+      0.3193780              0.2975140              0.2457120             -0.8031580        
+      0.1417810              0.1610370              0.5472610              0.3154610        
+Ru    D
+      0.0580170              1.0000000        
+Ru    F
+      1.6965000              1.0000000        
+Ru    F
+      0.4754000              1.0000000        
+Ru    G
+      1.0311000              1.0000000        
+END

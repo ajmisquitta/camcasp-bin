@@ -1,0 +1,124 @@
+!  aug-cc-pVTZ-PP-RI Diffuse  EMSL  Basis Set Exchange Library  4/12/16 2:51 AM
+! Elements                             References
+! --------                             ----------
+! Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! Cu Zn Ag Cd Au Hg: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! 
+!  cc-pVTZ-PP-RI  EMSL  Basis Set Exchange Library  4/12/16 2:50 AM
+! Elements                             References
+! --------                             ----------
+! Hf Ta W Re Os Ir Pt: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! Ga Ge As Se Br Kr In Sn Sb Te I Xe Tl Pb Bi Po At Rn: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! Cu Zn Ag Cd Au Hg: Christof Hattig, auxiliary basis sets for RI-MP2 calculations, TURBOMOLE basis set library 6.0, 1 (2009).
+! 
+! cu   aug-cc-pVTZ-PP-RI Diffuse
+!
+    1  s
+     23.424100000            1.0000000        
+    1  s
+     12.213700000            1.0000000        
+    1  s
+      6.3025500000           1.0000000        
+    1  s
+      3.2852400000           1.0000000        
+    1  s
+      1.9278700000           1.0000000        
+    1  s
+      0.93842000000          1.0000000        
+    1  s
+      0.43458300000          1.0000000        
+    1  s
+      0.22069100000          1.0000000        
+    1  s
+      0.10225600000          1.0000000        
+    1  s
+      0.61337300000E-01            1.0000000        
+    1  p
+     22.552700000            1.0000000        
+    1  p
+     12.164700000            1.0000000        
+    1  p
+      6.8425800000           1.0000000        
+    1  p
+      3.1745700000           1.0000000        
+    1  p
+      1.6452000000           1.0000000        
+    1  p
+      0.88908200000          1.0000000        
+    1  p
+      0.52035100000          1.0000000        
+    1  p
+      0.31185200000          1.0000000        
+    1  p
+      0.16550100000          1.0000000        
+    1  p
+      0.82921600000E-01            1.0000000        
+    1  d
+     17.913700000            1.0000000        
+    1  d
+     11.354500000            1.0000000        
+    1  d
+      5.5049200000           1.0000000        
+    1  d
+      3.0745600000           1.0000000        
+    1  d
+      1.5074500000           1.0000000        
+    1  d
+      0.75226000000          1.0000000        
+    1  d
+      0.46232300000          1.0000000        
+    1  d
+      0.25701500000          1.0000000        
+    1  d
+      0.14039000000          1.0000000        
+    1  f
+     13.696100000            1.0000000        
+    1  f
+      7.0700900000           1.0000000        
+    1  f
+      4.1311300000           1.0000000        
+    1  f
+      1.9086100000           1.0000000        
+    1  f
+      0.90724300000          1.0000000        
+    1  f
+      0.41993700000          1.0000000        
+    1  f
+      0.21272200000          1.0000000        
+    1  g
+     24.118800000            1.0000000        
+    1  g
+      8.9443700000           1.0000000        
+    1  g
+      5.1213900000           1.0000000        
+    1  g
+      2.3632500000           1.0000000        
+    1  g
+      1.1061800000           1.0000000        
+    1  g
+      0.51777600000          1.0000000        
+    1  h
+     10.857900000            1.0000000        
+    1  h
+      5.5790700000           1.0000000        
+    1  h
+      2.2707300000           1.0000000        
+    1  i
+     10.105100000            1.0000000        
+    1  i
+      5.0052400000           1.0000000      
+! Diffuse set
+    1  s
+      0.33151300000E-01            1.0000000        
+    1  p
+      0.40345600000E-01            1.0000000        
+    1  d
+      0.73775200000E-01            1.0000000        
+    1  f
+      0.12162900000          1.0000000        
+    1  g
+      0.24235800000          1.0000000        
+    1  h
+      0.91667700000          1.0000000        
+    1  i
+      2.2370900000           1.0000000        

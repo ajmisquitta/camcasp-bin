@@ -1,0 +1,35 @@
+TITLE  PROCESS file for CO_1
+! Usage: process < CO-CO.prss
+
+
+Set Global-data
+   CamCASP /home/ajs1/camcasp/trunk
+   Units  BOHR  DEGREE
+   Overwrite
+   Echo Off
+End
+
+Molecule CO_1
+  Units BOHR
+  C1          6.00    0.00000000    0.00000000   -1.20270254   Type C
+  O1          8.00    0.00000000    0.00000000    0.90202691   Type O
+End
+
+Read local pols for CO_1
+   Use binary file CO-CO_L<LIMIT!2>_0f10.pol
+   Maximum rank  <LIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Frequencies STATIC + 10
+   ! Use this command to split the P-2-P pol file into 11 parts:
+   ! P2P-Pols <point-2-point pol file> SPLIT
+End
+
+Write
+   File-prefix CO-CO
+   PFIT file for CO_1 +++
+      with cutoff 0.0001 and freq <INDEX!0> +++
+      with penalties and weight <WEIGHT! 4> +++
+      and <ISOTROPIC!> polarizabilities
+End
+
+Finish

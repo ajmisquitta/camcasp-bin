@@ -1,0 +1,125 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+Edit
+  NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Angular 200
+  Radial  40
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+
+BEGIN DF
+  Type   OO
+  Eta    = 0.0
+  Lambda = 1.0
+  Gamma  = 0.0
+  Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
+END
+
+Begin ISA
+  DF = Doo-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A+DF  Zeta = 0.1
+  DF-PARAMETERS Lambda = 1.0
+  Solver LU
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    FIX = ON  ( This can be set to OFF with the BVLS solver, buy recommended ON for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+BEGIN GRID
+  Angular 400
+  Radial  80
+END
+
+!  Calculate multipoles using the ISA atom-expansions
+Begin Multipoles
+  DF with Constraints  Type ISA
+  Rank 4
+End
+
+!  Calculate multipoles using the density-fitted densities
+!  and the ISA shape-functions. 
+Begin Multipoles
+  DF with Constraints  Type ISA-GRID
+  Rank 4
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecular-density
+    ISOdensity   = 0.001
+    Density-Type = RHO-C
+    SLATER-MULTIPLIER = 5.0  ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.3 Bohr  ( step size of grid )
+  END
+  AIM-ATOMS
+    ISOdensity   = 0.001
+    AIM-METHOD   = ISA  Grid-based
+    Density-Type = RHO-C
+    ATOMS        = ALL    ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN        = 1e-6   ( outer limit of scan determined to be radius at )
+                          ( which shape function is this value )
+    R-MAX        = 5.0 Bohr  ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.2 Bohr  ( step size of grid )
+  END
+End
+
+! Fine integration grid needed for DMA calculation
+
+BEGIN GRID
+  Angular 590
+  Radial  80
+END
+
+Begin GDMA
+  Bohr
+  !  Original DMA
+  Multipoles
+    Switch 0
+    Limit  5
+    Punch DMA_Z0_L5.mom
+  Start
+  !  Revised DMA
+  Multipoles
+    Switch 3
+    Limit  5
+    Punch DMA_Z4_L5.mom
+  Start
+End
+
+End-CamCASP-commands

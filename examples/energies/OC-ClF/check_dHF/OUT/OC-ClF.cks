@@ -1,0 +1,189 @@
+TITLE OC and ClF
+TITLE Basis sadlej and type DC
+TITLE Midbonds NONE and type weighted
+TITLE CalculationType: DELTA-HF
+
+MEMORY       2048 MB
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE OC at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file OC-ClF-A-asc.movecs format ASCII-2
+   IP     0.515005 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type DC
+      C          6.0        0.00000000       0.00000000      -5.29123277  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      O          8.0        0.00000000       0.00000000      -7.41334014  TYPE O
+        #include-camcasp basis/gamess_us/sadlej/O
+      ---
+      Cl         0.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+        #include-camcasp basis/gamess_us/sadlej/Cl
+      ---
+      F          0.0        0.00000000       0.00000000       3.15938392  TYPE F
+        #include-camcasp basis/gamess_us/sadlej/F
+      ---
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      C          6.0        0.00000000       0.00000000      -5.29123277  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/C
+      ---
+      O          8.0        0.00000000       0.00000000      -7.41334014  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/O
+      ---
+      Cl         0.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/Cl
+      ---
+      F          0.0        0.00000000       0.00000000       3.15938392  TYPE F
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/F
+      ---
+   End
+END
+
+MOLECULE ClF at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file OC-ClF-B-asc.movecs format ASCII-2
+   IP     0.470800 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type DC
+      Cl        17.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+        #include-camcasp basis/gamess_us/sadlej/Cl
+      ---
+      F          9.0        0.00000000       0.00000000       3.15938392  TYPE F
+        #include-camcasp basis/gamess_us/sadlej/F
+      ---
+      C          0.0        0.00000000       0.00000000      -5.29123277  TYPE C
+        #include-camcasp basis/gamess_us/sadlej/C
+      ---
+      O          0.0        0.00000000       0.00000000      -7.41334014  TYPE O
+        #include-camcasp basis/gamess_us/sadlej/O
+      ---
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      Cl        17.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/Cl
+      ---
+      F          9.0        0.00000000       0.00000000       3.15938392  TYPE F
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/F
+      ---
+      C          0.0        0.00000000       0.00000000      -5.29123277  TYPE C
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/C
+      ---
+      O          0.0        0.00000000       0.00000000      -7.41334014  TYPE O
+        Limit G
+        #include-camcasp basis/auxiliary/aug-cc-pVQZ/O
+      ---
+   End
+END
+BEGIN GRID
+  Molecule OC
+  Angular 200
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule ClF
+  Angular 200
+  Radial  60
+END
+
+SET NEW-PROP
+  Kernel ALDA
+  DF  ( For constrained DF use: C-DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 400.0
+    FD-DELTA = 0.1
+    FD-ALPHA = 0.1
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+  SOLVER LU ( Options: GELSS )
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule OC
+  Type NN
+  Print only normalization constraints
+END
+BEGIN DF
+  Molecule ClF
+  Type NN
+  Print only normalization constraints
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+BEGIN E1exch
+  Integral Switch =  1
+END
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+
+FINISH

@@ -1,0 +1,26 @@
+FC     := gfortran
+
+FILES  := precision.f90 parameters.f90 free_format_reader.F90 readGAMESSmos.f90
+OBJ    := $(subst .F90,.o,$(subst .f90,.o,$(FILES)))
+#  Note: -static fails under OS X
+LDFLAGS := -static-libgfortran -static-libgcc
+
+vpath %.F90 ../../src
+vpath %.f90 ../../src
+
+install: readGAMESSmos
+	cp -pf $< ../../bin
+
+readGAMESSmos: ${OBJ} ${FRC}
+	${FC} ${LDFLAGS} ${OBJ} -o $@
+
+%.o: %.F90 ${FRC}
+	${FC} -c $<
+
+%.o: %.f90 ${FRC}
+	${FC} -c $<
+
+force:
+
+clean:
+	rm -f *.mod *.o core

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Usage:
+# molpro.sh <inputfile> <outfile> [<cores>]
+
+# If the third argument is present and greater than 1, run in parallel,
+# using the specified number of cores.
+# "${3:-0}" provides "0" if $3 is unset.
+echo "molpro.sh:" $1 $2 $3
+if (( ${3:-0} > 1 )); then
+  molpro -n $3 < $1 > $2
+else
+  molpro < $1 > $2
+fi
+
+# If molpro is not in the PATH it is necessary to replace "molpro"
+# above by the full path to the Molpro executable, or to set
+# CamCASP/bin/molpro as a symbolic link to it.
+
+exit
+

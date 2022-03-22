@@ -1,0 +1,46 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+BEGIN GRID
+  Molecule A
+  Angular 590
+  Radial  80
+END
+
+Begin GDMA
+  Bohr
+  !  Original DMA
+  Multipoles
+    Switch 0
+    Limit  5
+    Punch DMA_Z0_L5.mom
+  Start
+  !  Revised DMA
+  Multipoles
+    Switch 3
+    Limit  5
+    Punch DMA_Z4_L5.mom
+  Start
+End
+
+
+! BEGIN GRID
+!   Molecule A
+!   Angular 400
+!   Radial   80
+! END
+! 
+! BEGIN GDMA
+!   ! FILE <check point file from GAUSSIAN>
+!   ! Using a hydrogen radius of 0.325 Angstrom = 0.614 a.u.
+!   Bohr
+!   Multipoles
+!     Switch 3
+!     Limit  5
+!     Limit  5  All H
+!     Radius All H  0.614
+!     Punch DMA_sw4_L5L5.mom
+!   Start
+! END
+
+End-CamCASP-commands

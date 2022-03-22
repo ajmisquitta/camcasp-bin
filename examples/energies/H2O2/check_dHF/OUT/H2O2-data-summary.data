@@ -1,0 +1,27 @@
+ ================================================================
+ Compiled on Sep 05 2013 at 12:33:08
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22529
+ Working directory: 
+     /scratch/fastscratch/ajs1/H2O2_13-49-24
+ Running on: whirligig
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.2520545E+04        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1777860E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{2}_{ind}                -0.7786672E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(A)             -0.2561060E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(B)             -0.5225611E+03        CM-1     DF :: PROP chf :: NoReg                                     
+E^{2}_{ind}(UC)            -0.6376840E+03        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.3947115E+03        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(A)         0.1548697E+03        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(B)         0.2398418E+03        CM-1     DF :: AMP C :: NoReg :: PROP chf                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+--------------------------------------------------------------------------------

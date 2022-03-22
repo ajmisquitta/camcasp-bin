@@ -1,0 +1,222 @@
+BEGIN ISA
+  MOLECULE  H2O
+  ISA-DONE TRUE
+  ISA-CONVERGED TRUE
+  NUM-ISA-ATOMS      3
+  BEGIN ATOM  O
+    NAME  O atom in molecule H2O
+    LABEL  O
+    TYPE  O
+    MOLECULE  H2O
+    ISA-CONVERGED TRUE
+    UNITS  BOHR
+    Z    8
+     COORDS    0.000000      0.000000      0.000000
+    BEGIN ISA-SHAPE-FUNCTION
+      ISA-CHARGE    0.87367787E+01
+      BEGIN BASIS 
+        NAME       Subset of basis Atom basis for : H2O
+        MAIN-AUX   AUX1
+        TYPE       
+        ATOMS           1
+        ATOM-TYPES      1
+        SITES           1
+        SHELLS          7
+        PRIMITIVES      7
+        MOL-CHARGE      0
+        MAX-L           0
+        SIZE            7
+        GTO-TYPE  Spherical
+        UNITS Bohr
+        BEGIN SITES
+               1 O          8.00  0.0000000E+00  0.0000000E+00  0.0000000E+00    TYPE O       
+        END SITES
+        BEGIN NORMALIZATION
+            ! Fully normalized
+            !  G_{lm}(r,a,A) = 2^l * (2/pi)^(3/4) a^(l/2 + 3/4)    
+            !                  --------------------------------  * 
+            !                           [(2l-1)!!]^(1/2)           
+            !          * R_{lm}(r-A) exp(-a(r-A)^2      
+            ! First factor is absorbed in the contraction coefficients.
+            ! See subroutine norm_contraction_coeffs
+            ! So Spherical GTOs are of the form:
+            !      C * R_{lm}(r-A) exp(-a(r-A)^2
+            ! where C is the coefficient (Coeff), a is the exponent (Alpha),
+            ! A is centre of the GTO and 
+            ! R_{lm} are the regular spherical harmonics. See Stone (1996).
+        END NORMALIZATION
+        BEGIN BASIS-FUNCTIONS
+            ! Indx  Site  Symm  l   m  Num \ [Coeff,Alpha]*Num
+               1     1   S    0  0      1
+                         1   0.24118742E+02   0.10946100E+03
+               2     1   S    0  0      1
+                         1   0.81060640E+01   0.25578000E+02
+               3     1   S    0  0      1
+                         1   0.38722474E+01   0.95514800E+01
+               4     1   S    0  0      1
+                         1   0.16000232E+01   0.29396000E+01
+               5     1   S    0  0      1
+                         1   0.91550940E+00   0.13963800E+01
+               6     1   S    0  0      1
+                         1   0.66133039E+00   0.90506100E+00
+               7     1   S    0  0      1
+                         1   0.37274553E+00   0.42137600E+00
+        END BASIS-FUNCTIONS
+      END BASIS
+      BEGIN COEFFICIENTS
+           1     0.5689867719701895E+01
+           2     0.3580317415868397E+01
+           3    -0.2529647622553302E+00
+           4     0.4033230385934225E+00
+           5     0.5843263279719373E+00
+           6     0.6584464751187764E+00
+           7     0.2201754676263128E+00
+      END COEFFICIENTS
+    END ISA-SHAPE-FUNCTION
+    BEGIN TAIL-FIX
+      DEFINED TRUE
+      FUNC-INDX      1
+      A       6.724427
+      b       2.723929
+      c       0.000000
+      r1       1.700753
+      FUNC-DESC   wL_A*exp(-wL_b*rB)                                                              
+    END TAIL-FIX
+  END ATOM  O
+  BEGIN ATOM  H1
+    NAME  H1 atom in molecule H2O
+    LABEL  H1
+    TYPE  H
+    MOLECULE  H2O
+    ISA-CONVERGED TRUE
+    UNITS  BOHR
+    Z    1
+     COORDS   -1.453652      0.000000     -1.121687
+    BEGIN ISA-SHAPE-FUNCTION
+      ISA-CHARGE    0.63235592E+00
+      BEGIN BASIS 
+        NAME       Subset of basis Atom basis for : H2O
+        MAIN-AUX   AUX1
+        TYPE       
+        ATOMS           1
+        ATOM-TYPES      1
+        SITES           1
+        SHELLS          3
+        PRIMITIVES      3
+        MOL-CHARGE      0
+        MAX-L           0
+        SIZE            3
+        GTO-TYPE  Spherical
+        UNITS Bohr
+        BEGIN SITES
+               1 H1         1.00 -0.1453652E+01  0.0000000E+00 -0.1121687E+01    TYPE H       
+        END SITES
+        BEGIN NORMALIZATION
+            ! Fully normalized
+            !  G_{lm}(r,a,A) = 2^l * (2/pi)^(3/4) a^(l/2 + 3/4)    
+            !                  --------------------------------  * 
+            !                           [(2l-1)!!]^(1/2)           
+            !          * R_{lm}(r-A) exp(-a(r-A)^2      
+            ! First factor is absorbed in the contraction coefficients.
+            ! See subroutine norm_contraction_coeffs
+            ! So Spherical GTOs are of the form:
+            !      C * R_{lm}(r-A) exp(-a(r-A)^2
+            ! where C is the coefficient (Coeff), a is the exponent (Alpha),
+            ! A is centre of the GTO and 
+            ! R_{lm} are the regular spherical harmonics. See Stone (1996).
+        END NORMALIZATION
+        BEGIN BASIS-FUNCTIONS
+            ! Indx  Site  Symm  l   m  Num \ [Coeff,Alpha]*Num
+               1     1   S    0  0      1
+                         1   0.24243815E+01   0.51158895E+01
+               2     1   S    0  0      1
+                         1   0.78783427E+00   0.11429653E+01
+               3     1   S    0  0      1
+                         1   0.28285864E+00   0.29166153E+00
+        END BASIS-FUNCTIONS
+      END BASIS
+      BEGIN COEFFICIENTS
+           1     0.7151086052862922E-01
+           2     0.1266281837400408E+00
+           3     0.9432083727169936E-02
+      END COEFFICIENTS
+    END ISA-SHAPE-FUNCTION
+    BEGIN TAIL-FIX
+      DEFINED TRUE
+      FUNC-INDX      1
+      A       0.767556
+      b       2.934975
+      c       0.000000
+      r1       1.417294
+      FUNC-DESC   wL_A*exp(-wL_b*rB)                                                              
+    END TAIL-FIX
+  END ATOM  H1
+  BEGIN ATOM  H2
+    NAME  H2 atom in molecule H2O
+    LABEL  H2
+    TYPE  H
+    MOLECULE  H2O
+    ISA-CONVERGED TRUE
+    UNITS  BOHR
+    Z    1
+     COORDS    1.453652      0.000000     -1.121687
+    BEGIN ISA-SHAPE-FUNCTION
+      ISA-CHARGE    0.63235592E+00
+      BEGIN BASIS 
+        NAME       Subset of basis Atom basis for : H2O
+        MAIN-AUX   AUX1
+        TYPE       
+        ATOMS           1
+        ATOM-TYPES      1
+        SITES           1
+        SHELLS          3
+        PRIMITIVES      3
+        MOL-CHARGE      0
+        MAX-L           0
+        SIZE            3
+        GTO-TYPE  Spherical
+        UNITS Bohr
+        BEGIN SITES
+               1 H2         1.00  0.1453652E+01  0.0000000E+00 -0.1121687E+01    TYPE H       
+        END SITES
+        BEGIN NORMALIZATION
+            ! Fully normalized
+            !  G_{lm}(r,a,A) = 2^l * (2/pi)^(3/4) a^(l/2 + 3/4)    
+            !                  --------------------------------  * 
+            !                           [(2l-1)!!]^(1/2)           
+            !          * R_{lm}(r-A) exp(-a(r-A)^2      
+            ! First factor is absorbed in the contraction coefficients.
+            ! See subroutine norm_contraction_coeffs
+            ! So Spherical GTOs are of the form:
+            !      C * R_{lm}(r-A) exp(-a(r-A)^2
+            ! where C is the coefficient (Coeff), a is the exponent (Alpha),
+            ! A is centre of the GTO and 
+            ! R_{lm} are the regular spherical harmonics. See Stone (1996).
+        END NORMALIZATION
+        BEGIN BASIS-FUNCTIONS
+            ! Indx  Site  Symm  l   m  Num \ [Coeff,Alpha]*Num
+               1     1   S    0  0      1
+                         1   0.24243815E+01   0.51158895E+01
+               2     1   S    0  0      1
+                         1   0.78783427E+00   0.11429653E+01
+               3     1   S    0  0      1
+                         1   0.28285864E+00   0.29166153E+00
+        END BASIS-FUNCTIONS
+      END BASIS
+      BEGIN COEFFICIENTS
+           1     0.7151086049619797E-01
+           2     0.1266281837729824E+00
+           3     0.9432083712556567E-02
+      END COEFFICIENTS
+    END ISA-SHAPE-FUNCTION
+    BEGIN TAIL-FIX
+      DEFINED TRUE
+      FUNC-INDX      1
+      A       0.767556
+      b       2.934975
+      c       0.000000
+      r1       1.417294
+      FUNC-DESC   wL_A*exp(-wL_b*rB)                                                              
+    END TAIL-FIX
+  END ATOM  H2
+END ISA

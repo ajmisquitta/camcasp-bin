@@ -1,0 +1,34 @@
+TITLE  PROCESS file for He
+! Usage: process < He_aTZ.prss
+
+
+Set Global-data
+   CamCASP /home/ajs1/camcasp-5.5
+   Units  BOHR  DEGREE
+   Overwrite
+   Echo Off
+End
+
+Molecule He
+  Units BOHR
+  HE          2.00    0.00000000    0.00000000    0.00000000   Type HE
+End
+
+Read local pols for He
+   Use binary file He_aTZ_L<LIMIT!2>_0f10.pol
+   Maximum rank  <LIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Frequencies STATIC + 10
+   ! Use this command to split the P-2-P pol file into 11 parts:
+   ! P2P-Pols <point-2-point pol file> SPLIT
+End
+
+Write
+   File-prefix He_aTZ
+   PFIT file for He +++
+      with cutoff 0.0001 and freq <INDEX!0> +++
+      with penalties and weight <WEIGHT! 4> +++
+      and <ISOTROPIC!> polarizabilities
+End
+
+Finish

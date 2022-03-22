@@ -1,0 +1,61 @@
+Title  H2O..Ca2+ : ISA : Rho+Rho1
+
+Global
+  Units     Angstrom Degree kJ/mol
+  Overwrite Yes
+End
+
+Molecule H2O
+  Units  Angstrom
+  I.P.     0.4638 a.u.
+  AC-SHIFT 0.1319 a.u.
+  Charge 0
+  ! Vibrationally averaged geom. : Mas, Bukowski, Szalewicz
+  O   8.0       0.000000  0.000000  0.000000 Type O
+  H1  1.0      -0.559244  0.776839  0.000000 Type H
+  H2  1.0      -0.559244 -0.776839  0.000000 Type H
+End
+
+Molecule  Ca
+  Units  Angstrom
+  ! NOTE: Computed using def2-tzvpp
+  I.P.     1.8723 a.u.
+  AC-SHIFT 0.2046 a.u.
+  Charge +2
+  Ca   20.0   0.0  0.0  0.0  Type  Ca
+End
+
+Rotate Ca by 0.0 about 0.0 0.0 0.1
+Place  Ca at 1.7 0.0 0.0
+
+Join H2O and Ca into dimer
+Show dimer in XYZ format
+
+
+Run-Type
+  SAPT(DFT)
+  !
+  Molecules    H2O and Ca
+  File-Prefix  H2O_Ca-2plus_3
+  !
+  Basis      user-def  Type DC
+  Aux-Basis  user-def  Type DC  Spherical   Use-ISA-Basis  ( this basis *could* be Cartesian )
+  AtomAux-Basis  user-def  Type DC  Spherical   Use-ISA-Basis  ( this *must* be Spherical )
+  ISA-Aux        set2  Min-S-exp-H = 0.0  MIN-S-EXP-DUMMY = 0.0  DUMMY-SYMM-LIMIT = G
+  ISA-AtomAux    set2  Min-S-exp-H = 0.2  MIN-S-EXP-DUMMY = 0.2  DUMMY-SYMM-LIMIT = P
+  !
+  MO-FILE-A      H2O_Ca-2plus_3-A-asc.movecs  format ASCII
+  MO-FILE-B      H2O_Ca-2plus_3-B-asc.movecs  format ASCII
+  !
+  ! PBE0/AC with default (and inappropriate) shift for AC:
+  Func       PBE0
+  AC         CS00
+  SCFcode    NWCHEM
+  !
+  Memory     4 GB
+  !
+  #include     isa-A-Rho+RHO1
+  !
+End
+
+Finish

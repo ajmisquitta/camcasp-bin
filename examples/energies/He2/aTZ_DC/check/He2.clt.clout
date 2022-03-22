@@ -1,0 +1,54 @@
+! Helium dimer cluster file
+! =========================
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE He1
+  I.P. 0.9036
+  He          2.0    0.0  0.0  0.0
+END
+Molecule He1
+  Units BOHR
+    1  He          2.00     0.00000000    0.00000000    0.00000000   Type He
+End
+
+MOLECULE He2
+  I.P. 0.9036
+  He          2.0    0.0  0.0  5.6
+END
+Molecule He2
+  Units BOHR
+    1  He          2.00     0.00000000    0.00000000    5.60000000   Type He
+End
+
+
+Run-type
+  Sapt-DFT
+  Molecules He1 and He2
+  Basis aVTZ Type DC
+  Aux-basis aVTZ type DC
+  SCFcode Dalton
+  Func PBE0
+  AC Multpole TANH 3.5 4.7
+  Kernel ALDA+CHF
+  File-prefix He2
+End
+ORIENT commands for He1 and He2
+ in file He2_energy.ornt
+TEMPLATE file is He2.DALtemplate
+P.data file is He2_P.data
+ Cartesian size of basis is           50
+ Max nocc =            1
+ nvir =           49
+ Memory needed for this calculation is          500  MB
+ But using the declared memory of         4096  MB
+ Spherical size of the basis is           46
+ nocc =            1
+ nvir =           45
+CamCASP command file is He2.cks
+
+Finish
+ Exiting program cluster_operations

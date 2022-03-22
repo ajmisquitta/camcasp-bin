@@ -1,0 +1,44 @@
+! Helium properties calculation
+! =============================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+!  CamCASP /home/ajs1/camcasp-5.5
+End
+
+Molecule He
+  He 2.0    0.0 0.0 0.0
+End
+Molecule He
+  Units BOHR
+    1  HE          2.00     0.00000000    0.00000000    0.00000000   Type HE
+End
+
+Files
+  Molecule He
+  Basis aVTZ
+  Options Tests
+  File-prefix He_aTZ
+  Orient file
+  Process file
+  Interface file
+  Sites file
+End
+ORIENT commands for He in file He_aTZ.ornt
+PROCESS commands to write the CASIMIR input for He
+are in file He_aTZ_casimir.prss
+PROCESS commands for He in file He_aTZ.prss
+ Cartesian size of the basis is           25
+ nocc =            1
+ nvir =           24
+ Memory needed for this calculation is          500  MB
+ Spherical size of the basis is           23
+ nocc =            1
+ nvir =           22
+TEMPLATE file is He_aTZ.template
+CamCASP command file is He_aTZ.cks
+SITES for He are in file He_aTZ.sites
+
+Finish
+ Exiting program cluster_operations

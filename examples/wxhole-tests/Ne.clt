@@ -1,0 +1,34 @@
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule Ne
+  Units Bohr
+  AC-Shift 0.229128    a.u.
+  IP       0.898748    a.u.
+  Ne  10.0    0.0000000000    0.0000000000    0.0000000000  Type Ne
+End
+
+Run-Type
+  Properties
+  Molecule     Ne
+  File-Prefix  Ne_aVTZ
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Cartesian   Use-ISA-Basis
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis
+  ISA-Basis      set2   Min-S-exp-H = 0.0   
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           GRAC            ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     Psi4            ( DALTON2015, NWCHEM, etc )
+
+  ! MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file if available )
+
+  #METHOD      wxhole-pols
+
+End
+
+Finish

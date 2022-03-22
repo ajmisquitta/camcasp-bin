@@ -1,0 +1,1815 @@
+              CamCASP version 6.0.051  (b'4a4a1cb' M)
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+      Compiled with gfortran on 04 May 2020 at 22:08:38
+       The source code included local modifications
+
+Starting on 04-05-2020 at 22:12:00.265
+ 
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with            1073741824  bytes
+TITLE H2O
+TITLE Basis: cc-pVDZ
+TITLE CalculationType: PROPERTIES
+
+
+MEMORY          8 GB
+ Memory Manager initialized with            8589934592  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code NWCHEM
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE H2O at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file H2O_DZ-A-asc.movecs format ASCII-2
+   IP     0.463800 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format NWCHEM
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+   End
+   Basis Aux
+        Spherical
+        Units Bohr
+        Format TURBOMOLE
+      O          8.0        0.00000000       0.00000000       0.00000000  TYPE O
+    LIMITING basis on this site upto G symmetry
+      H1         1.0       -1.45365196       0.00000000      -1.12168732  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H2         1.0        1.45365196       0.00000000      -1.12168732  TYPE H
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for H2O
+    1          O    8.00     0.0000     0.0000     0.0000
+    2         H1    1.00    -1.4537     0.0000    -1.1217
+    3         H2    1.00     1.4537     0.0000    -1.1217
+ Molecular charge    =     0
+ Number of electrons =    10
+ Molecular IP       =     0.463800  a.u.
+ Number of molecular orbitals =    24
+     Occupied orbitals        =     5
+     Virtual  orbitals        =    19
+ Main basis: Size   =    24
+             Shells =    12
+             Type   = MC
+             Atoms  =     3
+       Sites(Main)  =     3
+       Site Types   =     2
+             GTOs   = Spherical
+ Aux  basis: Size   =    84
+             Shells =    30
+             Type   = MC
+        Sites(Aux)  =     3
+             GTOs   = Spherical
+ Initialized stockholder atoms =       T
+ MO-file : H2O_DZ-A-asc.movecs Type ASCII-2
+============================================================
+
+
+
+
+Edit
+  ! For strongly delocalised systems reduce EPS or use TYPE = ALL
+  ! or else you will see large charge-violations in the ISA step.
+  NEIGHBOURS TYPE = OVR EPS = 0.01 PRINT
+           3  neighbours for site O
+           O   H1   H2 
+           3  neighbours for site H1
+          H1    O   H2 
+           3  neighbours for site H2
+          H2    O   H1 
+           3  neighbours for atom O
+           O   H1   H2 
+           3  neighbours for atom H1
+          H1    O   H2 
+           3  neighbours for atom H2
+          H2    O   H1 
+ Corr-Atom-Aux :            3  neighbours for atom O in mol%aux:
+           O   H1   H2 
+ Corr-Atom-Aux :            3  neighbours for atom H1 in mol%aux:
+           O   H1   H2 
+ Corr-Atom-Aux :            3  neighbours for atom H2 in mol%aux:
+           O   H1   H2 
+ 
+End
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN GRID
+  ! We need larger grids for the polarizability integration
+  Angular 590
+  Radial  100
+END
+ Integration grid summary
+ ========================
+ Molecular grid for molecule: H2O
+    Total number of points =       175230
+    Number of angular points          590
+    Number of radial  points          100
+ ========================
+    Atom     Total   Angular    Radial
+----------------------------------------
+O            58410       590       100
+H1           58410       590       100
+H2           58410       590       100
+----------------------------------------
+Total number of integration points on atoms:     175230
+========================================
+
+
+SET Lattice
+  ! These settings define the point-to-point lattice.
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random   2000
+  Seed     1
+END
+ End of LATTICE section. Resuming rest of routine
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+ DF-INT parameters set.
+SET DF
+  Solver LU (Options are LU and GELSS )
+END
+
+
+BEGIN DF
+  Molecule H2O
+  Type NN
+  Eta = 0.0
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for H2O
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00001
+End of tests for H2O
+ Normalization tests for fitted density of H2O
+  \int \rho(r) dr = 10.00000
+Differs from expected value of    10 by .00000101
+ End of normalization tests
+
+
+Begin ISA
+  DF = Drho-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  !  Use zeta = 0.1 for multipoles, 0.9 for density partitioning
+  ISA-Algorithm A
+  Solver LU
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+ Finished reading in the STOCKHOLDER:CONVERGENCE block.
+  W-TAILS
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+ Finished reading in the STOCKHOLDER block.
+ Using ISA algorithm A                                       
+ Minimizing: ||\rho^{a} - \rho w^{a}/(\sum_{b} w^{b})||
+   using squared overlap norm
+w-initialization 1 : Coeff of GTO with exponent closest to       1.0000
+      set to 1.0. Rest set to 0.0
+   Int Rho(r) dr =    10.000001012447512     
+ type(basis_set) :: Subset of basis Atom basis for : H2O
+ Read in? :  T
+ Atoms  :            1
+ Sites  :            1
+ Shells :            7
+ Primitives :            7
+ Charge :            0
+ Type   : 
+ Type of GTOs : Spherical
+ O     8.0    0.0000    0.0000    0.0000
+   S        1
+        109.46100      24.11874
+   S        1
+         25.57800       8.10606
+   S        1
+          9.55148       3.87225
+   S        1
+          2.93960       1.60002
+   S        1
+          1.39638       0.91551
+   S        1
+          0.90506       0.66133
+   S        1
+          0.42138       0.37275
+ type(basis_set) :: Subset of basis Atom basis for : H2O
+ Read in? :  T
+ Atoms  :            1
+ Sites  :            1
+ Shells :            3
+ Primitives :            3
+ Charge :            0
+ Type   : 
+ Type of GTOs : Spherical
+ H1    1.0   -1.4537    0.0000   -1.1217
+   S        1
+          5.11589       2.42438
+   S        1
+          1.14297       0.78783
+   S        1
+          0.29166       0.28286
+ type(basis_set) :: Subset of basis Atom basis for : H2O
+ Read in? :  T
+ Atoms  :            1
+ Sites  :            1
+ Shells :            3
+ Primitives :            3
+ Charge :            0
+ Type   : 
+ Type of GTOs : Spherical
+ H2    1.0    1.4537    0.0000   -1.1217
+   S        1
+          5.11589       2.42438
+   S        1
+          1.14297       0.78783
+   S        1
+          0.29166       0.28286
+ BEGIN TEST SHAPE-FUNCTIONS: INITIALIZATION
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          0.000000000    0.000000000    8.000000000   0.000000E+00     n
+    2      H1         0.000000000    0.000000000    1.000000000   0.000000E+00     n
+    3      H2         0.000000000    0.000000000    1.000000000   0.000000E+00     n
+====================================================================================
+ Residual charge =   10.000000000
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: INITIALIZATION
+ Stockholder iteration :            1
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.69663E+00
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.69663E+00
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            1
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          0.000000000    7.144735467    0.855264533   6.966274E-01     n
+    2      H1         0.000000000    1.628336502   -0.628336502   1.023163E-02     n
+    3      H2         0.000000000    1.628336501   -0.628336501   1.023163E-02     n
+====================================================================================
+ Residual charge =   -0.401408470
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            1
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             7.26570             3.07857             1.18470
+ Func(1)  H1         1             6.06797             3.23984             1.31207
+ Func(1)  H2         1             6.06797             3.23984             1.31207
+ End Shape-function analysis of tails
+ Stockholder iteration :            2
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.76076E-02
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.76076E-02
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            2
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          7.144735467    7.787439644    0.212560356   3.469988E-05     n
+    2      H1         1.628336502    1.136408250   -0.136408250   7.607551E-03     n
+    3      H2         1.628336501    1.136408250   -0.136408250   7.607551E-03     n
+====================================================================================
+ Residual charge =   -0.060256144
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            2
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             7.63405             3.00578             1.12934
+ Func(1)  H1         1             1.11463             2.37855             0.70719
+ Func(1)  H2         1             1.11463             2.37855             0.70719
+ End Shape-function analysis of tails
+ Stockholder iteration :            3
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.22519E-02
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.22519E-02
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            3
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          7.787439644    8.144666791   -0.144666791   1.912412E-05     n
+    2      H1         1.136408250    0.940121235    0.059878765   2.251881E-03     n
+    3      H2         1.136408250    0.940121235    0.059878765   2.251881E-03     n
+====================================================================================
+ Residual charge =   -0.024909260
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            3
+ Begin Shape-function analysis of tails
+ Func(1)  O          8            10.41823             3.13932             1.23192
+ Func(1)  H1         1             0.81696             2.43822             0.74311
+ Func(1)  H2         1             0.81696             2.43822             0.74311
+ End Shape-function analysis of tails
+ Stockholder iteration :            4
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.70641E-03
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.70641E-03
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            4
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.144666791    8.359874893   -0.359874893   4.146208E-06     n
+    2      H1         0.940121235    0.830399450    0.169600550   7.064051E-04     n
+    3      H2         0.940121235    0.830399450    0.169600550   7.064051E-04     n
+====================================================================================
+ Residual charge =   -0.020673794
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            4
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             9.37145             3.02471             1.14361
+ Func(1)  H1         1             0.76161             2.54059             0.80682
+ Func(1)  H2         1             0.76161             2.54059             0.80682
+ End Shape-function analysis of tails
+ Stockholder iteration :            5
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.30873E-03
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.30873E-03
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            5
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.359874893    8.494710200   -0.494710200   1.272666E-06     n
+    2      H1         0.830399450    0.760690315    0.239309685   3.087347E-04     n
+    3      H2         0.830399450    0.760690315    0.239309685   3.087347E-04     n
+====================================================================================
+ Residual charge =   -0.016090830
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            5
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             8.36226             2.91864             1.06480
+ Func(1)  H1         1             0.74754             2.63221             0.86607
+ Func(1)  H2         1             0.74754             2.63221             0.86607
+ End Shape-function analysis of tails
+ Stockholder iteration :            6
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.15203E-03
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.15203E-03
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            6
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.494710200    8.581758798   -0.581758798   4.851644E-07     n
+    2      H1         0.760690315    0.714268752    0.285731248   1.520344E-04     n
+    3      H2         0.760690315    0.714268752    0.285731248   1.520344E-04     n
+====================================================================================
+ Residual charge =   -0.010296302
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            6
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             7.74215             2.84835             1.01414
+ Func(1)  H1         1             0.75004             2.71484             0.92129
+ Func(1)  H2         1             0.75004             2.71484             0.92129
+ End Shape-function analysis of tails
+ Stockholder iteration :            7
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.75637E-04
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.75637E-04
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            7
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.581758798    8.639378197   -0.639378197   2.056530E-07     n
+    2      H1         0.714268752    0.682752772    0.317247228   7.563687E-05     n
+    3      H2         0.714268752    0.682752772    0.317247228   7.563687E-05     n
+====================================================================================
+ Residual charge =   -0.004883741
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            7
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             7.36417             2.80341             0.98239
+ Func(1)  H1         1             0.75791             2.78556             0.96992
+ Func(1)  H2         1             0.75791             2.78556             0.96992
+ End Shape-function analysis of tails
+ Stockholder iteration :            8
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.37542E-04
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.37542E-04
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            8
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.639378197    8.678251807   -0.678251807   9.204505E-08     n
+    2      H1         0.682752772    0.661064993    0.338935007   3.754211E-05     n
+    3      H2         0.682752772    0.661064993    0.338935007   3.754211E-05     n
+====================================================================================
+ Residual charge =   -0.000381793
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            8
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             7.12561             2.77420             0.96202
+ Func(1)  H1         1             0.76591             2.84267             1.01009
+ Func(1)  H2         1             0.76591             2.84267             1.01009
+ End Shape-function analysis of tails
+ Stockholder iteration :            9
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.18706E-04
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.18706E-04
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            9
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.678251807    8.704885906   -0.704885906   4.270546E-08     n
+    2      H1         0.661064993    0.645965887    0.354034113   1.870630E-05     n
+    3      H2         0.661064993    0.645965887    0.354034113   1.870630E-05     n
+====================================================================================
+ Residual charge =    0.003182320
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            9
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.96980             2.75476             0.94859
+ Func(1)  H1         1             0.77242             2.88709             1.04191
+ Func(1)  H2         1             0.77242             2.88709             1.04191
+ End Shape-function analysis of tails
+ Stockholder iteration :           10
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.93998E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.93998E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           10
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.704885906    8.723370688   -0.723370688   2.037724E-08     n
+    2      H1         0.645965887    0.635347946    0.364652054   9.399818E-06     n
+    3      H2         0.645965887    0.635347946    0.364652054   9.399818E-06     n
+====================================================================================
+ Residual charge =    0.005933419
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           10
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.86523             2.74156             0.93952
+ Func(1)  H1         1             0.77730             2.92091             1.06646
+ Func(1)  H2         1             0.77730             2.92091             1.06646
+ End Shape-function analysis of tails
+ Stockholder iteration :           11
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.41784E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.41784E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           11
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.723370688    8.737128023   -0.737128023   1.049131E-08     n
+    2      H1         0.635347946    0.630125191    0.369874809   4.178398E-06     n
+    3      H2         0.635347946    0.630125191    0.369874809   4.178398E-06     n
+====================================================================================
+ Residual charge =    0.002621595
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           11
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.79357             2.73243             0.93327
+ Func(1)  H1         1             0.78087             2.94635             1.08512
+ Func(1)  H2         1             0.78087             2.94635             1.08512
+ End Shape-function analysis of tails
+ Stockholder iteration :           12
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.19488E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.19488E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           12
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.737128023    8.744707126   -0.744707126   3.360470E-09     n
+    2      H1         0.630125191    0.626013369    0.373986631   1.948837E-06     n
+    3      H2         0.630125191    0.626013369    0.373986631   1.948837E-06     n
+====================================================================================
+ Residual charge =    0.003266136
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           12
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.73962             2.72546             0.92851
+ Func(1)  H1         1             0.77773             2.95308             1.09008
+ Func(1)  H2         1             0.77773             2.95308             1.09008
+ End Shape-function analysis of tails
+ Stockholder iteration :           13
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.87793E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.87793E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           13
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.744707126    8.750022085   -0.750022085   1.695176E-09     n
+    2      H1         0.626013369    0.623106235    0.376893765   8.779335E-07     n
+    3      H2         0.626013369    0.623106235    0.376893765   8.779335E-07     n
+====================================================================================
+ Residual charge =    0.003765446
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           13
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.71056             2.72171             0.92596
+ Func(1)  H1         1             0.77653             2.96011             1.09528
+ Func(1)  H2         1             0.77653             2.96011             1.09528
+ End Shape-function analysis of tails
+ Stockholder iteration :           14
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.19096E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.19096E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           14
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.750022085    8.745010942   -0.745010942   3.814001E-09     n
+    2      H1         0.623106235    0.627404531    0.372595469   1.909612E-06     n
+    3      H2         0.623106235    0.627404531    0.372595469   1.909612E-06     n
+====================================================================================
+ Residual charge =    0.000179996
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           14
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.69095             2.71916             0.92423
+ Func(1)  H1         1             0.77625             2.96594             1.09960
+ Func(1)  H2         1             0.77625             2.96594             1.09960
+ End Shape-function analysis of tails
+ Stockholder iteration :           15
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.12930E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.12930E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           15
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.745010942    8.749024748   -0.749024748   3.103491E-09     n
+    2      H1         0.627404531    0.623794431    0.376205569   1.293011E-06     n
+    3      H2         0.627404531    0.623794431    0.376205569   1.293011E-06     n
+====================================================================================
+ Residual charge =    0.003386391
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           15
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.69795             2.72037             0.92505
+ Func(1)  H1         1             0.77102             2.94972             1.08761
+ Func(1)  H2         1             0.77102             2.94972             1.08761
+ End Shape-function analysis of tails
+ Stockholder iteration :           16
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.44410E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.44410E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           16
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.749024748    8.752911773   -0.752911773   9.163258E-10     Y
+    2      H1         0.623794431    0.621593788    0.378406212   4.441039E-07     n
+    3      H2         0.623794431    0.621593787    0.378406213   4.441039E-07     n
+====================================================================================
+ Residual charge =    0.003900652
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           16
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.69497             2.71970             0.92460
+ Func(1)  H1         1             0.77328             2.96043             1.09552
+ Func(1)  H2         1             0.77328             2.96043             1.09552
+ End Shape-function analysis of tails
+ Stockholder iteration :           17
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.20660E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.20660E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           17
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.752911773    8.747291856   -0.747291856   4.343860E-09     n
+    2      H1         0.621593788    0.626147960    0.373852040   2.066009E-06     n
+    3      H2         0.621593787    0.626147960    0.373852040   2.066009E-06     n
+====================================================================================
+ Residual charge =    0.000412225
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           17
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.68148             2.71791             0.92338
+ Func(1)  H1         1             0.77475             2.96716             1.10050
+ Func(1)  H2         1             0.77475             2.96716             1.10050
+ End Shape-function analysis of tails
+ Stockholder iteration :           18
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.10422E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.10422E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           18
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.747291856    8.750624480   -0.750624480   2.665999E-09     n
+    2      H1         0.626147960    0.622928395    0.377071605   1.042165E-06     n
+    3      H2         0.626147960    0.622928395    0.377071605   1.042165E-06     n
+====================================================================================
+ Residual charge =    0.003518730
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           18
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.68985             2.71932             0.92434
+ Func(1)  H1         1             0.77043             2.95154             1.08895
+ Func(1)  H2         1             0.77043             2.95154             1.08895
+ End Shape-function analysis of tails
+ Stockholder iteration :           19
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.35054E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.35054E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           19
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.750624480    8.754023920   -0.754023920   6.907702E-10     Y
+    2      H1         0.622928395    0.620985178    0.379014822   3.505361E-07     n
+    3      H2         0.622928395    0.620985178    0.379014822   3.505361E-07     n
+====================================================================================
+ Residual charge =    0.004005725
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           19
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.68927             2.71896             0.92409
+ Func(1)  H1         1             0.77307             2.96198             1.09666
+ Func(1)  H2         1             0.77307             2.96198             1.09666
+ End Shape-function analysis of tails
+ Stockholder iteration :           20
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.20915E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.20915E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           20
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.754023920    8.748289272   -0.748289272   4.396204E-09     n
+    2      H1         0.620985178    0.625569522    0.374430478   2.091488E-06     n
+    3      H2         0.620985178    0.625569522    0.374430478   2.091488E-06     n
+====================================================================================
+ Residual charge =    0.000571685
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           20
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.67742             2.71738             0.92302
+ Func(1)  H1         1             0.77470             2.96839             1.10142
+ Func(1)  H2         1             0.77470             2.96839             1.10142
+ End Shape-function analysis of tails
+ Stockholder iteration :           21
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.94347E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.94347E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           21
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.748289272    8.751352543   -0.751352543   2.480577E-09     n
+    2      H1         0.625569522    0.622523652    0.377476348   9.434654E-07     n
+    3      H2         0.625569522    0.622523652    0.377476348   9.434654E-07     n
+====================================================================================
+ Residual charge =    0.003600153
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           21
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.68620             2.71884             0.92401
+ Func(1)  H1         1             0.77057             2.95293             1.08998
+ Func(1)  H2         1             0.77057             2.95293             1.08998
+ End Shape-function analysis of tails
+ Stockholder iteration :           22
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.21394E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.21394E-05
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           22
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.751352543    8.745706640   -0.745706640   4.586630E-09     n
+    2      H1         0.622523652    0.627181838    0.372818162   2.139399E-06     n
+    3      H2         0.622523652    0.627181838    0.372818162   2.139399E-06     n
+====================================================================================
+ Residual charge =   -0.000070316
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           22
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.68651             2.71860             0.92385
+ Func(1)  H1         1             0.77317             2.96298             1.09741
+ Func(1)  H2         1             0.77317             2.96298             1.09741
+ End Shape-function analysis of tails
+ Stockholder iteration :           23
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.30144E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.30144E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           23
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.745706640    8.747405163   -0.747405163   1.730502E-10     Y
+    2      H1         0.627181838    0.625993943    0.374006057   3.014383E-07     n
+    3      H2         0.627181838    0.625993943    0.374006057   3.014383E-07     n
+====================================================================================
+ Residual charge =    0.000606952
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           23
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.69441             2.71996             0.92477
+ Func(1)  H1         1             0.76873             2.94711             1.08568
+ Func(1)  H2         1             0.76873             2.94711             1.08568
+ End Shape-function analysis of tails
+ Stockholder iteration :           24
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.74232E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.74232E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           24
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.747405163    8.742819727   -0.742819727   1.256829E-09     n
+    2      H1         0.625993943    0.628830993    0.371169007   7.423208E-07     n
+    3      H2         0.625993943    0.628830993    0.371169007   7.423208E-07     n
+====================================================================================
+ Residual charge =   -0.000481714
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           24
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.68666             2.71897             0.92410
+ Func(1)  H1         1             0.77200             2.95388             1.09067
+ Func(1)  H2         1             0.77200             2.95388             1.09067
+ End Shape-function analysis of tails
+ Stockholder iteration :           25
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.90995E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.90995E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           25
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.742819727    8.744005500   -0.744005500   7.595058E-11     Y
+    2      H1         0.628830993    0.628047426    0.371952574   9.099506E-08     n
+    3      H2         0.628830993    0.628047426    0.371952574   9.099508E-08     n
+====================================================================================
+ Residual charge =   -0.000100352
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           25
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.70318             2.72115             0.92558
+ Func(1)  H1         1             0.76876             2.94369             1.08317
+ Func(1)  H2         1             0.76876             2.94369             1.08317
+ End Shape-function analysis of tails
+ Stockholder iteration :           26
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.32892E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.32892E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           26
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.744005500    8.740842284   -0.740842284   5.529683E-10     Y
+    2      H1         0.628047426    0.629988500    0.370011500   3.289220E-07     n
+    3      H2         0.628047426    0.629988500    0.370011500   3.289220E-07     n
+====================================================================================
+ Residual charge =   -0.000819283
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           26
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.69756             2.72044             0.92510
+ Func(1)  H1         1             0.77047             2.94755             1.08601
+ Func(1)  H2         1             0.77047             2.94755             1.08601
+ End Shape-function analysis of tails
+ Stockholder iteration :           27
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.34125E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.34125E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           27
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.740842284    8.741526105   -0.741526105   2.582667E-11     Y
+    2      H1         0.629988500    0.629531473    0.370468527   3.412547E-08     n
+    3      H2         0.629988500    0.629531473    0.370468527   3.412548E-08     n
+====================================================================================
+ Residual charge =   -0.000589050
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           27
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.71013             2.72206             0.92620
+ Func(1)  H1         1             0.76835             2.94079             1.08103
+ Func(1)  H2         1             0.76835             2.94079             1.08103
+ End Shape-function analysis of tails
+ Stockholder iteration :           28
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.15203E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.15203E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           28
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.741526105    8.739350566   -0.739350566   2.600753E-10     Y
+    2      H1         0.629531473    0.630861383    0.369138617   1.520316E-07     n
+    3      H2         0.629531473    0.630861382    0.369138618   1.520316E-07     n
+====================================================================================
+ Residual charge =   -0.001073331
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           28
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.70670             2.72163             0.92591
+ Func(1)  H1         1             0.76943             2.94313             1.08275
+ Func(1)  H2         1             0.76943             2.94313             1.08275
+ End Shape-function analysis of tails
+ Stockholder iteration :           29
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.12966E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.12966E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           29
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.739350566    8.739721713   -0.739721713   8.224643E-12     Y
+    2      H1         0.630861383    0.630607389    0.369392611   1.296579E-08     n
+    3      H2         0.630861382    0.630607388    0.369392612   1.296578E-08     n
+====================================================================================
+ Residual charge =   -0.000936490
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           29
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.71542             2.72275             0.92667
+ Func(1)  H1         1             0.76801             2.93857             1.07940
+ Func(1)  H2         1             0.76801             2.93857             1.07940
+ End Shape-function analysis of tails
+ Stockholder iteration :           30
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.70817E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.70817E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           30
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.739721713    8.738226349   -0.738226349   1.231520E-10     Y
+    2      H1         0.630607389    0.631518886    0.368481114   7.081733E-08     n
+    3      H2         0.630607388    0.631518886    0.368481114   7.081733E-08     n
+====================================================================================
+ Residual charge =   -0.001264120
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           30
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.71344             2.72250             0.92650
+ Func(1)  H1         1             0.76870             2.93999             1.08044
+ Func(1)  H2         1             0.76870             2.93999             1.08044
+ End Shape-function analysis of tails
+ Stockholder iteration :           31
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.49136E-08
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.49136E-08
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           31
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.738226349    8.738412826   -0.738412826   2.513656E-12     Y
+    2      H1         0.631518886    0.631385975    0.368614025   4.913630E-09     n
+    3      H2         0.631518886    0.631385975    0.368614025   4.913626E-09     n
+====================================================================================
+ Residual charge =   -0.001184776
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           31
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.71943             2.72327             0.92703
+ Func(1)  H1         1             0.76775             2.93690             1.07818
+ Func(1)  H2         1             0.76775             2.93690             1.07818
+ End Shape-function analysis of tails
+ Stockholder iteration :           32
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.33136E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.33136E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           32
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.738412826    8.737384165   -0.737384165   5.846723E-11     Y
+    2      H1         0.631385975    0.632011499    0.367988501   3.313641E-08     n
+    3      H2         0.631385975    0.632011499    0.367988501   3.313641E-08     n
+====================================================================================
+ Residual charge =   -0.001407164
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           32
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.71833             2.72314             0.92693
+ Func(1)  H1         1             0.76818             2.93774             1.07879
+ Func(1)  H2         1             0.76818             2.93774             1.07879
+ End Shape-function analysis of tails
+ Stockholder iteration :           33
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.18802E-08
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.18802E-08
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           33
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.737384165    8.737464879   -0.737464879   7.854828E-13     Y
+    2      H1         0.632011499    0.631948921    0.368051079   1.880220E-09     n
+    3      H2         0.632011499    0.631948921    0.368051079   1.880220E-09     n
+====================================================================================
+ Residual charge =   -0.001362720
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           33
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.72244             2.72367             0.92729
+ Func(1)  H1         1             0.76754             2.93565             1.07725
+ Func(1)  H2         1             0.76754             2.93565             1.07725
+ End Shape-function analysis of tails
+ Stockholder iteration :           34
+   Stockholder shape function converged for atom            1
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.15580E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.15580E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           34
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.737464879    8.736756092   -0.736756092   2.785605E-11     Y
+    2      H1         0.631948921    0.632379025    0.367620975   1.558020E-08     n
+    3      H2         0.631948921    0.632379025    0.367620975   1.558020E-08     n
+====================================================================================
+ Residual charge =   -0.001514143
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           34
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.72187             2.72360             0.92725
+ Func(1)  H1         1             0.76782             2.93613             1.07761
+ Func(1)  H2         1             0.76782             2.93613             1.07761
+ End Shape-function analysis of tails
+ Stockholder iteration :           35
+   Stockholder shape function converged for atom            1
+   Stockholder shape function converged for atom            2
+   Stockholder shape function converged for atom            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.74504E-09
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.74504E-09
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           35
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.736756092    8.736778680   -0.736778680   3.008704E-13     Y
+    2      H1         0.632379025    0.632355920    0.367644080   7.450435E-10     Y
+    3      H2         0.632379025    0.632355919    0.367644081   7.450411E-10     Y
+====================================================================================
+ Residual charge =   -0.001490519
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           35
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.72469             2.72396             0.92749
+ Func(1)  H1         1             0.76739             2.93471             1.07656
+ Func(1)  H2         1             0.76739             2.93471             1.07656
+ End Shape-function analysis of tails
+ Stockholder convergence on iteration :           35
+ BEGIN TEST SHAPE-FUNCTIONS: CONVERGED
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O          8.736778680    8.736778680   -0.736778680   3.008704E-13     Y
+    2      H1         0.632355920    0.632355920    0.367644080   7.450435E-10     Y
+    3      H2         0.632355919    0.632355919    0.367644081   7.450411E-10     Y
+====================================================================================
+ Residual charge =   -0.001490519
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: CONVERGED
+ Begin Shape-function analysis of tails
+ Func(1)  O          8             6.72443             2.72393             0.92747
+ Func(1)  H1         1             0.76756             2.93497             1.07676
+ Func(1)  H2         1             0.76756             2.93497             1.07676
+ End Shape-function analysis of tails
+ BEGIN SHAPE-FUNCTIONS : NORMAL ITERATIONS
+ Atom            1    Name O atom in molecule H2O
+ type(FuncExpansion) :: Shape function (curr): O atom in molecule H2O
+   Type              :: 
+   Norm              ::     0.000000
+   Molecule          :: H2O
+   Atom              :: O
+   Molecule Index    ::            1
+   Atom Index        ::            1
+   Which Basis       :: SHAPE
+   Coordinates          
+            1      0.000000      0.000000      0.000000
+  Tolerance:     0.000000
+ 
+ Indx Symm    alpha           ContCoeff           D_k          ContCoeff*D_k
+    1     109.46100000      24.11874194       5.68986772       137.23245120 *exp(-   109.46100*x*x) +
+    2      25.57800000       8.10606402       3.58031742        29.02228219 *exp(-    25.57800*x*x) +
+    3       9.55148000       3.87224739      -0.25296476        -0.97954214 *exp(-     9.55148*x*x) +
+    4       2.93960000       1.60002317       0.40332304         0.64532621 *exp(-     2.93960*x*x) +
+    5       1.39638000       0.91550940       0.58432633         0.53495625 *exp(-     1.39638*x*x) +
+    6       0.90506100       0.66133039       0.65844648         0.43545066 *exp(-     0.90506*x*x) +
+    7       0.42137600       0.37274553       0.22017547         0.08206942 *exp(-     0.42138*x*x) +
+ =============================================================
+ Atom            2    Name H1 atom in molecule H2O
+ type(FuncExpansion) :: Shape function (curr): H1 atom in molecule H2O
+   Type              :: 
+   Norm              ::     0.000000
+   Molecule          :: H2O
+   Atom              :: H1
+   Molecule Index    ::            1
+   Atom Index        ::            2
+   Which Basis       :: SHAPE
+   Coordinates          
+            1     -1.453652      0.000000     -1.121687
+  Tolerance:     0.000000
+ 
+ Indx Symm    alpha           ContCoeff           D_k          ContCoeff*D_k
+    1       5.11588952       2.42438149       0.07151086         0.17336961 *exp(-     5.11589*x*x) +
+    2       1.14296528       0.78783427       0.12662818         0.09976202 *exp(-     1.14297*x*x) +
+    3       0.29166153       0.28285864       0.00943208         0.00266795 *exp(-     0.29166*x*x) +
+ =============================================================
+ Atom            3    Name H2 atom in molecule H2O
+ type(FuncExpansion) :: Shape function (curr): H2 atom in molecule H2O
+   Type              :: 
+   Norm              ::     0.000000
+   Molecule          :: H2O
+   Atom              :: H2
+   Molecule Index    ::            1
+   Atom Index        ::            3
+   Which Basis       :: SHAPE
+   Coordinates          
+            1      1.453652      0.000000     -1.121687
+  Tolerance:     0.000000
+ 
+ Indx Symm    alpha           ContCoeff           D_k          ContCoeff*D_k
+    1       5.11588952       2.42438149       0.07151086         0.17336961 *exp(-     5.11589*x*x) +
+    2       1.14296528       0.78783427       0.12662818         0.09976202 *exp(-     1.14297*x*x) +
+    3       0.29166153       0.28285864       0.00943208         0.00266795 *exp(-     0.29166*x*x) +
+ =============================================================
+ END SHAPE-FUNCTIONS : NORMAL ITERATIONS
+ 
+ Tail Analysis
+ =============
+ BEST-FIT METHOD:
+ 
+ Found Rmax =       4.9200 a.u. at point   165 in r(pt)
+ Attempting a fit between       1.7008 and       4.9200 a.u.
+ CASE (1) : weight(r) = 1.0
+------------------------------------------------------------------------
+ Atom: O   Fit to A exp(-b r) :       10.7964 * exp(      -2.9396 * x)
+ Atom: O   Local IP =       1.0802  a.u.
+========================================================================
+ 
+ CASE (2) : weight(r) = r^2
+------------------------------------------------------------------------
+ Atom: O   Fit to A exp(-b r) :       18.1245 * exp(      -3.0841 * x)
+ Atom: O   Local IP =       1.1889  a.u.
+========================================================================
+ 
+ CASE (3) : weight(r) = r^2 exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+   RECOMMENDED: Asymmetric weighting includes volume (r^2) contribution.
+------------------------------------------------------------------------
+ Atom: O   Fit to A exp(-b r) :       67.2755 * exp(      -3.3974 * x)
+ Atom: O   Local IP =       1.4428  a.u.
+========================================================================
+ 
+ CASE (4) : weight(r) = exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+------------------------------------------------------------------------
+ Atom: O   Fit to A exp(-b r) :       36.9570 * exp(      -3.2484 * x)
+ Atom: O   Local IP =       1.3190  a.u.
+========================================================================
+ 
+ BOX-SHIFT METHOD:
+ 
+ Boxsize     R-start       R-end          <b>            var(b)      local-IP
+ ----------------------------------------------------------------------------
+     33        2.0700        3.0300        2.6802        0.0271        0.8979
+     36        1.9800        3.0300        2.6850        0.0305        0.9011
+     39        1.9200        3.0600        2.6895        0.0332        0.9042
+     42        1.8000        3.0300        2.6934        0.0349        0.9068
+     46        1.5900        2.9400        2.6952        0.0343        0.9080
+     50        1.5300        3.0000        2.6951        0.0335        0.9080
+     55        1.4700        3.0900        2.6960        0.0351        0.9086
+     60        1.3800        3.1500        2.6945        0.0414        0.9075
+     66        1.2900        3.2400        2.6940        0.0551        0.9072
+     72        1.2000        3.3300        2.6936        0.0738        0.9069
+     79        1.1100        3.4500        2.6967        0.1003        0.9090
+     86        1.0200        3.5700        2.7009        0.1312        0.9118
+     94        0.9000        3.6900        2.7010        0.1715        0.9119
+    103        0.8400        3.9000        2.7271        0.2238        0.9297
+    113        0.7800        4.1400        2.7644        0.2903        0.9552
+    124        0.7200        4.4100        2.8136        0.3711        0.9896
+    136        0.4500        4.5000        2.7804        0.4620        0.9663
+    149        0.4500        4.8900        2.8842        0.5552        1.0398
+    163        0.4500        5.3100        3.0067        0.6652        1.1300
+    179        0.4500        5.7900        3.1572        0.7967        1.2460
+    196        0.4200        6.2700        3.3255        0.9376        1.3823
+    215        0.4200        6.8400        3.5209        1.0941        1.5496
+    236        0.4200        7.4700        3.7453        1.2681        1.7534
+    259        0.4200        8.1600        3.9987        1.4583        1.9987
+    284        0.3900        8.8800        4.2795        1.6611        2.2893
+    312        0.3900        9.7200        4.6000        1.8860        2.6450
+    343        0.3900       10.6500        4.9612        2.1338        3.0766
+    377        0.3600       11.6400        5.3609        2.4000        3.5924
+    414        0.3300       12.7200        5.8007        2.6873        4.2060
+    455        0.2700       13.8900        6.2900        2.9994        4.9456
+    500        0.0300       15.0000        6.8402        3.3907        5.8486
+ ----------------------------------------------------------------------------
+  Recommended parameters for site O
+     b    =       2.7010
+   var(b) =       0.1715
+    IP    =       0.9119 +-       0.1158
+   R range  = [       0.9000 ,       3.6900 ]
+   Good relative range:       3.1000 >=       0.7500
+ ----------------------------------------------------------------------------
+ BEST-FIT METHOD:
+ 
+ Found Rmax =       4.8000 a.u. at point   161 in r(pt)
+ Attempting a fit between       2.4600 and       4.8000 a.u.
+ CASE (1) : weight(r) = 1.0
+------------------------------------------------------------------------
+ Atom: H1   Fit to A exp(-b r) :        0.1293 * exp(      -2.1597 * x)
+ Atom: H1   Local IP =       0.5831  a.u.
+========================================================================
+ 
+ CASE (2) : weight(r) = r^2
+------------------------------------------------------------------------
+ Atom: H1   Fit to A exp(-b r) :        0.1568 * exp(      -2.2102 * x)
+ Atom: H1   Local IP =       0.6106  a.u.
+========================================================================
+ 
+ CASE (3) : weight(r) = r^2 exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+   RECOMMENDED: Asymmetric weighting includes volume (r^2) contribution.
+------------------------------------------------------------------------
+ Atom: H1   Fit to A exp(-b r) :        0.1971 * exp(      -2.2789 * x)
+ Atom: H1   Local IP =       0.6492  a.u.
+========================================================================
+ 
+ CASE (4) : weight(r) = exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+------------------------------------------------------------------------
+ Atom: H1   Fit to A exp(-b r) :        0.1708 * exp(      -2.2401 * x)
+ Atom: H1   Local IP =       0.6273  a.u.
+========================================================================
+ 
+ BOX-SHIFT METHOD:
+ 
+ Boxsize     R-start       R-end          <b>            var(b)      local-IP
+ ----------------------------------------------------------------------------
+     33        2.5500        3.5100        1.9141        0.0707        0.4580
+     36        2.5200        3.5700        1.9280        0.0820        0.4646
+     39        2.4900        3.6300        1.9427        0.0938        0.4717
+     42        2.4900        3.7200        1.9578        0.1057        0.4791
+     46        2.4600        3.8100        1.9788        0.1219        0.4895
+     50        2.4300        3.9000        2.0007        0.1385        0.5003
+     55        2.4000        4.0200        2.0290        0.1598        0.5146
+     60        2.3400        4.1100        2.0581        0.1810        0.5295
+     66        2.3100        4.2600        2.0940        0.2067        0.5481
+     72        2.2800        4.4100        2.1309        0.2327        0.5676
+     79        2.2200        4.5600        2.1747        0.2629        0.5911
+     86        2.1900        4.7400        2.2191        0.2930        0.6156
+     94        2.1300        4.9200        2.2704        0.3270        0.6444
+    103        2.0700        5.1300        2.3286        0.3647        0.6778
+    113        1.9500        5.3100        2.3928        0.4048        0.7157
+    124        0.7500        4.4400        2.4226        0.4267        0.7336
+    136        0.3900        4.4400        2.4399        0.4123        0.7441
+    149        0.3300        4.7700        2.4553        0.4011        0.7535
+    163        0.3000        5.1600        2.4881        0.4048        0.7739
+    179        0.2700        5.6100        2.5398        0.4317        0.8063
+    196        0.2700        6.1200        2.6170        0.4833        0.8561
+    215        0.2400        6.6600        2.7062        0.5612        0.9154
+    236        0.2100        7.2600        2.8163        0.6631        0.9915
+    259        0.2100        7.9500        2.9609        0.7851        1.0959
+    284        0.1800        8.6700        3.1151        0.9238        1.2130
+    312        0.1500        9.4800        3.2978        1.0828        1.3595
+    343        0.1500       10.4100        3.5249        1.2600        1.5531
+    377        0.1500       11.4300        3.7822        1.4544        1.7882
+    414        0.1200       12.5100        4.0542        1.6647        2.0546
+    455        0.1200       13.7400        4.3796        1.8958        2.3976
+    500        0.0300       15.0000        4.6929        2.1498        2.7529
+ ----------------------------------------------------------------------------
+  Recommended parameters for site H1
+     b    =       2.0007
+   var(b) =       0.1385
+    IP    =       0.5003 +-       0.0693
+   R range  = [       2.4300 ,       3.9000 ]
+   Warning: the relative range is less than the minimum :       0.6049 <       0.7500
+   This means we may not have determined the atomic density tail confidently
+ ----------------------------------------------------------------------------
+ BEST-FIT METHOD:
+ 
+ Found Rmax =       4.8000 a.u. at point   161 in r(pt)
+ Attempting a fit between       2.4600 and       4.8000 a.u.
+ CASE (1) : weight(r) = 1.0
+------------------------------------------------------------------------
+ Atom: H2   Fit to A exp(-b r) :        0.1293 * exp(      -2.1597 * x)
+ Atom: H2   Local IP =       0.5831  a.u.
+========================================================================
+ 
+ CASE (2) : weight(r) = r^2
+------------------------------------------------------------------------
+ Atom: H2   Fit to A exp(-b r) :        0.1568 * exp(      -2.2102 * x)
+ Atom: H2   Local IP =       0.6106  a.u.
+========================================================================
+ 
+ CASE (3) : weight(r) = r^2 exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+   RECOMMENDED: Asymmetric weighting includes volume (r^2) contribution.
+------------------------------------------------------------------------
+ Atom: H2   Fit to A exp(-b r) :        0.1971 * exp(      -2.2789 * x)
+ Atom: H2   Local IP =       0.6492  a.u.
+========================================================================
+ 
+ CASE (4) : weight(r) = exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+------------------------------------------------------------------------
+ Atom: H2   Fit to A exp(-b r) :        0.1708 * exp(      -2.2401 * x)
+ Atom: H2   Local IP =       0.6273  a.u.
+========================================================================
+ 
+ BOX-SHIFT METHOD:
+ 
+ Boxsize     R-start       R-end          <b>            var(b)      local-IP
+ ----------------------------------------------------------------------------
+     33        2.5500        3.5100        1.9141        0.0707        0.4580
+     36        2.5200        3.5700        1.9280        0.0820        0.4646
+     39        2.4900        3.6300        1.9427        0.0938        0.4717
+     42        2.4900        3.7200        1.9578        0.1057        0.4791
+     46        2.4600        3.8100        1.9788        0.1219        0.4895
+     50        2.4300        3.9000        2.0007        0.1385        0.5003
+     55        2.4000        4.0200        2.0290        0.1598        0.5146
+     60        2.3400        4.1100        2.0581        0.1810        0.5295
+     66        2.3100        4.2600        2.0940        0.2067        0.5481
+     72        2.2800        4.4100        2.1309        0.2327        0.5676
+     79        2.2200        4.5600        2.1747        0.2629        0.5911
+     86        2.1900        4.7400        2.2191        0.2930        0.6156
+     94        2.1300        4.9200        2.2704        0.3270        0.6444
+    103        2.0700        5.1300        2.3286        0.3647        0.6778
+    113        1.9500        5.3100        2.3928        0.4048        0.7157
+    124        0.7500        4.4400        2.4226        0.4267        0.7336
+    136        0.3900        4.4400        2.4399        0.4123        0.7441
+    149        0.3300        4.7700        2.4553        0.4011        0.7535
+    163        0.3000        5.1600        2.4881        0.4048        0.7739
+    179        0.2700        5.6100        2.5398        0.4317        0.8063
+    196        0.2700        6.1200        2.6170        0.4833        0.8561
+    215        0.2400        6.6600        2.7062        0.5612        0.9154
+    236        0.2100        7.2600        2.8163        0.6631        0.9915
+    259        0.2100        7.9500        2.9609        0.7851        1.0959
+    284        0.1800        8.6700        3.1151        0.9238        1.2130
+    312        0.1500        9.4800        3.2978        1.0828        1.3595
+    343        0.1500       10.4100        3.5249        1.2600        1.5531
+    377        0.1500       11.4300        3.7822        1.4544        1.7882
+    414        0.1200       12.5100        4.0542        1.6647        2.0546
+    455        0.1200       13.7400        4.3796        1.8958        2.3976
+    500        0.0300       15.0000        4.6929        2.1498        2.7529
+ ----------------------------------------------------------------------------
+  Recommended parameters for site H2
+     b    =       2.0007
+   var(b) =       0.1385
+    IP    =       0.5003 +-       0.0693
+   R range  = [       2.4300 ,       3.9000 ]
+   Warning: the relative range is less than the minimum :       0.6049 <       0.7500
+   This means we may not have determined the atomic density tail confidently
+ ----------------------------------------------------------------------------
+ Analysis done. Results in files ending *-exp-analysis.dat
+ =========================================================
+ 
+ WARNING: Inconsistent parameters: Tail iterations are applicable
+   to the ISA A algorithm only if SelfConsistentTail==.true.     
+   Since this is not the case these iterations are being skipped.
+ WARNING: in subroutine Iterative_Stockholder_Atoms_restart line         1591
+ ISA: No tail-iterations performed.
+
+ISA atoms written to file: H2O_atoms.ISA
+
+ BEGIN ISA RESTART TESTS
+ INDEX  LABEL   CHARGE-FILE  CHARGE-COMPUTED   VERDICT
+ ============================================================================
+     1  O          0.87368E+01   0.87368E+01     SAME or SIMILAR to 5%
+     2  H1         0.63236E+00   0.63236E+00     SAME or SIMILAR to 5%
+     3  H2         0.63236E+00   0.63236E+00     SAME or SIMILAR to 5%
+ ============================================================================
+ ISA charges are consistent
+ END   ISA RESTART TESTS
+
+
+BEGIN Polarizability
+  DIST-ALG ISA-GRID   ( this sets the ISA-GRID-based partitioning )
+  ! Sq-freq  0.0      ( use this if you want only static pols )
+  Quad   10           ( and this is you want 1+10 static+freq-dependent pols )
+                      ( the settings in QUAD determine the frequencies )
+
+  Invert No           ( Do not invert the molecule )
+  Spherical           ( spherical tensor form of polarizabilities )
+  Rank 4              ( maximum rank )
+
+
+  Calculate only total and distributed polarizabilities and perturbations
+  Print only static total pols upto rank 2
+
+
+  ! Use the weighted exchange-hole method
+  WXhole
+  Dshift 0.4
+  OM2scal 1.8
+  Dist
+
+
+  ! Print options: use default names for the files:
+  Pert-file DEFAULT
+  Pol-file  DEFAULT
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+ options  RANDOM  4.0000    2.0000    1.0000   seed =   1
+ Lattice created for H2O
+ Type of lattice = RANDOM
+ Number of lattice points =         2000
+ 
+ End of Module LATTICE
+ =====================
+ 
+ WXhole model calculation
+      The perturbation matrix is written in file:H2O_lim2.0_4.0_p2000_f11.p2p
+      The polarization matrix in format A is written in file:H2O_ISA-GRID_f11_NL4_fmtA.pol
+      The polarization matrix in format B is written in file:H2O_ISA-GRID_f11_NL4_fmtB.pol
+
+ WXhole polarisabilities
+ -----------------------
+ dshift:       0.40000000
+ om2scal:      1.80000000
+ Space decomposition: ISA
+ int(rho):            9.9999998985
+
+ atomic charges
+     1-    3    8.744782    0.627609    0.627609
+
+ Total polarisability:
+
+ alpha(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00      0.0000001     0.0000000    -0.0000000     0.0000000    -0.0000000     0.0000000    -0.0000000    -0.0000001
+      Q10      0.0000000     9.7498125     0.0000000     0.0000000    -1.2226251    -0.0000000    -0.0000000    -2.2317178
+      Q11c    -0.0000000     0.0000000    10.6074924    -0.0000000     0.0000000    -5.3632010     0.0000000    -0.0000000
+      Q11s     0.0000000     0.0000000    -0.0000000     8.8402864     0.0000000     0.0000000    -1.0332284     0.0000000
+      Q20     -0.0000000    -1.2226251     0.0000000     0.0000000    33.0050803     0.0000000     0.0000000    -3.5767856
+      Q21c     0.0000000    -0.0000000    -5.3632010     0.0000000     0.0000000    42.3633609    -0.0000000     0.0000000
+      Q21s    -0.0000000    -0.0000000     0.0000000    -1.0332284     0.0000000    -0.0000000    30.0099212    -0.0000000
+      Q22c    -0.0000001    -2.2317178    -0.0000000     0.0000000    -3.5767856     0.0000000    -0.0000000    35.9445133
+      Q22s    -0.0000000     0.0000000    -0.0000000    -0.0000000     0.0000000     0.0000000     0.0000000     0.0000000
+
+                 Q22s    
+      Q00     -0.0000000
+      Q10      0.0000000
+      Q11c    -0.0000000
+      Q11s    -0.0000000
+      Q20      0.0000000
+      Q21c     0.0000000
+      Q21s     0.0000000
+      Q22c     0.0000000
+      Q22s    33.2150825
+
+ Isotropic dipole-dipole polarisability:      9.73253043
+
+ Distributed polarisabilities:
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    1    1
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00      0.8532122     0.5079971     0.0000000     0.0000000    -0.0574331     0.0000000    -0.0000000    -0.5732229
+      Q10      0.5079971     5.5066996     0.0000000     0.0000000     1.1392071     0.0000000    -0.0000000     0.6991602
+      Q11c     0.0000000     0.0000000     4.8642172    -0.0000000    -0.0000000     2.6882456    -0.0000000     0.0000000
+      Q11s     0.0000000     0.0000000    -0.0000000     6.8159715     0.0000000     0.0000000     0.9036773     0.0000000
+      Q20     -0.0574331     1.1392071    -0.0000000     0.0000000    16.7612453    -0.0000000    -0.0000000     2.4482966
+      Q21c     0.0000000     0.0000000     2.6882456     0.0000000    -0.0000000    12.3849917    -0.0000000     0.0000000
+      Q21s    -0.0000000    -0.0000000    -0.0000000     0.9036773    -0.0000000    -0.0000000    18.9710660    -0.0000000
+      Q22c    -0.5732229     0.6991602     0.0000000     0.0000000     2.4482966     0.0000000    -0.0000000    16.5163559
+      Q22s     0.0000000    -0.0000000    -0.0000000     0.0000000     0.0000000    -0.0000000    -0.0000000     0.0000000
+
+                 Q22s    
+      Q00      0.0000000
+      Q10     -0.0000000
+      Q11c    -0.0000000
+      Q11s     0.0000000
+      Q20      0.0000000
+      Q21c    -0.0000000
+      Q21s    -0.0000000
+      Q22c     0.0000000
+      Q22s    17.1147307
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    1    2
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00     -0.4266061     0.1394747     0.1363428     0.0000000     0.0034239     0.0010142    -0.0000000     0.0104688
+      Q10     -0.2539986     0.1914003    -0.1940130     0.0000000     0.1073073     0.1371002    -0.0000000     0.0669346
+      Q11c    -0.3351756    -0.1581837     0.0621504     0.0000000    -0.0383456     0.1086159     0.0000000     0.1781670
+      Q11s    -0.0000000     0.0000000    -0.0000000     0.3428629     0.0000000     0.0000000     0.0932986     0.0000000
+      Q20      0.0287165    -0.5558561     0.4131902     0.0000000     0.4078146    -0.1695507     0.0000000     0.2653484
+      Q21c     0.4307675    -0.2802178     0.0248330    -0.0000000    -0.2267487     0.1702443     0.0000000    -0.3139922
+      Q21s     0.0000000    -0.0000000     0.0000000    -0.5433393    -0.0000000    -0.0000000     0.6304585    -0.0000000
+      Q22c     0.2866114     0.2464623    -0.3377280     0.0000000     0.2684056    -0.2765088    -0.0000000     0.4660415
+      Q22s     0.0000000     0.0000000     0.0000000    -0.7070293    -0.0000000    -0.0000000    -0.3709670    -0.0000000
+
+                 Q22s    
+      Q00     -0.0000000
+      Q10      0.0000000
+      Q11c    -0.0000000
+      Q11s     0.1632957
+      Q20     -0.0000000
+      Q21c     0.0000000
+      Q21s    -0.3631733
+      Q22c     0.0000000
+      Q22s     0.4153061
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    1    3
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00     -0.4266061     0.1394747    -0.1363428     0.0000000     0.0034239    -0.0010142    -0.0000000     0.0104688
+      Q10     -0.2539986     0.1914003     0.1940130     0.0000000     0.1073073    -0.1371002    -0.0000000     0.0669346
+      Q11c     0.3351756     0.1581837     0.0621504    -0.0000000     0.0383456     0.1086159    -0.0000000    -0.1781669
+      Q11s    -0.0000000     0.0000000    -0.0000000     0.3428629     0.0000000    -0.0000000     0.0932986     0.0000000
+      Q20      0.0287165    -0.5558561    -0.4131902     0.0000000     0.4078146     0.1695507     0.0000000     0.2653484
+      Q21c    -0.4307675     0.2802178     0.0248330     0.0000000     0.2267487     0.1702443    -0.0000000     0.3139922
+      Q21s     0.0000000    -0.0000000    -0.0000000    -0.5433393    -0.0000000     0.0000000     0.6304585    -0.0000000
+      Q22c     0.2866114     0.2464623     0.3377280    -0.0000000     0.2684056     0.2765088    -0.0000000     0.4660415
+      Q22s    -0.0000000    -0.0000000     0.0000000     0.7070293     0.0000000    -0.0000000     0.3709670     0.0000000
+
+                 Q22s    
+      Q00      0.0000000
+      Q10     -0.0000000
+      Q11c    -0.0000000
+      Q11s    -0.1632957
+      Q20      0.0000000
+      Q21c     0.0000000
+      Q21s     0.3631733
+      Q22c    -0.0000000
+      Q22s     0.4153061
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    2    1
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00     -0.4266061    -0.2539986    -0.3351756    -0.0000000     0.0287165     0.4307675     0.0000000     0.2866114
+      Q10      0.1394747     0.1914003    -0.1581837     0.0000000    -0.5558561    -0.2802178    -0.0000000     0.2464623
+      Q11c     0.1363428    -0.1940130     0.0621504    -0.0000000     0.4131902     0.0248330     0.0000000    -0.3377280
+      Q11s     0.0000000     0.0000000     0.0000000     0.3428629     0.0000000    -0.0000000    -0.5433393     0.0000000
+      Q20      0.0034239     0.1073073    -0.0383456     0.0000000     0.4078146    -0.2267487    -0.0000000     0.2684056
+      Q21c     0.0010142     0.1371002     0.1086159     0.0000000    -0.1695507     0.1702443    -0.0000000    -0.2765088
+      Q21s    -0.0000000    -0.0000000     0.0000000     0.0932986     0.0000000     0.0000000     0.6304585    -0.0000000
+      Q22c     0.0104688     0.0669346     0.1781670     0.0000000     0.2653484    -0.3139922    -0.0000000     0.4660415
+      Q22s    -0.0000000     0.0000000    -0.0000000     0.1632957    -0.0000000     0.0000000    -0.3631733     0.0000000
+
+                 Q22s    
+      Q00      0.0000000
+      Q10      0.0000000
+      Q11c     0.0000000
+      Q11s    -0.7070293
+      Q20     -0.0000000
+      Q21c    -0.0000000
+      Q21s    -0.3709670
+      Q22c    -0.0000000
+      Q22s     0.4153061
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    2    2
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00      0.4575757    -0.1274802    -0.1457855    -0.0000000     0.0016995     0.0090288     0.0000000    -0.0175567
+      Q10     -0.1274802     0.3076766     0.0030331     0.0000000    -0.1881747    -0.1622187    -0.0000000     0.0258313
+      Q11c    -0.1457855     0.0030331     0.2991957     0.0000000     0.1201981    -0.1202352     0.0000000    -0.1659067
+      Q11s    -0.0000000     0.0000000     0.0000000     0.3163065     0.0000000     0.0000000    -0.1717474     0.0000000
+      Q20      0.0016995    -0.1881747     0.1201981     0.0000000     0.6385175     0.0298624     0.0000000    -0.0193034
+      Q21c     0.0090288    -0.1622187    -0.1202352     0.0000000     0.0298624     0.6194427     0.0000000     0.0433827
+      Q21s     0.0000000    -0.0000000     0.0000000    -0.1717474     0.0000000     0.0000000     0.6213723    -0.0000000
+      Q22c    -0.0175567     0.0258313    -0.1659067     0.0000000    -0.0193034     0.0433827    -0.0000000     0.6364117
+      Q22s     0.0000000     0.0000000    -0.0000000    -0.2044356    -0.0000000     0.0000000     0.0529558    -0.0000000
+
+                 Q22s    
+      Q00      0.0000000
+      Q10      0.0000000
+      Q11c    -0.0000000
+      Q11s    -0.2044356
+      Q20     -0.0000000
+      Q21c     0.0000000
+      Q21s     0.0529558
+      Q22c    -0.0000000
+      Q22s     0.6354022
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    2    3
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00     -0.0309697    -0.0119946    -0.0094427     0.0000000    -0.0051234     0.0100430     0.0000000     0.0070879
+      Q10     -0.0119946     0.0116229     0.0060911     0.0000000    -0.0029292    -0.0275377    -0.0000000    -0.0103028
+      Q11c     0.0094427    -0.0060911    -0.0099588    -0.0000000     0.0012585     0.0210522     0.0000000     0.0095557
+      Q11s    -0.0000000     0.0000000    -0.0000000     0.0101251     0.0000000    -0.0000000    -0.0072780    -0.0000000
+      Q20     -0.0051234    -0.0029292    -0.0012585     0.0000000     0.0221155     0.0257887    -0.0000000     0.0155059
+      Q21c    -0.0100430     0.0275377     0.0210522     0.0000000    -0.0257887    -0.0507167    -0.0000000    -0.0110382
+      Q21s    -0.0000000    -0.0000000    -0.0000000    -0.0072780     0.0000000     0.0000000     0.0316856    -0.0000000
+      Q22c     0.0070879    -0.0103028    -0.0095557    -0.0000000     0.0155059     0.0110382     0.0000000     0.0020074
+      Q22s    -0.0000000     0.0000000     0.0000000     0.0172346     0.0000000    -0.0000000    -0.0297224     0.0000000
+
+                 Q22s    
+      Q00      0.0000000
+      Q10     -0.0000000
+      Q11c     0.0000000
+      Q11s    -0.0172346
+      Q20     -0.0000000
+      Q21c    -0.0000000
+      Q21s     0.0297224
+      Q22c    -0.0000000
+      Q22s    -0.0333751
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    3    1
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00     -0.4266061    -0.2539986     0.3351756    -0.0000000     0.0287165    -0.4307675     0.0000000     0.2866114
+      Q10      0.1394747     0.1914003     0.1581837     0.0000000    -0.5558561     0.2802178    -0.0000000     0.2464623
+      Q11c    -0.1363428     0.1940130     0.0621504    -0.0000000    -0.4131902     0.0248330    -0.0000000     0.3377280
+      Q11s     0.0000000     0.0000000    -0.0000000     0.3428629     0.0000000     0.0000000    -0.5433393    -0.0000000
+      Q20      0.0034239     0.1073073     0.0383456     0.0000000     0.4078146     0.2267487    -0.0000000     0.2684056
+      Q21c    -0.0010142    -0.1371002     0.1086159    -0.0000000     0.1695507     0.1702443     0.0000000     0.2765088
+      Q21s    -0.0000000    -0.0000000    -0.0000000     0.0932986     0.0000000    -0.0000000     0.6304585    -0.0000000
+      Q22c     0.0104688     0.0669346    -0.1781669     0.0000000     0.2653484     0.3139922    -0.0000000     0.4660415
+      Q22s     0.0000000    -0.0000000    -0.0000000    -0.1632957     0.0000000     0.0000000     0.3631733    -0.0000000
+
+                 Q22s    
+      Q00     -0.0000000
+      Q10     -0.0000000
+      Q11c     0.0000000
+      Q11s     0.7070293
+      Q20      0.0000000
+      Q21c    -0.0000000
+      Q21s     0.3709670
+      Q22c     0.0000000
+      Q22s     0.4153061
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    3    2
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00     -0.0309697    -0.0119946     0.0094427    -0.0000000    -0.0051234    -0.0100430    -0.0000000     0.0070879
+      Q10     -0.0119946     0.0116229    -0.0060911     0.0000000    -0.0029292     0.0275377    -0.0000000    -0.0103028
+      Q11c    -0.0094427     0.0060911    -0.0099588    -0.0000000    -0.0012585     0.0210522    -0.0000000    -0.0095557
+      Q11s     0.0000000     0.0000000    -0.0000000     0.0101251     0.0000000     0.0000000    -0.0072780    -0.0000000
+      Q20     -0.0051234    -0.0029292     0.0012585     0.0000000     0.0221155    -0.0257887     0.0000000     0.0155059
+      Q21c     0.0100430    -0.0275377     0.0210522    -0.0000000     0.0257887    -0.0507167     0.0000000     0.0110382
+      Q21s     0.0000000    -0.0000000     0.0000000    -0.0072780    -0.0000000    -0.0000000     0.0316856     0.0000000
+      Q22c     0.0070879    -0.0103028     0.0095557    -0.0000000     0.0155059    -0.0110382    -0.0000000     0.0020074
+      Q22s     0.0000000    -0.0000000     0.0000000    -0.0172346    -0.0000000    -0.0000000     0.0297224    -0.0000000
+
+                 Q22s    
+      Q00     -0.0000000
+      Q10      0.0000000
+      Q11c     0.0000000
+      Q11s     0.0172346
+      Q20      0.0000000
+      Q21c    -0.0000000
+      Q21s    -0.0297224
+      Q22c     0.0000000
+      Q22s    -0.0333751
+
+ ----------------------------------------------
+ omega^2:   -0.000000     icen,jcen:    3    3
+ ----------------------------------------------
+
+ alpha^ij(iw=-0.000000E+00)
+                 Q00           Q10           Q11c          Q11s          Q20           Q21c          Q21s          Q22c    
+      Q00      0.4575757    -0.1274802     0.1457855    -0.0000000     0.0016995    -0.0090288     0.0000000    -0.0175567
+      Q10     -0.1274802     0.3076766    -0.0030331     0.0000000    -0.1881747     0.1622187    -0.0000000     0.0258313
+      Q11c     0.1457855    -0.0030331     0.2991957    -0.0000000    -0.1201981    -0.1202352     0.0000000     0.1659067
+      Q11s    -0.0000000     0.0000000    -0.0000000     0.3163065     0.0000000    -0.0000000    -0.1717474     0.0000000
+      Q20      0.0016995    -0.1881747    -0.1201981     0.0000000     0.6385175    -0.0298624     0.0000000    -0.0193034
+      Q21c    -0.0090288     0.1622187    -0.1202352    -0.0000000    -0.0298624     0.6194427    -0.0000000    -0.0433827
+      Q21s     0.0000000    -0.0000000     0.0000000    -0.1717474     0.0000000    -0.0000000     0.6213723    -0.0000000
+      Q22c    -0.0175567     0.0258313     0.1659067     0.0000000    -0.0193034    -0.0433827    -0.0000000     0.6364117
+      Q22s    -0.0000000     0.0000000    -0.0000000     0.2044356     0.0000000     0.0000000    -0.0529558     0.0000000
+
+                 Q22s    
+      Q00     -0.0000000
+      Q10      0.0000000
+      Q11c    -0.0000000
+      Q11s     0.2044356
+      Q20      0.0000000
+      Q21c     0.0000000
+      Q21s    -0.0529558
+      Q22c     0.0000000
+      Q22s     0.6354022
+
+ Perturbation matrix written in file H2O_lim2.0_4.0_p2000_f11.p2p
+ Polarization matrix written in Format A in file H2O_ISA-GRID_f11_NL4_fmtA.pol
+
+
+
+
+FINISH
+ End of Input file. Stopping.
+
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                 1.061
+ WriteToFile_TypeRealVector              18                 0.000
+ WriteToFile_Vector                      18                 0.000
+ WriteToFile_TypeRealMatrix              10                 0.000
+ WriteToFile_Matrix                      12                 0.000
+ construct_molecular_integratio           1                 0.002
+ construct_atom_integration_gri           1                 0.001
+ df_parser                                2                 0.001
+ df_monomer                               1                 0.001
+ df_int_for_df                            5                 0.001
+ make_integrals_for_df                    5                 0.001
+ df_make_I                                1                 0.000
+ make_s_matrix_coulomb                    2                 0.000
+ diagonal_1index                          3                 0.000
+ make_s_matrix_constraints                1                 0.000
+ ReadFromFile_TypeRealMatrix              8                 0.000
+ ReadFromFile_Matrix                      8                 0.000
+ ReadFromFile_TypeRealVector              6                 0.000
+ ReadFromFile_Vector                      6                 0.000
+ make_T_AO_mono                           1                 0.000
+ diagonal_2index                          1                 0.000
+ matrix_write_block_types               143                 0.000
+ WriteToFile_InBlocks_TypeRealM         143                 0.000
+ WriteToFile_InBlocks_Matrix            143                 0.000
+ make_T_MO_mono_NN                        1                 0.000
+ ReadRowsFromFile_TypeRealMatri         113                 0.000
+ ReadRowsFromFile_Matrix                113                 0.000
+ scale_trans_mat_types                    1                 0.000
+ solve_df_equations_lu                    4                 0.000
+ lineq_solver_lu                          2                 0.000
+ lineq_lu_iter                          107                 0.000
+ matrix_write                             2                 0.000
+ test_df                                  1                 0.000
+ matvec_types                             1                 0.000
+ fill_subset                              2                 0.000
+ StockholderParser                        1                 0.911
+ Iterative_Stockholder_Atoms_re           1                 0.911
+ initialize_stockholder_FuncExp           1                 0.000
+ initialize_D0                            3                 0.000
+ initialize_w0                            3                 0.000
+ shape_function_charge                  111                 0.000
+ shape_function_tests                    37                 0.000
+ make_Stilde_stockholder_A              105                 0.000
+ overlap2                               210                 0.000
+ make_T1_stockholder_A                  105                 0.902
+ Chi_rho_w_overlap                      105                 0.902
+ calculate_stockholder_weights        19116                 0.242
+ solve_Stockholder_equations            105                 0.000
+ llsq_lu_types_1                        105                 0.000
+ update_D_one_atom                      105                 0.000
+ update_w                               105                 0.000
+ check_convergence                      105                 0.000
+ shape_function_tail_analysis           111                 0.008
+ shape_function_tail_fit1               108                 0.005
+ update_w0                               35                 0.000
+ update_D0                               35                 0.000
+ shape_function_analysis_exp              3                 0.003
+ wxholePol                                1                 0.146
+ ====================================
+
+
+Maximum memory defined is :             8192 MB                                      
+Maximum memory used is    :                1 MB                                      
+
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   28
+ ======================================
+    1 TMP____000                                 D: atom: O atom in molecule H2O
+    2 TMP____001                                D: atom: H1 atom in molecule H2O
+    3 TMP____002                                D: atom: H2 atom in molecule H2O
+    4 TMP____003                                         E      Energies for H2O
+    5 TMP____004                                              C      MOs for H2O
+    6 TMP____005                                          I_____XA 1-e integrals
+    7 TMP_D_c__a                                          D  Full DF sol for H2O
+    8 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+    9 TMP____006                           G  1-index diagonal integrals for H2O
+   10 TMP____007                                   SC___A_A 2-e 2-indx integrals
+   11 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   12 TMP____008                           G  2-index diagonal integrals for H2O
+   13 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   14 TMP_DrhoCa                                         Drho Density DF for H2O
+   15 TMP_Dooc_a                               OO part of D  Full DF sol for H2O
+   16 TMP_Dovc_a                               OV part of D  Full DF sol for H2O
+   17 TMP____011    D : Expan coeffs : Shape function (curr): O atom in molecule
+   18 TMP____012    D : Expan coeffs : Shape function (prev): O atom in molecule
+   19 TMP____013          Density function-expansion for atom (prev)           1
+   20 TMP____014    D : Expan coeffs : Shape function (curr): H1 atom in molecul
+   21 TMP____015    D : Expan coeffs : Shape function (prev): H1 atom in molecul
+   22 TMP____016          Density function-expansion for atom (prev)           2
+   23 TMP____017    D : Expan coeffs : Shape function (curr): H2 atom in molecul
+   24 TMP____018    D : Expan coeffs : Shape function (prev): H2 atom in molecul
+   25 TMP____019          Density function-expansion for atom (prev)           3
+   26 TMP____023             D : Expan coeffs : AtomRho : O atom in molecule H2O
+   27 TMP____024            D : Expan coeffs : AtomRho : H1 atom in molecule H2O
+   28 TMP____025            D : Expan coeffs : AtomRho : H2 atom in molecule H2O
+ --------------------------------------
+ 
+ WARNING: NoRelease = T. Name = C      MOs for H2O
+ WARNING: NoRelease = T. Name = C      MOs for H2O
+ WARNING: Temporary file to be removed does not exist in the list
+ File name is TMP____004
+ WARNING: NoRelease = T. Name = E      Energies for H2O
+
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+--------------------------------------------------------------------------------
+
+Ending on 04-05-2020 at 22:13:00.546

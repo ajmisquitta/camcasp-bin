@@ -1,0 +1,793 @@
+              CamCASP version 6.0.045  (8cff4ae M)
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+      Compiled with ifort on 20 January 2020 at 19:41:31
+       The source code included local modifications
+
+Starting on 30-01-2020 at 11:37:46.378
+ 
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE water1 and water2
+TITLE Basis aug-cc-pVTZ and type MC+BS
+TITLE MidBonds 3S3P2D2F and type weighted
+TITLE CalculationType: SAPT(DFT)
+
+
+MEMORY          8 GB
+ Memory Manager initialized with             8589934592  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code NWCHEM
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE water1 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file H2O2-A-asc.movecs format ASCII-2
+   IP     0.463800 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format NWCHEM
+      Type MC+BS
+      O1         8.0        0.10880900       0.00000000      -0.06077600  TYPE O1
+      H1         1.0       -0.16161460       0.00000000       1.75530702  TYPE H1
+      H2         1.0       -1.57933347       0.00000000      -0.78289890  TYPE H2
+      O1         0.0       -0.09648300       0.00000000       5.59028800  TYPE O1
+    LIMITING basis on this site upto P symmetry
+      H1         0.0        0.77186787       1.45365210       6.30032236  TYPE H1
+    LIMITING basis on this site upto S symmetry
+      H2         0.0        0.77186805      -1.45365182       6.30032273  TYPE H2
+    LIMITING basis on this site upto S symmetry
+      Mb         0.0        0.00376528       0.00000007       3.64787605  TYPE Mb
+   End
+   Basis Aux
+      CARTESIAN
+      Units Bohr
+      Format TURBOMOLE
+      Type MC+BS
+      O1         8.0        0.10880900       0.00000000      -0.06077600  TYPE O1
+    LIMITING basis on this site upto G symmetry
+      H1         1.0       -0.16161460       0.00000000       1.75530702  TYPE H1
+    LIMITING basis on this site upto G symmetry
+      H2         1.0       -1.57933347       0.00000000      -0.78289890  TYPE H2
+    LIMITING basis on this site upto G symmetry
+      O1         0.0       -0.09648300       0.00000000       5.59028800  TYPE O1
+    LIMITING basis on this site upto G symmetry
+      H1         0.0        0.77186787       1.45365210       6.30032236  TYPE H1
+    LIMITING basis on this site upto G symmetry
+      H2         0.0        0.77186805      -1.45365182       6.30032273  TYPE H2
+    LIMITING basis on this site upto G symmetry
+      Mb         0.0        0.00376528       0.00000007       3.64787605  TYPE Mb
+
+
+
+   End
+END
+ WARNING: In ASCII(2) MO file: MOs on file /= MOs defined
+ This could be because the DFT code has truncated the 
+ basis space.
+ In basis: NMOS =          153
+ On file :      =          152
+ Updating mol%nmos and mol%nvir
+============================================================
+Summary for water1
+    1         O1    8.00     0.1088     0.0000    -0.0608
+    2         H1    1.00    -0.1616     0.0000     1.7553
+    3         H2    1.00    -1.5793     0.0000    -0.7829
+    4         O1    0.00    -0.0965     0.0000     5.5903
+    5         H1    0.00     0.7719     1.4537     6.3003
+    6         H2    0.00     0.7719    -1.4537     6.3003
+    7         Mb    0.00     0.0038     0.0000     3.6479
+ Molecular charge    =     0
+ Number of electrons =    10
+ Molecular IP       =     0.463800  a.u.
+ Number of molecular orbitals =   152
+     Occupied orbitals        =     5
+     Virtual  orbitals        =   147
+ Main basis: Size   =   153
+             Shells =    59
+             Type   = MC+BS
+             Atoms  =     3
+       Sites(Main)  =     7
+       Site Types   =     4
+             GTOs   = Spherical
+ Aux  basis: Size   =   627
+             Shells =   134
+             Type   = MC+BS
+        Sites(Aux)  =     7
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : H2O2-A-asc.movecs Type ASCII-2
+============================================================
+
+
+MOLECULE water2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file H2O2-B-asc.movecs format ASCII-2
+   IP     0.463800 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format NWCHEM
+      Type MC+BS
+      O1         8.0       -0.09648300       0.00000000       5.59028800  TYPE O1
+      H1         1.0        0.77186787       1.45365210       6.30032236  TYPE H1
+      H2         1.0        0.77186805      -1.45365182       6.30032273  TYPE H2
+      O1         0.0        0.10880900       0.00000000      -0.06077600  TYPE O1
+    LIMITING basis on this site upto P symmetry
+      H1         0.0       -0.16161460       0.00000000       1.75530702  TYPE H1
+    LIMITING basis on this site upto S symmetry
+      H2         0.0       -1.57933347       0.00000000      -0.78289890  TYPE H2
+    LIMITING basis on this site upto S symmetry
+      Mb         0.0        0.00376528       0.00000007       3.64787605  TYPE Mb
+   End
+   Basis Aux
+      CARTESIAN
+      Units Bohr
+      Format TURBOMOLE
+      Type MC+BS
+      O1         8.0       -0.09648300       0.00000000       5.59028800  TYPE O1
+    LIMITING basis on this site upto G symmetry
+      H1         1.0        0.77186787       1.45365210       6.30032236  TYPE H1
+    LIMITING basis on this site upto G symmetry
+      H2         1.0        0.77186805      -1.45365182       6.30032273  TYPE H2
+    LIMITING basis on this site upto G symmetry
+      O1         0.0        0.10880900       0.00000000      -0.06077600  TYPE O1
+    LIMITING basis on this site upto G symmetry
+      H1         0.0       -0.16161460       0.00000000       1.75530702  TYPE H1
+    LIMITING basis on this site upto G symmetry
+      H2         0.0       -1.57933347       0.00000000      -0.78289890  TYPE H2
+    LIMITING basis on this site upto G symmetry
+      Mb         0.0        0.00376528       0.00000007       3.64787605  TYPE Mb
+
+
+
+   End
+END
+============================================================
+Summary for water2
+    1         O1    8.00    -0.0965     0.0000     5.5903
+    2         H1    1.00     0.7719     1.4537     6.3003
+    3         H2    1.00     0.7719    -1.4537     6.3003
+    4         O1    0.00     0.1088     0.0000    -0.0608
+    5         H1    0.00    -0.1616     0.0000     1.7553
+    6         H2    0.00    -1.5793     0.0000    -0.7829
+    7         Mb    0.00     0.0038     0.0000     3.6479
+ Molecular charge    =     0
+ Number of electrons =    10
+ Molecular IP       =     0.463800  a.u.
+ Number of molecular orbitals =   153
+     Occupied orbitals        =     5
+     Virtual  orbitals        =   148
+ Main basis: Size   =   153
+             Shells =    59
+             Type   = MC+BS
+             Atoms  =     3
+       Sites(Main)  =     7
+       Site Types   =     4
+             GTOs   = Spherical
+ Aux  basis: Size   =   627
+             Shells =   134
+             Type   = MC+BS
+        Sites(Aux)  =     7
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : H2O2-B-asc.movecs Type ASCII-2
+============================================================
+BEGIN GRID
+  Molecule water1
+  Angular 200
+  Radial  100
+END
+ Integration grid summary
+ ========================
+ Molecular grid for molecule: water1
+    Total number of points =       159390
+    Number of angular points          230
+    Number of radial  points          100
+ ========================
+    Atom     Total   Angular    Radial
+----------------------------------------
+O1           22770       230       100
+H1           22770       230       100
+H2           22770       230       100
+O1           22770       230       100
+H1           22770       230       100
+H2           22770       230       100
+Mb           22770       230       100
+----------------------------------------
+Total number of integration points on atoms:     159390
+========================================
+
+
+BEGIN GRID
+  Molecule water2
+  Angular 200
+  Radial  100
+END
+ Integration grid summary
+ ========================
+ Molecular grid for molecule: water2
+    Total number of points =       159390
+    Number of angular points          230
+    Number of radial  points          100
+ ========================
+    Atom     Total   Angular    Radial
+----------------------------------------
+O1           22770       230       100
+H1           22770       230       100
+H2           22770       230       100
+O1           22770       230       100
+H1           22770       230       100
+H2           22770       230       100
+Mb           22770       230       100
+----------------------------------------
+Total number of integration points on atoms:     159390
+========================================
+
+
+SET NEW-PROP
+  Kernel ALDA
+  DF  ( For constrained DF use: C-DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 1000.0
+    FD-DELTA = 0.01
+    FD-ALPHA = 1.0
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+ Finished reading the KERNEL-INTEGRAL-PARAMETERS.
+  SOLVER LU ( Options: GELSS )
+END
+ Finished reading in the NEW-PROP settings.
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+ DF-INT parameters set.
+
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+ WARNING: Merge issue when creating the dimer in make_dimer
+   Sites in AUX < Sites in MAIN: aux=           7  main=           14
+ WARNING: in subroutine make_dimer line         1354
+ nsitesaux < nsites for dimer
+ INFO =            1
+BEGIN DF
+  Molecule water1
+  Type NN
+  Print only normalization constraints
+END
+ 
+Tests of DF for water1
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .04012
+End of tests for water1
+ Normalization tests for fitted density of water1
+  \int \rho(r) dr = 9.99986
+Differs from expected value of    10 by .00013576
+ End of normalization tests
+BEGIN DF
+  Molecule water2
+  Type NN
+  Print only normalization constraints
+END
+ 
+Tests of DF for water2
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .04757
+End of tests for water2
+ Normalization tests for fitted density of water2
+  \int \rho(r) dr = 9.99984
+Differs from expected value of    10 by .00015700
+ End of normalization tests
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+ E^{1}_{elst}                             =   -2427.6644     CM-1
+ Electron--electron energy =    3885842.2     CM-1
+ Electron--nuclear (A) energy =   -3844068.5     CM-1
+ Electron--nuclear (B) energy =   -3937698.4     CM-1
+ Nuclear --Nuclear  energy =    3893497.0     CM-1
+ 
+BEGIN E1exch
+  Integral Switch =  1
+END
+ E^{1}_{exch}(S2) =    2125.9059     CM-1
+ E^{1}_{int}     =   -288.83937     CM-1
+    E^{1}_{exch} =    2138.8250     CM-1
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+ 
+  INDUCTION CALCULATION 
+ 
+  Parameters same. Skipping DF for water1
+   OV DF finished for water1
+ E^{2}_{ind}                              =   -963.91640     CM-1
+     E^{2}_{ind}(A)                           =   -324.39573     CM-1
+     E^{2}_{ind}(B)                           =   -639.52066     CM-1
+  Density-fitted propagator was used.
+ E^{2}_{ind}(UC)                          =   -934.71614     CM-1
+     E^{2}_{ind}(A)(UC) =   -322.08540     CM-1
+     E^{2}_{ind}(B)(UC) =   -612.63074     CM-1
+  Propagator type : cks
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}(S2)                     =    576.54908     CM-1
+     E^{2}_{ind,exch}(S2)(A)                  =    232.57923     CM-1
+     E^{2}_{ind,exch}(S2)(B)                  =    343.96985     CM-1
+ E^{2}_{ind,exch}(S2)(UC)                 =    0.0000000     CM-1
+     E^{2}_{ind,exch}(S2)(A)(UC) =    0.0000000     CM-1
+     E^{2}_{ind,exch}(S2)(B)(UC) =    0.0000000     CM-1
+ ---------------------------------
+ 
+ 
+ INDUCTION CALCULATION without the S^2 approximation     
+ ---------------------------------------------------     
+ Using spin-summed (closed-shell) expression derived from
+ expression given by Rainer Schaffer and Georg Jansen in 
+ Intermolecular exchange-induction energies without overlap expansion
+ Theor Chem Acc (2012) 131:1235, DOI 10.1007/s00214-012-1235-6.
+ 
+ WARNING: NoRelease = T. Name = T-intermediate for E2IND
+ WARNING: NoRelease = T. Name = tA matrix for monomer A
+ WARNING: NoRelease = T. Name = tB matrix for monomer A
+ WARNING: NoRelease = T. Name = T-intermediate for E2IND
+ WARNING: NoRelease = T. Name = tA matrix for monomer B
+ WARNING: NoRelease = T. Name = tB matrix for monomer B
+ E^{2}_{IND}                              =   -372.43533     CM-1
+     E^{2}_{IND}(A)                           =   -84.865935     CM-1
+     E^{2}_{IND}(B)                           =   -287.56940     CM-1
+  Density-fitted propagator was used.
+  Propagator type : cks
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}                         =    591.48106     CM-1
+     E^{2}_{ind,exch}(A)                      =    239.52980     CM-1
+     E^{2}_{ind,exch}(B)                      =    351.95127     CM-1
+ ---------------------------------
+ 
+BEGIN E2disp
+  Use the N3 algorithm
+  Integral Switch =  1
+END
+ 
+  DISPERSION CALCULATION 
+ 
+ 
+ Initializing the N3 Algorithm
+ 
+ Quadrature information:
+ -----------------------
+          10  points in the quad grid
+ Gauss-Legendre quadrature will be used
+ with the transformtion:
+ omega = beta (1+t)/(1-t) 
+ beta =   0.500000000000000     
+ Quad grid created:
+ ------------------
+ #i                 omega                wt   
+ ---------------------------------------------
+     1       0.006609602       0.666713443E-01
+     2       0.036174812       0.149451349E+00
+     3       0.095447364       0.219086363E+00
+     4       0.197644212       0.269266719E+00
+     5       0.370417213       0.295524225E+00
+     6       0.674914640       0.295524225E+00
+     7       1.264899172       0.269266719E+00
+     8       2.619244685       0.219086363E+00
+     9       6.910885950       0.149451349E+00
+    10      37.823762350       0.666713443E-01
+ ---------------------------------------------
+ ---------------------------------
+ Quad points and XI at each point:
+ i     OMEGA             XI       
+ ---------------------------------
+    1      0.006610   -0.574210E-02
+    2      0.036175   -0.570797E-02
+    3      0.095447   -0.550924E-02
+    4      0.197644   -0.488764E-02
+    5      0.370417   -0.364339E-02
+    6      0.674915   -0.202924E-02
+    7      1.264899   -0.724863E-03
+    8      2.619245   -0.132610E-03
+    9      6.910886   -0.706870E-05
+   10     37.823762   -0.137703E-07
+ ---------------------------------
+ E^{2}_{disp}                             =   -879.12145     CM-1
+ E^{2}_{disp}(UC)                         =   -1110.3643     CM-1
+     Density-fitted propagator was used.
+     Propagator type : cks
+ ---------------------------------
+ 
+ E^{2}_{disp,exch}                        =    156.81167     CM-1
+ E^{2}_{disp,exch}(UC)                    =    198.05919     CM-1
+ ---------------------------------
+ 
+BEGIN E2ind
+  Use the DF algorithm
+  Regularise Eta = 3.0
+  Integral Switch = 0
+  Amplitude-Type COUPLED
+END
+ 
+  INDUCTION CALCULATION 
+ 
+ E^{2}_{ind}                              =   -360.84725     CM-1
+     E^{2}_{ind}(A)                           =   -49.977344     CM-1
+     E^{2}_{ind}(B)                           =   -310.86991     CM-1
+  Density-fitted propagator was used.
+ E^{2}_{ind}(UC)                          =   -372.97459     CM-1
+     E^{2}_{ind}(A)(UC) =   -62.827594     CM-1
+     E^{2}_{ind}(B)(UC) =   -310.14699     CM-1
+  Propagator type : cks
+ Regularization was used. Eta =    3.00000000000000     
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}(S2)                     =    64.997101     CM-1
+     E^{2}_{ind,exch}(S2)(A)                  =   -33.347381     CM-1
+     E^{2}_{ind,exch}(S2)(B)                  =    98.344483     CM-1
+ E^{2}_{ind,exch}(S2)(UC)                 =    0.0000000     CM-1
+     E^{2}_{ind,exch}(S2)(A)(UC) =    0.0000000     CM-1
+     E^{2}_{ind,exch}(S2)(B)(UC) =    0.0000000     CM-1
+ ---------------------------------
+ Regularization was used. Eta =    3.00000000000000     
+ ---------------------------------
+ 
+ 
+ INDUCTION CALCULATION without the S^2 approximation     
+ ---------------------------------------------------     
+ Using spin-summed (closed-shell) expression derived from
+ expression given by Rainer Schaffer and Georg Jansen in 
+ Intermolecular exchange-induction energies without overlap expansion
+ Theor Chem Acc (2012) 131:1235, DOI 10.1007/s00214-012-1235-6.
+ 
+ WARNING: NoRelease = T. Name = T-intermediate for E2IND
+ WARNING: NoRelease = T. Name = tA matrix for monomer A
+ WARNING: NoRelease = T. Name = tB matrix for monomer A
+ WARNING: NoRelease = T. Name = T-intermediate for E2IND
+ WARNING: NoRelease = T. Name = tA matrix for monomer B
+ WARNING: NoRelease = T. Name = tB matrix for monomer B
+ E^{2}_{IND}                              =   -293.77084     CM-1
+     E^{2}_{IND}(A)                           =   -83.713846     CM-1
+     E^{2}_{IND}(B)                           =   -210.05700     CM-1
+  Density-fitted propagator was used.
+  Propagator type : cks
+ Regularization was used. Eta =    3.00000000000000     
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}                         =    67.076410     CM-1
+     E^{2}_{ind,exch}(A)                      =   -33.736503     CM-1
+     E^{2}_{ind,exch}(B)                      =    100.81291     CM-1
+ ---------------------------------
+ Regularization was used. Eta =    3.00000000000000     
+ ---------------------------------
+ 
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                 2.051
+ WriteToFile_TypeRealVector             171                 0.000
+ WriteToFile_Vector                     171                 0.001
+ WriteToFile_TypeRealMatrix            3764                 0.028
+ WriteToFile_Matrix                    3793                 0.030
+ construct_molecular_integratio           2                 0.023
+ construct_atom_integration_gri           2                 0.011
+ df_parser                                4                 0.252
+ df_dimer                                86                 0.085
+ df_int_for_df                          316                 0.218
+ make_integrals_for_df                  330                 0.217
+ make_s_matrix_coulomb                    1                 0.001
+ diagonal_1index                          4                 0.000
+ fill_Smat_subsets                        1                 0.001
+ ReadFromFile_TypeRealMatrix            887                 0.000
+ ReadFromFile_Matrix                    887                 0.034
+ make_T_dimer                             1                 0.081
+ diagonal_2index                          3                 0.001
+ matmult_types                         3551                 0.132
+ matrix_write_block_types             25591                 0.027
+ WriteToFile_InBlocks_TypeRealM       25591                 0.000
+ WriteToFile_InBlocks_Matrix          25591                 0.024
+ scale_trans_mat_types                    5                 0.004
+ solve_df_equations_lu                   14                 0.000
+ lineq_solver_lu                         29                 0.035
+ ReadRowsFromFile_TypeRealMatri       23444                 0.000
+ ReadRowsFromFile_Matrix              23444                 0.017
+ lineq_lu_iter                           37                 0.022
+ matrix_write                            29                 0.002
+ df_monomer                             194                 0.168
+ df_make_I                                3                 0.000
+ make_T_AO_mono                           2                 0.081
+ make_T_MO_mono_NN                        2                 0.053
+ test_df                                  2                 0.003
+ matvec_types                            20                 0.004
+ ReadFromFile_TypeRealVector            201                 0.000
+ ReadFromFile_Vector                    201                 0.000
+ fill_subset                              6                 0.016
+ calculate_e1elst_mol                     1                 0.013
+ df_int                                 311                 1.678
+ make_twoeint                           108                 0.056
+ make_D_S_D                             108                 0.056
+ make_oneeint                           183                 0.498
+ twoindx_1e_int_MO                      119                 0.496
+ transform_2index                       119                 0.004
+ calculate_e1exchS2                       1                 0.052
+ overlap_integrals                       43                 0.008
+ open_gen_2eint                          45                 0.348
+ close_gen_2eint                         45                 0.000
+ calculate_e1exch                         1                 0.026
+ calculate_e1intAB                        1                 0.026
+ make_D_matrix                            3                 0.001
+ calculate_e2ind                          2                 1.180
+ init_DF_algorithm                        1                 1.148
+ densfit_prop                            22                 1.198
+ init_prop                               22                 1.144
+ make_h1                                  2                 1.139
+ make_kernel_OVOV_ALDA                    2                 1.128
+ make_kernel_integrals                    2                 1.122
+ make_kernel_integrals:kernel_i           2                 1.122
+ Chi_fxc_Chi_ALDAKernel                   2                 1.122
+ add_2e_ints_to_Hessians                  4                 0.012
+ adddiag                                  4                 0.000
+ make_h2                                  2                 0.001
+ make_misc_df                             4                 0.000
+ make_Dtilde                              4                 0.000
+ nuclear_X                               48                 0.002
+ make_amplitudes                         12                 0.042
+ calculate_e2exchind                      2                 0.162
+ llsq_lu_types_2                          8                 0.003
+ calculate_e2disp                         1                 0.073
+ init_n3_algorithm                        1                 0.000
+ calculate_e2disp_UC                      1                 0.005
+ n3_algorithm                            10                 0.018
+ calculate_e2exchdisp                     1                 0.156
+ e2exchdispUC                             1                 0.156
+ make_t_amplitudes                        1                 0.000
+ make_term_1                              1                 0.016
+ make_term_2a                             1                 0.001
+ make_term_2b_2c                          1                 0.001
+ make_tS1_tS2_intermediates               1                 0.001
+ make_term_3                              1                 0.039
+ make_term_4                              1                 0.042
+ make_term_5                              1                 0.026
+ make_term_6                              1                 0.028
+ DIaux                                    6                 0.001
+ ====================================
+ 
+ 
+Maximum memory defined is :             8192 MB                                      
+Maximum memory used is    :              169 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =  118
+ ======================================
+    1 TMP____000                             D: atom: O1 atom in molecule water1
+    2 TMP____001                             D: atom: H1 atom in molecule water1
+    3 TMP____002                             D: atom: H2 atom in molecule water1
+    4 TMP____003                             D: atom: O1 atom in molecule water1
+    5 TMP____004                             D: atom: H1 atom in molecule water1
+    6 TMP____005                             D: atom: H2 atom in molecule water1
+    7 TMP____006                             D: atom: Mb atom in molecule water1
+    8 TMP____007                                      E      Energies for water1
+    9 TMP____008                                           C      MOs for water1
+   10 TMP____009                             D: atom: O1 atom in molecule water2
+   11 TMP____010                             D: atom: H1 atom in molecule water2
+   12 TMP____011                             D: atom: H2 atom in molecule water2
+   13 TMP____012                             D: atom: O1 atom in molecule water2
+   14 TMP____013                             D: atom: H1 atom in molecule water2
+   15 TMP____014                             D: atom: H2 atom in molecule water2
+   16 TMP____015                             D: atom: Mb atom in molecule water2
+   17 TMP____016                                      E      Energies for water2
+   18 TMP____017                                           C      MOs for water2
+   19 TMP_Doo_ab                                Doo_ab  DF sol for water1_water2
+   20 TMP_S___ab                                   S_____AB 2-e 2-indx integrals
+   21 TMP____018                        G  1-index diagonal integrals for water1
+   22 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+   23 TMP_S____b                                   S____B_B 2-e 2-indx integrals
+   24 TMP____021                                   S____A_B 2-e 2-indx integrals
+   25 TMP____022                                   S___A_AB 2-e 2-indx integrals
+   26 TMP____023                                   S___B_AB 2-e 2-indx integrals
+   27 TMP_Too_ab                                   T_MOOOAB 2-e 2-indx integrals
+   28 TMP_Tov_ab                                   T_MOOVAB 2-e 2-indx integrals
+   29 TMP_Tvo_ab                                   T_MOVOAB 2-e 2-indx integrals
+   30 TMP____019                        G  2-index diagonal integrals for water1
+   31 TMP_Dov_ab                                Dov_ab  DF sol for water1_water2
+   32 TMP_Dvo_ab                                Dvo_ab  DF sol for water1_water2
+   33 TMP____020                                          I_____XA 1-e integrals
+   34 TMP_D____a                                       D  Full DF sol for water1
+   35 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   36 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   37 TMP_Drho_a                                      Drho Density DF for water1
+   38 TMP_Doo__a                            OO part of D  Full DF sol for water1
+   39 TMP_Dov__a                            OV part of D  Full DF sol for water1
+   40 TMP_Dvv__a                            VV part of D  Full DF sol for water1
+   41 TMP____024                                          I_____XB 1-e integrals
+   42 TMP_D____b                                       D  Full DF sol for water2
+   43 TMP_TAO__b                                   T_AO___B 2-e 2-indx integrals
+   44 TMP_T____b                                   T_MO___B 2-e 2-indx integrals
+   45 TMP_Drho_b                                      Drho Density DF for water2
+   46 TMP_Doo__b                            OO part of D  Full DF sol for water2
+   47 TMP_Dov__b                            OV part of D  Full DF sol for water2
+   48 TMP_Dvv__b                            VV part of D  Full DF sol for water2
+   49 TMP____025                                          OOOOAABB 2-e integrals
+   50 TMP____026                                          NUCBOOAA 1-e integrals
+   51 TMP____027                                          NUCAOOBB 1-e integrals
+   52 TMP____028                                          OVRLOOAB 1-e integrals
+   53 TMP____029                                          OOOOABAB 2-e integrals
+   54 TMP____030                                          NUCAOOAB 1-e integrals
+   55 TMP____031                                          NUCBOOAB 1-e integrals
+   56 TMP____032                                          OOOOAAAB 2-e integrals
+   57 TMP____033                                          OOOOABBB 2-e integrals
+   58 TMP____034                           C_a  static density-fitted propagator
+   59 TMP____035                                   H1-matrix  for monomer water1
+   60 TMP____036                                          OVOVAAAA 2-e integrals
+   61 TMP____037                                   KERAXAXA 1-e 2-indx integrals
+   62 TMP____038                      Rho : OO part of D  Full DF sol for water1
+   63 TMP____039                                          VVOOAAAA 2-e integrals
+   64 TMP____040                                   H2-matrix  for monomer water1
+   65 TMP____041                                 H21 = H2 * H1 : mol indx =    1
+   66 TMP____042                          fH2D = -4.0 * H2 * D : mol indx =    1
+   67 TMP____043                           C_b  static density-fitted propagator
+   68 TMP____044                                   H1-matrix  for monomer water2
+   69 TMP____045                                          OVOVBBBB 2-e integrals
+   70 TMP____046                                   KERBXBXB 1-e 2-indx integrals
+   71 TMP____047                      Rho : OO part of D  Full DF sol for water2
+   72 TMP____048                                          VVOOBBBB 2-e integrals
+   73 TMP____049                                   H2-matrix  for monomer water2
+   74 TMP____050                                 H21 = H2 * H1 : mol indx =    2
+   75 TMP____051                          fH2D = -4.0 * H2 * D : mol indx =    2
+   76 TMP____052                                          DTIL__XB 1-e integrals
+   77 TMP____053                                          NUCB__XA 1-e integrals
+   78 TMP____054                                          DTIL__XA 1-e integrals
+   79 TMP____055                                          NUCA__XB 1-e integrals
+   80 TMP____057                                          NUCBOVAA 1-e integrals
+   81 TMP____058                                          OVOOAABB 2-e integrals
+   82 TMP____059                                          NUCAOVBB 1-e integrals
+   83 TMP____060                                          OOOVAABB 2-e integrals
+   84 TMP____061                                          OVRLVOAB 1-e integrals
+   85 TMP____062                                          OOVOABAB 2-e integrals
+   86 TMP____063                                          NUCAVOAB 1-e integrals
+   87 TMP____064                                          OOVOAAAB 2-e integrals
+   88 TMP____065                                          OVOOAAAB 2-e integrals
+   89 TMP____066                                          OVRLOVAB 1-e integrals
+   90 TMP____067                                          OVOOABAB 2-e integrals
+   91 TMP____068                                          NUCBOVAB 1-e integrals
+   92 TMP____069                                          OVOOABBB 2-e integrals
+   93 TMP____070                                          OOOVABBB 2-e integrals
+   94 TMP____071                                          OVVOABAB 2-e integrals
+   95 TMP____072            tprop_a  Matrix containing density-fitted propagator
+   96 TMP____073            tprop_b  Matrix containing density-fitted propagator
+   97 TMP____074            tprop_a  Matrix containing density-fitted propagator
+   98 TMP____075            tprop_b  Matrix containing density-fitted propagator
+   99 TMP____076            tprop_a  Matrix containing density-fitted propagator
+  100 TMP____077            tprop_b  Matrix containing density-fitted propagator
+  101 TMP____078            tprop_a  Matrix containing density-fitted propagator
+  102 TMP____079            tprop_b  Matrix containing density-fitted propagator
+  103 TMP____080            tprop_a  Matrix containing density-fitted propagator
+  104 TMP____081            tprop_b  Matrix containing density-fitted propagator
+  105 TMP____082            tprop_a  Matrix containing density-fitted propagator
+  106 TMP____083            tprop_b  Matrix containing density-fitted propagator
+  107 TMP____084            tprop_a  Matrix containing density-fitted propagator
+  108 TMP____085            tprop_b  Matrix containing density-fitted propagator
+  109 TMP____086            tprop_a  Matrix containing density-fitted propagator
+  110 TMP____087            tprop_b  Matrix containing density-fitted propagator
+  111 TMP____088            tprop_a  Matrix containing density-fitted propagator
+  112 TMP____089            tprop_b  Matrix containing density-fitted propagator
+  113 TMP____090            tprop_a  Matrix containing density-fitted propagator
+  114 TMP____091            tprop_b  Matrix containing density-fitted propagator
+  115 TMP____092                                          OVOVAABB 2-e integrals
+  116 TMP____093                                          I____XAB 1-e integrals
+  117 TMP____094                                          NUCA_XAB 1-e integrals
+  118 TMP____095                                          NUCB_XAB 1-e integrals
+ --------------------------------------
+ 
+ WARNING: NoRelease = T. Name = C      MOs for water1
+ WARNING: NoRelease = T. Name = C      MOs for water1
+ WARNING: Temporary file to be removed does not exist in the list
+ File name is TMP____008
+ WARNING: NoRelease = T. Name = E      Energies for water1
+ WARNING: NoRelease = T. Name = C      MOs for water2
+ WARNING: NoRelease = T. Name = C      MOs for water2
+ WARNING: Temporary file to be removed does not exist in the list
+ File name is TMP____017
+ WARNING: NoRelease = T. Name = E      Energies for water2
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.2427664E+04        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2125906E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{exch}                0.2138825E+04        CM-1     DF :: NoReg ::                                              
+E^{1}_{int}                -0.2888394E+03        CM-1     DF :: NoReg ::                                              
+E^{2}_{ind}                -0.9639164E+03        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(A)             -0.3243957E+03        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(B)             -0.6395207E+03        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.9347161E+03        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}(S2)        0.5765491E+03        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP cks                      
+E^{2}_{ind,exch}(S2)(A)     0.2325792E+03        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP cks                      
+E^{2}_{ind,exch}(S2)(B)     0.3439698E+03        CM-1     DF :: S2 :: AMP C :: NoReg :: PROP cks                      
+E^{2}_{ind,exch}(S2)(UC)    0.0000000E+00        CM-1     DF :: S2 :: AMP UC ::  :: NoReg                             
+E^{2}_{IND}                -0.3724353E+03        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{IND}(A)             -0.8486593E+02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{IND}(B)             -0.2875694E+03        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind,exch}            0.5914811E+03        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(A)         0.2395298E+03        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(B)         0.3519513E+03        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{disp}               -0.8791214E+03        CM-1     DF :: NoReg :: PROP cks                                     
+E^{2}_{disp}(UC)           -0.1110364E+04        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{disp,exch}           0.1568117E+03        CM-1     DF :: NoReg :: PROP scaled cks                              
+E^{2}_{disp,exch}(UC)       0.1980592E+03        CM-1     DF :: NoReg :: PROP UC                                      
+E^{2}_{ind}                -0.3608473E+03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(A)             -0.4997734E+02        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(B)             -0.3108699E+03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind}(UC)            -0.3729746E+03        CM-1     DF :: PROP UC  :: REG eta =   3.0000                        
+E^{2}_{ind,exch}(S2)        0.6499710E+02        CM-1     DF :: S2 :: AMP C :: REG eta =   3.0000 :: PROP cks         
+E^{2}_{ind,exch}(S2)(A)    -0.3334738E+02        CM-1     DF :: S2 :: AMP C :: REG eta =   3.0000 :: PROP cks         
+E^{2}_{ind,exch}(S2)(B)     0.9834448E+02        CM-1     DF :: S2 :: AMP C :: REG eta =   3.0000 :: PROP cks         
+E^{2}_{ind,exch}(S2)(UC)    0.0000000E+00        CM-1     DF :: S2 :: AMP UC ::  :: REG eta =   3.0000                
+E^{2}_{IND}                -0.2937708E+03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{IND}(A)             -0.8371385E+02        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{IND}(B)             -0.2100570E+03        CM-1     DF :: PROP cks :: REG eta =   3.0000                        
+E^{2}_{ind,exch}            0.6707641E+02        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+E^{2}_{ind,exch}(A)        -0.3373650E+02        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+E^{2}_{ind,exch}(B)         0.1008129E+03        CM-1     DF :: AMP C :: REG eta =   3.0000 :: PROP cks               
+--------------------------------------------------------------------------------
+
+Ending on 30-01-2020 at 11:38:49.706

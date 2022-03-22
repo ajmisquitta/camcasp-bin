@@ -1,0 +1,47 @@
+TITLE  PROCESS file for benzene
+! Usage: process < benzene_sadlej.prss
+
+
+Set Global-data
+   CamCASP /home/ajs1/camcasp-5.7
+   Units  BOHR  DEGREES
+   Overwrite
+   Echo Off
+End
+
+Molecule benzene
+  Units BOHR
+  C1          6.00    2.64623243    0.00000000    0.00000000   Type C
+  C2          6.00    1.32311622    2.29170451    0.00000000   Type C
+  C3          6.00   -1.32311622    2.29170451    0.00000000   Type C
+  C4          6.00   -2.64623243    0.00000000    0.00000000   Type C
+  C5          6.00   -1.32311622   -2.29170451    0.00000000   Type C
+  C6          6.00    1.32311622   -2.29170451    0.00000000   Type C
+  H1          1.00    4.70829954    0.00000000    0.00000000   Type H
+  H2          1.00    2.35414977    4.07750701    0.00000000   Type H
+  H3          1.00   -2.35414977    4.07750701    0.00000000   Type H
+  H4          1.00   -4.70829954    0.00000000    0.00000000   Type H
+  H5          1.00   -2.35414977   -4.07750701    0.00000000   Type H
+  H6          1.00    2.35414977   -4.07750701    0.00000000   Type H
+End
+
+Read local pols for benzene
+   Use binary file benzene_sadlej_L<LIMIT!2>_0f10.pol
+   Maximum rank  <LIMIT! 2>
+   Limit rank to <WSMLIMIT! 2>
+   Limit rank to <HLIMIT! 1> for sites +++
+       H1 H2 H3 H4 H5 H6
+   Frequencies STATIC + 10
+   ! Use this command to split the P-2-P pol file into 11 parts:
+   ! P2P-Pols <point-2-point pol file> SPLIT
+End
+
+Write
+   File-prefix benzene_sadlej
+   PFIT file for benzene +++
+      with cutoff 0.0001 and freq <INDEX!0> +++
+      with penalties and weight <WEIGHT! 4> +++
+      and <ISOTROPIC!> polarizabilities
+End
+
+Finish

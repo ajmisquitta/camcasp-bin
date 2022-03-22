@@ -1,0 +1,25 @@
+! Helium properties calculation
+! =============================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule He
+  I.P.  0.9036
+  He 2.0    0.0 0.0 0.0
+End
+
+Files
+  Molecule He
+  Basis aVTZ
+  Options Tests
+  File-prefix He_aTZ
+  Orient file
+  Process file
+  Interface file
+  Sites file
+End
+
+Finish

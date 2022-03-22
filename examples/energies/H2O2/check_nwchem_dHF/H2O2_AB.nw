@@ -1,0 +1,24 @@
+Title "  water1...water2 Method: PBE0 "
+Scratch_dir <SCRATCHDIR>
+Memory     2048 mb
+Start H2O2_AB
+ 
+Charge     0
+Geometry Units Bohr nocenter noautoz noautosym
+   O1              0.10880900       0.00000000      -0.06077600
+   H1             -0.16161460       0.00000000       1.75530702
+   H2             -1.57933347       0.00000000      -0.78289890
+   O1             -0.09648300       0.00000000       5.59028800
+   H1              0.77186787       1.45365210       6.30032236
+   H2              0.77186805      -1.45365182       6.30032273
+   bqmb            0.00376528       0.00000007       3.64787605
+End
+Basis "ao basis" Spherical
+      *          library     Sadlej_pVTZ
+      bqmb       library  B  mb-3s2p1d
+End
+set lindep:tol 1e-5
+scf
+  thresh 1.0e-7
+end
+task SCF energy

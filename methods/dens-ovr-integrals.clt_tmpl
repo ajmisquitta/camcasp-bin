@@ -1,0 +1,79 @@
+Title Template Cluster file for a distributed density overlap integral calculation
+
+! Goals:
+! To calculate the distributed density overlap integrals at a variety
+! of dimer orientations using the ISA decomposition of the molecular
+! density into atoms-in-a-molecule.
+!
+! These integrals are needed in a density overlap model that is used
+! as an intermediate step in the fitting process for atom-atom potentials.
+
+! We assume the following:
+! (1) You have got MO files for the two molecules in their reference
+!     geometries. These are the geometries defined below.
+! (2) You have for the ISA solution files (*.ISA) for the two molecules.
+! (3) You have a list of dimer geometries in a file called:
+!      dimers.geom
+! (4) At present, the AUX and ATOMAUX basis sets both need to have
+!     SPHERICAL GTOs. 
+! (5) ATOMAUX must have the same s-functions as used to get the ISA solutions.
+!     But other functions may differ.
+! (6) AUX need not be the same as ATOMAUX.
+!
+! Procedure:
+! * Edit this file as needed.
+! * Have the items listed above ready.
+! * Run:
+!     cluster < this_file.clt
+! * If it ran correctly you will get many files, but we need only the *.cks file.
+! * See if the *.cks file is correct. Edit it as needed and then run:
+!     camcasp < *.cks
+!
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule A
+  ...
+End
+Molecule B
+  ...
+End
+
+
+Run-Type
+  SAPT(DFT)
+
+  Molecules    A and B
+
+  ! Change these basis sets as appropriate
+  ! But all must be type MC
+
+  Main-Basis     aVDZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Spherical    No-ISA-Basis
+  
+  ! Make sure that the s-functions in this basis are the same as
+  ! those used to get the ISA solutions.
+
+  AtomAux-Basis  aVTZ   Type  MC   Spherical   Use-ISA-Basis
+  ISA-Basis      set2   Min-S-exp-H = 0.0   
+                               ( convergence tends to be better with this setting )
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  MO-FILE-A    <name of *.movecs>  Format ASCII  ( Set this to the acutal MO file )
+  MO-FILE-B    <name of *.movecs>  Format ASCII  ( Set this to the acutal MO file )
+
+  File-Prefix  A-B-ovr       ( change this to something reasonable )
+
+  #METHOD      dens-ovr-integrals  ( this is the method file )
+
+End
+
+
+Finish

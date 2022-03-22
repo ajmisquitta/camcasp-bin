@@ -1,0 +1,64 @@
+
+# RCS #####################################################################
+# $Id: i,v 1.3 1996/11/25 13:24:01 karin Exp $ 
+# $Log: i,v $
+# Revision 1.3  1996/11/25 13:24:01  karin
+# complete set of nicknames added
+#
+# Revision 1.2  1996/09/27 14:19:57  karin
+# complete set of nicknames added
+#
+# Revision 1.1  1996/07/08 09:29:10  karin
+# Initial revision
+# 
+# RCS #####################################################################
+
+###########################################################################
+$jbas
+#
+#AUXILIARY BASIS SET FOR I
+#
+#
+*
+i 46-mwb-opt
+i ecp-46-mwb-SVP
+i def-SVP
+i def-SV(P)
+i ecp-46-mwb-TZVP
+i def-TZVP
+#  (5s3p3d1f1g)/ [3s3p2d1f1g]  {311/111/21/1/1}
+# RI-J atom energy:                                  dev(DFT): 0.018 mH
+# RI-J HI :                                          dev(DFT): 0.104 mH
+# RI-J IF :                                          dev(DFT): 0.120 mH
+# RI-J IF3  :                                        dev(DFT): 0.206 mH
+# s,d functions optimized and contracted for I atom
+# f, p functions from auxf, auxp (p contraction calc. on HI)
+# g function exp = 2* eta(d) Basis
+# contraction tested on IF, IF3
+*
+    3  s
+     7.491389            -.562097428D-01
+     2.844320             .372659859D+00
+     1.143744            -.110338383D+01
+    1  s
+     0.476822             .936608541D+00
+    1  s
+     0.201251             .291597111D+00
+    1  p
+     1.219576            -.232891450D-02
+    1  p
+     0.486856            -.189960253D-01
+    1  p
+     0.202856             .132244767D-01
+    2  d
+     1.461023             .197603244D-01
+     0.543002            -.645737504D-01
+    1  d
+     0.202307            -.148298056D-01
+    1  f
+     .48584474           1.0
+    1  g
+     0.5320000           1.000000
+*
+###########################################################################
+$end

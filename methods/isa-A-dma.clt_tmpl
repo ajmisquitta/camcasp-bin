@@ -1,0 +1,53 @@
+Title  Template Cluster file for isa-A-dma (ISA and DMA moments)
+
+! Notes
+! -----
+! An ISA A+DF calculation uses the ISA A functional only.
+! This implies that different basis sets can be used for the
+! density-fitting (the AUX basis) and the atomic basis sets
+! that are used for the ISA expansions (the ATOMAUX basis).
+! HOWEVER, convergence seems more reliable if these are kept
+! the same. 
+!
+! The AUX basis can use Cartesian GTOs, but we have found
+! issues with convergence in some cases that have done so.
+! If you need to use Cartesian GTOs in AUX, first converge the ISA-A
+! with spherical GTOs in AUX and then restart using 
+! Cartesian GTOs in AUX (see method isa-A-restart)
+!
+! CamCASP version: >= 6.0.14
+
+Molecule  MOL
+  UNITS  Bohr
+  IP     0.0 a.u.              ( the AC needs the IP. )
+  X   Z    Rx   Ry   Rz
+  ...
+End
+
+Show MOL in XYZ format         ( always a useful check )
+
+Run-Type
+  Properties
+  Molecule     MOL
+
+  ! In this example the AUX basis is aVTZ+ISAset2 and ATOMAUX is aVQZ+ISAset
+
+  Main-Basis     aVTZ   Type  MC
+  Aux-Basis      aVTZ   Type  MC   Spherical   Use-ISA-Basis  ( this basis could be Cartesian )
+  AtomAux-Basis  aVQZ   Type  MC   Spherical   Use-ISA-Basis
+  ISA-Basis      set2   Min-S-exp-H = 0.2   
+                               ( convergence tends to be better with this setting )
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  File-Prefix  MOL-ISA-A-DMA   ( change this to something reasonable )
+
+  #METHOD      isa-A-dma       ( this will use the file isa-A-dma from the methods/ directory )
+
+End
+
+Finish
+

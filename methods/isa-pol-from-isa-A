@@ -1,0 +1,137 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+Edit
+  NEIGHBOURS TYPE = OVR EPS = 0.0001 PRINT
+End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  ! We need larger grids for the polarizability integration
+  Angular 400
+  Radial  100
+END
+
+SET Lattice
+  ! These settings define the point-to-point lattice.
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random   2000
+  Seed     1
+END
+
+SET NEW-PROP
+  Kernel ALDA
+  C-DF  ( For unconstrained DF use: DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 600.0
+    FD-DELTA = 0.01
+    FD-ALPHA = 1.0
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+  SOLVER LU ( Options: GELSS )
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+SET DF
+  Solver GELSS (Options are LU and GELSS )
+END
+
+BEGIN DF
+  Type     NN
+  Eta    =    0.0 
+  Lambda =    1.0 
+  Gamma  =    0.0
+  Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
+END
+BEGIN DF
+  Type     NN
+  Eta    = 0.0 
+  Lambda = 0.0 
+  Gamma  = 0.0
+  Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
+END
+
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 651
+End
+
+Begin ISA
+  DF = Doo-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A
+  Solver BVLS  Alpha-Max = 0.5
+  !  Symmetry
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1  ( set to 0 for molecular grids - slower    )
+  Convergence
+    Convergence-Type W
+    EPS-Norm    = 1.0e-09
+    EPS-Q       = 1.0e-4
+    Max-Iter    = 120
+    W-Damping   = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    FIX = ON  ( This can be set to OFF with the BVLS solver, buy recommended ON for LU. )
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+Begin Multipoles
+  Rank 4
+  DF Type ISA-GRID
+  DF  with Constraints    Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF               ( recommended for more accurate properties )
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1  ( set to 0 for molecular grids - slower    )
+End
+
+BEGIN Polarizability
+  DIST-ALG ISA-GRID   ( this sets the ISA-GRID-based partitioning )
+  ! Sq-freq  0.0      ( use this if you want only static pols )
+  Quad   10           ( and this is you want 1+10 static+freq-dependent pols )
+                      ( the settings in QUAD determine the frequencies )
+  Invert No
+  Spherical
+  Rank 4
+  Calculate only total and distributed polarizabilities and perturbations
+  Print only static total pols upto rank 2
+  Pert-file DEFAULT
+  Pol-file  DEFAULT
+
+  ISA-OPTIONS  TAIL-FIX  OFF               ( recommended for more accurate properties )
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1  ( Use the atom grids. For mol grids set to 0 )
+END
+
+End-CamCASP-commands

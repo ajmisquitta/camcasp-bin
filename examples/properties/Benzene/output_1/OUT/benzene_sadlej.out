@@ -1,0 +1,1744 @@
+      CamCASP version 5.7.16  Tue 04 Mar 2014 14:20:01 GMT
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+Starting on 11-03-2014 at 12:40:20.900
+ 
+ ================================================================
+ Compiled on Sep 05 2013 at 12:33:08
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22529
+ Working directory: 
+     /scratch/fastscratch/ajs1/benzene_sadlej_12-27-27
+ Running on: whirligig
+ ================================================================
+
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE benzene
+TITLE Basis: sadlej
+TITLE CalculationType: PROPERTIES
+
+
+MEMORY       2048 MB
+ Memory Manager initialized with             2147483648  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE benzene at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file benzene_sadlej-A-asc.movecs format ASCII-2
+   IP     0.339700 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      C1         6.0        2.64623243       0.00000000       0.00000000  TYPE C
+      C2         6.0        1.32311622       2.29170451       0.00000000  TYPE C
+      C3         6.0       -1.32311622       2.29170451       0.00000000  TYPE C
+      C4         6.0       -2.64623243       0.00000000       0.00000000  TYPE C
+      C5         6.0       -1.32311622      -2.29170451       0.00000000  TYPE C
+      C6         6.0        1.32311622      -2.29170451       0.00000000  TYPE C
+      H1         1.0        4.70829954       0.00000000       0.00000000  TYPE H
+      H2         1.0        2.35414977       4.07750701       0.00000000  TYPE H
+      H3         1.0       -2.35414977       4.07750701       0.00000000  TYPE H
+      H4         1.0       -4.70829954       0.00000000       0.00000000  TYPE H
+      H5         1.0       -2.35414977      -4.07750701       0.00000000  TYPE H
+      H6         1.0        2.35414977      -4.07750701       0.00000000  TYPE H
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      C1         6.0        2.64623243       0.00000000       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      C2         6.0        1.32311622       2.29170451       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      C3         6.0       -1.32311622       2.29170451       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      C4         6.0       -2.64623243       0.00000000       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      C5         6.0       -1.32311622      -2.29170451       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      C6         6.0        1.32311622      -2.29170451       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      H1         1.0        4.70829954       0.00000000       0.00000000  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H2         1.0        2.35414977       4.07750701       0.00000000  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H3         1.0       -2.35414977       4.07750701       0.00000000  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H4         1.0       -4.70829954       0.00000000       0.00000000  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H5         1.0       -2.35414977      -4.07750701       0.00000000  TYPE H
+    LIMITING basis on this site upto G symmetry
+      H6         1.0        2.35414977      -4.07750701       0.00000000  TYPE H
+    LIMITING basis on this site upto G symmetry
+   End
+END
+ WARNING: In ASCII(2) MO file: MOs on file /= MOs defined
+ This could be because the DFT code has truncated the 
+ basis space.
+ In basis: NMOS =          198
+ On file :      =          196
+ Updating mol%nmos and mol%nvir
+============================================================
+Summary for benzene
+    1         C1    6.00     2.6462     0.0000     0.0000
+    2         C2    6.00     1.3231     2.2917     0.0000
+    3         C3    6.00    -1.3231     2.2917     0.0000
+    4         C4    6.00    -2.6462     0.0000     0.0000
+    5         C5    6.00    -1.3231    -2.2917     0.0000
+    6         C6    6.00     1.3231    -2.2917     0.0000
+    7         H1    1.00     4.7083     0.0000     0.0000
+    8         H2    1.00     2.3541     4.0775     0.0000
+    9         H3    1.00    -2.3541     4.0775     0.0000
+   10         H4    1.00    -4.7083     0.0000     0.0000
+   11         H5    1.00    -2.3541    -4.0775     0.0000
+   12         H6    1.00     2.3541    -4.0775     0.0000
+ Molecular charge   =     0
+ Molecular IP       =     0.339700  a.u.
+ Number of molecular orbitals =   196
+     Occupied orbitals        =    21
+     Virtual  orbitals        =   175
+ Main basis: Size   =   198
+             Shells =    90
+             Type   = MC
+             Atoms  =    12
+       Sites(Main)  =    12
+       Site Types   =     2
+             GTOs   = Spherical
+ Aux  basis: Size   =  1146
+             Shells =   252
+             Type   = MC
+        Sites(Aux)  =    12
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : benzene_sadlej-A-asc.movecs Type ASCII-2
+============================================================
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN GRID
+  Molecule benzene
+  Angular 200
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 230-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+SET Lattice
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random   2000
+  Seed     1
+END
+ End of LATTICE section. Resuming rest of routine
+SET NEW-PROP
+  Kernel ALDA
+  C-DF  ( For unconstrained DF use: DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 400.0
+    FD-DELTA = 0.1
+    FD-ALPHA = 0.1
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+ Finished reading the KERNEL-INTEGRAL-PARAMETERS.
+  SOLVER LU ( Options: GELSS )
+END
+ Finished reading in the NEW-PROP settings.
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+ DF-INT parameters set.
+SET DF
+  Solver LU (Options are LU and GELSS )
+END
+
+
+BEGIN DF
+  Molecule benzene
+  Type NN
+  Eta = 0.0
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for benzene
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00001
+End of tests for benzene
+ Normalization tests for fitted density of benzene
+  \int \rho(r) dr = 42.00000
+Differs from expected value of    42 by .00000
+ End of normalization tests
+
+
+BEGIN Polarizability
+  Molecule benzene
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank 2
+  Calculate only total polarizabilities and perturbations
+  Print only static total pols upto rank 2
+  Pert-file benzene_sadlej_lim2.0_4.0_p2000_f11
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+ options  RANDOM  4.0000    2.0000    1.0000   seed =   1
+ Lattice created for benzene
+ Type of lattice = RANDOM
+ Number of lattice points =         2000
+ 
+ End of Module LATTICE
+ =====================
+ 
+      The perturbation matrix is written in file:
+ benzene_sadlej_lim2.0_4.0_p2000_f11.p2p                                        
+  
+       Polarizability calculations for w^2 =  0.000000000000000E+000
+       i.e., w =   0.000000000000000E+000
+ 
+ 
+ Polarizability calculation
+    Spherical tensor form
+ 
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+ Order:    0 by    0
+   0.0000000E+00 
+ 
+ Order:    0 by    1
+   0.0000000E+00   0.0000000E+00   0.0000000E+00 
+ 
+ Order:    0 by    2
+  -0.5522472E-06   0.0000000E+00   0.0000000E+00   0.0000000E+00   0.0000000E+00
+ 
+ 
+ Order:    1 by    1
+   0.4315983E+02   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8074021E+02  -0.9490256E-05 
+   0.0000000E+00  -0.9490538E-05   0.8074737E+02 
+    Isotropic polarizability:  0.6821580E+02
+  Anisotropic polarizability:  0.3758395E+02
+ 
+ Order:    1 by    2
+   0.0000000E+00  -0.6363335E-07  -0.2063250E-07   0.0000000E+00   0.0000000E+00
+ 
+   0.7001396E-06   0.0000000E+00   0.0000000E+00  -0.8279939E-04  -0.1158346E-04
+ 
+  -0.2961911E-04   0.0000000E+00   0.0000000E+00  -0.2116744E-04   0.1325327E-04
+ 
+ 
+ Order:    2 by    2
+   0.7798249E+03   0.0000000E+00   0.0000000E+00   0.9092214E-01   0.7795560E-03
+ 
+   0.0000000E+00   0.1067758E+04   0.9236170E-07   0.0000000E+00   0.0000000E+00
+ 
+   0.0000000E+00   0.9235959E-07   0.1067809E+04   0.0000000E+00   0.0000000E+00
+ 
+   0.9092214E-01   0.0000000E+00   0.0000000E+00   0.2201198E+04  -0.4343828E-03
+ 
+   0.7795546E-03   0.0000000E+00   0.0000000E+00  -0.4343834E-03   0.2200869E+04
+ 
+ 
+       Polarizability calculations for w^2 = -4.368683325899941E-005
+       i.e., w =   6.609601596087271E-003 i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -1.308617023136294E-003
+       i.e., w =   3.617481199863096E-002 i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -9.110199235437613E-003
+       i.e., w =   9.544736369034827E-002 i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -3.906323447595483E-002
+       i.e., w =   0.197644211845313      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -0.137208911542497     
+       i.e., w =   0.370417212805367      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -0.455509771904592     
+       i.e., w =   0.674914640458030      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -1.59996991643054     
+       i.e., w =    1.26489917243650      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -6.86044271752941     
+       i.e., w =    2.61924468454732      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -47.7603446195507     
+       i.e., w =    6.91088595040829      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -1430.63699832546     
+       i.e., w =    37.8237623502140      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+ Perturbation matrix written in file benzene_sadlej_lim2.0_4.0_p2000_f11.p2p
+
+
+BEGIN DF
+  Molecule benzene
+  Type NN
+  Eta = 0.0005
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for benzene
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00001
+End of tests for benzene
+ Normalization tests for fitted density of benzene
+  \int \rho(r) dr = 42.00000
+Differs from expected value of    42 by .00000
+ End of normalization tests
+SET NEW-PROP
+  Kernel ALDA
+  C-DF  ( For unconstrained DF use: DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 400.0
+    FD-DELTA = 0.1
+    FD-ALPHA = 0.1
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+ Finished reading the KERNEL-INTEGRAL-PARAMETERS.
+  SOLVER LU ( Options: GELSS )
+END
+ Finished reading in the NEW-PROP settings.
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+BEGIN Polarizability
+  Molecule benzene
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank  4
+  Calculate only distributed polarizabilities
+  Print only static distributed pols upto rank 1
+  Print pols for Orient
+  Pol-file benzene_sadlej_0.0005_1000_f11_NL4
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+      The polarization matrix is written in file:
+ benzene_sadlej_0.0005_1000_f11_NL4.pol
+       Polarizability calculations for w^2 =  0.000000000000000E+000
+       i.e., w =   0.000000000000000E+000
+ 
+ 
+ Distributed polarizability calculation
+    Spherical tensor form
+ 
+ Order:    0 by    0 for sites   C1 (  1) and   C1 (  1)
+   0.1662494E-01 
+ 
+ Order:    0 by    1 for sites   C1 (  1) and   C1 (  1)
+   0.0000000E+00   0.4974954E-01  -0.3029953E-05 
+ 
+ Order:    1 by    1 for sites   C1 (  1) and   C1 (  1)
+   0.4950586E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2804147E+01  -0.8751924E-04 
+   0.0000000E+00  -0.8751924E-04   0.3980119E+01 
+    Isotropic polarizability:  0.3911617E+01
+  Anisotropic polarizability:  0.1861709E+01
+ 
+ Order:    0 by    0 for sites   C2 (  2) and   C1 (  1)
+   0.3375007E-02 
+ 
+ Order:    0 by    1 for sites   C2 (  2) and   C1 (  1)
+   0.0000000E+00   0.2218395E-01   0.3046630E-01 
+ 
+ Order:    1 by    1 for sites   C2 (  2) and   C1 (  1)
+   0.3286268E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1434708E+01   0.1033260E+01 
+   0.0000000E+00   0.5154541E+00   0.5404170E+00 
+    Isotropic polarizability:  0.7679172E+00
+  Anisotropic polarizability:  0.2058371E+01
+ 
+ Order:    0 by    0 for sites   C2 (  2) and   C2 (  2)
+   0.1661657E-01 
+ 
+ Order:    0 by    1 for sites   C2 (  2) and   C2 (  2)
+   0.0000000E+00   0.2482520E-01   0.4306602E-01 
+ 
+ Order:    1 by    1 for sites   C2 (  2) and   C2 (  2)
+   0.4945758E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3686410E+01  -0.5094623E+00 
+   0.0000000E+00  -0.5094623E+00   0.3098681E+01 
+    Isotropic polarizability:  0.3910283E+01
+  Anisotropic polarizability:  0.1857470E+01
+ 
+ Order:    0 by    0 for sites   C3 (  3) and   C1 (  1)
+  -0.2172518E-02 
+ 
+ Order:    0 by    1 for sites   C3 (  3) and   C1 (  1)
+   0.0000000E+00  -0.7086907E-02   0.4122934E-01 
+ 
+ Order:    1 by    1 for sites   C3 (  3) and   C1 (  1)
+  -0.8944317E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3103347E+00   0.3380597E-01 
+   0.0000000E+00   0.4305831E+00   0.5782669E+00 
+    Isotropic polarizability:  0.2663861E+00
+  Anisotropic polarizability:  0.5849375E+00
+ 
+ Order:    0 by    0 for sites   C3 (  3) and   C2 (  2)
+   0.3376711E-02 
+ 
+ Order:    0 by    1 for sites   C3 (  3) and   C2 (  2)
+   0.0000000E+00  -0.1533011E-01   0.3448715E-01 
+ 
+ Order:    1 by    1 for sites   C3 (  3) and   C2 (  2)
+   0.3299473E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.9308406E-01   0.2592183E+00 
+   0.0000000E+00  -0.2592432E+00   0.1881897E+01 
+    Isotropic polarizability:  0.7683094E+00
+  Anisotropic polarizability:  0.1741790E+01
+ 
+ Order:    0 by    0 for sites   C3 (  3) and   C3 (  3)
+   0.1661680E-01 
+ 
+ Order:    0 by    1 for sites   C3 (  3) and   C3 (  3)
+   0.0000000E+00  -0.2480967E-01   0.4306241E-01 
+ 
+ Order:    1 by    1 for sites   C3 (  3) and   C3 (  3)
+   0.4945758E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3686152E+01   0.5097105E+00 
+   0.0000000E+00   0.5097105E+00   0.3098505E+01 
+    Isotropic polarizability:  0.3910139E+01
+  Anisotropic polarizability:  0.1857836E+01
+ 
+ Order:    0 by    0 for sites   C4 (  4) and   C1 (  1)
+  -0.2363100E-02 
+ 
+ Order:    0 by    1 for sites   C4 (  4) and   C1 (  1)
+   0.0000000E+00  -0.1647056E-01  -0.1685438E-05 
+ 
+ Order:    1 by    1 for sites   C4 (  4) and   C1 (  1)
+   0.1544701E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.7248541E-01  -0.4721929E-04 
+   0.0000000E+00   0.7400780E-04   0.1421240E+01 
+    Isotropic polarizability:  0.1012809E+01
+  Anisotropic polarizability:  0.1414532E+01
+ 
+ Order:    0 by    0 for sites   C4 (  4) and   C2 (  2)
+  -0.2172182E-02 
+ 
+ Order:    0 by    1 for sites   C4 (  4) and   C2 (  2)
+   0.0000000E+00  -0.3923618E-01   0.1452039E-01 
+ 
+ Order:    1 by    1 for sites   C4 (  4) and   C2 (  2)
+  -0.8944317E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3100922E+00  -0.4308662E+00 
+   0.0000000E+00  -0.3372652E-01   0.5782667E+00 
+    Isotropic polarizability:  0.2663052E+00
+  Anisotropic polarizability:  0.9463764E+00
+ 
+ Order:    0 by    0 for sites   C4 (  4) and   C3 (  3)
+   0.3375026E-02 
+ 
+ Order:    0 by    1 for sites   C4 (  4) and   C3 (  3)
+   0.0000000E+00  -0.3749564E-01   0.3955359E-02 
+ 
+ Order:    1 by    1 for sites   C4 (  4) and   C3 (  3)
+   0.3286268E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1434642E+01  -0.5153327E+00 
+   0.0000000E+00  -0.1033222E+01   0.5403223E+00 
+    Isotropic polarizability:  0.7678638E+00
+  Anisotropic polarizability:  0.1353015E+01
+ 
+ Order:    0 by    0 for sites   C4 (  4) and   C4 (  4)
+   0.1662458E-01 
+ 
+ Order:    0 by    1 for sites   C4 (  4) and   C4 (  4)
+   0.0000000E+00  -0.4975041E-01   0.2127220E-05 
+ 
+ Order:    1 by    1 for sites   C4 (  4) and   C4 (  4)
+   0.4950586E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2804435E+01  -0.5102834E-05 
+   0.0000000E+00  -0.5102834E-05   0.3980017E+01 
+    Isotropic polarizability:  0.3911680E+01
+  Anisotropic polarizability:  0.1861446E+01
+ 
+ Order:    0 by    0 for sites   C5 (  5) and   C1 (  1)
+  -0.2172512E-02 
+ 
+ Order:    0 by    1 for sites   C5 (  5) and   C1 (  1)
+   0.0000000E+00  -0.7082763E-02  -0.4122806E-01 
+ 
+ Order:    1 by    1 for sites   C5 (  5) and   C1 (  1)
+  -0.8944317E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3103937E+00  -0.3371727E-01 
+   0.0000000E+00  -0.4306534E+00   0.5783981E+00 
+    Isotropic polarizability:  0.2664495E+00
+  Anisotropic polarizability:  0.5850337E+00
+ 
+ Order:    0 by    0 for sites   C5 (  5) and   C2 (  2)
+  -0.2361829E-02 
+ 
+ Order:    0 by    1 for sites   C5 (  5) and   C2 (  2)
+   0.0000000E+00  -0.8212085E-02  -0.1427739E-01 
+ 
+ Order:    1 by    1 for sites   C5 (  5) and   C2 (  2)
+   0.1542220E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1083990E+01  -0.5841919E+00 
+   0.0000000E+00  -0.5840625E+00   0.4099756E+00 
+    Isotropic polarizability:  0.1012062E+01
+  Anisotropic polarizability:  0.1413140E+01
+ 
+ Order:    0 by    0 for sites   C5 (  5) and   C3 (  3)
+  -0.2168572E-02 
+ 
+ Order:    0 by    1 for sites   C5 (  5) and   C3 (  3)
+   0.0000000E+00  -0.3220385E-01  -0.2676826E-01 
+ 
+ Order:    1 by    1 for sites   C5 (  5) and   C3 (  3)
+  -0.8810055E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.7122818E+00  -0.1984399E+00 
+   0.0000000E+00   0.1985346E+00   0.1764290E+00 
+    Isotropic polarizability:  0.2668701E+00
+  Anisotropic polarizability:  0.7854924E+00
+ 
+ Order:    0 by    0 for sites   C5 (  5) and   C4 (  4)
+   0.3374964E-02 
+ 
+ Order:    0 by    1 for sites   C5 (  5) and   C4 (  4)
+   0.0000000E+00  -0.2218535E-01  -0.3046548E-01 
+ 
+ Order:    1 by    1 for sites   C5 (  5) and   C4 (  4)
+   0.3286268E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1434716E+01   0.1033124E+01 
+   0.0000000E+00   0.5153768E+00   0.5402762E+00 
+    Isotropic polarizability:  0.7678730E+00
+  Anisotropic polarizability:  0.2058194E+01
+ 
+ Order:    0 by    0 for sites   C5 (  5) and   C5 (  5)
+   0.1661711E-01 
+ 
+ Order:    0 by    1 for sites   C5 (  5) and   C5 (  5)
+   0.0000000E+00  -0.2481956E-01  -0.4306246E-01 
+ 
+ Order:    1 by    1 for sites   C5 (  5) and   C5 (  5)
+   0.4945758E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3686108E+01  -0.5097216E+00 
+   0.0000000E+00  -0.5097216E+00   0.3098571E+01 
+    Isotropic polarizability:  0.3910146E+01
+  Anisotropic polarizability:  0.1857810E+01
+ 
+ Order:    0 by    0 for sites   C6 (  6) and   C1 (  1)
+   0.3374980E-02 
+ 
+ Order:    0 by    1 for sites   C6 (  6) and   C1 (  1)
+   0.0000000E+00   0.2217560E-01  -0.3046301E-01 
+ 
+ Order:    1 by    1 for sites   C6 (  6) and   C1 (  1)
+   0.3286268E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1434763E+01  -0.1033147E+01 
+   0.0000000E+00  -0.5154047E+00   0.5402987E+00 
+    Isotropic polarizability:  0.7678963E+00
+  Anisotropic polarizability:  0.2058248E+01
+ 
+ Order:    0 by    0 for sites   C6 (  6) and   C2 (  2)
+  -0.2168842E-02 
+ 
+ Order:    0 by    1 for sites   C6 (  6) and   C2 (  2)
+   0.0000000E+00   0.3220753E-01  -0.2675956E-01 
+ 
+ Order:    1 by    1 for sites   C6 (  6) and   C2 (  2)
+  -0.8810055E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.7125296E+00   0.1986323E+00 
+   0.0000000E+00  -0.1986203E+00   0.1763134E+00 
+    Isotropic polarizability:  0.2669141E+00
+  Anisotropic polarizability:  0.7858689E+00
+ 
+ Order:    0 by    0 for sites   C6 (  6) and   C3 (  3)
+  -0.2362058E-02 
+ 
+ Order:    0 by    1 for sites   C6 (  6) and   C3 (  3)
+   0.0000000E+00   0.8223642E-02  -0.1427867E-01 
+ 
+ Order:    1 by    1 for sites   C6 (  6) and   C3 (  3)
+   0.1542220E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1084042E+01   0.5840811E+00 
+   0.0000000E+00   0.5840630E+00   0.4099710E+00 
+    Isotropic polarizability:  0.1012078E+01
+  Anisotropic polarizability:  0.1413009E+01
+ 
+ Order:    0 by    0 for sites   C6 (  6) and   C4 (  4)
+  -0.2172511E-02 
+ 
+ Order:    0 by    1 for sites   C6 (  6) and   C4 (  4)
+   0.0000000E+00   0.7084472E-02  -0.4123160E-01 
+ 
+ Order:    1 by    1 for sites   C6 (  6) and   C4 (  4)
+  -0.8944317E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3101459E+00   0.3369755E-01 
+   0.0000000E+00   0.4307717E+00   0.5783520E+00 
+    Isotropic polarizability:  0.2663516E+00
+  Anisotropic polarizability:  0.5849656E+00
+ 
+ Order:    0 by    0 for sites   C6 (  6) and   C5 (  5)
+   0.3376542E-02 
+ 
+ Order:    0 by    1 for sites   C6 (  6) and   C5 (  5)
+   0.0000000E+00   0.1533555E-01  -0.3447951E-01 
+ 
+ Order:    1 by    1 for sites   C6 (  6) and   C5 (  5)
+   0.3299473E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.9297660E-01   0.2591794E+00 
+   0.0000000E+00  -0.2591962E+00   0.1881934E+01 
+    Isotropic polarizability:  0.7682859E+00
+  Anisotropic polarizability:  0.1741871E+01
+ 
+ Order:    0 by    0 for sites   C6 (  6) and   C6 (  6)
+   0.1661712E-01 
+ 
+ Order:    0 by    1 for sites   C6 (  6) and   C6 (  6)
+   0.0000000E+00   0.2481821E-01  -0.4306888E-01 
+ 
+ Order:    1 by    1 for sites   C6 (  6) and   C6 (  6)
+   0.4945758E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3686290E+01   0.5096045E+00 
+   0.0000000E+00   0.5096045E+00   0.3098627E+01 
+    Isotropic polarizability:  0.3910225E+01
+  Anisotropic polarizability:  0.1857644E+01
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   C1 (  1)
+  -0.2118933E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   C1 (  1)
+   0.0000000E+00   0.6960317E-01   0.6206761E-05 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   C1 (  1)
+  -0.5425755E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.7990316E-01   0.2971276E-04 
+   0.0000000E+00  -0.5342618E-05   0.2267143E+00 
+    Isotropic polarizability: -0.1319215E+00
+  Anisotropic polarizability:  0.6707782E+00
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   C2 (  2)
+  -0.1704829E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   C2 (  2)
+   0.0000000E+00   0.1001387E+00  -0.4010997E-01 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   C2 (  2)
+  -0.1933196E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1569116E+00  -0.8837166E-01 
+   0.0000000E+00  -0.2257268E+00   0.2895886E+00 
+    Isotropic polarizability:  0.8439352E-01
+  Anisotropic polarizability:  0.4584336E+00
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   C3 (  3)
+  -0.3387074E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   C3 (  3)
+   0.0000000E+00   0.9033372E-01  -0.4022524E-02 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   C3 (  3)
+  -0.2879727E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1075727E+00  -0.1856143E-01 
+   0.0000000E+00   0.2810191E+00   0.1654580E+00 
+    Isotropic polarizability: -0.7669582E-01
+  Anisotropic polarizability:  0.3967093E+00
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   C4 (  4)
+  -0.4365049E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   C4 (  4)
+   0.0000000E+00   0.6643234E-01  -0.5641706E-05 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   C4 (  4)
+  -0.2504238E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1061834E+00  -0.2349102E-04 
+   0.0000000E+00   0.1562772E-04   0.1536724E+00 
+    Isotropic polarizability: -0.6764490E-01
+  Anisotropic polarizability:  0.3546999E+00
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   C5 (  5)
+  -0.3386935E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   C5 (  5)
+   0.0000000E+00   0.9032723E-01   0.4023602E-02 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   C5 (  5)
+  -0.2879727E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1075898E+00   0.1859092E-01 
+   0.0000000E+00  -0.2809999E+00   0.1654584E+00 
+    Isotropic polarizability: -0.7670137E-01
+  Anisotropic polarizability:  0.3967158E+00
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   C6 (  6)
+  -0.1704611E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   C6 (  6)
+   0.0000000E+00   0.1001318E+00   0.4011091E-01 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   C6 (  6)
+  -0.1933196E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1568951E+00   0.8835441E-01 
+   0.0000000E+00   0.2256993E+00   0.2896074E+00 
+    Isotropic polarizability:  0.8439428E-01
+  Anisotropic polarizability:  0.4584323E+00
+ 
+ Order:    0 by    0 for sites   H1 (  7) and   H1 (  7)
+   0.2154065E-01 
+ 
+ Order:    0 by    1 for sites   H1 (  7) and   H1 (  7)
+   0.0000000E+00   0.4983301E-02  -0.8913580E-06 
+ 
+ Order:    1 by    1 for sites   H1 (  7) and   H1 (  7)
+   0.1590437E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.9281936E+00   0.4201594E-05 
+   0.0000000E+00   0.4201594E-05   0.8624679E+00 
+    Isotropic polarizability:  0.1127033E+01
+  Anisotropic polarizability:  0.6974330E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   C1 (  1)
+  -0.1704894E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   C1 (  1)
+   0.0000000E+00   0.1530621E-01   0.1067578E+00 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   C1 (  1)
+  -0.1935858E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1205691E+00  -0.2046344E+00 
+   0.0000000E+00  -0.6724251E-01   0.3261056E+00 
+    Isotropic polarizability:  0.8436296E-01
+  Anisotropic polarizability:  0.5754429E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   C2 (  2)
+  -0.2114106E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   C2 (  2)
+   0.0000000E+00   0.3476758E-01   0.6028301E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   C2 (  2)
+  -0.5420280E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1501055E+00  -0.1329997E+00 
+   0.0000000E+00  -0.1328604E+00  -0.3279725E-02 
+    Isotropic polarizability: -0.1317341E+00
+  Anisotropic polarizability:  0.6704323E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   C3 (  3)
+  -0.1706516E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   C3 (  3)
+   0.0000000E+00   0.8482096E-01   0.6665965E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   C3 (  3)
+  -0.1934377E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3922760E+00   0.8979457E-01 
+   0.0000000E+00  -0.4757356E-01   0.5416014E-01 
+    Isotropic polarizability:  0.8433284E-01
+  Anisotropic polarizability:  0.5324781E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   C4 (  4)
+  -0.3387820E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   C4 (  4)
+   0.0000000E+00   0.4867998E-01   0.7627079E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   C4 (  4)
+  -0.2883504E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1645855E-01  -0.3336443E+00 
+   0.0000000E+00  -0.3394968E-01   0.7434255E-01 
+    Isotropic polarizability: -0.7682213E-01
+  Anisotropic polarizability:  0.6639380E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   C5 (  5)
+  -0.4367903E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   C5 (  5)
+   0.0000000E+00   0.3326293E-01   0.5753433E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   C5 (  5)
+  -0.2500776E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8871326E-01  -0.1125687E+00 
+   0.0000000E+00  -0.1125382E+00  -0.4125979E-01 
+    Isotropic polarizability: -0.6754139E-01
+  Anisotropic polarizability:  0.3544767E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   C6 (  6)
+  -0.3389876E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   C6 (  6)
+   0.0000000E+00   0.4168807E-01   0.8025937E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   C6 (  6)
+  -0.2879553E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2107693E+00   0.9722298E-01 
+   0.0000000E+00  -0.2024315E+00  -0.1529194E+00 
+    Isotropic polarizability: -0.7670180E-01
+  Anisotropic polarizability:  0.4774643E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   H1 (  7)
+   0.5102468E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   H1 (  7)
+   0.0000000E+00   0.1578143E-01   0.4376023E-02 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   H1 (  7)
+   0.6751378E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1988434E+00   0.7039834E-01 
+   0.0000000E+00   0.1740420E+00   0.5773418E-01 
+    Isotropic polarizability:  0.3105718E+00
+  Anisotropic polarizability:  0.5734505E+00
+ 
+ Order:    0 by    0 for sites   H2 (  8) and   H2 (  8)
+   0.2154162E-01 
+ 
+ Order:    0 by    1 for sites   H2 (  8) and   H2 (  8)
+   0.0000000E+00   0.2496482E-02   0.4330186E-02 
+ 
+ Order:    1 by    1 for sites   H2 (  8) and   H2 (  8)
+   0.1590454E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8789893E+00   0.2843613E-01 
+   0.0000000E+00   0.2843613E-01   0.9118372E+00 
+    Isotropic polarizability:  0.1127093E+01
+  Anisotropic polarizability:  0.6973637E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   C1 (  1)
+  -0.3386799E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   C1 (  1)
+   0.0000000E+00  -0.4863733E-01   0.7625459E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   C1 (  1)
+  -0.2883504E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1652319E-01   0.3336002E+00 
+   0.0000000E+00   0.3399734E-01   0.7434948E-01 
+    Isotropic polarizability: -0.7684136E-01
+  Anisotropic polarizability:  0.6638651E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   C2 (  2)
+  -0.1704538E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   C2 (  2)
+   0.0000000E+00  -0.8480490E-01   0.6666109E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   C2 (  2)
+  -0.1934377E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3922900E+00  -0.8975871E-01 
+   0.0000000E+00   0.4751886E-01   0.5410229E-01 
+    Isotropic polarizability:  0.8431822E-01
+  Anisotropic polarizability:  0.5324771E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   C3 (  3)
+  -0.2112677E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   C3 (  3)
+   0.0000000E+00  -0.3481676E-01   0.6029257E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   C3 (  3)
+  -0.5420280E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1501454E+00   0.1329526E+00 
+   0.0000000E+00   0.1328018E+00  -0.3252350E-02 
+    Isotropic polarizability: -0.1317117E+00
+  Anisotropic polarizability:  0.6704374E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   C4 (  4)
+  -0.1703975E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   C4 (  4)
+   0.0000000E+00  -0.1534448E-01   0.1067824E+00 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   C4 (  4)
+  -0.1935858E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1205957E+00   0.2046520E+00 
+   0.0000000E+00   0.6726014E-01   0.3260955E+00 
+    Isotropic polarizability:  0.8436847E-01
+  Anisotropic polarizability:  0.5754579E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   C5 (  5)
+  -0.3388724E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   C5 (  5)
+   0.0000000E+00  -0.4171252E-01   0.8025438E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   C5 (  5)
+  -0.2879553E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2108255E+00  -0.9722815E-01 
+   0.0000000E+00   0.2023697E+00  -0.1529383E+00 
+    Isotropic polarizability: -0.7668938E-01
+  Anisotropic polarizability:  0.4775227E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   C6 (  6)
+  -0.4366876E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   C6 (  6)
+   0.0000000E+00  -0.3321988E-01   0.5753001E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   C6 (  6)
+  -0.2500776E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8873174E-01   0.1125659E+00 
+   0.0000000E+00   0.1124811E+00  -0.4121817E-01 
+    Isotropic polarizability: -0.6752136E-01
+  Anisotropic polarizability:  0.3544909E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   H1 (  7)
+  -0.3831360E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   H1 (  7)
+   0.0000000E+00   0.6882008E-02   0.1355997E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   H1 (  7)
+   0.3142173E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2295030E-02   0.1057362E+00 
+   0.0000000E+00   0.8552223E-01   0.1127012E+00 
+    Isotropic polarizability:  0.1430712E+00
+  Anisotropic polarizability:  0.3295258E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   H2 (  8)
+   0.5104171E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   H2 (  8)
+   0.0000000E+00   0.4095299E-02   0.1584367E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   H2 (  8)
+   0.6751276E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1280085E-01  -0.5181084E-01 
+   0.0000000E+00   0.5180958E-01   0.2694335E+00 
+    Isotropic polarizability:  0.3105867E+00
+  Anisotropic polarizability:  0.6056383E+00
+ 
+ Order:    0 by    0 for sites   H3 (  9) and   H3 (  9)
+   0.2154091E-01 
+ 
+ Order:    0 by    1 for sites   H3 (  9) and   H3 (  9)
+   0.0000000E+00  -0.2484712E-02   0.4325838E-02 
+ 
+ Order:    1 by    1 for sites   H3 (  9) and   H3 (  9)
+   0.1590454E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8789671E+00  -0.2843069E-01 
+   0.0000000E+00  -0.2843069E-01   0.9118469E+00 
+    Isotropic polarizability:  0.1127089E+01
+  Anisotropic polarizability:  0.6973704E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   C1 (  1)
+  -0.4364425E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   C1 (  1)
+   0.0000000E+00  -0.6642065E-01   0.1513202E-05 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   C1 (  1)
+  -0.2504238E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1061638E+00   0.1739022E-04 
+   0.0000000E+00   0.2840329E-05   0.1536818E+00 
+    Isotropic polarizability: -0.6763525E-01
+  Anisotropic polarizability:  0.3547055E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   C2 (  2)
+  -0.3385511E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   C2 (  2)
+   0.0000000E+00  -0.9032438E-01  -0.4018569E-02 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   C2 (  2)
+  -0.2879727E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1074770E+00   0.1863611E-01 
+   0.0000000E+00  -0.2810040E+00   0.1654904E+00 
+    Isotropic polarizability: -0.7665311E-01
+  Anisotropic polarizability:  0.3967383E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   C3 (  3)
+  -0.1703891E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   C3 (  3)
+   0.0000000E+00  -0.1001453E+00  -0.4010511E-01 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   C3 (  3)
+  -0.1933196E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1569362E+00   0.8833249E-01 
+   0.0000000E+00   0.2257176E+00   0.2895932E+00 
+    Isotropic polarizability:  0.8440324E-01
+  Anisotropic polarizability:  0.4584199E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   C4 (  4)
+  -0.2117984E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   C4 (  4)
+   0.0000000E+00  -0.6961289E-01  -0.2057454E-05 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   C4 (  4)
+  -0.5425755E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.7999629E-01  -0.8485861E-05 
+   0.0000000E+00  -0.2793995E-04   0.2267470E+00 
+    Isotropic polarizability: -0.1319416E+00
+  Anisotropic polarizability:  0.6707936E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   C5 (  5)
+  -0.1703339E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   C5 (  5)
+   0.0000000E+00  -0.1001476E+00   0.4010542E-01 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   C5 (  5)
+  -0.1933196E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1569108E+00  -0.8834146E-01 
+   0.0000000E+00  -0.2257103E+00   0.2896074E+00 
+    Isotropic polarizability:  0.8439950E-01
+  Anisotropic polarizability:  0.4584286E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   C6 (  6)
+  -0.3385713E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   C6 (  6)
+   0.0000000E+00  -0.9032702E-01   0.4019737E-02 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   C6 (  6)
+  -0.2879727E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1074966E+00  -0.1861828E-01 
+   0.0000000E+00   0.2810288E+00   0.1654554E+00 
+    Isotropic polarizability: -0.7667132E-01
+  Anisotropic polarizability:  0.3967060E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   H1 (  7)
+  -0.7415354E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   H1 (  7)
+   0.0000000E+00   0.1518419E-01   0.2370287E-06 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   H1 (  7)
+   0.1696813E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.8266499E-01  -0.1500396E-05 
+   0.0000000E+00  -0.1035772E-05   0.1337095E+00 
+    Isotropic polarizability:  0.7357526E-01
+  Anisotropic polarizability:  0.2364218E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   H2 (  8)
+  -0.3832935E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   H2 (  8)
+   0.0000000E+00  -0.8297869E-02   0.1273368E-01 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   H2 (  8)
+   0.3142173E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2272693E-02  -0.8553694E-01 
+   0.0000000E+00  -0.1057447E+00   0.1126956E+00 
+    Isotropic polarizability:  0.1430619E+00
+  Anisotropic polarizability:  0.3114587E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   H3 (  9)
+   0.5100686E-02 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   H3 (  9)
+   0.0000000E+00  -0.1165669E-01   0.1146753E-01 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   H3 (  9)
+   0.6751378E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1988488E+00  -0.1740626E+00 
+   0.0000000E+00  -0.7039500E-01   0.5773956E-01 
+    Isotropic polarizability:  0.3105754E+00
+  Anisotropic polarizability:  0.6362902E+00
+ 
+ Order:    0 by    0 for sites   H4 ( 10) and   H4 ( 10)
+   0.2153957E-01 
+ 
+ Order:    0 by    1 for sites   H4 ( 10) and   H4 ( 10)
+   0.0000000E+00  -0.4979019E-02  -0.2257333E-05 
+ 
+ Order:    1 by    1 for sites   H4 ( 10) and   H4 ( 10)
+   0.1590437E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.9282374E+00   0.9689717E-05 
+   0.0000000E+00   0.9689717E-05   0.8624671E+00 
+    Isotropic polarizability:  0.1127047E+01
+  Anisotropic polarizability:  0.6974147E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   C1 (  1)
+  -0.3387166E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   C1 (  1)
+   0.0000000E+00  -0.4864915E-01  -0.7623993E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   C1 (  1)
+  -0.2883504E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1650887E-01  -0.3336294E+00 
+   0.0000000E+00  -0.3398094E-01   0.7433165E-01 
+    Isotropic polarizability: -0.7684253E-01
+  Anisotropic polarizability:  0.6639050E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   C2 (  2)
+  -0.4366799E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   C2 (  2)
+   0.0000000E+00  -0.3322041E-01  -0.5753317E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   C2 (  2)
+  -0.2500776E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8873705E-01  -0.1125474E+00 
+   0.0000000E+00  -0.1124884E+00  -0.4122344E-01 
+    Isotropic polarizability: -0.6752134E-01
+  Anisotropic polarizability:  0.3544762E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   C3 (  3)
+  -0.3388250E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   C3 (  3)
+   0.0000000E+00  -0.4170144E-01  -0.8025084E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   C3 (  3)
+  -0.2879553E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2108074E+00   0.9721014E-01 
+   0.0000000E+00  -0.2023768E+00  -0.1529578E+00 
+    Isotropic polarizability: -0.7670192E-01
+  Anisotropic polarizability:  0.4775000E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   C4 (  4)
+  -0.1704616E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   C4 (  4)
+   0.0000000E+00  -0.1533588E-01  -0.1067890E+00 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   C4 (  4)
+  -0.1935858E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1205729E+00  -0.2046247E+00 
+   0.0000000E+00  -0.6727078E-01   0.3261114E+00 
+    Isotropic polarizability:  0.8436614E-01
+  Anisotropic polarizability:  0.5754366E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   C5 (  5)
+  -0.2113252E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   C5 (  5)
+   0.0000000E+00  -0.3481556E-01  -0.6028532E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   C5 (  5)
+  -0.5420280E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1501422E+00  -0.1329673E+00 
+   0.0000000E+00  -0.1328036E+00  -0.3255569E-02 
+    Isotropic polarizability: -0.1317138E+00
+  Anisotropic polarizability:  0.6704432E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   C6 (  6)
+  -0.1704119E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   C6 (  6)
+   0.0000000E+00  -0.8481181E-01  -0.6666070E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   C6 (  6)
+  -0.1934377E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3923100E+00   0.8976715E-01 
+   0.0000000E+00  -0.4751687E-01   0.5412566E-01 
+    Isotropic polarizability:  0.8433265E-01
+  Anisotropic polarizability:  0.5324966E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   H1 (  7)
+  -0.3831152E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   H1 (  7)
+   0.0000000E+00   0.6886830E-02  -0.1355748E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   H1 (  7)
+   0.3142173E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2290121E-02  -0.1057427E+00 
+   0.0000000E+00  -0.8552271E-01   0.1126965E+00 
+    Isotropic polarizability:  0.1430680E+00
+  Anisotropic polarizability:  0.3295359E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   H2 (  8)
+  -0.7417846E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   H2 (  8)
+   0.0000000E+00   0.7599150E-02   0.1314455E-01 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   H2 (  8)
+   0.1696600E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.7963371E-01  -0.9369175E-01 
+   0.0000000E+00  -0.9369756E-01  -0.2857776E-01 
+    Isotropic polarizability:  0.7357200E-01
+  Anisotropic polarizability:  0.2364123E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   H3 (  9)
+  -0.3831237E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   H3 (  9)
+   0.0000000E+00  -0.1519003E-01  -0.8200489E-03 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   H3 (  9)
+   0.3142024E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1679150E+00   0.1010400E-01 
+   0.0000000E+00  -0.1010449E-01  -0.5295271E-01 
+    Isotropic polarizability:  0.1430549E+00
+  Anisotropic polarizability:  0.3206228E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   H4 ( 10)
+   0.5100694E-02 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   H4 ( 10)
+   0.0000000E+00  -0.1577006E-01  -0.4371062E-02 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   H4 ( 10)
+   0.6751378E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1988526E+00   0.7040062E-01 
+   0.0000000E+00   0.1740639E+00   0.5773732E-01 
+    Isotropic polarizability:  0.3105759E+00
+  Anisotropic polarizability:  0.5734466E+00
+ 
+ Order:    0 by    0 for sites   H5 ( 11) and   H5 ( 11)
+   0.2154131E-01 
+ 
+ Order:    0 by    1 for sites   H5 ( 11) and   H5 ( 11)
+   0.0000000E+00  -0.2487864E-02  -0.4324690E-02 
+ 
+ Order:    1 by    1 for sites   H5 ( 11) and   H5 ( 11)
+   0.1590454E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8789759E+00   0.2843479E-01 
+   0.0000000E+00   0.2843479E-01   0.9118453E+00 
+    Isotropic polarizability:  0.1127092E+01
+  Anisotropic polarizability:  0.6973669E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   C1 (  1)
+  -0.1704574E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   C1 (  1)
+   0.0000000E+00   0.1532888E-01  -0.1067800E+00 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   C1 (  1)
+  -0.1935858E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1205848E+00   0.2046360E+00 
+   0.0000000E+00   0.6722112E-01   0.3261319E+00 
+    Isotropic polarizability:  0.8437696E-01
+  Anisotropic polarizability:  0.5754627E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   C2 (  2)
+  -0.3389645E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   C2 (  2)
+   0.0000000E+00   0.4168848E-01  -0.8027769E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   C2 (  2)
+  -0.2879553E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2107647E+00  -0.9725114E-01 
+   0.0000000E+00   0.2024683E+00  -0.1528669E+00 
+    Isotropic polarizability: -0.7668585E-01
+  Anisotropic polarizability:  0.4774647E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   C3 (  3)
+  -0.4366974E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   C3 (  3)
+   0.0000000E+00   0.3322394E-01  -0.5753654E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   C3 (  3)
+  -0.2500776E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8869543E-01   0.1126049E+00 
+   0.0000000E+00   0.1125783E+00  -0.4130413E-01 
+    Isotropic polarizability: -0.6756211E-01
+  Anisotropic polarizability:  0.3544944E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   C4 (  4)
+  -0.3387325E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   C4 (  4)
+   0.0000000E+00   0.4866690E-01  -0.7625819E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   C4 (  4)
+  -0.2883504E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1647088E-01   0.3336154E+00 
+   0.0000000E+00   0.3391318E-01   0.7434851E-01 
+    Isotropic polarizability: -0.7682425E-01
+  Anisotropic polarizability:  0.6638948E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   C5 (  5)
+  -0.1705547E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   C5 (  5)
+   0.0000000E+00   0.8480856E-01  -0.6665590E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   C5 (  5)
+  -0.1934377E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3922852E+00  -0.8978033E-01 
+   0.0000000E+00   0.4756739E-01   0.5417897E-01 
+    Isotropic polarizability:  0.8434217E-01
+  Anisotropic polarizability:  0.5324773E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   C6 (  6)
+  -0.2114024E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   C6 (  6)
+   0.0000000E+00   0.3479080E-01  -0.6027902E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   C6 (  6)
+  -0.5420280E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1501131E+00   0.1329518E+00 
+   0.0000000E+00   0.1328688E+00  -0.3269666E-02 
+    Isotropic polarizability: -0.1317282E+00
+  Anisotropic polarizability:  0.6704115E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   H1 (  7)
+   0.5102170E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   H1 (  7)
+   0.0000000E+00   0.1577381E-01  -0.4372756E-02 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   H1 (  7)
+   0.6751378E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1988364E+00  -0.7038841E-01 
+   0.0000000E+00  -0.1740329E+00   0.5772471E-01 
+    Isotropic polarizability:  0.3105663E+00
+  Anisotropic polarizability:  0.5734552E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   H2 (  8)
+  -0.3826370E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   H2 (  8)
+   0.0000000E+00   0.1519032E-01  -0.8103716E-03 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   H2 (  8)
+   0.3142024E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1679299E+00  -0.1010449E-01 
+   0.0000000E+00   0.1009666E-01  -0.5294462E-01 
+    Isotropic polarizability:  0.1430626E+00
+  Anisotropic polarizability:  0.3206172E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   H3 (  9)
+  -0.7419589E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   H3 (  9)
+   0.0000000E+00  -0.7598830E-02   0.1315156E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   H3 (  9)
+   0.1696600E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.7964615E-01   0.9369170E-01 
+   0.0000000E+00   0.9368224E-01  -0.2857154E-01 
+    Isotropic polarizability:  0.7357822E-01
+  Anisotropic polarizability:  0.2364087E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   H4 ( 10)
+  -0.3831803E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   H4 ( 10)
+   0.0000000E+00  -0.6895363E-02  -0.1355492E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   H4 ( 10)
+   0.3142173E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2279056E-02   0.1057288E+00 
+   0.0000000E+00   0.8554622E-01   0.1127090E+00 
+    Isotropic polarizability:  0.1430684E+00
+  Anisotropic polarizability:  0.3295279E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   H5 ( 11)
+   0.5102426E-02 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   H5 ( 11)
+   0.0000000E+00  -0.4101463E-02  -0.1585414E-01 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   H5 ( 11)
+   0.6751276E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1280359E-01  -0.5181293E-01 
+   0.0000000E+00   0.5181577E-01   0.2694324E+00 
+    Isotropic polarizability:  0.3105855E+00
+  Anisotropic polarizability:  0.6056412E+00
+ 
+ Order:    0 by    0 for sites   H6 ( 12) and   H6 ( 12)
+   0.2154125E-01 
+ 
+ Order:    0 by    1 for sites   H6 ( 12) and   H6 ( 12)
+   0.0000000E+00   0.2488585E-02  -0.4329529E-02 
+ 
+ Order:    1 by    1 for sites   H6 ( 12) and   H6 ( 12)
+   0.1590454E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.8789767E+00  -0.2843632E-01 
+   0.0000000E+00  -0.2843632E-01   0.9118513E+00 
+    Isotropic polarizability:  0.1127094E+01
+  Anisotropic polarizability:  0.6973639E+00
+ 
+       Polarizability calculations for w^2 = -4.368683325899941E-005
+       i.e., w =   6.609601596087271E-003 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -1.308617023136294E-003
+       i.e., w =   3.617481199863096E-002 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -9.110199235437613E-003
+       i.e., w =   9.544736369034827E-002 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -3.906323447595483E-002
+       i.e., w =   0.197644211845313      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -0.137208911542497     
+       i.e., w =   0.370417212805367      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -0.455509771904592     
+       i.e., w =   0.674914640458030      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -1.59996991643054     
+       i.e., w =    1.26489917243650      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -6.86044271752941     
+       i.e., w =    2.61924468454732      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -47.7603446195507     
+       i.e., w =    6.91088595040829      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -1430.63699832546     
+       i.e., w =    37.8237623502140      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+ Polarization matrix written in file benzene_sadlej_0.0005_1000_f11_NL4.pol
+
+
+BEGIN GRID
+  Molecule benzene
+  ! No parameters specified. Defaults will be used.
+END
+Using 80-point Euler-MacLaurin radial quadrature
+Using 590-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+BEGIN GDMA
+                                     G D M A
+
+                                 by Anthony Stone
+
+                         version 2.2, 11 January 2006
+
+               Distributed Multipoles from Gaussian wavefunctions
+
+
+
+Starting at 12:52:35 on 11 Mar 2014 
+  Molecule benzene
+ WARNING: in subroutine situs_interface_to_gdma line          298
+ Largest degree of contraction not set correctly at present.
+  ! FILE <check point file from GAUSSIAN>
+  ! Using a hydrogen radius of 0.325 Angstrom = 0.614 a.u.
+  Bohr
+  Multipoles
+    Switch 4
+    Limit  4
+    Limit  1  H1
+    Radius H1  0.614
+    Limit  1  H2
+    Radius H2  0.614
+    Limit  1  H3
+    Radius H3  0.614
+    Limit  1  H4
+    Radius H4  0.614
+    Limit  1  H5
+    Radius H5  0.614
+    Limit  1  H6
+    Radius H6  0.614
+    Punch benzene_sadlej_DMA2_L4.mom
+WARNING: string truncated
+  Start
+
+                         Distributed Multipole Analysis
+
+Standard DMA for products of primitives with exponent greater than 4.00000
+Using 80-point Euler-MacLaurin radial quadrature
+Using 590-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+Positions and radii in bohr
+Multipole moments in atomic units, ea_0^k for rank k
+
+C1         x =  2.646232  y =  0.000000  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.093488
+|Q1| =   0.134047  Q11c =  -0.134047
+|Q2| =   1.259937  Q20  =  -1.244846  Q22c =   0.194422
+|Q3| =   2.960248  Q31c =  -1.237473  Q33c =   2.689187
+|Q4| =   7.842553  Q40  =   1.593847  Q42c =  -4.798980  Q44c =   5.994588
+
+C2         x =  1.323116  y =  2.291705  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.093488
+|Q1| =   0.134050  Q11c =  -0.067025  Q11s =  -0.116091
+|Q2| =   1.259942  Q20  =  -1.244851  Q22c =  -0.097212  Q22s =   0.168380
+|Q3| =   2.960258  Q31c =  -0.618726  Q31s =  -1.071714  Q33c =  -2.689188
+                   Q33s =  -0.000005
+|Q4| =   7.842595  Q40  =   1.593963  Q42c =   2.399763  Q42s =  -4.156056
+                   Q44c =  -2.997241  Q44s =  -5.191384
+
+C3         x = -1.323116  y =  2.291705  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.093488
+|Q1| =   0.134050  Q11c =   0.067025  Q11s =  -0.116091
+|Q2| =   1.259942  Q20  =  -1.244851  Q22c =  -0.097212  Q22s =  -0.168380
+|Q3| =   2.960258  Q31c =   0.618726  Q31s =  -1.071714  Q33c =   2.689188
+                   Q33s =  -0.000005
+|Q4| =   7.842595  Q40  =   1.593963  Q42c =   2.399763  Q42s =   4.156056
+                   Q44c =  -2.997241  Q44s =   5.191384
+
+C4         x = -2.646232  y =  0.000000  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.093488
+|Q1| =   0.134047  Q11c =   0.134047
+|Q2| =   1.259937  Q20  =  -1.244846  Q22c =   0.194422
+|Q3| =   2.960248  Q31c =   1.237473  Q33c =  -2.689187
+|Q4| =   7.842553  Q40  =   1.593847  Q42c =  -4.798980  Q44c =   5.994588
+
+C5         x = -1.323116  y = -2.291705  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.093488
+|Q1| =   0.134050  Q11c =   0.067025  Q11s =   0.116091
+|Q2| =   1.259942  Q20  =  -1.244851  Q22c =  -0.097212  Q22s =   0.168380
+|Q3| =   2.960258  Q31c =   0.618726  Q31s =   1.071714  Q33c =   2.689188
+                   Q33s =   0.000005
+|Q4| =   7.842595  Q40  =   1.593963  Q42c =   2.399763  Q42s =  -4.156056
+                   Q44c =  -2.997241  Q44s =  -5.191384
+
+C6         x =  1.323116  y = -2.291705  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.093488
+|Q1| =   0.134050  Q11c =  -0.067025  Q11s =   0.116091
+|Q2| =   1.259942  Q20  =  -1.244851  Q22c =  -0.097212  Q22s =  -0.168380
+|Q3| =   2.960258  Q31c =  -0.618726  Q31s =   1.071714  Q33c =  -2.689188
+                   Q33s =   0.000005
+|Q4| =   7.842595  Q40  =   1.593963  Q42c =   2.399763  Q42s =   4.156056
+                   Q44c =  -2.997241  Q44s =   5.191384
+
+H1         x =  4.708300  y =  0.000000  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.093461
+|Q1| =   0.130658  Q11c =  -0.130658
+
+H2         x =  2.354150  y =  4.077507  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.093462
+|Q1| =   0.130658  Q11c =  -0.065329  Q11s =  -0.113153
+
+H3         x = -2.354150  y =  4.077507  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.093462
+|Q1| =   0.130658  Q11c =   0.065329  Q11s =  -0.113153
+
+H4         x = -4.708300  y =  0.000000  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.093461
+|Q1| =   0.130658  Q11c =   0.130658
+
+H5         x = -2.354150  y = -4.077507  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.093462
+|Q1| =   0.130658  Q11c =   0.065329  Q11s =   0.113153
+
+H6         x =  2.354150  y = -4.077507  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.093462
+|Q1| =   0.130658  Q11c =  -0.065329  Q11s =   0.113153
+
+Total multipoles
+referred to origin at x =   0.000000,  y =    0.000000,  z =    0.000000
+                   Q00  =  -0.000159
+|Q1| =   0.000000
+|Q2| =   5.901302  Q20  =  -5.901302  Q22c =   0.000002
+|Q3| =   0.000000
+|Q4| = 169.608359  Q40  = 169.608359  Q42c =   0.002379  Q44c =   0.000012
+
+CPU time used:      3m37.414s          Total:      3m37.414s
+END
+
+Finished GDMA at 12:56:13 on 11 Mar 2014 
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1               15.82
+ WriteToFile_TypeRealVector              12                0.00
+ WriteToFile_Vector                      12                0.00
+ WriteToFile_TypeRealMatrix             180                0.09
+ WriteToFile_Matrix                     230                0.23
+ update_molecular_geometry               30                0.00
+ update_molecular_orbitals               30                0.00
+ construct_molecular_integratio           2                0.03
+ df_parser                                3                1.04
+ df_monomer                              29                1.47
+ df_int_for_df                           45                1.00
+ make_integrals_for_df                   45                1.00
+ df_make_I                                1                0.00
+ make_s_matrix_coulomb                    3                0.01
+ diagonal_1index                          4                0.00
+ make_s_matrix_constraints                2                0.01
+ ReadFromFile_TypeRealMatrix            210                0.00
+ ReadFromFile_Matrix                    210                0.51
+ ReadFromFile_TypeRealVector              8                0.00
+ ReadFromFile_Vector                      8                0.00
+ make_T_AO_mono                           1                0.17
+ diagonal_2index                          1                0.00
+ matrix_write_block_types             27401                0.08
+ WriteToFile_InBlocks_TypeRealM       27401                0.00
+ WriteToFile_InBlocks_Matrix          27401                0.08
+ make_T_MO_mono_NN                        3                0.82
+ ReadRowsFromFile_TypeRealMatri       27149                0.00
+ ReadRowsFromFile_Matrix              27149                0.08
+ scale_trans_mat_types                    3                0.03
+ solve_df_equations_lu                   12                0.00
+ lineq_solver_lu                         28                3.58
+ lineq_lu_iter                           28                3.21
+ matrix_write                            50                0.13
+ test_df                                  2                0.02
+ matvec_types                             2                0.02
+ fill_subset                              7                0.03
+ densfit_prop                            22               10.04
+ init_prop                               22                6.13
+ make_h1                                  1                5.73
+ make_kernel_OVOV_ALDA                    1                5.54
+ df_int                                   5                5.57
+ make_kernel_integrals                    1                5.02
+ make_kernel_integrals:kernel_i           1                5.02
+ Chi_fxc_Chi_ALDAKernel                   1                5.02
+ matmult_types                           75                1.38
+ add_2e_ints_to_Hessians                  2                0.24
+ adddiag                                  2                0.00
+ make_twoeint                             4                0.12
+ make_D_S_D                               4                0.12
+ make_h2                                  1                0.06
+ polarizabilities                        11                0.00
+ make_perturbation_matrices              11                0.11
+ make_alphaPP                            11                0.32
+ dist_polarizabilities                   11                0.01
+ ====================================
+ 
+ 
+Maximum memory defined is :             2048 MB                                      
+Maximum memory used is    :              616 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   40
+ ======================================
+    1 TMP____000                            D: atom: C1 atom in molecule benzene
+    2 TMP____001                            D: atom: C2 atom in molecule benzene
+    3 TMP____002                            D: atom: C3 atom in molecule benzene
+    4 TMP____003                            D: atom: C4 atom in molecule benzene
+    5 TMP____004                            D: atom: C5 atom in molecule benzene
+    6 TMP____005                            D: atom: C6 atom in molecule benzene
+    7 TMP____006                            D: atom: H1 atom in molecule benzene
+    8 TMP____007                            D: atom: H2 atom in molecule benzene
+    9 TMP____008                            D: atom: H3 atom in molecule benzene
+   10 TMP____009                            D: atom: H4 atom in molecule benzene
+   11 TMP____010                            D: atom: H5 atom in molecule benzene
+   12 TMP____011                            D: atom: H6 atom in molecule benzene
+   13 TMP____012                                     E      Energies for benzene
+   14 TMP____013                                          C      MOs for benzene
+   15 TMP____014                                          C      MOs for benzene
+   16 TMP____015                                           P densmat for benzene
+   17 TMP____016                                          I_____XA 1-e integrals
+   18 TMP_D_c__a                                      D  Full DF sol for benzene
+   19 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+   20 TMP____017                       G  1-index diagonal integrals for benzene
+   21 TMP____018                                   SC___A_A 2-e 2-indx integrals
+   22 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   23 TMP____019                       G  2-index diagonal integrals for benzene
+   24 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   25 TMP_DrhoCa                                     Drho Density DF for benzene
+   26 TMP_Dooc_a                           OO part of D  Full DF sol for benzene
+   27 TMP_Dovc_a                           OV part of D  Full DF sol for benzene
+   28 TMP____022                                  H1-matrix  for monomer benzene
+   29 TMP____023                                          OVOVAAAA 2-e integrals
+   30 TMP_D____a                                      D  Full DF sol for benzene
+   31 TMP_Drho_a                                     Drho Density DF for benzene
+   32 TMP_Doo__a                           OO part of D  Full DF sol for benzene
+   33 TMP_Dov__a                           OV part of D  Full DF sol for benzene
+   34 TMP_Dvv__a                           VV part of D  Full DF sol for benzene
+   35 TMP____024                                   KERAXAXA 1-e 2-indx integrals
+   36 TMP____025                     Rho : OO part of D  Full DF sol for benzene
+   37 TMP____026                                          VVOOAAAA 2-e integrals
+   38 TMP____027                                  H2-matrix  for monomer benzene
+   39 TMP____028                                 H21 = H2 * H1 : mol indx =    1
+   40 TMP____029                          fH2D = -4.0 * H2 * D : mol indx =    1
+ --------------------------------------
+ 
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+--------------------------------------------------------------------------------
+
+Ending on 11-03-2014 at 12:56:13.431

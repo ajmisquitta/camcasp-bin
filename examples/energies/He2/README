@@ -1,0 +1,113 @@
+This example illustrates the different basis set types
+and the dependence of the interaction energy on the type. 
+
+See the Users' Guide for a description of these types. Note that you
+need to have set up the CamCASP programs as described in the Users'
+Guide. In particular you need to have the $CAMCASP/bin directory in
+your Linux PATH, where the environment variable CAMCASP has been set
+to the CamCASP base directory; e.g.
+$ export CAMCASP=~/ajs1/CamCASP-6.0
+$ export PATH=$CAMCASP/bin:$PATH
+(Don't type the $ here -- it's the Linux command prompt, and is shown
+to distinguish Linux commands from other text.) It's best to put such
+commands in your startup file so that you don't have to issue them
+every time. 
+
+The runcamcasp.py script is used to run CamCASP jobs. The only input
+required is the input file for the cluster program, here He2.clt. It
+is a very simple file. All the complicated files are generated for you
+by the other scripts. To run the He2 calculations, chdir into the
+appropriate directory; for example:
+
+$ cd aTZ_MC
+
+(the $ is the command prompt) and then
+
+$ runcamcasp.py He2 --clt He2.clt --directory test [-q <queue>]
+
+Here "He2" is the job name. It must match the file-prefix defined in
+the He2.clt file. The --directory (or -d) flag specifies a directory,
+here called "test", in which the files for the job will be created.
+<queue> specifies how the job is to be queued. The options are
+"batch", "bg" or "none". "bg" (the default) specifies that the job is
+to be run in the background, which is a sensible choice for small
+jobs. "batch" puts the job in the Linux batch queue. Jobs in this
+queue are started in turn when the machine load drops sufficiently, so
+a series of jobs can be sent to the batch queue and will run
+sequentially. "none" specifies that the job is not to be run
+immediately, but just set up to run later. This is useful if any of
+the job files needs to be modified before the job is started.
+
+This is what happens if we use "none":
+
+$ runcamcasp.py He2 --clt He2.clt -d test -q none
+Setting up files in directory test
+See He2_atz/He2.clt.clout for output of CLUSTER
+This is a SAPT(DFT) calculation with SCF program dalton 2013
+Mid-bond basis functions will not be used
+
+To run your job, execute
+/home/ajs1/camcasp-5.7/examples/energies/He2/aTZ_MC/test/submit.bash [-q <queue>]
+
+What has happened is that runcamcasp.py has created a directory He2_atz
+and set up some files in it:
+$ ls test
+He2_A.dal  He2.bash   He2_B.mol  He2.clt        He2.DALtemplate  He2_P.data
+He2_A.mol  He2_B.dal  He2.cks    He2.clt.clout  He2_energy.ornt  submit.bash
+
+Of these files, He2.clt.clout is the output of the cluster program,
+and will contain error messages if anything went wrong. He2_A.dal and
+He2_A.mol are the input files for the Dalton calculation for molecule
+A, and He2_B.dal and He2_B.mol for molecule B. A and B are the two He
+atoms in this case. If the NWChem SCF code is specified, the
+appropriate input files will be generated for that. He2.cks is the
+input file for the CamCASP program itself, and may need to be modified
+for special purposes (though there is a way to specify non-standard
+CamCASP input in the .clt file -- see the users' guide for details).
+Finally submit.bash is the script that you can use to submit the job,
+after making any changes that are needed.
+
+The runcamcasp.py script has some other options, in particular an
+--ifexists option that specifies what to do if the directory specified
+for the job already exists. To see all the options, run
+
+$ runcamcasp.py --help
+
+When the job has run (which will only take a few seconds) you can see
+the results by using the extract_saptdft.py script:
+
+$ extract_saptdft.py --unit kelvin *
+kelvin      elst        exch         ind        exind       disp       exdisp       total
+kelvin      elst        exch         ind        exind       disp       exdisp       Eint
+check    -1.54231     9.34819    -0.00386     0.00824   -18.85964     0.11603   -10.93335
+test     -1.54231     9.34819    -0.00386     0.00824   -18.85964     0.11603   -10.93335
+
+The "*" here expands to all files and directories in the current
+directory, but the script looks for CamCASP output in the directories
+and ignores all the files that aren't directories. The check directory
+contains a previous calculation that you can compare with the present
+one. 
+
+The extract_saptdft.py script outputs energies in kJ/mol by default,
+but the more conventional unit for the helium dimer energy is kelvin,
+which is specified with the "--unit kelvin" flag. The total energy to
+second order here is -10.933 K.
+
+The results above are for the aTZ_MC example. The other examples will
+give different results, but each example directory has a check
+subdirectory with results for comparison. The aTZ_MC+ and aTZ_DC+
+directories also have an nwchem directory that contains results from
+the NWChem program. They are slightly different because NWChem uses a
+different form of asymptotic correction.
+
+Here's a summary of the He2 energies. We suggest running the examples
+in this order.
+aTZ MC     -10.933 K
+aTZ MC+    -11.047 K  * 
+aTZ DC      -8.320 K
+aTZ DC+    -11.070 K  * 
+
+Reference  -11.06 K   Korona et al. J. Chem. Phys. 106, 5109 (1997)
+
+* We would generally use the `+' type of basis set for an intermolecular
+energy calculation.

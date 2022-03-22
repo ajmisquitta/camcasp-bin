@@ -1,0 +1,88 @@
+!  cc-pVTZ-RI  EMSL  Basis Set Exchange Library  7/2/15 3:06 AM
+! Elements                             References
+! --------                             ----------
+! H He B C N O F Ne Al Si P S Cl Ar Ga Ge As Se Br Kr: F. Weigend, A. Kohn, C. Hattig, Efficient use of the correlation consistent basis sets in resolution of the identity MP2 calculations, The Journal of Chemical Physics 116, 3175 (2002).
+! Li Be Na Mg: Christof Haettig, Optimization of auxiliary basis sets for RI-MP2 and RI-CC2 calculations: Core-valence and quintuple-? basis sets for H to Ar and QZVPP basis sets for Li to Kr, Physical Chemistry Chemical Physics 7, 59 (2005).
+! 
+!  aug-cc-pVTZ-RI diffuse  EMSL  Basis Set Exchange Library  7/2/15 3:00 AM
+! Elements                             References
+! --------                             ----------
+! H He B C N O F Ne Al Si P S Cl Ar Ga Ge As Se Br Kr : F. Weigend, A. Kohn, C. Hattig, Efficient use of the correlation consistent basis sets in resolution of the identity MP2 calculations, The Journal of Chemical Physics 116, 3175 (2002).
+! 
+!
+! P   cc-pVTZ-RI
+! P   aug-cc-pVTZ-RI diffuse
+    1  s
+    300.41068810             1.0000000        
+    1  s
+    106.28840958             1.0000000        
+    1  s
+     39.060992229            1.0000000        
+    1  s
+     13.026074582            1.0000000        
+    1  s
+      7.0701932593           1.0000000        
+    1  s
+      3.2753302641           1.0000000        
+    1  s
+      1.3055670252           1.0000000        
+    1  s
+      0.73465341783          1.0000000        
+    1  s
+      0.39032159084          1.0000000        
+    1  s
+      0.18099629118          1.0000000        
+    1  p
+    102.90935514             1.0000000        
+    1  p
+     11.914677724            1.0000000        
+    1  p
+      4.2552940379           1.0000000        
+    1  p
+      2.5199387172           1.0000000        
+    1  p
+      0.90225914690          1.0000000        
+    1  p
+      0.60649172007          1.0000000        
+    1  p
+      0.31163460720          1.0000000        
+    1  p
+      0.19158075786          1.0000000        
+    1  d
+     36.076519401            1.0000000        
+    1  d
+     10.796005325            1.0000000        
+    1  d
+      6.3958496457           1.0000000        
+    1  d
+      2.4163515747           1.0000000        
+    1  d
+      1.0207780762           1.0000000        
+    1  d
+      0.49056375374          1.0000000        
+    1  d
+      0.23573126400          1.0000000        
+    1  f
+      9.0738102843           1.0000000        
+    1  f
+      3.5046468322           1.0000000        
+    1  f
+      1.3807901291           1.0000000        
+    1  f
+      0.75615139217          1.0000000        
+    1  f
+      0.38481386692          1.0000000        
+    1  g
+      2.5412556753           1.0000000        
+    1  g
+      0.69630924691          1.0000000        
+    1  s
+      0.50828031060E-01            1.0000000        
+    1  p
+      0.89763566127E-01            1.0000000        
+    1  d
+      0.77524539620E-01            1.0000000        
+    1  f
+      0.14225917049          1.0000000        
+    1  g
+      0.27056437513          1.0000000        

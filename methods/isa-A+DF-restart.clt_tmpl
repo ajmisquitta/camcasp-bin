@@ -1,0 +1,76 @@
+Title  Template Cluster file for an isa-A+DF-restart job
+
+! Notes
+! -----
+! An ISA A+DF calculation uses both the ISA A and density-fitting
+! functionals.
+! This implies that the AUX and ATOMAUX basis sets should be the same.
+! This condition holds for a RESTART too. If you need to relax this
+! condition then you will need to use an ISA A restart:
+! See method isa-A-restart for how this can be done.
+!
+! An ISA A+DF restart may be useful when you have converged 
+! part of the molecule, or have converged the ISA with a small
+! basis and now intend to restart with a larger basis.
+! 
+! As CamCASP does not yet project the ISA shape-functions 
+! on to the basis used, you will need to ensure that the 
+! s-functions in the ATOMAUX basis are the same in the 
+! restart and the ISA solution. However the higher 
+! angular functions can be different as all the restart 
+! uses is the s-part of the basis.
+!
+! Here we have assumed you have performed an ISA calculation
+! (any type) and have a *.ISA file present.
+! This job will restart the ISA-A algorithm using the ISA
+! shape-function expansions present in that file. 
+!
+! CamCASP version: >= 6.0.14
+
+Molecule  MOL
+  UNITS  Bohr
+  IP     0.0 a.u.              ( the AC needs the IP. )
+  X   Z    Rx   Ry   Rz
+  ...
+End
+
+Show MOL in XYZ format         ( always a useful check )
+
+Run-Type
+  CamCASP-Only                 ( as this is a restart, you will already have the      )
+                               ( *.movecs file. So all you need is a new CamCASP file )
+  Molecule     MOL
+
+  ! In this example we have AUX == ATOMAUX = aVTZ+set2. 
+  ! The restrictions here are that
+  ! 1) AUX == ATOMAUX
+  ! 2) the s-function part of ATOMAUX (i.e. Set2 in this example) should be the 
+  !    same basis as was used to obtain the ISA solution from which this
+  !    calculation will be restarted.
+  ! 3) The AUX and ATOMAUX basis sets can BOTH use Spherical OR Cartesian GTOs
+  !    but only if no restart iterations (default) are performed.
+  ! You may alter the p- and higher-angular functions in the AUX and ATOMAUX
+  ! basis sets.
+
+  Main-Basis     aVTZ   Type  MC
+  
+  Aux-Basis      aVTZ   Type  MC   Spherical   Use-ISA-Basis  ( can use Cartesian GTOs )
+  AtomAux-Basis  aVTZ   Type  MC   Spherical   Use-ISA-Basis  ( in that case, so must this! )
+  ISA-Basis      set2   Min-S-exp-H = 0.2   
+                               ( convergence tends to be better with this setting )
+
+  Func         PBE0            ( other functionals possible, but this is probably the best )
+  AC           MULTIPOLE       ( [TH | LINEAR | GRAC] [CS00 | MULTIPOLE | LB94] : CS00 with NWChem)
+  Kernel       ALDA+CHF        ( not needed for an ISA calculation )
+  SCF-code     <name of code>  ( DALTON2015, NWCHEM, etc )
+
+  MO-FILE      <MOL.movecs>  Format ASCII  ( Set this to the acutal MO file )
+
+  File-Prefix  MOL-ISA-A+DF-restart  ( change this to something reasonable )
+
+  #METHOD      isa-A+DF-restart      ( this will use the file isa-A+DF-restart from the methods/ directory )
+
+End
+
+Finish
+

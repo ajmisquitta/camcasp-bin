@@ -1,0 +1,37 @@
+INTGRL
+  OC with ClF
+  Basis is sadlej and type MC+
+Spherical  Atomtypes=  2 +   2  Charge=   0 +   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! OC
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C                0.00000000         0.00000000        -5.29123277
+#include  sadlej/C
+!
+Charge=  8.0  Atoms=1 Blocks=3 1 1 1
+O                0.00000000         0.00000000        -7.41334014
+#include  sadlej/O
+!
+!
+#molecule B
+!
+! ClF
+!
+Charge= 17.0  Atoms=1 Blocks=3 1 1 1
+Cl               0.00000000         0.00000000         0.00000000
+#include  sadlej/Cl
+!
+Charge=  9.0  Atoms=1 Blocks=3 1 1 1
+F                0.00000000         0.00000000         3.15938392
+#include  sadlej/F
+!
+!
+#midbond
+!
+Charge=0.0 Atoms=1 Blocks=3 1 1 1
+Mb                0.00000000         0.00000000        -2.67619378
+#include  midbond/Mb_3s2p1d
+!

@@ -1,0 +1,32 @@
+TITLE He-CO DeltaHF energy
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE He
+  I.P. 0.9036 a.u.
+  Units Bohr
+  He    2     0.0  0.0  0.0
+END
+
+MOLECULE CO
+  I.P. 0.5150 a.u.
+  ! Placed in the global min geometry
+  Units Bohr
+  C     6      1.15075100     0.00000000     6.81791000
+  O     8     -0.86333800     0.00000000     6.11810600
+END
+
+Files
+  DeltaHF
+  Mols He and CO
+  Basis aTZ Type DC+
+  Aux-basis-type DC+
+  Midbond 3s2p1d Type Weighted
+  File-prefix dHF
+  Interface files
+End
+
+Finish

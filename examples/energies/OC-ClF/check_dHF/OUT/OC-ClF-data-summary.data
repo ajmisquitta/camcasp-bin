@@ -1,0 +1,27 @@
+ ================================================================
+ Compiled on Sep 05 2013 at 12:33:08
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22529
+ Working directory: 
+     /scratch/fastscratch/ajs1/OC-ClF_15-34-25
+ Running on: whirligig
+ ================================================================
+
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.1835683E+04        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2793060E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{2}_{ind}                -0.2153126E+04        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(A)             -0.2054840E+04        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(B)             -0.9828580E+02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.2062661E+04        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.1850196E+04        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(A)         0.1779703E+04        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(B)         0.7049353E+02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+--------------------------------------------------------------------------------

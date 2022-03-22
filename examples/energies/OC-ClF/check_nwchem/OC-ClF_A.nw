@@ -1,0 +1,30 @@
+Title "  OC Method: PBE0 "
+Scratch_dir <SCRATCHDIR>
+Memory     2048 mb
+Start OC-ClF_A
+ 
+Charge     0
+Geometry Units Bohr nocenter noautoz noautosym
+   C               0.00000000       0.00000000      -5.29123277
+   O               0.00000000       0.00000000      -7.41334014
+   bqCl            0.00000000       0.00000000       0.00000000
+   bqF             0.00000000       0.00000000       3.15938392
+   bqmb            0.00000000       0.00000000      -2.67619378
+End
+Basis "ao basis" Spherical
+      *          library     Sadlej_pVTZ
+      bqCl*      library  Cl Sadlej_pVTZ-sp     
+      bqF*       library  F  Sadlej_pVTZ-sp     
+      bqmb       library  B  mb-3s2p1d
+End
+set lindep:tol 1e-5
+dft
+   direct
+   grid fine
+   iterations 60
+   convergence energy 1e-6
+   xc PBE0
+   Mult 1
+   CS00
+end
+task DFT energy

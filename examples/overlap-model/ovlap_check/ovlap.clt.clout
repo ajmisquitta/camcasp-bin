@@ -1,0 +1,116 @@
+! CO...CO overlap model
+
+Global
+  Units bohr Degrees
+  Overwrite yes
+End
+
+Molecule CO_1
+  I.P. 0.5150
+  C1  6  0.000000  0.000000  -1.20270254   type C
+  O1  8  0.000000  0.000000   0.902026905  type O
+End
+Molecule CO_1
+  Units BOHR
+    1  C1          6.00     0.00000000    0.00000000   -1.20270254   Type C
+    2  O1          8.00     0.00000000    0.00000000    0.90202691   Type O
+End
+
+Molecule CO_2
+  I.P. 0.5150
+  C2  6  0.000000  0.000000  -1.20270254   type C
+  O2  8  0.000000  0.000000   0.902026905  type O
+End
+Molecule CO_2
+  Units BOHR
+    1  C2          6.00     0.00000000    0.00000000   -1.20270254   Type C
+    2  O2          8.00     0.00000000    0.00000000    0.90202691   Type O
+End
+
+Files
+  Molecules CO_1 and CO_2
+  File-prefix CO-CO
+  Basis avqz type mc
+  Aux-basis jk-tzvpp spherical type mc
+  Orient file
+  Process file
+  Sites file
+  Interface file
+  #include ../overlap-model-cmnds
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+BEGIN GRID
+  Molecule CO_1
+  Angular 200
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule CO_2
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN energy-scan
+  ! scan molecule B with molecule A
+  Energies Overlap
+  Points
+   Skip-first-column
+   File CO-CO-pts.dat
+   ---
+  Energy-file dummy (We don't use this energy-file)
+  Overlap-file prefix CO-CO-overlap
+End
+
+Begin overlap-model
+  Units kJ/mol
+  Energy = E1exch
+  Energy-file CO-CO-energies.dat
+  Overlap-file CO-CO-overlap.dat
+  Symmetrize-between-molecules
+End
+
+End-CamCASP-commands
+End
+ORIENT commands for CO_1 in file CO-CO.ornt
+ORIENT commands for CO_1 and CO_1
+ in file CO-CO_energy.ornt
+PROCESS commands to write the CASIMIR input for CO_1
+and CO_2
+are in file CO-CO_casimir.prss
+ WARNING: Using only the first molecule to write the
+ PROCESS command file for PFIT
+PROCESS commands for CO_1 in file CO-CO.prss
+TEMPLATE file is CO-CO.DALtemplate
+P.data file is CO-CO_P.data
+ Cartesian size of basis is          210
+ Max nocc =            7
+ nvir =          203
+ Memory needed for this calculation is          500  MB
+ But using the declared memory of         2048  MB
+ Spherical size of the basis is          160
+ nocc =            7
+ nvir =          153
+CamCASP command file is CO-CO.cks
+SITES for CO_1 are in file CO-CO.sites
+SITES for CO_2 are in file CO-CO.sites
+
+Finish
+ Exiting program cluster_operations

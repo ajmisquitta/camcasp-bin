@@ -1,0 +1,64 @@
+
+# RCS #####################################################################
+# $Id: pb,v 1.3 1996/11/25 13:23:59 karin Exp $ 
+# $Log: pb,v $
+# Revision 1.3  1996/11/25 13:23:59  karin
+# complete set of nicknames added
+#
+# Revision 1.2  1996/09/27 14:22:47  karin
+# complete set of nicknames added
+#
+# Revision 1.1  1996/07/08 10:12:39  karin
+# Initial revision
+# 
+# RCS #####################################################################
+###########################################################################
+$jbas
+#
+#AUXILIARY BASIS SET FOR Pb
+#
+#
+*
+pb 78-mwb-opt
+pb ecp-78-mwb-SVP
+pb def-SVP
+pb def-SV(P)
+pb ecp-78-mwb-TZVP
+pb def-TZVP
+#  (5s3p3d1f1g)/ [4s3p2d1f1g]  {2111/111/21/1/1}
+# RI-J atom energy:                                  dev(DFT): 0.005 mH
+# RI-J PbO  :                                        dev(DFT): 0.092 mH
+# RI-J PbO2 :                                        dev(DFT): 0.104 mH
+# s,d functions optimized and contracted for Pb atom
+# p functions from auxp
+# f exponent = 2* eta(d) Basis/1.095
+# g function exp = 2* eta(d) Basis
+# contraction tested on PbO, PbO2
+*
+   2  s
+     1.630582            .106631959D+00
+     0.732496           -.457185760D+00
+    1  s
+     0.362759            .366911396D+00
+    1  s
+     0.191415            .119458134D+00
+    1  s
+     0.103257            .571074362D-01
+    1  p
+     .97321339          1.0
+    1  p
+     .38850834          1.0
+    1  p
+     .16187847          1.0
+    2  d
+     0.790884            .157148128D-01
+     0.301662           -.444470536D-01
+    1  d
+     0.115250           -.943531592D-02
+    1  f
+      .29954337         1.0
+    1  g
+     0.32800000000      1.0
+*
+###########################################################################
+$end

@@ -1,0 +1,7 @@
+These basis sets are for use by the Psi4 program. They will be used in
+preference to the standard Psi4 basis library if the environment
+variable PSIPATH is set to point to this directory.
+
+Note that any comments (prefixed by "!") may occur only at the start
+of the file or between a terminating "****" of one basis set and the
+element-name line of the next.

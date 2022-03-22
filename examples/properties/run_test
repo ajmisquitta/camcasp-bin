@@ -1,0 +1,66 @@
+#!/bin/bash
+
+name=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --help )
+      echo "Usage: $0 [--test] name"
+      echo "Available tests are He, H2O, Formamide, Benzene"
+      exit 0;;
+    --test )
+      name=$2
+      shift;;
+    * )
+      if [[ -z $name ]]; then
+        name=$1
+      else
+        die "$1 not understood"
+      fi;;
+  esac
+  shift
+done
+
+job=$name
+case $name in
+  He )
+    job=He_aTZ
+    ip=0.9036;;
+  H2O )
+    job=H2O_aTZ
+    ip=0.4638;;
+  Formamide )
+    job=HCONH2
+    ip=0.3745;;
+  Benzene )
+    job=benzene_sadlej
+    ip=0.3397;;
+  * )
+    echo "No test for $name. Available tests are He, H2O and Formamide."
+    exit 1;;
+esac
+
+
+cd $name
+rm -rf test
+runSAPT $job -clt $name.clt -d test
+
+sleep 2
+echo "Please wait ..."
+
+while [[ ! -e test/OUT/${job}_camcasp.out ]]
+do
+  sleep 5
+done
+
+echo "Comparing check output with test results."
+echo "Press ctrl-Q to exit xxdiff and continue"
+
+xxdiff output_1/${job}_camcasp.out test/OUT/${job}_camcasp.out
+
+echo "Localizing polarizabilities and constructing dispersion coefficients ..."
+cd test
+localize ${job}
+
+xxdiff ../output_2/${job}_wt4_L2_C10.pot ./${job}_wt4_L2_C10.pot
+
+echo "Test finished"

@@ -1,0 +1,456 @@
+
+
+    ******************************************************************
+    ***********  DALTON - An electronic structure program  ***********
+    ******************************************************************
+
+    This is output from DALTON (Release 2.0 rev. 0, Mar. 2005)
+
+    Celestino Angeli,         University of Ferrara,        Italy      
+    Keld L. Bak,              UNI-C,                        Denmark    
+    Vebjoern Bakken,          University of Oslo,           Norway     
+    Ove Christiansen,         Aarhus University,            Denmark    
+    Renzo Cimiraglia,         University of Ferrara,        Italy      
+    Sonia Coriani,            University of Trieste,        Italy      
+    Paal Dahle,               University of Oslo,           Norway     
+    Erik K. Dalskov,          UNI-C,                        Denmark    
+    Thomas Enevoldsen,        SDU - Odense University,      Denmark    
+    Berta Fernandez,          U. of Santiago de Compostela, Spain      
+    Christof Haettig,         Forschungszentrum Karlsruhe,  Germany    
+    Kasper Hald,              Aarhus University,            Denmark    
+    Asger Halkier,            Aarhus University,            Denmark    
+    Hanne Heiberg,            University of Oslo,           Norway     
+    Trygve Helgaker,          University of Oslo,           Norway     
+    Hinne Hettema,            University of Auckland,       New Zealand
+    Hans Joergen Aa. Jensen,  Univ. of Southern Denmark,    Denmark    
+    Dan Jonsson,              KTH Stockholm,                Sweden     
+    Poul Joergensen,          Aarhus University,            Denmark    
+    Sheela Kirpekar,          SDU - Odense University,      Denmark    
+    Wim Klopper,              University of Karlsruhe,      Germany    
+    Rika Kobayashi,           ANU Supercomputer Facility,   Australia  
+    Henrik Koch,              University of Trondheim,      Norway     
+    Andrea Ligabue,           University of Modena,         Italy      
+    Ola B. Lutnaes,           University of Oslo,           Norway     
+    Kurt V. Mikkelsen,        University of Copenhagen,     Denmark    
+    Patrick Norman,           University of Linkoeping,     Sweden     
+    Jeppe Olsen,              Aarhus University,            Denmark    
+    Martin J. Packer,         University of Sheffield,      UK         
+    Thomas B. Pedersen,       University of Lund,           Sweden     
+    Zilvinas Rinkevicius,     KTH Stockholm,                Sweden     
+    Elias Rudberg,            KTH Stockholm,                Sweden     
+    Torgeir A. Ruden,         University of Oslo,           Norway     
+    Kenneth Ruud,             University of Tromsoe,        Norway     
+    Pawel Salek,              KTH Stockholm,                Sweden     
+    Alfredo Sanchez de Meras, University of Valencia,       Spain      
+    Trond Saue,               University of Strasbourg,     France     
+    Stephan P. A. Sauer,      University of Copenhagen,     Denmark    
+    Bernd Schimmelpfennig,    Forschungszentrum Karlsruhe,  Sweden     
+    K. O. Sylvester-Hvid,     University of Copenhagen,     Denmark    
+    Peter R. Taylor,          University of Warwick,        UK         
+    Olav Vahtras,             KTH Stockholm,                Sweden     
+    David J. Wilson,          University of Oslo,           Norway     
+    Hans Agren,               KTH Stockholm,                Sweden     
+
+ ---------------------------------------------------------------------
+
+     NOTE:
+      
+     This is an experimental code for the evaluation of molecular
+     properties using (MC)SCF and CC wave functions. The authors
+     accept no responsibility for the performance of the code or
+     for the correctness of the results.
+      
+     The code (in whole or part) is provided under a licence and
+     is not to be reproduced for further distribution without
+     the written permission of the authors or their representatives.
+      
+     See the home page "http://www.kjemi.uio.no/software/dalton"
+     for further information.
+      
+     If results obtained with this code are published,
+     an appropriate citation would be:
+      
+     "Dalton, a molecular electronic structure program, Release 2.0
+     (2005), see http://www.kjemi.uio.no/software/dalton/dalton.html"
+
+     Date and time (Linux)  : Fri Jun 10 12:50:47 2011
+     Host name              : Tati                                    
+
+ <<<<<<<<<< OUTPUT FROM GENERAL INPUT PROCESSING >>>>>>>>>>
+
+
+ Default print level:        0
+
+    Integral sections will be executed
+    "Old" integral transformation used (limited to max 255 basis functions)
+    Wave function sections will be executed
+
+Starting in Integral Section -
+
+
+
+ *************************************************************************
+ ****************** Output from HERMIT input processing ******************
+ *************************************************************************
+
+
+ Default print level:        1
+
+ * Nuclear model: Point charge
+
+ Calculation of one- and two-electron Hamiltonian integrals.
+
+
+ *************************************************************************
+ ****************** Output from READIN input processing ******************
+ *************************************************************************
+
+
+
+  Title Cards
+  -----------
+
+    He1 with He2                                                          
+    Basis is aug-cc-pVTZ and type MC                                      
+
+  INFO from READIN: Threshold for discarding integrals was    1.00D-16
+  INFO from READIN: Threshold is reset to minimum value       1.00D-15
+
+
+                      SYMGRP:Point group information
+                      ------------------------------
+
+Point group: C1 
+
+   * Character table
+
+        |  E 
+   -----+-----
+    A   |   1
+
+   * Direct product table
+
+        | A  
+   -----+-----
+    A   | A  
+
+
+                             Isotopic Masses
+                             ---------------
+
+                           He          4.002603
+
+                       Total mass:     4.002603 amu
+                       Natural abundance: 100.000 %
+
+ Center-of-mass coordinates (A):    0.000000    0.000000    5.000000
+
+
+  Atoms and basis sets
+  --------------------
+
+  Number of atom types:     1
+  Total number of atoms:    1
+
+  label    atoms   charge   prim    cont     basis
+  ----------------------------------------------------------------------
+  He          1       2      26      23      [7s3p2d|4s3p2d]                              
+  ----------------------------------------------------------------------
+  total:      1       2      26      23
+  ----------------------------------------------------------------------
+  Spherical harmonic basis used.
+
+  Threshold for integrals:  1.00D-15
+
+
+  Cartesian Coordinates
+  ---------------------
+
+  Total number of coordinates:  3
+
+   1   He       x      0.0000000000
+   2            y      0.0000000000
+   3            z      5.0000000000
+
+
+ This is an atomic calculation.
+
+
+  Nuclear repulsion energy :    0.000000000000
+
+
+ ************************************************************************
+ ************************** Output from HERINT **************************
+ ************************************************************************
+
+
+ >>> Time used in HUCKEL is   0.00 seconds
+
+
+ >>> Time used in ONEDRV is   0.00 seconds
+
+
+ Number of two-electron integrals written:        4806 ( 12.6% )
+ Megabytes written:                              0.062
+
+
+
+ >>> Time used in TWOINT is   0.00 seconds
+
+ >>>> Total CPU  time used in HERMIT:   0.00 seconds
+ >>>> Total wall time used in HERMIT:   0.00 seconds
+
+- End of Integral Section
+
+
+Starting in Wave Function Section -
+
+ Fermi-Amaldi/Tozer-Handy asymptotic correction
+   Parameters used:    0.9036D+00  0.3000D+01  0.4000D+01
+
+
+ Settings for DFT calculation:
+ -----------------------------
+
+     Default thresholds:                       0.10D-08    0.10D-09    0.20D-11
+     Default threshold for number of electrons:                        0.10D-01
+     DFT radial quadrature accuracy/ang. expansion order:  0.10E-12  35
+
+ *** Output from Huckel module :
+
+     Using EWMO model:          T
+     Using EHT  model:          F
+     Number of Huckel orbitals each symmetry:    1
+
+ EWMO - Energy Weighted Maximum Overlap - is a Huckel type method,
+ which normally is better than Extended Huckel Theory.
+ Reference: Linderberg and Ohrm, Propagators in Quantum Chemistry (Wiley, 1973)
+
+ Huckel EWMO eigenvalues for symmetry :  1
+           -0.914122
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ 
+     Date and time (Linux)  : Fri Jun 10 12:50:47 2011
+     Host name              : Tati                                    
+
+ Title lines from integral program:
+       He1 with He2                                                          
+       Basis is aug-cc-pVTZ and type MC                                      
+
+ Print level on unit LUPRI =   2 is   0
+ Print level on unit LUW4  =   2 is   5
+
+     Restricted, closed shell Kohn-Sham calculation.
+
+
+ Initial molecular orbitals are obtained according to
+ ".MOSTART EWMO  " input option.
+
+     Wave function specification
+     ============================
+     Number of closed shell electrons          2
+     Number of electrons in active shells      0
+     Total charge of the molecule              0
+
+     Number of active orbitals                 0
+     Total number of orbitals                 23
+
+     Spin multiplicity                         1
+     Total number of symmetries                1
+     Reference state symmetry                  1
+ 
+     This is a DFT calculation of type: PBE0
+ Weighted mixed functional:
+               HF exchange:    0.25000
+                      Pbex:    0.75000
+                      Pbec:    1.00000
+
+     Orbital specifications
+     ======================
+     Abelian symmetry species           1
+                                       --
+     Total number of orbitals          23
+     Number of basis functions         23
+
+      ** Automatic occupation of RKS orbitals **
+      -- Initial occupation of symmetries is determined from Huckel guess.                    
+      -- Initial occupation of symmetries is : --
+
+     Occupied SCF orbitals              1
+
+     Maximum number of Fock   iterations      0
+     Maximum number of DIIS   iterations     60
+     Maximum number of QC-SCF iterations     15
+     Threshold for SCF convergence     1.00D-06
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Automatic occupation of symmetries with   2 electrons.
+
+ Iter     Total energy    Error norm  Delta(E)    HF occupation
+ -----------------------------------------------------------------------------
+ Radial Quadrature : LMG scheme
+ Space partitioning: Original Becke partitioning
+ Radial integration threshold: 1e-13
+* Grid spacing
+   s-orbitals -->  0.142
+   p-orbitals -->  0.131
+   d-orbitals -->  0.123
+ Value chosen:  0.123
+ AH =    468.0000000000000     
+* Inner grid point: 4.04201E-06
+* Outer point:
+   s-orbitals --> 17.519
+   p-orbitals -->  9.447
+   d-orbitals -->  6.631
+ Value chosen: 17.519
+Constant c: 0.30834E-04
+Number of points:  108
+ Atom:    1*1 points=21348 compressed from 21348 (108 radial)
+ Number of grid points:    21348 Grid generation time:       0.0 s
+K-S electrons/energy :    2.00000000000001   -0.80196322631630 err:0.93E-14
+   1     -2.894310462225   7.61D-02  -2.89D+00    1
+K-S electrons/energy :    1.99999999999999   -0.79657508597647 err:-.12E-13
+   2     -2.894681840985   1.16D-02  -3.71D-04    1
+K-S electrons/energy :    1.99999999999999   -0.79767356408589 err:-.14E-13
+   3     -2.894685942327   2.76D-03  -4.10D-06    1
+K-S electrons/energy :    1.99999999999999   -0.79738137721070 err:-.12E-13
+   4     -2.894686306607   2.85D-05  -3.64D-07    1
+K-S electrons/energy :    2.00000000000000   -0.79738294201090 err:-.29E-14
+   5     -2.894686306679   2.31D-07  -7.17D-11    1
+ DIIS converged in   5 iterations !
+
+
+ *** RHF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :    2
+ Orbital occupations :    1
+
+ Hartree-Fock orbital energies, symmetry 1
+
+        -0.66944811     0.07091311     0.31544966     0.31544966     0.31544966
+         0.69823879
+
+    E(LUMO) :     0.07091311 au (symmetry 1)
+  - E(HOMO) :    -0.66944811 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.74036122 au
+
+ >>> Writing SIRIFC interface file <<<
+ Begin asymptotic correction computing
+ End asymptotic correction computing
+ >>>> Total CPU  time used in HARPOT:   0.00 seconds
+ >>>> Total wall time used in HARPOT:   3.00 seconds
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =   10
+
+ Automatic occupation of symmetries with   2 electrons.
+
+ Iter     Total energy    Error norm  Delta(E)    HF occupation
+ -----------------------------------------------------------------------------
+K-S electrons/energy :    2.00000000000000   -0.79738294201090 err:-.29E-14
+   1     -2.894686306679   3.05D-02   0.00D+00    1
+K-S electrons/energy :    2.00000000000000   -0.80121669424854 err:-.42E-14
+   2     -2.894565149295   7.67D-03   1.21D-04    1
+K-S electrons/energy :    1.99999999999999   -0.80049867096431 err:-.73E-14
+   3     -2.894573713920   2.81D-03  -8.56D-06    1
+K-S electrons/energy :    1.99999999999999   -0.80085443277793 err:-.11E-13
+   4     -2.894554371064   4.43D-05   1.93D-05    1
+K-S electrons/energy :    1.99999999999999   -0.80085797736126 err:-.73E-14
+   5     -2.894554162880   1.58D-06   2.08D-07    1
+K-S electrons/energy :    1.99999999999999   -0.80085777531806 err:-.69E-14
+   6     -2.894554173102   4.56D-09  -1.02D-08    1
+ DIIS converged in   6 iterations !
+
+
+ *** RHF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :    2
+ Orbital occupations :    1
+
+ Hartree-Fock orbital energies, symmetry 1
+
+        -0.66364129     0.15657277     0.34994096     0.34994096     0.34994096
+         0.73331653
+
+    E(LUMO) :     0.15657277 au (symmetry 1)
+  - E(HOMO) :    -0.66364129 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.82021405 au
+
+ >>> Writing SIRIFC interface file <<<
+
+
+                    >>> FINAL RESULTS FROM SIRIUS <<<
+
+     Spin multiplicity:           1
+     Spatial symmetry:            1
+     Total charge of molecule:    0
+
+     Final DFT energy:             -2.894554173102
+     Nuclear repulsion:             0.000000000000
+     Electronic energy:            -2.894554173102
+
+     Final gradient norm:           0.000000004556
+
+ 
+     Date and time (Linux)  : Fri Jun 10 12:50:52 2011
+     Host name              : Tati                                    
+
+     Molecular orbitals for symmetry species   1
+
+ Orbital          1
+   1  He  1s     1.0148
+   2  He  1s    -0.0205
+   3  He  1s     0.0027
+   4  He  1s     0.0062
+   5  He  2px    0.0000
+   6  He  2py    0.0000
+   7  He  2pz    0.0000
+   8  He  2px    0.0000
+   9  He  2py    0.0000
+  10  He  2pz    0.0000
+  11  He  2px    0.0000
+  12  He  2py    0.0000
+  13  He  2pz    0.0000
+  14  He  3d2-   0.0000
+  15  He  3d1-   0.0000
+  16  He  3d0    0.0000
+  17  He  3d1+   0.0000
+  18  He  3d2+   0.0000
+  19  He  3d2-   0.0000
+  20  He  3d1-   0.0000
+  21  He  3d0    0.0000
+  22  He  3d1+   0.0000
+  23  He  3d2+   0.0000
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      0.00 seconds
+ >>>> Total wall time used in SIRIUS :      5.00 seconds
+
+ 
+     Date and time (Linux)  : Fri Jun 10 12:50:52 2011
+     Host name              : Tati                                    
+
+- End of Wave Function Section
+
+ >>>> Total CPU  time used in DALTON:   0.00 seconds
+ >>>> Total wall time used in DALTON:   5.00 seconds
+
+ 
+     Date and time (Linux)  : Fri Jun 10 12:50:52 2011
+     Host name              : Tati                                    

@@ -1,0 +1,55 @@
+TITLE He-CO interaction energy
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE He
+  I.P. 0.9036 a.u.
+  Units Bohr
+  He    2     0.0  0.0  0.0
+END
+Molecule He
+  Units BOHR
+    1  He          2.00     0.00000000    0.00000000    0.00000000   Type He
+End
+
+MOLECULE CO
+  I.P. 0.5150 a.u.
+  ! Placed in the global min geometry
+  Units Bohr
+  C     6      1.15075100     0.00000000     6.81791000
+  O     8     -0.86333800     0.00000000     6.11810600
+END
+Molecule CO
+  Units BOHR
+    1  C           6.00     1.15075100    0.00000000    6.81791000   Type C
+    2  O           8.00    -0.86333800    0.00000000    6.11810600   Type O
+End
+
+Files
+  SAPT(DFT)
+  Mols He and CO
+  Basis aTZ Type mc+
+  Aux-basis-type DC+
+  Midbond 3s2p1d Type Weighted
+  Func PBE0
+  kernel ALDA+CHF
+  File-prefix He-CO
+  Interface files
+End
+TEMPLATE file is He-CO.DALtemplate
+P.data file is He-CO_P.data
+ Cartesian size of basis is          138
+ Max nocc =            7
+ nvir =          131
+ Memory needed for this calculation is          500  MB
+ But using the declared memory of         2048  MB
+ Spherical size of the basis is          119
+ nocc =            7
+ nvir =          112
+CamCASP command file is He-CO.cks
+
+Finish
+ Exiting program cluster_operations

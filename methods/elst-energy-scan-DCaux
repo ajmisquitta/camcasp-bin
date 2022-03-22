@@ -1,0 +1,106 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+
+! MOL..MOL energy scan with DC auxiliary basis
+
+! The Dimer-Centered (DC) auxiliary basis consists of auxiliary basis functions
+! on both molecules. To correctly update the geometry of this basis CamCASP needs
+! explicit commands that cause each molecule to define a partner: A -> B and B -> A.
+! So when A is translated/rotated, B knows and is appropriately updated, and 
+! vice versa. 
+
+! NOTE: At present, the code also needs the auxiliary basis sets of A and B to contain 
+! sites in the same order. So both basis sets will contain functions for A and B, in 
+! that order. 
+!
+
+Edit  A
+  Partner-Monomer = B
+  Update Geometry
+End
+
+Edit  B
+  Partner-Monomer = A
+  Update Geometry
+End
+
+! Only needed for large molecules
+! Edit  A
+!   NEIGHBOURS TYPE = OVR   EPS = 0.0001  PRINT
+! End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+  DF-TYPE-DIMER   OV
+END
+
+SET DF
+  Type     OO   ( needed to force OO so the DF-INT module does not default to NN )
+  Eta    = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True   ( if True, DF will be repeated on mol rotation )
+                              ( if False, DF sol will be rotated.            )
+                              ( Needs to be True for DC aux case.            )
+  Solver   LU
+  ! Solver GELSS Condition = 1e-8
+END
+
+! Using Integral switch = 1 causes the code to use non-DF integrals for the 
+! nuclear integrals. This results in higher accuracies when the DC auxiliary basis
+! is used. 
+
+Set E1elst
+  Integral switch = 1
+End
+
+Set E1exch
+  Integral switch = 1
+End
+
+BEGIN energy-scan
+  !  Scan electrostatic potential on the specified grid
+  Scan molecule A with B
+  Energies E1elst  ( E1exch & Overlap )
+  Energy-file elst-scan
+  ! see user's guide for details
+  Units  Bohr Degree
+  Points
+    !  Provide points file (created by Orient or CamCASP)
+    !  Give full path or put the file in the job directory
+    !  e.g.
+    !  file /home/ajs1/molecules/piracetam/aug-cc-pVDZ_-63/piracetam_vdW1.50.pts
+    !  or make a symbolic link grid.pts to the appropriate file
+    !  If Traslations-Only is specified (as is done here) the format of points should be:
+    !  X1  Y1  Z1
+    !  X2  Y2  Z2
+    !  ...
+    !  Units are Bohr (see Units setting in this block)
+    !  If an initial index column is included as in:
+    !  1  X1  Y1  Z1
+    !  2  X2  Y2  Z2
+    !  .. ...
+    !  Then also include the command:
+    !   SKIP-FIRST-COLUMN
+    !  If the points are of the form (translation+angle-axis):
+    !  X1  Y1  Z1  ALPHA1  NX1  NY1  NZ1
+    !  X2  Y2  Z2  ALPHA2  NX2  NY2  NZ2
+    !  ...
+    !  Then delete the TRANSLATIONS-ONLY command.
+    !
+    Translations-Only
+    file  grid.pts
+  ---
+End
+
+End-CamCASP-commands

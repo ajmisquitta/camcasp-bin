@@ -1,0 +1,117 @@
+INTGRL
+  benzene1 with benzene2
+  Basis is sadlej and type MC+
+Spherical  Atomtypes= 12 +  12  Charge=   0 +   0 Integrals=1.0D-16 Nosymmetry
+!
+#molecule A
+!
+! benzene1
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C1               2.64623243         0.00000000         0.00000000
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C2               1.32311622         2.29170451         0.00000000
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C3              -1.32311622         2.29170451         0.00000000
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C4              -2.64623243         0.00000000         0.00000000
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C5              -1.32311622        -2.29170451         0.00000000
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C6               1.32311622        -2.29170451         0.00000000
+#include  sadlej/C
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H1               4.70829954         0.00000000         0.00000000
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H2               2.35414977         4.07750701         0.00000000
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H3              -2.35414977         4.07750701         0.00000000
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H4              -4.70829954         0.00000000         0.00000000
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H5              -2.35414977        -4.07750701         0.00000000
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H6               2.35414977        -4.07750701         0.00000000
+#include  sadlej/H
+!
+!
+#midbond
+!
+Charge=0.0 Atoms=1 Blocks=3 1 1 1
+Mb          0.00000000         0.00000000         3.59048100
+#include  midbond/Mb_3s2p1d
+!
+!
+#molecule B
+!
+! benzene2
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C1               2.64623243         0.00000000         7.18096200
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C2               1.32311622        -2.29170451         7.18096200
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C3              -1.32311622        -2.29170451         7.18096200
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C4              -2.64623243         0.00000000         7.18096200
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C5              -1.32311622         2.29170451         7.18096200
+#include  sadlej/C
+!
+Charge=  6.0  Atoms=1 Blocks=3 1 1 1
+C6               1.32311622         2.29170451         7.18096200
+#include  sadlej/C
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H1               4.70829954         0.00000000         7.18096200
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H2               2.35414977        -4.07750701         7.18096200
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H3              -2.35414977        -4.07750701         7.18096200
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H4              -4.70829954         0.00000000         7.18096200
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H5              -2.35414977         4.07750701         7.18096200
+#include  sadlej/H
+!
+Charge=  1.0  Atoms=1 Blocks=2 1 1
+H6               2.35414977         4.07750701         7.18096200
+#include  sadlej/H
+!

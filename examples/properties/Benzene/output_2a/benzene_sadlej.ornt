@@ -1,0 +1,56 @@
+! ORIENT localization file for benzene
+
+UNITS BOHR
+
+Parameters
+      Sites     13 polarizable     13
+      S-functions 50000
+      Alphas 50000
+      Parameter-sets 50000
+      Pairs 100000
+End
+
+Types
+      C          Z     6
+      H          Z     1
+End
+
+Molecule  benzene at  0.0 0.0 0.0
+  ! Units BOHR
+  C1          2.64623243    0.00000000    0.00000000   Type C
+  C2          1.32311622    2.29170451    0.00000000   Type C
+  C3         -1.32311622    2.29170451    0.00000000   Type C
+  C4         -2.64623243    0.00000000    0.00000000   Type C
+  C5         -1.32311622   -2.29170451    0.00000000   Type C
+  C6          1.32311622   -2.29170451    0.00000000   Type C
+  H1          4.70829954    0.00000000    0.00000000   Type H
+  H2          2.35414977    4.07750701    0.00000000   Type H
+  H3         -2.35414977    4.07750701    0.00000000   Type H
+  H4         -4.70829954    0.00000000    0.00000000   Type H
+  H5         -2.35414977   -4.07750701    0.00000000   Type H
+  H6          2.35414977   -4.07750701    0.00000000   Type H
+End
+
+Polarizabilities for benzene
+   Read rank  4 sites +++
+       C1 C2 C3 C4 C5 C6 H1 H2 H3 H4 H5 H6                                      
+   #include benzene_sadlej_NL4_<INDEX!000>.pol
+   Limit rank <LIMIT! 2> for +++
+       C1 C2 C3 C4 C5 C6 H1 H2 H3 H4 H5 H6                                      
+   Sum-rule test 1e-7
+   Localise <LOC!LS> test 1e-7 Limit <LIMIT! 2> sites +++
+       C1 C2 C3 C4 C5 C6 H1 H2 H3 H4 H5 H6                                      
+End
+
+Edit benzene
+   #include <AXES!axes>
+End
+
+Polarizabilities for benzene
+   Write local limit <LIMIT! 2> file benzene_sadlej_L<LIMIT!2>_<INDEX!000>.pol sites +++
+       C1 C2 C3 C4 C5 C6 H1 H2 H3 H4 H5 H6                                      
+   Print limit <LIMIT! 2> +++
+       C1 C2 C3 C4 C5 C6 H1 H2 H3 H4 H5 H6                                      
+End
+
+Finish

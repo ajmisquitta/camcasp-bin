@@ -1,0 +1,9 @@
+See the README in the aTZ_MC+ directory for more details. The results
+are: 
+
+$ extract_saptdft.py --units kelvin test
+kelvin      elst        exch         ind        exind       disp       exdisp       Eint
+test     -1.92066    13.51117    -0.36296     0.31232   -20.28468     0.42518    -8.31963
+
+
+That is, Eint = -8.320 K.

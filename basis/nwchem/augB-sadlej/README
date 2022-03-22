@@ -1,0 +1,24 @@
+AJM: 03 May 2016
+Sadlej-pVTZ basis sets augmented as follows:
+
+    * Start from the augA-Salej basis
+    * Replace most diffuse l_max function with one even more diffuse. 
+      Use next most diffuse exponent from l_max-1 set.
+      ** If most diffuse l_max function was obtained from the l_max set
+         by dividing by 3.0, then:
+         *** Try to add another function by dividing most diffuse l_max exponent
+             by 3.0. If result is < 0.03 a.u., discard.
+
+H : [3S,2P,1d]
+C : [5S,3P,2D,1f]
+N : [5S,3P,2D,1f]
+O : [6S,3P,2D,1f]
+F : [6s,3p,2d,1f]
+S : [7s,5p,2d,1f] 
+Br: [10s,8p,5d,3f]
+I : [11s,9p,6d,3f]
+
+   NOTES:
+     * The Sadlej basis set definition in NWChem is slighty different from those
+     use in other codes. The main difference is with the number of sig figs in the
+     exponents. This is 4 in NWChem and 5 to 6 in the other codes.

@@ -1,0 +1,138 @@
+TITLE water1 and water2
+TITLE Basis sadlej and type MC
+TITLE Midbonds NONE and type weighted
+
+MEMORY        1000 MB
+
+SET Global_data
+  Units Bohr kJ/mol
+  Scf-code Dalton
+  XC-func PBE0
+  Overwrite yes
+END
+
+MOLECULE water1 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   H1-file h1A.data
+   MO-file water.asc.mos
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      O1         8.0        0.00000000       0.00000000       0.12551496  TYPE O1
+        #include-camcasp basis/gamess_us/sadlej/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -0.99617236  TYPE H1
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -0.99617236  TYPE H2
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+   End
+   Basis Aux
+        Spherical
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       0.12551496  TYPE O1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -0.99617236  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -0.99617236  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+      O2         8.0        0.00000000       0.00000000       0.12551496  TYPE O1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/O
+      ---
+      H3         1.0       -1.45365196       0.00000000      -0.99617236  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+      H4         1.0        1.45365196       0.00000000      -0.99617236  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+   End
+END
+
+MOLECULE water2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   H1-file h1A.data
+   MO-file water.asc.mos
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      O1         8.0        0.00000000       0.00000000       0.12551496  TYPE O1
+        #include-camcasp basis/gamess_us/sadlej/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -0.99617236  TYPE H1
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -0.99617236  TYPE H2
+        #include-camcasp basis/gamess_us/sadlej/H
+      ---
+   End
+   Basis Aux
+        Spherical
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       0.12551496  TYPE O1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/O
+      ---
+      H1         1.0       -1.45365196       0.00000000      -0.99617236  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+      H2         1.0        1.45365196       0.00000000      -0.99617236  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+      O2         8.0        0.00000000       0.00000000       0.12551496  TYPE O1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/O
+      ---
+      H3         1.0       -1.45365196       0.00000000      -0.99617236  TYPE H1
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+      H4         1.0        1.45365196       0.00000000      -0.99617236  TYPE H2
+        Limit G
+        #include-camcasp basis/auxiliary/JK-basis/tzvpp/H
+      ---
+   End
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+END
+
+Set E1elst
+  Integral switch = 0
+End
+Set E1exch
+  Integral switch = 0
+End
+
+Begin Energy-Scan
+  Probe water1 with water2
+  Energy  E1elst E1exch and Overlap
+  Units Bohr
+  Points
+    #include water2_min_orientation.grid
+  ---
+End
+
+FINISH

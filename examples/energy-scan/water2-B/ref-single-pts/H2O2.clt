@@ -1,0 +1,42 @@
+! H2O properties calculation
+! ==========================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+  CamCASP /home/alston/CamCASP/current
+End
+
+Molecule H2Oa
+  I.P. 0.4638 a.u.
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O   8.0    0.0000000000    0.0000000000    0.0000000000 Type O
+  H1  1.0   -1.4536519600    0.0000000000   -1.1216873200 Type H
+  H2  1.0    1.4536519600    0.0000000000   -1.1216873200 Type H
+End
+
+Molecule H2Ob
+  I.P. 0.4638 a.u.
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O   8.0    0.0000000000    0.0000000000    0.0000000000 Type O
+  H1  1.0   -1.4536519600    0.0000000000   -1.1216873200 Type H
+  H2  1.0    1.4536519600    0.0000000000   -1.1216873200 Type H
+End
+
+Rotate H2Ob by alpha degrees about  Nx Ny Nz
+Place H2Ob at Rx Ry Rz
+
+Join H2Oa and H2Ob into H2O2
+Show H2O2 in PDB format
+
+Files
+  SAPT(DFT)
+  Molecules H2Oa and H2Ob
+  Basis aVTZ Type MC
+  Aux-basis  aVTZ Type MC
+  File-prefix JOB
+End
+
+Finish

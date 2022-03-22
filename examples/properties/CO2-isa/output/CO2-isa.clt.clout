@@ -1,0 +1,166 @@
+! CO2 distributes multipoles
+! ==========================
+
+Global
+  Units Bohr Degrees
+  Overwrite Yes
+End
+
+Molecule CO2
+  !  Vibrational ground state geometry from Herzberg
+  Units Angstrom
+  I.P. 0.5063
+  O1  8.0    0.0000000000    0.0000000000    1.1621        Type O
+  C   6.0    0.0000000000    0.0000000000    0.0000000000  Type C
+  O2  8.0    0.0000000000    0.0000000000   -1.1621        Type O
+End
+Molecule CO2
+  Units BOHR
+    1  O1          8.00     0.00000000    0.00000000    2.19605057   Type O
+    2  C           6.00     0.00000000    0.00000000    0.00000000   Type C
+    3  O2          8.00     0.00000000    0.00000000   -2.19605057   Type O
+End
+
+Files
+  Properties
+  Molecule CO2
+  Basis aVTZ
+  Aux-basis aVTZ  Spherical
+  ISA-Aux set2
+  File-prefix CO2
+  #include /home/ajs1/camcasp/test/camcasp-5.8/data/camcasp-cmnds/isa-display
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  80
+END
+
+SET Lattice
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random   2000
+  Seed     1
+END
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+
+BEGIN DF
+  Type RHO
+  Eta = 0.0
+  Lambda = 1000.0
+  Gamma = 0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+
+Begin ISA
+  DF = Drho-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A+DF  Zeta = 0.1
+  DF-PARAMETERS Lambda = 1000.0
+  Solver LU
+  Convergence
+    Convergence-Type W
+    EPS-Norm = 1.0e-09
+    EPS-Q    = 1.0e-4
+    Max-Iter = 120
+    W-Damping = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+  W-TAILS
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+
+!  Calculate multipoles using ISA densities
+Begin Multipoles
+  DF Type ISA
+  Rank 4
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecular-density
+    Slater-multiplier 5.0
+    isodensity 0.001
+    step = 0.3 bohr
+  END
+  AIM-ATOMS
+    AIM-METHOD  ISA  Grid-based with RHO-C
+    ATOMS = ALL  ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN = 1e-6  ( outer limit of scan determined to be radius at )
+                  ( which shape function is this value )
+    R-MAX = 5.0 Bohr ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                  ( multiple of Slater radius )
+    DR = 0.2 Bohr  ( step size of grid )
+    AIM-Method ISA Grid-Based with RHO-C
+    ISOdensity = 0.001
+  END
+End
+
+! Fine integration grid needed for DMA calculation
+
+BEGIN GRID
+  Molecule A
+  Angular 400
+  Radial  60
+END
+
+Begin GDMA
+  Bohr
+  !  Original DMA
+  Multipoles
+    Switch 0.0
+    Limit  5
+    Punch DMA_Z0_L5.mom
+  Start
+  !  Revised DMA
+  Multipoles
+    Switch 4.0
+    Limit  5
+    Punch DMA_Z4_L5.mom
+  Start
+End
+
+End-CamCASP-commands
+End
+ORIENT commands for CO2 and CO2
+ in file CO2_energy.ornt
+TEMPLATE file is CO2.DALtemplate
+ Cartesian size of the basis is          165
+ nocc =           11
+ nvir =          154
+ Memory needed for this calculation is          500  MB
+ But using the declared memory of         2048  MB
+ Spherical size of the basis is          138
+ nocc =           11
+ nvir =          127
+CamCASP command file is CO2.cks
+
+Finish
+ Exiting program cluster_operations

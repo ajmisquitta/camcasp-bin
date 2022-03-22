@@ -1,0 +1,51 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+BEGIN GRID
+  Molecule CO_1
+  Angular 200
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule CO_2
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN energy-scan
+  ! scan molecule B with molecule A
+  Energies Overlap
+  Points
+   Skip-first-column
+   File scan-points
+   ---
+  Energy-file dummy (not used in this job)
+  Overlap-file CO-CO-overlap
+End
+
+Begin overlap-model
+  Units kJ/mol
+  Energy = E1exch
+  Energy-file CO-CO-energies.dat (imported from energy-scan job)
+  Overlap-file CO-CO-overlap.dat
+  Symmetrize-between-molecules
+End
+
+End-CamCASP-commands

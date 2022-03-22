@@ -1,0 +1,114 @@
+NWChem interface
+================
+The *.movecs file written out by NWChem contains all the data needed
+for the interface. This file is written out by 
+      logical function movecs_write(rtdb, basis, filename,
+     $     scftype, title,
+     $     nbf, nsets, nmo, occ, ldocc, evals, ldevals, g_vecs)
+which is in 
+    $NWCHEM/src/ddscf/vectors.F
+
+Here's the code that does the writing:
+--------------------------------------
+      logical function movecs_write(rtdb, basis, filename,
+     $     scftype, title,
+     $     nbf, nsets, nmo, occ, ldocc, evals, ldevals, g_vecs)
+...
+...
+      integer rtdb              ! [input] RTDB handle (-1 if not accessible)
+      integer basis             ! [input] Basis handle(-1 if not accessible)
+      character*(*) filename    ! [input] File to write to
+      character*(*) scftype     ! [input] Type of SCF (dft, scf, mcscf)
+      character*(*) title       ! [input] Title of job that created vectors
+      integer nbf               ! [input] No. of functions in basis
+      integer nsets             ! [input] No. of sets of vectors
+      integer nmo(nsets)        ! [input] No. of vectors in each set
+      integer ldocc             ! [input]
+      integer ldevals           ! [input]
+      double precision occ(ldocc, nsets) ! [input] Occupation numbers 
+      double precision evals(ldevals, nsets) ! [input] Eigenvalues
+      integer g_vecs(nsets)     ! Global array with eigen-vectors
+c
+      integer unitno            ! Unit no. for writing
+      parameter (unitno = 67)   ! These need to be managed !!!
+
+...
+...
+         open(unitno, status='unknown', form='unformatted',
+     $        file=filename, err=1000)
+c
+c        Information about convergence
+c
+         write(unitno, err=1001) basissum, geomsum, bqsum, scftype20,
+     $                           date
+c
+c        Check that read routines are both consistent with this
+c
+         write(unitno, err=1001) scftype20
+         lentit = max(1,inp_strlen(title)) ! 0 length record confuses f2c
+         write(unitno, err=1001) lentit
+         write(unitno, err=1001) title(1:lentit)
+         lenbas = max(1,inp_strlen(basis_name))
+         write(unitno, err=1001) lenbas
+         write(unitno, err=1001) basis_name(1:lenbas)
+         write(unitno, err=1001) nsets
+         write(unitno, err=1001) nbf
+         write(unitno, err=1001) (nmo(i),i=1,nsets)
+         if (.not. ma_push_get(mt_dbl,nbf,'movecs_write',l_vecs,k_vecs))
+     $        call errquit('movecs_write: ma failed', nbf, MA_ERR)
+         do iset = 1, nsets
+            write(unitno, err=1001) (occ(j,iset),j=1,nbf)
+            write(unitno, err=1001) (evals(j,iset),j=1,nbf)
+            do i = 1, nmo(iset)
+               call ga_get(g_vecs(iset), 1, nbf, i, i, dbl_mb(k_vecs),1)
+               call swrite(unitno, dbl_mb(k_vecs), nbf)
+*               write(unitno, err=1001) (dbl_mb(k_vecs+j), j=0,nbf-1)
+            enddo
+         enddo
+
+
+
+This code is called by wrapper routine:
+scf_movecs_write from $NWCHEM/src/ddscf/scf_movecs.F
+-----------------------------------------------------
+      subroutine scf_movecs_write(rtdb)
+      implicit none
+#include "errquit.fh"
+#include "crohf.fh"
+#include "mafdecls.fh"
+#include "cscf.fh"
+      logical movecs_write
+      external movecs_write
+      integer rtdb              ! [input]
+c
+      integer nset, nmo2(2)
+c
+      nmo2(1) = nmo
+      if (scftype .eq. 'UHF') then
+         nset = 2
+         nmo2(2) = nmo
+      else
+         nset = 1
+      endif
+c
+      if (.not. movecs_write(rtdb, basis, movecs_out,
+     $     'scf', title,
+     $     nbf, nset, nmo2,
+     $     dbl_mb(k_occ), nbf, dbl_mb(k_eval),
+     $     nbf, g_movecs)) call errquit
+     $     ('scf_movecs_write: movecs_write failed', 0, DISK_ERR)
+
+
+So it does seem like the number of sets corresponds to the number of
+spin types. For RHF and ROHF cases both spins are treated 
+the same way so 
+   RHF/ROHF: nsets = 1
+But for UHF they are different, so
+   UHF: nsets = 2
+
+
+Unknowns:
+=========
+sets: NWChem writes out all data (MOs, Energies) for each 
+      'set'. Does this mean that a set corresponds to spin types?
+      *** corresponds to spin types. See comment above.

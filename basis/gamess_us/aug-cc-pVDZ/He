@@ -1,0 +1,20 @@
+!  aug-cc-pVDZ  EMSL  Basis Set Exchange Library   4/5/07 4:42 AM
+! Elements                             References
+! --------                             ----------
+!  H     : T.H. Dunning, Jr. J. Chem. Phys. 90, 1007 (1989).
+!  He    : D.E. Woon and T.H. Dunning, Jr. J. Chem. Phys. 100, 2975 (1994).
+!   
+!  HELIUM
+  S     4
+    1              38.3600000              0.0238090        
+    2               5.7700000              0.1548910        
+    3               1.2400000              0.4699870        
+    4               0.2976000              0.5130270        
+  S     1
+    1               0.2976000              1.0000000        
+  S     1
+    1               0.0725500              1.0000000        
+  P     1
+    1               1.2750000              1.0000000        
+  P     1
+    1               0.2473000              1.0000000        

@@ -1,0 +1,44 @@
+
+! Only needed for large molecules
+! Edit  A
+!   NEIGHBOURS TYPE = OVR   EPS = 0.01  PRINT
+! End
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  60
+END
+
+BEGIN DF
+  Type RHO
+  Eta = 0.0
+  Lambda = 1000.0
+  Gamma = 0.0
+  Print only normalization constraints
+  Solver LU
+  ! Solver GELSS Condition = 1e-8
+END
+
+BEGIN energy-scan
+  !  Scan electrostatic potential on the specified grid
+  Scan molecule A with charge 1.0
+  Energies E1elst
+  Energy-file elst-scan
+  ! see user's guide for details
+  Points
+    !  Provide points file (created by Orient)
+    !  Give full path or put the file in the job directory
+    !  e.g.
+    !  file /home/ajs1/molecules/piracetam/aug-cc-pVDZ_-63/piracetam_vdW1.50.pts
+    !  or make a symbolic link grid.pts to the appropriate file
+    file  grid.pts
+  ---
+End
+
+

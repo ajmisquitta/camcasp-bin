@@ -1,0 +1,510 @@
+      CamCASP version 5.7.15  Mon 24 Feb 2014 14:30:11 GMT
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+Starting on 28-02-2014 at 15:18:59.296
+ 
+ ================================================================
+ Compiled on Sep 05 2013 at 12:33:08
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22529
+ Working directory: 
+     /scratch/fastscratch/ajs1/OC-ClF_15-18-49
+ Running on: whirligig
+ ================================================================
+
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE OC and ClF
+TITLE Basis sadlej and type DC
+TITLE Midbonds NONE and type weighted
+TITLE CalculationType: DELTA-HF
+
+
+MEMORY       2048 MB
+ Memory Manager initialized with             2147483648  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code NWCHEM
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE OC at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file OC-ClF-A-asc.movecs format ASCII-2
+   IP     0.515005 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format NWCHEM
+      Type DC
+      C          6.0        0.00000000       0.00000000      -5.29123277  TYPE C
+
+      O          8.0        0.00000000       0.00000000      -7.41334014  TYPE O
+
+      Cl         0.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+
+      F          0.0        0.00000000       0.00000000       3.15938392  TYPE F
+
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      C          6.0        0.00000000       0.00000000      -5.29123277  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O          8.0        0.00000000       0.00000000      -7.41334014  TYPE O
+    LIMITING basis on this site upto G symmetry
+      Cl         0.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+    LIMITING basis on this site upto G symmetry
+      F          0.0        0.00000000       0.00000000       3.15938392  TYPE F
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for OC
+    1          C    6.00     0.0000     0.0000    -5.2912
+    2          O    8.00     0.0000     0.0000    -7.4133
+    3         Cl    0.00     0.0000     0.0000     0.0000
+    4          F    0.00     0.0000     0.0000     3.1594
+ Molecular charge   =     0
+ Molecular IP       =     0.515005  a.u.
+ Number of molecular orbitals =   104
+     Occupied orbitals        =     7
+     Virtual  orbitals        =    97
+ Main basis: Size   =   104
+             Shells =    44
+             Type   = DC
+             Atoms  =     2
+       Sites(Main)  =     4
+       Site Types   =     4
+             GTOs   = Spherical
+ Aux  basis: Size   =   811
+             Shells =   144
+             Type   = DC
+        Sites(Aux)  =     4
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : OC-ClF-A-asc.movecs Type ASCII-2
+============================================================
+
+
+MOLECULE ClF at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file OC-ClF-B-asc.movecs format ASCII-2
+   IP     0.470800 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format NWCHEM
+      Type DC
+      Cl        17.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+
+      F          9.0        0.00000000       0.00000000       3.15938392  TYPE F
+
+      C          0.0        0.00000000       0.00000000      -5.29123277  TYPE C
+
+      O          0.0        0.00000000       0.00000000      -7.41334014  TYPE O
+
+   End
+   Basis Aux
+      Cartesian
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      Cl        17.0        0.00000000       0.00000000       0.00000000  TYPE Cl
+    LIMITING basis on this site upto G symmetry
+      F          9.0        0.00000000       0.00000000       3.15938392  TYPE F
+    LIMITING basis on this site upto G symmetry
+      C          0.0        0.00000000       0.00000000      -5.29123277  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O          0.0        0.00000000       0.00000000      -7.41334014  TYPE O
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for ClF
+    1         Cl   17.00     0.0000     0.0000     0.0000
+    2          F    9.00     0.0000     0.0000     3.1594
+    3          C    0.00     0.0000     0.0000    -5.2912
+    4          O    0.00     0.0000     0.0000    -7.4133
+ Molecular charge   =     0
+ Molecular IP       =     0.470800  a.u.
+ Number of molecular orbitals =   104
+     Occupied orbitals        =    13
+     Virtual  orbitals        =    91
+ Main basis: Size   =   104
+             Shells =    44
+             Type   = DC
+             Atoms  =     2
+       Sites(Main)  =     4
+       Site Types   =     4
+             GTOs   = Spherical
+ Aux  basis: Size   =   811
+             Shells =   144
+             Type   = DC
+        Sites(Aux)  =     4
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : OC-ClF-B-asc.movecs Type ASCII-2
+============================================================
+BEGIN GRID
+  Molecule OC
+  Angular 200
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 230-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+BEGIN GRID
+  Molecule ClF
+  Angular 200
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 230-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+SET NEW-PROP
+  Kernel ALDA
+  DF  ( For constrained DF use: C-DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 400.0
+    FD-DELTA = 0.1
+    FD-ALPHA = 0.1
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+ Finished reading the KERNEL-INTEGRAL-PARAMETERS.
+  SOLVER LU ( Options: GELSS )
+END
+ Finished reading in the NEW-PROP settings.
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF without constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+ DF-INT parameters set.
+
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+BEGIN DF
+  Dimer
+  Type OV
+  Print only normalization constraints
+END
+ WARNING: Merge issue when creating the dimer in make_dimer_2
+   Sites in AUX < Sites in MAIN: aux=           4  main=            8
+ WARNING: in subroutine make_dimer_2 line         2053
+ nsitesaux < nsites for dimer
+ INFO =            1
+BEGIN DF
+  Molecule OC
+  Type NN
+  Print only normalization constraints
+END
+ 
+Tests of DF for OC
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00634
+End of tests for OC
+ Normalization tests for fitted density of OC
+  \int \rho(r) dr = 13.99990
+Differs from expected value of    14 by .00010
+ End of normalization tests
+BEGIN DF
+  Molecule ClF
+  Type NN
+  Print only normalization constraints
+END
+ 
+Tests of DF for ClF
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00646
+End of tests for ClF
+ Normalization tests for fitted density of ClF
+  \int \rho(r) dr = 26.00073
+Differs from expected value of    26 by .00073
+ End of normalization tests
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN E1elst
+  Integral Switch =  1
+END
+ E^{1}_{elst}                             =   -1835.6872     CM-1
+ Electron--electron energy =    11128705.     CM-1
+ Electron--nuclear (A) energy =   -11181267.     CM-1
+ Electron--nuclear (B) energy =   -11103528.     CM-1
+ Nuclear --Nuclear  energy =    11154254.     CM-1
+ 
+BEGIN E1exch
+  Integral Switch =  1
+END
+ E^{1}_{exch}(S2) =    2793.0655     CM-1
+BEGIN E2ind
+  Use the DF algorithm
+  Amplitude-Type COUPLED
+  Integral Switch =  1
+END
+ 
+  INDUCTION CALCULATION 
+ 
+  Parameters same. Skipping DF for OC
+OV DF finished for OC
+ E^{2}_{ind}                              =   -2153.1526     CM-1
+     E^{2}_{ind}(A)                           =   -2054.8685     CM-1
+     E^{2}_{ind}(B)                           =   -98.284189     CM-1
+  Density-fitted propagator was used.
+ E^{2}_{ind}(UC)                          =   -2062.6859     CM-1
+     E^{2}_{ind}(A)(UC) =   -1963.5848     CM-1
+     E^{2}_{ind}(B)(UC) =   -99.101064     CM-1
+  Propagator type : cks
+ ---------------------------------
+ 
+ E^{2}_{ind,exch}                         =    1850.2184     CM-1
+     E^{2}_{ind,exch}(A)                      =    1779.7264     CM-1
+     E^{2}_{ind,exch}(B)                      =    70.492029     CM-1
+ E^{2}_{ind,exch}(UC)                     =    0.0000000     CM-1
+     E^{2}_{ind,exch}(A)(UC) =    0.0000000     CM-1
+     E^{2}_{ind,exch}(B)(UC) =    0.0000000     CM-1
+ ---------------------------------
+ 
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                1.51
+ WriteToFile_TypeRealVector              78                0.00
+ WriteToFile_Vector                      78                0.00
+ WriteToFile_TypeRealMatrix            4299                0.02
+ WriteToFile_Matrix                    4310                0.02
+ update_molecular_geometry               74                0.00
+ update_molecular_orbitals               74                0.00
+ construct_molecular_integratio           2                0.00
+ df_parser                                4                0.25
+ df_dimer                                12                0.07
+ df_int_for_df                           93                0.17
+ make_integrals_for_df                   95                0.17
+ make_s_matrix_coulomb                    1                0.00
+ diagonal_1index                          4                0.00
+ fill_Smat_subsets                        1                0.00
+ ReadFromFile_TypeRealMatrix            296                0.00
+ ReadFromFile_Matrix                    296                0.04
+ make_T_dimer                             1                0.06
+ diagonal_2index                          3                0.00
+ matmult_types                         4213                0.10
+ matrix_write_block_types             13652                0.02
+ WriteToFile_InBlocks_TypeRealM       13652                0.00
+ WriteToFile_InBlocks_Matrix          13652                0.02
+ scale_trans_mat_types                    5                0.01
+ solve_df_equations_lu                   14                0.00
+ lineq_solver_lu                          9                0.07
+ ReadRowsFromFile_TypeRealMatri       10931                0.00
+ ReadRowsFromFile_Matrix              10931                0.01
+ lineq_lu_iter                           11                0.06
+ matrix_write                            11                0.00
+ df_monomer                              48                0.18
+ df_make_I                                2                0.00
+ make_T_AO_mono                           2                0.05
+ make_T_MO_mono_NN                        2                0.06
+ test_df                                  2                0.00
+ matvec_types                             8                0.01
+ ReadFromFile_TypeRealVector             66                0.00
+ ReadFromFile_Vector                     66                0.00
+ fill_subset                              6                0.01
+ calculate_e1elst_mol                     1                0.00
+ df_int                                  95                1.19
+ make_twoeint                            31                0.05
+ make_D_S_D                              31                0.05
+ make_oneeint                            58                0.02
+ twoindx_1e_int_MO                       54                0.02
+ transform_2index                        54                0.00
+ calculate_e1exchS2                       1                0.01
+ overlap_integrals                       18                0.00
+ open_gen_2eint                          16                0.04
+ close_gen_2eint                         16                0.00
+ calculate_e2ind                          1                1.21
+ init_DF_algorithm                        1                1.20
+ densfit_prop                             2                1.20
+ init_prop                                2                1.18
+ make_h1                                  2                1.16
+ make_kernel_OVOV_ALDA                    2                1.13
+ make_kernel_integrals                    2                1.11
+ make_kernel_integrals:kernel_i           2                1.11
+ Chi_fxc_Chi_ALDAKernel                   2                1.11
+ add_2e_ints_to_Hessians                  4                0.03
+ adddiag                                  4                0.00
+ make_h2                                  2                0.01
+ make_misc_df                             2                0.00
+ make_Dtilde                              2                0.00
+ nuclear_X                                4                0.00
+ make_amplitudes                          4                0.01
+ calculate_e2exchind                      1                0.04
+ llsq_lu_types_2                          2                0.00
+ ====================================
+ 
+ 
+Maximum memory defined is :             2048 MB                                      
+Maximum memory used is    :              101 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   91
+ ======================================
+    1 TMP____000                                  D: atom: C atom in molecule OC
+    2 TMP____001                                  D: atom: O atom in molecule OC
+    3 TMP____002                                 D: atom: Cl atom in molecule OC
+    4 TMP____003                                  D: atom: F atom in molecule OC
+    5 TMP____004                                          E      Energies for OC
+    6 TMP____005                                               C      MOs for OC
+    7 TMP____006                                               C      MOs for OC
+    8 TMP____007                                                P densmat for OC
+    9 TMP____008                                D: atom: Cl atom in molecule ClF
+   10 TMP____009                                 D: atom: F atom in molecule ClF
+   11 TMP____010                                 D: atom: C atom in molecule ClF
+   12 TMP____011                                 D: atom: O atom in molecule ClF
+   13 TMP____012                                         E      Energies for ClF
+   14 TMP____013                                              C      MOs for ClF
+   15 TMP____014                                              C      MOs for ClF
+   16 TMP____015                                               P densmat for ClF
+   17 TMP_Doo_ab                                       Doo_ab  DF sol for OC_ClF
+   18 TMP_S___ab                                   S_____AB 2-e 2-indx integrals
+   19 TMP____016                            G  1-index diagonal integrals for OC
+   20 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+   21 TMP_S____b                                   S____B_B 2-e 2-indx integrals
+   22 TMP____019                                   S____A_B 2-e 2-indx integrals
+   23 TMP____020                                   S___A_AB 2-e 2-indx integrals
+   24 TMP____021                                   S___B_AB 2-e 2-indx integrals
+   25 TMP_Too_ab                                   T_MOOOAB 2-e 2-indx integrals
+   26 TMP_Tov_ab                                   T_MOOVAB 2-e 2-indx integrals
+   27 TMP_Tvo_ab                                   T_MOVOAB 2-e 2-indx integrals
+   28 TMP____017                            G  2-index diagonal integrals for OC
+   29 TMP_Dov_ab                                       Dov_ab  DF sol for OC_ClF
+   30 TMP_Dvo_ab                                       Dvo_ab  DF sol for OC_ClF
+   31 TMP____018                                          I_____XA 1-e integrals
+   32 TMP_D____a                                           D  Full DF sol for OC
+   33 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   34 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   35 TMP_Drho_a                                          Drho Density DF for OC
+   36 TMP_Doo__a                                OO part of D  Full DF sol for OC
+   37 TMP_Dov__a                                OV part of D  Full DF sol for OC
+   38 TMP_Dvv__a                                VV part of D  Full DF sol for OC
+   39 TMP____022                                          I_____XB 1-e integrals
+   40 TMP_D____b                                          D  Full DF sol for ClF
+   41 TMP_TAO__b                                   T_AO___B 2-e 2-indx integrals
+   42 TMP_T____b                                   T_MO___B 2-e 2-indx integrals
+   43 TMP_Drho_b                                         Drho Density DF for ClF
+   44 TMP_Doo__b                               OO part of D  Full DF sol for ClF
+   45 TMP_Dov__b                               OV part of D  Full DF sol for ClF
+   46 TMP_Dvv__b                               VV part of D  Full DF sol for ClF
+   47 TMP____023                                          OOOOAABB 2-e integrals
+   48 TMP____024                                          NUCBOOAA 1-e integrals
+   49 TMP____025                                          NUCAOOBB 1-e integrals
+   50 TMP____026                                          OVRLOOAB 1-e integrals
+   51 TMP____027                                          OOOOABAB 2-e integrals
+   52 TMP____028                                          NUCAOOAB 1-e integrals
+   53 TMP____029                                          NUCBOOAB 1-e integrals
+   54 TMP____030                                          OOOOAAAB 2-e integrals
+   55 TMP____031                                          OOOOABBB 2-e integrals
+   56 TMP____032                           C_a  static density-fitted propagator
+   57 TMP____033                                       H1-matrix  for monomer OC
+   58 TMP____034                                          OVOVAAAA 2-e integrals
+   59 TMP____035                                   KERAXAXA 1-e 2-indx integrals
+   60 TMP____036                          Rho : OO part of D  Full DF sol for OC
+   61 TMP____037                                          VVOOAAAA 2-e integrals
+   62 TMP____038                                       H2-matrix  for monomer OC
+   63 TMP____039                                 H21 = H2 * H1 : mol indx =    1
+   64 TMP____040                          fH2D = -4.0 * H2 * D : mol indx =    1
+   65 TMP____041                           C_b  static density-fitted propagator
+   66 TMP____042                                      H1-matrix  for monomer ClF
+   67 TMP____043                                          OVOVBBBB 2-e integrals
+   68 TMP____044                                   KERBXBXB 1-e 2-indx integrals
+   69 TMP____045                         Rho : OO part of D  Full DF sol for ClF
+   70 TMP____046                                          VVOOBBBB 2-e integrals
+   71 TMP____047                                      H2-matrix  for monomer ClF
+   72 TMP____048                                 H21 = H2 * H1 : mol indx =    2
+   73 TMP____049                          fH2D = -4.0 * H2 * D : mol indx =    2
+   74 TMP____050                                          DTIL__XB 1-e integrals
+   75 TMP____051                                          NUCB__XA 1-e integrals
+   76 TMP____052                                          DTIL__XA 1-e integrals
+   77 TMP____053                                          NUCA__XB 1-e integrals
+   78 TMP____055                                          NUCBOVAA 1-e integrals
+   79 TMP____056                                          OVOOAABB 2-e integrals
+   80 TMP____057                                          NUCAOVBB 1-e integrals
+   81 TMP____058                                          OOOVAABB 2-e integrals
+   82 TMP____059                                          OVRLVOAB 1-e integrals
+   83 TMP____060                                          OOVOABAB 2-e integrals
+   84 TMP____061                                          NUCAVOAB 1-e integrals
+   85 TMP____062                                          OOVOAAAB 2-e integrals
+   86 TMP____063                                          OVOOAAAB 2-e integrals
+   87 TMP____064                                          OVRLOVAB 1-e integrals
+   88 TMP____065                                          OVOOABAB 2-e integrals
+   89 TMP____066                                          NUCBOVAB 1-e integrals
+   90 TMP____067                                          OVOOABBB 2-e integrals
+   91 TMP____068                                          OOOVABBB 2-e integrals
+ --------------------------------------
+ 
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{elst}               -0.1835687E+04        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2793066E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{2}_{ind}                -0.2153153E+04        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(A)             -0.2054868E+04        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(B)             -0.9828419E+02        CM-1     DF :: PROP cks :: NoReg                                     
+E^{2}_{ind}(UC)            -0.2062686E+04        CM-1     DF :: PROP UC  :: NoReg                                     
+E^{2}_{ind,exch}            0.1850218E+04        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(A)         0.1779726E+04        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(B)         0.7049203E+02        CM-1     DF :: AMP C :: NoReg :: PROP cks                            
+E^{2}_{ind,exch}(UC)        0.0000000E+00        CM-1     DF :: AMP UC ::  :: NoReg                                   
+--------------------------------------------------------------------------------
+
+Ending on 28-02-2014 at 15:20:32.012

@@ -1,0 +1,953 @@
+
+
+     ************************************************************************
+     *************** Dalton - An Electronic Structure Program ***************
+     ************************************************************************
+
+    This is output from DALTON (Release Dalton2013 patch 0)
+   ----------------------------------------------------------------------------
+    NOTE:
+     
+    Dalton is an experimental code for the evaluation of molecular
+    properties using (MC)SCF, DFT, CI, and CC wave functions.
+    The authors accept no responsibility for the performance of
+    the code or for the correctness of the results.
+     
+    The code (in whole or part) is provided under a licence and
+    is not to be reproduced for further distribution without
+    the written permission of the authors or their representatives.
+     
+    See the home page "http://daltonprogram.org" for further information.
+     
+    If results obtained with this code are published,
+    the appropriate citations would be both of:
+     
+       K. Aidas, C. Angeli, K. L. Bak, V. Bakken, R. Bast,
+       L. Boman, O. Christiansen, R. Cimiraglia, S. Coriani,
+       P. Dahle, E. K. Dalskov, U. Ekstroem, T. Enevoldsen,
+       J. J. Eriksen, P. Ettenhuber, B. Fernandez, L. Ferrighi,
+       H. Fliegl, L. Frediani, K. Hald, A. Halkier, C. Haettig,
+       H. Heiberg, T. Helgaker, A. C. Hennum, H. Hettema,
+       E. Hjertenaes, S. Hoest, I.-M. Hoeyvik, M. F. Iozzi,
+       B. Jansik, H. J. Aa. Jensen, D. Jonsson, P. Joergensen,
+       J. Kauczor, S. Kirpekar, T. Kjaergaard, W. Klopper,
+       S. Knecht, R. Kobayashi, H. Koch, J. Kongsted, A. Krapp,
+       K. Kristensen, A. Ligabue, O. B. Lutnaes, J. I. Melo,
+       K. V. Mikkelsen, R. H. Myhre, C. Neiss, C. B. Nielsen,
+       P. Norman, J. Olsen, J. M. H. Olsen, A. Osted,
+       M. J. Packer, F. Pawlowski, T. B. Pedersen, P. F. Provasi,
+       S. Reine, Z. Rinkevicius, T. A. Ruden, K. Ruud, V. Rybkin,
+       P. Salek, C. C. M. Samson, A. Sanchez de Meras, T. Saue,
+       S. P. A. Sauer, B. Schimmelpfennig, K. Sneskov,
+       A. H. Steindal, K. O. Sylvester-Hvid, P. R. Taylor,
+       A. M. Teale, E. I. Tellgren, D. P. Tew, A. J. Thorvaldsen,
+       L. Thoegersen, O. Vahtras, M. A. Watson, D. J. D. Wilson,
+       M. Ziolkowski and H. Aagren,
+       "The Dalton quantum chemistry program system",
+       WIREs Comput. Mol. Sci. 2013. (doi: 10.1002/wcms.1172)
+    
+    and
+    
+       Dalton, a Molecular Electronic Structure Program,
+       Release DALTON2013.0 (2013), see http://daltonprogram.org
+   ----------------------------------------------------------------------------
+
+    Authors in alphabetical order (major contribution(s) in parenthesis):
+
+  Kestutis Aidas,           Vilnius University,           Lithuania   (QM/MM)
+  Celestino Angeli,         University of Ferrara,        Italy       (NEVPT2)
+  Keld L. Bak,              UNI-C,                        Denmark     (AOSOPPA, non-adiabatic coupling, magnetic properties)
+  Vebjoern Bakken,          University of Oslo,           Norway      (DALTON; geometry optimizer, symmetry detection)
+  Radovan Bast,             KTH Stockholm,                Sweden      (DALTON installation and execution frameworks)
+  Linus Boman,              NTNU,                         Norway      (Cholesky decomposition and subsystems)
+  Ove Christiansen,         Aarhus University,            Denmark     (CC module)
+  Renzo Cimiraglia,         University of Ferrara,        Italy       (NEVPT2)
+  Sonia Coriani,            University of Trieste,        Italy       (CC module, MCD in RESPONS)
+  Paal Dahle,               University of Oslo,           Norway      (Parallelization)
+  Erik K. Dalskov,          UNI-C,                        Denmark     (SOPPA)
+  Thomas Enevoldsen,        Univ. of Southern Denmark,    Denmark     (SOPPA)
+  Janus J. Eriksen,         Aarhus University,            Denmark     (PE-MP2/SOPPA, TDA)
+  Berta Fernandez,          U. of Santiago de Compostela, Spain       (doublet spin, ESR in RESPONS)
+  Lara Ferrighi,            Aarhus University,            Denmark     (PCM Cubic response)
+  Heike Fliegl,             University of Oslo,           Norway      (CCSD(R12))
+  Luca Frediani,            UiT The Arctic U. of Norway,  Norway      (PCM)
+  Bin Gao,                  UiT The Arctic U. of Norway,  Norway      (Gen1Int library)
+  Christof Haettig,         Ruhr-University Bochum,       Germany     (CC module)
+  Kasper Hald,              Aarhus University,            Denmark     (CC module)
+  Asger Halkier,            Aarhus University,            Denmark     (CC module)
+  Hanne Heiberg,            University of Oslo,           Norway      (geometry analysis, selected one-electron integrals)
+  Trygve Helgaker,          University of Oslo,           Norway      (DALTON; ABACUS, ERI, DFT modules, London, and much more)
+  Alf Christian Hennum,     University of Oslo,           Norway      (Parity violation)
+  Hinne Hettema,            University of Auckland,       New Zealand (quadratic response in RESPONS; SIRIUS supersymmetry)
+  Eirik Hjertenaes,         NTNU,                         Norway      (Cholesky decomposition)
+  Maria Francesca Iozzi,    University of Oslo,           Norway      (RPA)
+  Brano Jansik              Technical Univ. of Ostrava    Czech Rep.  (DFT cubic response)
+  Hans Joergen Aa. Jensen,  Univ. of Southern Denmark,    Denmark     (DALTON; SIRIUS, RESPONS, ABACUS modules, London, and much more)
+  Dan Jonsson,              UiT The Arctic U. of Norway,  Norway      (cubic response in RESPONS module)
+  Poul Joergensen,          Aarhus University,            Denmark     (RESPONS, ABACUS, and CC modules)
+  Joanna Kauczor,           Linkoeping University,        Sweden      (Complex polarization propagator (CPP) module)
+  Sheela Kirpekar,          Univ. of Southern Denmark,    Denmark     (Mass-velocity & Darwin integrals)
+  Wim Klopper,              KIT Karlsruhe,                Germany     (R12 code in CC, SIRIUS, and ABACUS modules)
+  Stefan Knecht,            ETH Zurich,                   Switzerland (Parallel CI and MCSCF)
+  Rika Kobayashi,           Australian National Univ.,    Australia   (DIIS in CC, London in MCSCF)
+  Henrik Koch,              NTNU,                         Norway      (CC module, Cholesky decomposition)
+  Jacob Kongsted,           Univ. of Southern Denmark,    Denmark     (Polarizable embedding, QM/MM)
+  Andrea Ligabue,           University of Modena,         Italy       (CTOCD, AOSOPPA)
+  Ola B. Lutnaes,           University of Oslo,           Norway      (DFT Hessian)
+  Juan I. Melo,             University of Buenos Aires,   Argentina   (LRESC, Relativistic Effects on NMR Shieldings)
+  Kurt V. Mikkelsen,        University of Copenhagen,     Denmark     (MC-SCRF and QM/MM)
+  Rolf H. Myhre,            NTNU,                         Norway      (Cholesky, subsystems and ECC2)
+  Christian Neiss,          Univ. Erlangen-Nuernberg,     Germany     (CCSD(R12))
+  Christian B. Nielsen,     University of Copenhagen,     Denmark     (QM/MM)
+  Patrick Norman,           Linkoeping University,        Sweden      (Cubic response and complex response in RESPONS)
+  Jeppe Olsen,              Aarhus University,            Denmark     (SIRIUS CI/density modules)
+  Jogvan Magnus H. Olsen,   Univ. of Southern Denmark,    Denmark     (Polarizable embedding, PE library, QM/MM)
+  Anders Osted,             Copenhagen University,        Denmark     (QM/MM)
+  Martin J. Packer,         University of Sheffield,      UK          (SOPPA)
+  Filip Pawlowski,          Kazimierz Wielki University,  Poland      (CC3)
+  Thomas B. Pedersen,       University of Oslo,           Norway      (Cholesky decomposition)
+  Patricio F. Provasi,      University of Northeastern,   Argentina   (Analysis of coupling constants in localized orbitals)
+  Zilvinas Rinkevicius,     KTH Stockholm,                Sweden      (open-shell DFT, ESR)
+  Elias Rudberg,            KTH Stockholm,                Sweden      (DFT grid and basis info)
+  Torgeir A. Ruden,         University of Oslo,           Norway      (Numerical derivatives in ABACUS)
+  Kenneth Ruud,             UiT The Arctic U. of Norway,  Norway      (DALTON; ABACUS magnetic properties and  much more)
+  Pawel Salek,              KTH Stockholm,                Sweden      (DALTON; DFT code)
+  Claire C. M. Samson       University of Karlsruhe       Germany     (Boys localization, r12 integrals in ERI)
+  Alfredo Sanchez de Meras, University of Valencia,       Spain       (CC module, Cholesky decomposition)
+  Trond Saue,               Paul Sabatier University,     France      (direct Fock matrix construction)
+  Stephan P. A. Sauer,      University of Copenhagen,     Denmark     (SOPPA(CCSD), SOPPA prop., AOSOPPA, vibrational g-factors)
+  Bernd Schimmelpfennig,    Forschungszentrum Karlsruhe,  Germany     (AMFI module)
+  Kristian Sneskov,         Aarhus University,            Denmark     (QM/MM, PE-CC)
+  Arnfinn H. Steindal,      UiT The Arctic U. of Norway,  Norway      (parallel QM/MM)
+  K. O. Sylvester-Hvid,     University of Copenhagen,     Denmark     (MC-SCRF)
+  Peter R. Taylor,          VLSCI/Univ. of Melbourne,     Australia   (Symmetry handling ABACUS, integral transformation)
+  Andrew M. Teale,          University of Nottingham,     England     (DFT-AC, DFT-D)
+  David P. Tew,             University of Bristol,        England     (CCSD(R12))
+  Olav Vahtras,             KTH Stockholm,                Sweden      (triplet response, spin-orbit, ESR, TDDFT, open-shell DFT)
+  David J. Wilson,          La Trobe University,          Australia   (DFT Hessian and DFT magnetizabilities)
+  Hans Agren,               KTH Stockholm,                Sweden      (SIRIUS module, RESPONS, MC-SCRF solvation model)
+ --------------------------------------------------------------------------------
+
+     Date and time (Linux)  : Fri Feb 21 13:49:24 2014
+     Host name              : whirligig                               
+
+ * Work memory size             :   320000000 =  2.384 gigabytes.
+
+ * Directories for basis set searches:
+   1) /scratch/fastscratch/ajs1/H2O2_13-49-24
+   2) /usr/local/dalton_gfortran_64/basis
+
+
+Compilation information
+-----------------------
+
+ Who compiled             | ajs1
+ Host                     | whirligig
+ System                   | Linux-3.2.0-56-generic
+ CMake generator          | Unix Makefiles
+ Processor                | x86_64
+ 64-bit integers          | ON
+ MPI                      | OFF
+ Fortran compiler         | /usr/bin/gfortran
+ Fortran compiler version | GNU Fortran (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
+ C compiler               | /usr/bin/gcc
+ C compiler version       | gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
+ C++ compiler             | /usr/bin/g++
+ C++ compiler version     | g++ (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3
+ Explicit libs            | -L/usr/local/shared/atlas/Linux_core2duo_sse3_sse4
+                          | _1/lib -llapack -lf77blas -lcblas -latlas
+ Static linking           | OFF
+ Last Git revision        | 575a5cf6d2c5c3776735f11fa026dbfca0382455
+ Configuration time       | 2013-12-02 17:16:29.544027
+
+
+   Content of the .dal input file
+ ----------------------------------
+
+**DALTON INPUT                                    
+.RUN WAVE FUNCTION                                
+! .DIRECT                                         
+**INTEGRALS                                       
+.NOSUP                                            
+.PRINT                                            
+    1                                             
+**WAVE FUNCTIONS                                  
+.HF                                               
+.INTERFACE                                        
+*AUXILIARY INPUT                                  
+.NOSUPMAT                                         
+*ORBITALS                                         
+.NOSUPSYM                                         
+.AO DELETE                                        
+ 1.0E-6                                           
+.CMOMAX                                           
+ 1000.0                                           
+*SCF INPUT                                        
+.THRESH                                           
+1.0D-6                                            
+*ORBITAL INPUT                                    
+*END OF INPUT                                     
+
+
+   Content of the .mol file
+ ----------------------------
+
+INTGRL                                                                         
+  water1 with water2                                                           
+  Basis is sadlej and type DC+                                                 
+Spherical  Atomtypes=7  Charge=0 Integrals=1.0D-16 Nosymmetry                  
+!                                                                              
+!                                                                              
+! water1                                                                       
+!                                                                              
+Charge=  8.0  Atoms=1 Blocks=3 1 1 1                                           
+O1               0.10880900         0.00000000        -0.06077600              
+!                                                                              
+! O: Sadlej pVTZ                                                               
+! A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)                  
+! A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)        
+! A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)                               
+! A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)                                
+! A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)                               
+!                                                                              
+! (10S,6P,4D) -> [5S,3P,2D]                                                    
+!                                                                              
+!                                                                              
+!  S functions                                                                 
+F  10    5                                                                     
+ 10662.28500   0.000799   0.000000   0.000000   0.000000   0.000000            
+  1599.70970   0.006153   0.000000   0.000000   0.000000   0.000000            
+   364.72526   0.031157   0.000000   0.000000   0.000000   0.000000            
+   103.65179   0.115596   0.000000   0.000000   0.000000   0.000000            
+    33.90581   0.301552   0.000000   0.000000   0.000000   0.000000            
+    12.28747   0.000000   0.444870   0.000000   0.000000   0.000000            
+     4.75680   0.000000   0.243172   0.000000   0.000000   0.000000            
+     1.00427   0.000000   0.000000   1.000000   0.000000   0.000000            
+     0.30069   0.000000   0.000000   0.000000   1.000000   0.000000            
+     0.09003   0.000000   0.000000   0.000000   0.000000   1.000000            
+!                                                                              
+!  P functions                                                                 
+F   6    3                                                                     
+    34.85646   0.015648   0.000000   0.000000                                  
+     7.84313   0.098197   0.000000   0.000000                                  
+     2.30625   0.307768   0.000000   0.000000                                  
+     0.72316   0.492470   0.000000   0.000000                                  
+     0.21488   0.000000   1.000000   0.000000                                  
+     0.06385   0.000000   0.000000   1.000000                                  
+!                                                                              
+!  D functions                                                                 
+F   4    2                                                                     
+     2.30620   0.202700   0.000000                                             
+     0.72320   0.579100   0.000000                                             
+     0.21490   0.000000   0.785450                                             
+     0.06390   0.000000   0.533870                                             
+!                                                                              
+Charge=  1.0  Atoms=1 Blocks=2 1 1                                             
+H1              -0.16161460         0.00000000         1.75530702              
+!                                                                              
+! BASIS="Sadlej pVTZ"                                                          
+! A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)                  
+! A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)        
+! A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)                               
+! A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)                                
+! A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)                               
+!                                                                              
+! (6S,4P) -> [3S,2P]                                                           
+!                                                                              
+!  S functions                                                                 
+F   6    3                                                                     
+    33.86501   0.006068   0.000000   0.000000                                  
+     5.09479   0.045316   0.000000   0.000000                                  
+     1.15879   0.202846   0.000000   0.000000                                  
+     0.32584   0.503709   0.000000   0.000000                                  
+     0.10274   0.000000   1.000000   0.000000                                  
+     0.03240   0.000000   0.000000   1.000000                                  
+!                                                                              
+!  P functions                                                                 
+F   4    2                                                                     
+     1.15880   0.188440   0.000000                                             
+     0.32580   0.882420   0.000000                                             
+     0.10270   0.000000   0.117800                                             
+     0.03240   0.000000   0.004200                                             
+!                                                                              
+Charge=  1.0  Atoms=1 Blocks=2 1 1                                             
+H2              -1.57933347         0.00000000        -0.78289890              
+!                                                                              
+! BASIS="Sadlej pVTZ"                                                          
+! A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)                  
+! A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)        
+! A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)                               
+! A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)                                
+! A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)                               
+!                                                                              
+! (6S,4P) -> [3S,2P]                                                           
+!                                                                              
+!  S functions                                                                 
+F   6    3                                                                     
+    33.86501   0.006068   0.000000   0.000000                                  
+     5.09479   0.045316   0.000000   0.000000                                  
+     1.15879   0.202846   0.000000   0.000000                                  
+     0.32584   0.503709   0.000000   0.000000                                  
+     0.10274   0.000000   1.000000   0.000000                                  
+     0.03240   0.000000   0.000000   1.000000                                  
+!                                                                              
+!  P functions                                                                 
+F   4    2                                                                     
+     1.15880   0.188440   0.000000                                             
+     0.32580   0.882420   0.000000                                             
+     0.10270   0.000000   0.117800                                             
+     0.03240   0.000000   0.004200                                             
+!                                                                              
+!                                                                              
+!                                                                              
+! water2                                                                       
+!                                                                              
+Charge=  0.0  Atoms=1 Blocks=3 1 1 1                                           
+O1              -0.09648300         0.00000000         5.59028800              
+!                                                                              
+! O: Sadlej pVTZ                                                               
+! A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)                  
+! A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)        
+! A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)                               
+! A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)                                
+! A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)                               
+!                                                                              
+! (10S,6P,4D) -> [5S,3P,2D]                                                    
+!                                                                              
+!                                                                              
+!  S functions                                                                 
+F  10    5                                                                     
+ 10662.28500   0.000799   0.000000   0.000000   0.000000   0.000000            
+  1599.70970   0.006153   0.000000   0.000000   0.000000   0.000000            
+   364.72526   0.031157   0.000000   0.000000   0.000000   0.000000            
+   103.65179   0.115596   0.000000   0.000000   0.000000   0.000000            
+    33.90581   0.301552   0.000000   0.000000   0.000000   0.000000            
+    12.28747   0.000000   0.444870   0.000000   0.000000   0.000000            
+     4.75680   0.000000   0.243172   0.000000   0.000000   0.000000            
+     1.00427   0.000000   0.000000   1.000000   0.000000   0.000000            
+     0.30069   0.000000   0.000000   0.000000   1.000000   0.000000            
+     0.09003   0.000000   0.000000   0.000000   0.000000   1.000000            
+!                                                                              
+!  P functions                                                                 
+F   6    3                                                                     
+    34.85646   0.015648   0.000000   0.000000                                  
+     7.84313   0.098197   0.000000   0.000000                                  
+     2.30625   0.307768   0.000000   0.000000                                  
+     0.72316   0.492470   0.000000   0.000000                                  
+     0.21488   0.000000   1.000000   0.000000                                  
+     0.06385   0.000000   0.000000   1.000000                                  
+!                                                                              
+!  D functions                                                                 
+F   4    2                                                                     
+     2.30620   0.202700   0.000000                                             
+     0.72320   0.579100   0.000000                                             
+     0.21490   0.000000   0.785450                                             
+     0.06390   0.000000   0.533870                                             
+!                                                                              
+Charge=  0.0  Atoms=1 Blocks=2 1 1                                             
+H1               0.77186787         1.45365210         6.30032236              
+!                                                                              
+! BASIS="Sadlej pVTZ"                                                          
+! A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)                  
+! A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)        
+! A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)                               
+! A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)                                
+! A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)                               
+!                                                                              
+! (6S,4P) -> [3S,2P]                                                           
+!                                                                              
+!  S functions                                                                 
+F   6    3                                                                     
+    33.86501   0.006068   0.000000   0.000000                                  
+     5.09479   0.045316   0.000000   0.000000                                  
+     1.15879   0.202846   0.000000   0.000000                                  
+     0.32584   0.503709   0.000000   0.000000                                  
+     0.10274   0.000000   1.000000   0.000000                                  
+     0.03240   0.000000   0.000000   1.000000                                  
+!                                                                              
+!  P functions                                                                 
+F   4    2                                                                     
+     1.15880   0.188440   0.000000                                             
+     0.32580   0.882420   0.000000                                             
+     0.10270   0.000000   0.117800                                             
+     0.03240   0.000000   0.004200                                             
+!                                                                              
+Charge=  0.0  Atoms=1 Blocks=2 1 1                                             
+H2               0.77186805        -1.45365182         6.30032273              
+!                                                                              
+! BASIS="Sadlej pVTZ"                                                          
+! A. J. Sadlej, Collec. Czech. Chem. Commun.  53, 1995 (1988)                  
+! A. J. Sadlej and M. Urban, J. Mol. Struct. (THEOCHEM) 234, 147 (1991)        
+! A. J. Sadlej, Theor. Chim. Acta 79, 123 (1992)                               
+! A. J. Sadlej, Theor. Chim. Acta 81, 45 (1992)                                
+! A. J. Sadlej, Theor. Chim. Acta 81, 339 (1992)                               
+!                                                                              
+! (6S,4P) -> [3S,2P]                                                           
+!                                                                              
+!  S functions                                                                 
+F   6    3                                                                     
+    33.86501   0.006068   0.000000   0.000000                                  
+     5.09479   0.045316   0.000000   0.000000                                  
+     1.15879   0.202846   0.000000   0.000000                                  
+     0.32584   0.503709   0.000000   0.000000                                  
+     0.10274   0.000000   1.000000   0.000000                                  
+     0.03240   0.000000   0.000000   1.000000                                  
+!                                                                              
+!  P functions                                                                 
+F   4    2                                                                     
+     1.15880   0.188440   0.000000                                             
+     0.32580   0.882420   0.000000                                             
+     0.10270   0.000000   0.117800                                             
+     0.03240   0.000000   0.004200                                             
+!                                                                              
+!                                                                              
+!                                                                              
+Charge=  0.0 Atoms=1 Blocks=3 1 1 1                                            
+Mb                0.00376528         0.00000007         3.64787605             
+!                                                                              
+! 3s2p1d mid-bond set                                                          
+!                                                                              
+! S-TYPE FUNCTIONS                                                             
+!                                                                              
+F   3   3                                                                      
+  0.553063  1.0  0.0  0.0                                                      
+  0.250866  0.0  1.0  0.0                                                      
+  0.117111  0.0  0.0  1.0                                                      
+!                                                                              
+! P-TYPE FUNCTIONS                                                             
+!                                                                              
+F   2   2                                                                      
+  0.392     1.0  0.0                                                           
+  0.142     0.0  1.0                                                           
+!                                                                              
+! D-TYPE FUNCTIONS                                                             
+!                                                                              
+F   1   1                                                                      
+  0.328     1.0                                                                
+!                                                                              
+
+
+       *******************************************************************
+       *********** Output from DALTON general input processing ***********
+       *******************************************************************
+
+ --------------------------------------------------------------------------------
+   Overall default print level:    0
+   Print level for DALTON.STAT:    1
+
+    HERMIT 1- and 2-electron integral sections will be executed
+    "Old" integral transformation used (limited to max 255 basis functions)
+    Wave function sections will be executed (SIRIUS module)
+ --------------------------------------------------------------------------------
+
+
+   ****************************************************************************
+   *************** Output of molecule and basis set information ***************
+   ****************************************************************************
+
+
+    The two title cards from your ".mol" input:
+    ------------------------------------------------------------------------
+ 1:   water1 with water2                                                    
+ 2:   Basis is sadlej and type DC+                                          
+    ------------------------------------------------------------------------
+
+  INFO from READIN: Threshold for discarding integrals was    1.00D-16
+  INFO from READIN: Threshold is reset to minimum value       1.00D-15
+
+  Atomic type no.    1
+  --------------------
+  Nuclear charge:   8.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+  Atomic type no.    2
+  --------------------
+  Nuclear charge:   1.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+  Atomic type no.    3
+  --------------------
+  Nuclear charge:   1.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+  Atomic type no.    4
+  --------------------
+  Nuclear charge:   0.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+  Atomic type no.    5
+  --------------------
+  Nuclear charge:   0.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+  Atomic type no.    6
+  --------------------
+  Nuclear charge:   0.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+  Atomic type no.    7
+  --------------------
+  Nuclear charge:   0.00000
+  Number of symmetry independent centers:    1
+  Number of basis sets to read;    2
+
+
+                         SYMGRP: Point group information
+                         -------------------------------
+
+Point group: C1 
+
+
+                                 Isotopic Masses
+                                 ---------------
+
+                           O1         15.994915
+                           H1          1.007825
+                           H2          1.007825
+
+                       Total mass:    18.010565 amu
+                       Natural abundance:  99.730 %
+
+ Center-of-mass coordinates (a.u.):   -0.000787    0.000000    0.000439
+
+
+  Atoms and basis sets
+  --------------------
+
+  Number of atom types :    7
+  Total number of atoms:    7
+
+  label    atoms   charge   prim   cont     basis
+  ----------------------------------------------------------------------
+  O1          1    8.0000    48    24      [10s6p4d|5s3p2d]                                   
+  H1          1    1.0000    18     9      [6s4p|3s2p]                                        
+  H2          1    1.0000    18     9      [6s4p|3s2p]                                        
+  O1          1    0.0000    48    24      [10s6p4d|5s3p2d]                                   
+  H1          1    0.0000    18     9      [6s4p|3s2p]                                        
+  H2          1    0.0000    18     9      [6s4p|3s2p]                                        
+  Mb          1    0.0000    14    14      [3s2p1d|3s2p1d]                                    
+  ----------------------------------------------------------------------
+  total:      7   10.0000   182    98
+  ----------------------------------------------------------------------
+  Spherical harmonic basis used.
+
+  Threshold for neglecting AO integrals:  1.00D-15
+
+
+  Cartesian Coordinates (a.u.)
+  ----------------------------
+
+  Total number of coordinates:   21
+  O1      :     1  x   0.1088090000    2  y   0.0000000000    3  z  -0.0607760000
+  H1      :     4  x  -0.1616146000    5  y   0.0000000000    6  z   1.7553070200
+  H2      :     7  x  -1.5793334700    8  y   0.0000000000    9  z  -0.7828989000
+  O1      :    10  x  -0.0964830000   11  y   0.0000000000   12  z   5.5902880000
+  H1      :    13  x   0.7718678700   14  y   1.4536521000   15  z   6.3003223600
+  H2      :    16  x   0.7718680500   17  y  -1.4536518200   18  z   6.3003227300
+  Mb      :    19  x   0.0037652800   20  y   0.0000000700   21  z   3.6478760500
+
+
+   Interatomic separations (in Angstrom):
+   --------------------------------------
+
+            O1          H1          H2          O1          H1          H2    
+            ------      ------      ------      ------      ------      ------
+ O1    :    0.000000
+ H1    :    0.971626    0.000000
+ H2    :    0.971626    1.538479    0.000000
+ O1    :    2.992387    2.029677    3.462629    0.000000
+ H1    :    3.470706    2.573002    4.023601    0.971626    0.000000
+ H2    :    3.470706    2.573002    4.023601    0.971626    1.538479    0.000000
+ Mb    :    1.963321    1.005321    2.489832    1.029248    1.651385    1.651386
+
+            Mb    
+            ------
+ Mb    :    0.000000
+
+
+  Max    interatomic separation is    4.0236 Angstrom (    7.6035 Bohr)
+  between atoms    6 and    3, "H2    " and "H2    ".
+
+  Min HX interatomic separation is    0.9716 Angstrom (    1.8361 Bohr)
+
+  Min YX interatomic separation is    0.9716 Angstrom (    1.8361 Bohr)
+
+WARNING: Number of short HX and YX bond lengths:    0    2
+WARNING: If not intentional, maybe your coordinates were in Angstrom,
+WARNING: but "Angstrom" was not specified in .mol file
+
+
+  Bond distances (Angstrom):
+  --------------------------
+
+                  atom 1     atom 2       distance
+                  ------     ------       --------
+  bond distance:  H1         O1           0.971626
+  bond distance:  H2         O1           0.971626
+
+
+  Bond angles (degrees):
+  ----------------------
+
+                  atom 1     atom 2     atom 3         angle
+                  ------     ------     ------         -----
+  bond angle:     H1         O1         H2           104.690
+
+
+
+
+ Principal moments of inertia (u*A**2) and principal axes
+ --------------------------------------------------------
+
+   IA       0.630690          0.487640    0.000000    0.873045
+   IB       1.192719          0.873045    0.000000   -0.487640
+   IC       1.823409          0.000000    1.000000    0.000000
+
+
+ Rotational constants
+ --------------------
+
+ The molecule is planar.
+
+               A                   B                   C
+
+         801311.8888         423719.9689         277161.6481 MHz
+           26.728888           14.133777            9.245117 cm-1
+
+
+@  Nuclear repulsion energy :    9.058053550307 Hartree
+
+  Number of floating/multiple basis set orbitals :    4
+
+
+                     .---------------------------------------.
+                     | Starting in Integral Section (HERMIT) |
+                     `---------------------------------------'
+
+
+
+    *************************************************************************
+    ****************** Output from HERMIT input processing ******************
+    *************************************************************************
+
+
+ Default print level:        1
+
+ * Nuclear model: Point charge
+
+ Calculation of one- and two-electron Hamiltonian integrals.
+
+ Center of mass  (bohr):     -0.000787331348      0.000000000000      0.000439201074
+ Operator center (bohr):      0.000000000000      0.000000000000      0.000000000000
+ Gauge origin    (bohr):      0.000000000000      0.000000000000      0.000000000000
+ Dipole origin   (bohr):      0.000000000000      0.000000000000      0.000000000000
+
+
+     ************************************************************************
+     ************************** Output from HERINT **************************
+     ************************************************************************
+
+
+ Threshold for neglecting two-electron integrals:  1.00D-15
+ Number of two-electron integrals written:    10462688 ( 88.9% )
+ Megabytes written:                            159.783
+
+ >>>  Time used in TWOINT     is   4.86 seconds
+ >>>> Total CPU  time used in HERMIT:   4.98 seconds
+ >>>> Total wall time used in HERMIT:   5.07 seconds
+
+
+                        .----------------------------------.
+                        | End of Integral Section (HERMIT) |
+                        `----------------------------------'
+
+
+
+                   .--------------------------------------------.
+                   | Starting in Wave Function Section (SIRIUS) |
+                   `--------------------------------------------'
+
+
+ *** Output from Huckel module :
+
+     Using EWMO model:          T
+     Using EHT  model:          F
+     Number of Huckel orbitals each symmetry:    7
+
+ EWMO - Energy Weighted Maximum Overlap - is a Huckel type method,
+        which normally is better than Extended Huckel Theory.
+ Reference: Linderberg and Ohrn, Propagators in Quantum Chemistry (Wiley, 1973)
+
+ Huckel EWMO eigenvalues for symmetry :  1
+          -20.684741      -1.601845      -0.778326      -0.688865      -0.616200
+           -0.237198      -0.172725
+
+ **********************************************************************
+ *SIRIUS* a direct, restricted step, second order MCSCF program       *
+ **********************************************************************
+
+ 
+     Date and time (Linux)  : Fri Feb 21 13:49:29 2014
+     Host name              : whirligig                               
+
+ Title lines from ".mol" input file:
+       water1 with water2                                                    
+       Basis is sadlej and type DC+                                          
+
+ Print level on unit LUPRI =   2 is   0
+ Print level on unit LUW4  =   2 is   5
+
+@    Restricted, closed shell Hartree-Fock calculation.
+
+ Initial molecular orbitals are obtained according to
+ ".MOSTART EWMO  " input option
+
+     Wave function specification
+     ============================
+@    For the wave function of type :      >>> HF <<<
+@    Number of closed shell electrons          10
+@    Number of electrons in active shells       0
+@    Total charge of the molecule               0
+
+@    Spin multiplicity and 2 M_S                1         0
+     Total number of symmetries                 1
+@    Reference state symmetry                   1
+
+     Orbital specifications
+     ======================
+     Abelian symmetry species          All |    1
+                                       --- |  ---
+@    Occupied SCF orbitals               5 |    5
+     Secondary orbitals                 93 |   93
+     Total number of orbitals           98 |   98
+     Number of basis functions          98 |   98
+
+     Optimization information
+     ========================
+@    Number of configurations                 1
+@    Number of orbital rotations            465
+     ------------------------------------------
+@    Total number of variables              466
+
+     Maximum number of Fock   iterations      0
+     Maximum number of DIIS   iterations     60
+     Maximum number of QC-SCF iterations     60
+     Threshold for SCF convergence     1.00D-06
+
+
+ >>>>> DIIS optimization of Hartree-Fock <<<<<
+
+ C1-DIIS algorithm; max error vectors =    5
+
+ Iter      Total energy        Error norm    Delta(E)  DIIS dim.
+ -----------------------------------------------------------------------------
+@  1    -75.8786744893        1.69026D+00   -7.59D+01    1
+      Virial theorem: -V/T =      1.998081
+@      MULPOP O1     -0.49; H1      0.09; H2      0.18; 
+ -----------------------------------------------------------------------------
+@  2    -76.0461780394        3.40214D-01   -1.68D-01    2
+      Virial theorem: -V/T =      2.004016
+@      MULPOP O1      0.03; H1     -0.84; H2     -0.71; 
+ -----------------------------------------------------------------------------
+@  3    -76.0526008880        9.51434D-02   -6.42D-03    3
+      Virial theorem: -V/T =      2.000586
+@      MULPOP O1      0.02; H1     -0.97; H2     -0.77; 
+ -----------------------------------------------------------------------------
+@  4    -76.0533690062        5.02547D-02   -7.68D-04    4
+      Virial theorem: -V/T =      2.002656
+@      MULPOP O1      0.03; H1     -1.00; H2     -0.79; 
+ -----------------------------------------------------------------------------
+@  5    -76.0535050787        8.81601D-03   -1.36D-04    5
+      Virial theorem: -V/T =      2.001739
+@      MULPOP O1      0.02; H1     -1.00; H2     -0.79; 
+ -----------------------------------------------------------------------------
+@  6    -76.0535201382        2.03997D-03   -1.51D-05    5
+      Virial theorem: -V/T =      2.001769
+@      MULPOP O1      0.01; H1     -1.00; H2     -0.78; 
+ -----------------------------------------------------------------------------
+@  7    -76.0535209418        4.50890D-04   -8.04D-07    5
+      Virial theorem: -V/T =      2.001788
+@      MULPOP O1      0.01; H1     -1.00; H2     -0.78; 
+ -----------------------------------------------------------------------------
+@  8    -76.0535209739        5.60601D-05   -3.21D-08    5
+      Virial theorem: -V/T =      2.001793
+@      MULPOP O1      0.01; H1     -1.00; H2     -0.78; 
+ -----------------------------------------------------------------------------
+@  9    -76.0535209744        1.27564D-05   -4.61D-10    5
+      Virial theorem: -V/T =      2.001794
+@      MULPOP O1      0.01; H1     -1.00; H2     -0.78; 
+ -----------------------------------------------------------------------------
+@ 10    -76.0535209744        4.41809D-06   -2.16D-11    5
+      Virial theorem: -V/T =      2.001793
+@      MULPOP O1      0.01; H1     -1.00; H2     -0.78; 
+ -----------------------------------------------------------------------------
+@ 11    -76.0535209744        1.54178D-06   -1.90D-12    5
+      Virial theorem: -V/T =      2.001794
+@      MULPOP O1      0.01; H1     -1.00; H2     -0.78; 
+ -----------------------------------------------------------------------------
+@ 12    -76.0535209744        3.69489D-07   -3.98D-13    5
+
+@ *** DIIS converged in  12 iterations !
+@     Converged SCF energy, gradient:    -76.053520974394    3.69D-07
+    - total time used in SIRFCK :              0.00 seconds
+
+
+ *** SCF orbital energy analysis ***
+
+ Only the five lowest virtual orbital energies printed in each symmetry.
+
+ Number of electrons :   10
+ Orbital occupations :    5
+
+ Sym       Hartree-Fock orbital energies
+
+  1    -20.57034994    -1.34578437    -0.71158815    -0.58258955    -0.50860058
+         0.02740691     0.05203204     0.06170744     0.08750649     0.10732908
+
+    E(LUMO) :     0.02740691 au (symmetry 1)
+  - E(HOMO) :    -0.50860058 au (symmetry 1)
+  ------------------------------------------
+    gap     :     0.53600750 au
+
+ >>> Writing SIRIFC interface file <<<
+
+ >>>> CPU and wall time for SCF :       5.616       6.426
+
+
+                       .-----------------------------------.
+                       | >>> Final results from SIRIUS <<< |
+                       `-----------------------------------'
+
+
+@    Spin multiplicity:           1
+@    Spatial symmetry:            1
+@    Total charge of molecule:    0
+
+@    Final HF energy:             -76.053520974394                 
+@    Nuclear repulsion:             9.058053550307
+@    Electronic energy:           -85.111574524701
+
+@    Final gradient norm:           0.000000369489
+
+ 
+     Date and time (Linux)  : Fri Feb 21 13:49:36 2014
+     Host name              : whirligig                               
+
+ (Only coefficients >0.0100 are printed.)
+
+ Molecular orbitals for symmetry species  1
+ ------------------------------------------
+
+    Orbital         1        2        3        4        5        6        7
+   1 O1  :1s    -0.4192   0.0925   0.0001   0.0299  -0.0000  -0.0088   0.0061
+   2 O1  :1s    -0.6635   0.2363   0.0001   0.0767   0.0000  -0.0225   0.0161
+   3 O1  :1s    -0.0151  -0.4901   0.0005  -0.1653  -0.0000   0.0451  -0.0396
+   4 O1  :1s     0.0036  -0.3520  -0.0012  -0.3222   0.0000   0.1178  -0.0208
+   5 O1  :1s     0.0079   0.0506  -0.0306  -0.0887   0.0000   1.1208  -0.8568
+   6 O1  :2px    0.0013   0.0774  -0.2786  -0.5481   0.0000  -0.0482   0.0582
+   7 O1  :2py    0.0000  -0.0000   0.0000   0.0000  -0.7209   0.0000  -0.0000
+   8 O1  :2pz   -0.0010  -0.0404  -0.4971   0.3067   0.0000   0.0408   0.0350
+   9 O1  :2px   -0.0009  -0.0783  -0.0194  -0.1740   0.0000  -0.0676   0.1090
+  10 O1  :2py   -0.0000   0.0000   0.0000  -0.0000  -0.3337  -0.0000  -0.0000
+  11 O1  :2pz    0.0001   0.0162  -0.0444   0.1096  -0.0000  -0.0099   0.1001
+  12 O1  :2px   -0.0003  -0.0595   0.0410  -0.0016   0.0000  -0.2424   0.5368
+  13 O1  :2py   -0.0000   0.0000   0.0000  -0.0000  -0.0596   0.0000  -0.0000
+  14 O1  :2pz   -0.0003   0.0087   0.0708   0.0086   0.0000  -0.2519   1.0019
+  15 O1  :3d2-  -0.0000   0.0000   0.0000   0.0000   0.0175   0.0000   0.0000
+  17 O1  :3d0   -0.0001  -0.0058  -0.0267   0.0012  -0.0000   0.0005   0.0014
+  18 O1  :3d1+   0.0001  -0.0015   0.0201  -0.0124   0.0000  -0.0013   0.0010
+  19 O1  :3d2+   0.0000  -0.0072   0.0155   0.0176  -0.0000   0.0020  -0.0025
+  22 O1  :3d0   -0.0005   0.0287   0.0445  -0.0102  -0.0000  -0.0357   0.0460
+  23 O1  :3d1+   0.0000   0.0164  -0.0301  -0.0036   0.0000   0.0220  -0.0516
+  24 O1  :3d2+  -0.0000   0.0349  -0.0278  -0.0091   0.0000   0.0021  -0.0091
+  25 H1  :1s    -0.0004  -0.2426  -0.3935   0.2448  -0.0000  -0.0061   0.0163
+  26 H1  :1s     0.0047  -0.3347  -0.2585   0.1711   0.0000   1.4176  -1.0267
+  27 H1  :1s    -0.0007   0.0814  -0.0331  -0.0188  -0.0000   1.0149  -1.6571
+  28 H1  :2px    0.0003  -0.0066  -0.0358  -0.0364  -0.0000  -0.0027   0.0072
+  29 H1  :2py   -0.0000  -0.0000  -0.0000   0.0000  -0.0624  -0.0000   0.0000
+  30 H1  :2pz   -0.0026   0.0703   0.0564  -0.0415  -0.0000  -0.0355   0.0294
+  31 H1  :2px    0.0013  -0.0410   0.0219  -0.0009  -0.0000  -0.0719  -0.0977
+  33 H1  :2pz    0.0131  -0.4541  -0.0115   0.1678   0.0000   0.9361   0.0106
+  34 H2  :1s    -0.0002  -0.2349   0.3914   0.2450  -0.0000  -0.0165   0.0144
+  35 H2  :1s     0.0015  -0.3109   0.2429   0.1336   0.0000  -0.5408   1.0952
+  36 H2  :1s     0.0002  -0.0457   0.0388   0.0089   0.0000  -1.3264   2.8319
+  37 H2  :2px    0.0004  -0.0583   0.0612   0.0177   0.0000   0.0061  -0.0214
+  38 H2  :2py    0.0000  -0.0000   0.0000  -0.0000  -0.0439  -0.0000  -0.0000
+  39 H2  :2pz    0.0001  -0.0298   0.0085   0.0411   0.0000   0.0077  -0.0067
+  40 H2  :2px   -0.0003  -0.0279   0.0074   0.0016   0.0000  -0.1550   0.3958
+  42 H2  :2pz    0.0008  -0.0413   0.0219   0.0073   0.0000  -0.0999   0.0616
+  46 O1  :1s    -0.0000  -0.0279  -0.0259  -0.0065  -0.0000  -0.0330   0.1123
+  47 O1  :1s    -0.0019   0.0540  -0.0138  -0.0190   0.0000   2.5612   1.5645
+  51 O1  :2px   -0.0001   0.0023   0.0130   0.0098  -0.0000   0.0244   0.0146
+  52 O1  :2py   -0.0000  -0.0000  -0.0000  -0.0000   0.0217   0.0000  -0.0000
+  53 O1  :2pz    0.0008  -0.0169   0.0155   0.0078   0.0000   0.0558  -0.0410
+  54 O1  :2px    0.0002  -0.0030  -0.0023   0.0024   0.0000   0.4569   0.0639
+  56 O1  :2pz    0.0011  -0.0200  -0.0025   0.0036   0.0000   0.5101   0.1572
+  64 O1  :3d0   -0.0006   0.0221  -0.0034  -0.0054  -0.0000  -0.0186  -0.0201
+  65 O1  :3d1+  -0.0000  -0.0020  -0.0073  -0.0061   0.0000   0.0752   0.0322
+  66 O1  :3d2+  -0.0001  -0.0029   0.0006   0.0015  -0.0000  -0.0244  -0.0191
+  68 H1  :1s     0.0004  -0.0289  -0.0148   0.0014  -0.0068  -0.9707  -0.3384
+  69 H1  :1s    -0.0002  -0.0006   0.0003  -0.0016   0.0018  -0.8416  -0.4764
+  73 H1  :2px   -0.0001   0.0083   0.0047  -0.0004  -0.0019   0.1258   0.1001
+  74 H1  :2py   -0.0001   0.0085   0.0040   0.0003   0.0026   0.2356   0.1194
+  75 H1  :2pz   -0.0001   0.0044   0.0111   0.0045   0.0048   0.0457   0.0049
+  77 H2  :1s     0.0004  -0.0289  -0.0148   0.0014   0.0068  -0.9707  -0.3384
+  78 H2  :1s    -0.0002  -0.0006   0.0003  -0.0016  -0.0018  -0.8416  -0.4764
+  82 H2  :2px   -0.0001   0.0083   0.0047  -0.0004   0.0019   0.1258   0.1001
+  83 H2  :2py    0.0001  -0.0085  -0.0040  -0.0003   0.0026  -0.2356  -0.1194
+  84 H2  :2pz   -0.0001   0.0044   0.0111   0.0045  -0.0048   0.0457   0.0049
+  85 Mb  :1s    -0.0001  -0.0085  -0.0064   0.0004  -0.0000  -0.0318   0.0088
+  86 Mb  :1s     0.0049  -0.0756   0.0190   0.0357   0.0000   0.2644  -0.0167
+  87 Mb  :1s    -0.0162   0.6421   0.0979  -0.2108  -0.0000  -2.0485  -0.2421
+  90 Mb  :2pz   -0.0013   0.0055   0.0036  -0.0045  -0.0000  -0.0125   0.0239
+  91 Mb  :2px   -0.0001  -0.0074  -0.0182  -0.0002   0.0000   0.1654   0.0519
+  92 Mb  :2py    0.0000  -0.0000  -0.0000   0.0000  -0.0133   0.0000  -0.0000
+  93 Mb  :2pz    0.0024  -0.0616   0.0170   0.0452   0.0000   0.2835  -0.3560
+  95 Mb  :3d1-   0.0000   0.0000  -0.0000   0.0000  -0.0221  -0.0000   0.0000
+  96 Mb  :3d0    0.0001   0.0220   0.0081   0.0001   0.0000   0.0152  -0.0385
+  97 Mb  :3d1+   0.0003  -0.0036  -0.0111  -0.0109   0.0000   0.0092   0.0000
+
+
+
+ >>>> Total CPU  time used in SIRIUS :      5.76 seconds
+ >>>> Total wall time used in SIRIUS :      6.57 seconds
+
+ 
+     Date and time (Linux)  : Fri Feb 21 13:49:36 2014
+     Host name              : whirligig                               
+
+
+                     .---------------------------------------.
+                     | End of Wave Function Section (SIRIUS) |
+                     `---------------------------------------'
+
+ >>>> Total CPU  time used in DALTON:  10.75 seconds
+ >>>> Total wall time used in DALTON:  11.65 seconds
+
+ 
+     Date and time (Linux)  : Fri Feb 21 13:49:36 2014
+     Host name              : whirligig                               
+
+Dalton interface to CamCASP
+
+ ********21Feb14 
+
+      9.0580535503069708    -85.1115745247007283      0.0000000000000000    -76.0535209743937628
+     1     0     1     0
+     5     0     5    98    98     1   465   465
+     1  9604     0     0  4851  9604     1     1
+     2     3     4     5     6     7     8     2
+     1     4     3     6     5     8
+Summary:
+ Number of occupied orbitals :      5
+ Number of virtual  orbitals :     93
+ Number of molecular orbitals:     98
+ Number of basis functions   :     98
+ SCF energy                 :  -0.760535E+02 Hartree
+ Nuclear potential energy   :   0.905805E+01 Hartree

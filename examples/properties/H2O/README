@@ -1,0 +1,116 @@
+Here's another example of using the runcamcasp.py script to run a
+properties job. See the README file for the He example for more
+details. 
+
+The Cluster input file is called H2O.clt, but the "file-prefix" used to 
+label the job is H2O_aTZ, so we need to tell the runcamcasp.py script to 
+use two different names.
+
+The vertical IP of water is 0.4638 a.u. = 12.62 eV
+
+Change "queue" to the name of the batch queue you want to use, or
+leave it as "bg" to run the job in the background.
+
+$ runcamcasp.py H2O_aTZ --clt H2O.clt -M 500 -q bg
+Setting up files in directory H2O_aTZ
+See H2O_aTZ/H2O.clt.clout for output of CLUSTER
+This is a properties calculation with SCF program nwchem
+...
+Starting at Tue Feb 25 10:27:06 GMT 2014
+...
+(Wait for a few minutes.)
+...
+Job H2O_aTZ finished
+
+
+$ ls H2O_aTZ
+H2O_aTZ-A-asc.movecs  H2O_aTZ.bash          H2O_aTZ.ornt   H2O.clt.clout
+H2O_aTZ_A.dal         H2O_aTZ_casimir.prss  H2O_aTZ.prss   OUT
+H2O_aTZ_A.mol         H2O_aTZ.cks           H2O_aTZ.sites
+H2O_aTZ_A.out         H2O_aTZ.DALtemplate   H2O.clt
+$ ls H2O_aTZ/OUT
+H2O_aTZ_0.0005_1000_f11_NL4.pol  H2O_aTZ_DMA2_L4.mom
+H2O_aTZ_A.out                    H2O_aTZ_lim2.0_4.0_p2000_f11.p2p
+H2O_aTZ_A.out.0                  H2O_aTZ.out
+H2O_aTZ.cks                      TMP_Memory_usage.dat
+H2O_aTZ-data-summary.data
+
+
+Now we move on to the localization step. 
+========================================
+
+For this example we need a local-axis file. Of course, we could obtain
+polarizabilities using the global axis frame for all sites, but for a
+system with symmetry, it is better to use a frame that observes the
+symmetry.
+
+Here's our local-axis file:
+$ cat H2O.axes
+Axes
+  H1  z from O to H1   x from H2 to H1
+  H2  z from O to H2   x from H1 to H2
+End
+
+
+We don't need to specify axes for the O atom as they're the same as
+the global axes. The axes for the H atoms are defined so that the C2
+symmetry operation takes the H1 set into the H2 set.
+
+Now we run the localize.py script in the subdirectory created for
+this job. This script has a large number of options, which you can see
+by entering
+$ localize.py --help
+but usually the only argument needed is the job name (file-prefix) and
+the name of the local-axes file:
+$ cd H2O_aTZ
+$ localize.py H2O_aTZ --axes ../H2O.axes
+Using polarizability file OUT/H2O_aTZ_0.0005_1000_f11_NL4.pol
+Splitting OUT/H2O_aTZ_0.0005_1000_f11_NL4.pol into individual frequencies ...  done
+Localizing polarizabilities using LW procedure ...
+000 001 002 003 004 005 006 007 008 009 010  ... done
+Preparing to refine the local polarizabilities
+Using p2p file OUT/H2O_aTZ_lim2.0_4.0_p2000_f11.p2p
+ Splitting point-to-point pols for H2O_aTZ
+ Frequencies :            0  to           10
+ Number of points in grid :          500
+ Total p2p pols per frequency :       125250
+ Split p2p pols in files with prefix : H2O_aTZ_010
+Splitting the point-to-point polarizability file ...  done
+Refining the local polarizabilities
+000 001 002 003 004 005 006 007 008 009 010 
+Refinement finished
+Calculating the dispersion coefficients ...   done
+Dispersion coefficients are in H2O_aTZ_ref_wt4_L2.casimir.out.
+The dispersion potential, in Orient form, is in H2O_aTZ_wt4_L2_C10.pot.
+
+The localization procedure produces a large number of files. Most of
+them are not needed, but some are not deleted immediately in case
+problems arise. To tidy up, run the command
+$ localize.py H2O_aTZ --clean
+$ ls
+H2O_aTZ-A-asc.movecs  H2O_aTZ.DALtemplate          H2O_aTZ_ref_wt4_L2.casimir
+H2O_aTZ_A.dal         H2O_aTZ_L2_0f10.pol          H2O_aTZ_ref_wt4_L2.casimir.out
+H2O_aTZ_A.mol         H2O_aTZ_NL4_static.pol       H2O_aTZ.sites
+H2O_aTZ_A.out         H2O_aTZ.ornt                 H2O_aTZ_wt4_L2_C10.pot
+H2O_aTZ.bash          H2O_aTZ.pdef                 H2O.clt
+H2O_aTZ_casimir.prss  H2O_aTZ.prss                 H2O.clt.clout
+H2O_aTZ.cks           H2O_aTZ_ref_wt4_L2_0f10.pol  OUT
+
+
+
+Of the new files remaining from the localize.py script,
+H2O_aTZ.pdef
+  contains the polarizability definitions used by the pfit program.
+  See the README for the He example for an explanation of this file.
+
+H2O_aTZ_ref_wt4_L2_0f10.pol
+  contains the polarizabilities. See the README of the He example
+  for some details of this file.
+
+H2O_aTZ_ref_wt4_L2_casimir.out
+  gives the frequency-dependent polarizabilities in recoupled form,
+  followed by the dispersion coefficients. 
+
+H2O_aTZ_wt4_L2_C10.pot contains the dispersion potential, in Orient
+  form, and can be pasted directly into an Orient data file. 
+

@@ -1,0 +1,77 @@
+!  cc-pVDZ-PP MP2 Fitting  EMSL  Basis Set Exchange Library  4/12/16 2:16 AM
+! Elements                             References
+! --------                             ----------
+! Ru: J. G. Hill and J. A. Platts, Calculating interaction energies in transition metal complexes with local electron correlation methods, J. Chem. Phys. 129, 134101 (2008).
+! Y Zr Nb Mo Tc Rh Pd: J. Grant Hill and James A. Platts, Auxiliary Basis Sets for Density-Fitted MP2 Calculations: Correlation-Consistent Basis Sets for the 4d Elements, J. Chem. Theory Comput. 5, 500 (2009).
+! Hf Ta W Re Os Ir Pt: J. Grant Hill, Auxiliary basis sets for density fitting second-order Møller-Plesset perturbation theory: Correlation consistent basis sets for the 5d elements Hf-Pt, J. Chem. Phys. 135, 044105 (2011).
+! 
+! ru   cc-pVDZ-PP MP2 Fitting
+!
+    1  s
+      9.5123655322           1.0000000        
+    1  s
+      4.6798082136           1.0000000        
+    1  s
+      2.9821150009           1.0000000        
+    1  s
+      2.0720263679           1.0000000        
+    1  s
+      1.0400689738           1.0000000        
+    1  s
+      0.51546880141          1.0000000        
+    1  s
+      0.25053175985          1.0000000        
+    1  s
+      0.10391705632          1.0000000        
+    1  p
+     11.651446392            1.0000000        
+    1  p
+      5.0777080565           1.0000000        
+    1  p
+      2.3529288731           1.0000000        
+    1  p
+      1.5728760421           1.0000000        
+    1  p
+      0.82898189701          1.0000000        
+    1  p
+      0.38473576892          1.0000000        
+    1  p
+      0.20043281124          1.0000000        
+    1  p
+      0.97578676706E-01            1.0000000        
+    1  d
+      6.1021648456           1.0000000        
+    1  d
+      3.1947420359           1.0000000        
+    1  d
+      2.3671166178           1.0000000        
+    1  d
+      1.2449503073           1.0000000        
+    1  d
+      0.41372869534          1.0000000        
+    1  d
+      0.16387753219          1.0000000        
+    1  f
+      8.0990513833           1.0000000        
+    1  f
+      2.7768696813           1.0000000        
+    1  f
+      1.2100971391           1.0000000        
+    1  f
+      0.64866263726          1.0000000        
+    1  f
+      0.28411998396          1.0000000        
+    1  f
+      0.11426041628          1.0000000        
+    1  g
+      3.1074958089           1.0000000        
+    1  g
+      1.6074295732           1.0000000        
+    1  g
+      0.58271444321          1.0000000        
+    1  g
+      0.21480523054          1.0000000        
+    1  h
+      2.5142899238           1.0000000        
+    1  h
+      1.3005446166           1.0000000        

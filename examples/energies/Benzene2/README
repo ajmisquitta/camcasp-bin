@@ -1,0 +1,123 @@
+Benzene dimer 
+=============
+Basis: Sadlej-pVTZ MC+
+Method: PBE/AC ALDAX
+
+Time: 
+  DALTON: 5 hours
+  CamCASP: 70-90 mins
+
+This is an example of a batch calculation using a set of configurations. In
+this case, we have only one configuration in the geometry file, but you should
+nevertheless get a good idea of how the calculation proceeds.
+
+Files needed:
+=============
+(1) CLUSTER file: benzene2.clt
+This is almost the usual cluster file. It contains two molecule blocks, one
+for each benzene molecule in a reference geometry. Then come the following
+lines:
+   Rotate benzene2 by {alpha} about {Nx} {Ny} {Nz
+   Place benzene2 at {Rx} {Ry} {Rz}
+The values of alpha, Nx, Ny, Nz, Rx, Ry, Rz will be set by the batch_SAPT.pl
+script. These lines must contain these variable names in the given form. 
+CASE MATTERS here.
+
+It is important to be consistent with UNITS. The UNITS specified in the
+CLUSTER file need to be consistent with the geometry units in the geometry
+file (below). In this example, we have used BOHR and DEGREES in the geometry
+file, so we need:
+GLOBAL
+  UNITS BOHR DEGREES
+END
+in the preamble.
+
+NOTE: We always keep molecule 1 fixed and translate/rotate molecule 2.
+
+Following that comes the FILES (or RUN-TYPE) block. There is one important
+line:
+   File-prefix {job}
+This must be present in exactly this form. {jpb} will be replaced by a job name.
+The rest of the specifications here are pretty much as usual.
+
+(2) Geometry file: random-grid_points.dat
+It contains a few comment lines (starting with '! ') and then the geometry
+specification in BOHR and DEGREES (other units are possible, in which case the
+UNITS command in the CLUSTER file should be changed).
+The order of the entries must be:
+   INDEX  Rx     Ry     Rz    alpha    Nx      Ny     Nz
+INDEX: Index of the geometry. 
+Rx,Ry,Rz: (BOHR) Translation vector of centre of molecule 2.
+Nx,Ny,Nz: (dimensionless) Components of vector that defines rotation
+          axis. This need not be a unit vector.
+angle   : (DEGREES) Angle by which molecule 2 is rotated about the vector
+          (Nx,Ny,Nz).
+
+We normally generate the geometries using the ENERGY-SCAN module in
+CamCASP. This can create a random selection of geometries near van der
+Waals contact.
+
+Command:
+========
+The job is run using
+$ batch_SAPT.pl benzene2 -geom random-grid_points.dat -clt benzene2.clt 
+  --dalton-direct -q <specify the queue>
+Here we have specified:
+job name      : benzene2
+geometry file : random-grid_points.dat
+Cluster file  : benzene2.clt
+DALTON options: --dalton-direct creates DALTON command files with the
+                .DIRECT directive. This avoids excessive disk access
+                and is recommended for large jobs.
+queue         : As usual, the appropriate queue needs to be specified.
+
+The batch_sapt.py script will use the job name ("benzene2") and the
+INDEX in the geometry file to create a unique name for each dimer
+configuration. A directory with this name will be created for the
+output files for this configuration. In this case there will be only
+one directory: 
+    benzene2_1/
+
+The output will be in benzene2_1/OUT. There is a search script that will
+search through all directories for you. 
+
+Searching:
+==========
+$ batch_search.pl benzene2 -geom random-grid_points.dat
+
+You need to tell it the job name ("benzene2") and the name of the geometry
+file. By default it will search for SAPT(DFT) energies. This can be changed by
+placing one of the recognised search keys in a file titled 'keys' (or another
+file, in which case specify the file using -keys <keys file> on the command
+line).
+
+The output will be:
+$ batch_search.pl benzene2 -geom random-grid_points.dat 
+    INDEX         Rx         Ry         Rz      alpha         Nx         Ny         Nz       elst       exch     ind2UC   exind2UC    disp2UC  exdisp2UC     disp2C      ind2C     ind3UC   exind3UC    exind2C   exdisp2C    Eint(2)   Eint(3*)  
+        0          1          2          3          4          5          6          7          8          9         10         11         12         13         14         15         16         17         18         19         20         21  
+        1   0.000000   0.000000   7.180962 180.000000   1.000000   0.000000   0.000000  -0.754377  15.352100  -5.808190   4.971163 -49.855776   4.243172 -22.820805  -5.428468    -----      -----     4.646164   1.942254  -7.063133    -----  
+
+The search script assumes:
+(1) Energy units in the CamCASP output: cm-1
+(2) Output energy units               : kJ/mol
+
+If a calculation has failed or if certain energies have not been calculated 
+the output will contain '-----' strings.
+
+A more useful key to search for is 'saptdft-camcasp' as this prints out energy
+components in a format suitable for further processing by CamCASP.
+
+$ cat keys 
+saptdft-camcasp
+$ batch_search.pl benzene2 -geom random-grid_points.dat 
+    INDEX         Rx         Ry         Rz      alpha         Nx         Ny         Nz       elst      ind2C     disp2C       exch    exind2C   exdisp2C  
+        0          1          2          3          4          5          6          7          8          9         10         11         12         13  
+        1   0.000000   0.000000   7.180962 180.000000   1.000000   0.000000   0.000000  -0.754377  -5.428468 -22.820805  15.352100   4.646164   1.942254 
+
+
+Caveats:
+========
+There is ample opportunity to make mistakes in such a calculation. SO before
+submitting a job to the queue, use the '-q none' option to generate the input
+files, inspect them, and only then use the proper queue name to submit the
+jobs.

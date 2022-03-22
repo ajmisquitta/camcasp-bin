@@ -1,0 +1,921 @@
+      CamCASP version 5.7.16  Tue 04 Mar 2014 14:20:01 GMT
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+Starting on 10-03-2014 at 10:30:01.914
+ 
+ ================================================================
+ Compiled on Sep 05 2013 at 12:33:08
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22529
+ Working directory: 
+     /scratch/fastscratch/ajs1/HCONH2_10-27-00
+ Running on: whirligig
+ ================================================================
+
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE formamide
+TITLE Basis: sadlej
+TITLE CalculationType: PROPERTIES
+
+
+MEMORY       2048 MB
+ Memory Manager initialized with             2147483648  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE formamide at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file HCONH2-A-asc.movecs format ASCII-2
+   IP     0.374500 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+      O          8.0        2.29063151       0.00000000       0.00000000  TYPE O
+      H1         1.0       -1.13908247       1.77246836       0.00000000  TYPE H1
+      N          7.0       -1.45985298      -2.10205057       0.00000000  TYPE N
+      H2         1.0       -3.36209048      -1.98418554       0.00000000  TYPE H2
+      H3         1.0       -0.62710178      -3.82189185       0.00000000  TYPE H3
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O          8.0        2.29063151       0.00000000       0.00000000  TYPE O
+    LIMITING basis on this site upto G symmetry
+      H1         1.0       -1.13908247       1.77246836       0.00000000  TYPE H1
+    LIMITING basis on this site upto G symmetry
+      N          7.0       -1.45985298      -2.10205057       0.00000000  TYPE N
+    LIMITING basis on this site upto G symmetry
+      H2         1.0       -3.36209048      -1.98418554       0.00000000  TYPE H2
+    LIMITING basis on this site upto G symmetry
+      H3         1.0       -0.62710178      -3.82189185       0.00000000  TYPE H3
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for formamide
+    1          C    6.00     0.0000     0.0000     0.0000
+    2          O    8.00     2.2906     0.0000     0.0000
+    3         H1    1.00    -1.1391     1.7725     0.0000
+    4          N    7.00    -1.4599    -2.1021     0.0000
+    5         H2    1.00    -3.3621    -1.9842     0.0000
+    6         H3    1.00    -0.6271    -3.8219     0.0000
+ Molecular charge   =     0
+ Molecular IP       =     0.374500  a.u.
+ Number of molecular orbitals =    99
+     Occupied orbitals        =    12
+     Virtual  orbitals        =    87
+ Main basis: Size   =    99
+             Shells =    45
+             Type   = MC
+             Atoms  =     6
+       Sites(Main)  =     6
+       Site Types   =     6
+             GTOs   = Spherical
+ Aux  basis: Size   =   573
+             Shells =   126
+             Type   = MC
+        Sites(Aux)  =     6
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : HCONH2-A-asc.movecs Type ASCII-2
+============================================================
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN GRID
+  Molecule formamide
+  Angular 200
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 230-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+SET Lattice
+  Charge   1.0
+  LoLim    2.0
+  HiLim    4.0
+  Random    500
+  Seed     1
+END
+ End of LATTICE section. Resuming rest of routine
+SET NEW-PROP
+  Kernel ALDA
+  C-DF  ( For unconstrained DF use: DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 400.0
+    FD-DELTA = 0.1
+    FD-ALPHA = 0.1
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+ Finished reading the KERNEL-INTEGRAL-PARAMETERS.
+  SOLVER LU ( Options: GELSS )
+END
+ Finished reading in the NEW-PROP settings.
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+END
+ DF-INT parameters set.
+SET DF
+  Solver LU (Options are LU and GELSS )
+END
+
+
+BEGIN DF
+  Molecule formamide
+  Type NN
+  Eta = 0.0
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for formamide
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00000
+End of tests for formamide
+ Normalization tests for fitted density of formamide
+  \int \rho(r) dr = 24.00000
+Differs from expected value of    24 by .00000
+ End of normalization tests
+
+
+BEGIN Polarizability
+  Molecule formamide
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank 2
+  Calculate only total polarizabilities and perturbations
+  Print only static total pols upto rank 2
+  Pert-file HCONH2_lim2.0_4.0_p2000_f11
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+ options  RANDOM  4.0000    2.0000    1.0000   seed =   1
+ Lattice created for formamide
+ Type of lattice = RANDOM
+ Number of lattice points =          500
+ 
+ End of Module LATTICE
+ =====================
+ 
+      The perturbation matrix is written in file:
+ HCONH2_lim2.0_4.0_p2000_f11.p2p                                                
+  
+       Polarizability calculations for w^2 =  0.000000000000000E+000
+       i.e., w =   0.000000000000000E+000
+ 
+ 
+ Polarizability calculation
+    Spherical tensor form
+ 
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+ Order:    0 by    0
+   0.0000000E+00 
+ 
+ Order:    0 by    1
+   0.0000000E+00   0.2582611E-07  -0.1326983E-07 
+ 
+ Order:    0 by    2
+   0.2513455E-06   0.0000000E+00   0.0000000E+00   0.5205526E-07  -0.3605273E-07
+ 
+ 
+ Order:    1 by    1
+   0.1951854E+02   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3375445E+02   0.3085201E+01 
+   0.0000000E+00   0.3085201E+01   0.2879909E+02 
+    Isotropic polarizability:  0.2735736E+02
+  Anisotropic polarizability:  0.1360984E+02
+ 
+ Order:    1 by    2
+   0.0000000E+00  -0.7932830E+01  -0.2957896E+02   0.0000000E+00   0.0000000E+00
+ 
+   0.6366575E+01   0.0000000E+00   0.0000000E+00   0.1008326E+02  -0.4149623E+02
+ 
+   0.2330808E+02   0.0000000E+00   0.0000000E+00   0.4428945E+02  -0.2501290E+02
+ 
+ 
+ Order:    2 by    2
+   0.2118725E+03   0.0000000E+00   0.0000000E+00  -0.3404953E+01  -0.8843633E+02
+ 
+   0.0000000E+00   0.3035914E+03   0.9524949E+02   0.0000000E+00   0.0000000E+00
+ 
+   0.0000000E+00   0.9524949E+02   0.2697286E+03   0.0000000E+00   0.0000000E+00
+ 
+  -0.3404953E+01   0.0000000E+00   0.0000000E+00   0.5494619E+03   0.1196381E+02
+ 
+  -0.8843633E+02   0.0000000E+00   0.0000000E+00   0.1196381E+02   0.5060134E+03
+ 
+ 
+       Polarizability calculations for w^2 = -4.368683325899941E-005
+       i.e., w =   6.609601596087271E-003 i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -1.308617023136294E-003
+       i.e., w =   3.617481199863096E-002 i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -9.110199235437613E-003
+       i.e., w =   9.544736369034827E-002 i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -3.906323447595483E-002
+       i.e., w =   0.197644211845313      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -0.137208911542497     
+       i.e., w =   0.370417212805367      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 = -0.455509771904592     
+       i.e., w =   0.674914640458030      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -1.59996991643054     
+       i.e., w =    1.26489917243650      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -6.86044271752941     
+       i.e., w =    2.61924468454732      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -47.7603446195507     
+       i.e., w =    6.91088595040829      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+       Polarizability calculations for w^2 =  -1430.63699832546     
+       i.e., w =    37.8237623502140      i  
+ 
+ Calculating Polarizabilities but not printing them.
+    Origin is (   0.0000,   0.0000,   0.0000) BOHR
+ 
+ Perturbation matrix written in file HCONH2_lim2.0_4.0_p2000_f11.p2p
+
+
+BEGIN DF
+  Molecule formamide
+  Type NN
+  Eta = 0.0005
+  Lambda = 1000.0
+  Print only normalization constraints
+END
+ 
+Tests of DF for formamide
+ Summary of orthonormality failures:
+Off-diagonal elements: maximum difference from 0: .00000
+End of tests for formamide
+ Normalization tests for fitted density of formamide
+  \int \rho(r) dr = 24.00000
+Differs from expected value of    24 by .00000
+ End of normalization tests
+SET NEW-PROP
+  Kernel ALDA
+  C-DF  ( For unconstrained DF use: DF )
+  ! These parameters control the quality of the LR-DFT
+  ! kernel. Additionally, the integration grid affects
+  ! the kernel.
+  KERNEL-INTEGRAL-PARAMETERS
+    INFINITY-CONTROL-METHOD FD
+    RHO-EPS  = 1e-8
+    F-MAX    = 400.0
+    FD-DELTA = 0.1
+    FD-ALPHA = 0.1
+    KERNEL-INTEGRAL-CUTOFF =   0.10E-07
+  END
+ Finished reading the KERNEL-INTEGRAL-PARAMETERS.
+  SOLVER LU ( Options: GELSS )
+END
+ Finished reading in the NEW-PROP settings.
+SET PROPAGATOR
+  Type CKS
+  Hessians Internal
+  DF with constraints
+  DF-integrals
+END
+ Finished reading in the PROPAGATOR settings.
+BEGIN Polarizability
+  Molecule formamide
+  ! Sq-freq  0.0
+  Invert No
+  Quad   10
+  Spherical
+  Rank  4
+  Calculate only distributed polarizabilities
+  Print only static distributed pols upto rank 1
+  Print pols for Orient
+  Pol-file HCONH2_0.0005_1000_f11_NL4
+END
+ Finished reading in the POLARIZABILITY block
+ Now for the calculations...
+      The polarization matrix is written in file:HCONH2_0.0005_1000_f11_NL4.pol
+       Polarizability calculations for w^2 =  0.000000000000000E+000
+       i.e., w =   0.000000000000000E+000
+ 
+ 
+ Distributed polarizability calculation
+    Spherical tensor form
+ 
+ Order:    0 by    0 for sites    C (  1) and    C (  1)
+   0.1534197E-01 
+ 
+ Order:    0 by    1 for sites    C (  1) and    C (  1)
+   0.0000000E+00   0.3260007E-01   0.1472569E-01 
+ 
+ Order:    1 by    1 for sites    C (  1) and    C (  1)
+   0.4200803E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.5296079E+01   0.9667387E+00 
+   0.0000000E+00   0.9667387E+00   0.4648391E+01 
+    Isotropic polarizability:  0.4715091E+01
+  Anisotropic polarizability:  0.1927040E+01
+ 
+ Order:    0 by    0 for sites    O (  2) and    C (  1)
+  -0.1951612E-03 
+ 
+ Order:    0 by    1 for sites    O (  2) and    C (  1)
+   0.0000000E+00   0.1565196E+00   0.6448695E-01 
+ 
+ Order:    1 by    1 for sites    O (  2) and    C (  1)
+   0.5703770E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1318367E+01  -0.1063306E+00 
+   0.0000000E+00  -0.2263456E+00   0.7242124E+00 
+    Isotropic polarizability:  0.8709855E+00
+  Anisotropic polarizability:  0.7085237E+00
+ 
+ Order:    0 by    0 for sites    O (  2) and    O (  2)
+   0.2567604E-01 
+ 
+ Order:    0 by    1 for sites    O (  2) and    O (  2)
+   0.0000000E+00   0.1023540E+00   0.1177761E-01 
+ 
+ Order:    1 by    1 for sites    O (  2) and    O (  2)
+   0.2386960E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2485625E+01  -0.1207443E+00 
+   0.0000000E+00  -0.1207443E+00   0.2111005E+01 
+    Isotropic polarizability:  0.2327863E+01
+  Anisotropic polarizability:  0.3960431E+00
+ 
+ Order:    0 by    0 for sites   H1 (  3) and    C (  1)
+  -0.1917808E-02 
+ 
+ Order:    0 by    1 for sites   H1 (  3) and    C (  1)
+   0.0000000E+00  -0.1423978E-01   0.8993079E-01 
+ 
+ Order:    1 by    1 for sites   H1 (  3) and    C (  1)
+  -0.2765350E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.6212278E+00   0.4152486E-01 
+   0.0000000E+00   0.2447322E+00   0.3536894E+00 
+    Isotropic polarizability:  0.2327941E+00
+  Anisotropic polarizability:  0.8015870E+00
+ 
+ Order:    0 by    0 for sites   H1 (  3) and    O (  2)
+   0.6574298E-03 
+ 
+ Order:    0 by    1 for sites   H1 (  3) and    O (  2)
+   0.0000000E+00  -0.1874356E-01   0.7526450E-01 
+ 
+ Order:    1 by    1 for sites   H1 (  3) and    O (  2)
+   0.1221663E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.4190563E+00   0.3986455E+00 
+   0.0000000E+00   0.1676467E-01   0.2606419E-01 
+    Isotropic polarizability:  0.1890956E+00
+  Anisotropic polarizability:  0.7763155E+00
+ 
+ Order:    0 by    0 for sites   H1 (  3) and   H1 (  3)
+   0.2366592E-01 
+ 
+ Order:    0 by    1 for sites   H1 (  3) and   H1 (  3)
+   0.0000000E+00   0.4218746E-02  -0.2184651E-01 
+ 
+ Order:    1 by    1 for sites   H1 (  3) and   H1 (  3)
+   0.2102297E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1578190E+01  -0.4631284E+00 
+   0.0000000E+00  -0.4631284E+00   0.1739152E+01 
+    Isotropic polarizability:  0.1806546E+01
+  Anisotropic polarizability:  0.9271998E+00
+ 
+ Order:    0 by    0 for sites    N (  4) and    C (  1)
+   0.2067145E-03 
+ 
+ Order:    0 by    1 for sites    N (  4) and    C (  1)
+   0.0000000E+00  -0.2901715E-01  -0.6148508E-02 
+ 
+ Order:    1 by    1 for sites    N (  4) and    C (  1)
+   0.2808877E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2097175E+01   0.5810736E-01 
+   0.0000000E+00  -0.4019760E+00   0.1478344E+01 
+    Isotropic polarizability:  0.1285469E+01
+  Anisotropic polarizability:  0.1602500E+01
+ 
+ Order:    0 by    0 for sites    N (  4) and    O (  2)
+  -0.8195068E-02 
+ 
+ Order:    0 by    1 for sites    N (  4) and    O (  2)
+   0.0000000E+00  -0.3622560E-01  -0.2240231E-01 
+ 
+ Order:    1 by    1 for sites    N (  4) and    O (  2)
+   0.4438059E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.6811247E+00   0.1123119E+00 
+   0.0000000E+00  -0.2747301E+00   0.6896416E+00 
+    Isotropic polarizability:  0.6048574E+00
+  Anisotropic polarizability:  0.3102512E+00
+ 
+ Order:    0 by    0 for sites    N (  4) and   H1 (  3)
+  -0.1041806E-01 
+ 
+ Order:    0 by    1 for sites    N (  4) and   H1 (  3)
+   0.0000000E+00  -0.1876703E-01   0.1017522E-01 
+ 
+ Order:    1 by    1 for sites    N (  4) and   H1 (  3)
+  -0.9794086E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.4084139E+00  -0.7316948E-01 
+   0.0000000E+00   0.3463464E+00   0.8037956E-01 
+    Isotropic polarizability:  0.1302842E+00
+  Anisotropic polarizability:  0.4625594E+00
+ 
+ Order:    0 by    0 for sites    N (  4) and    N (  4)
+   0.1999466E-01 
+ 
+ Order:    0 by    1 for sites    N (  4) and    N (  4)
+   0.0000000E+00   0.6189813E-02  -0.3257118E-01 
+ 
+ Order:    1 by    1 for sites    N (  4) and    N (  4)
+   0.5230436E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.3952776E+01   0.5815787E+00 
+   0.0000000E+00   0.5815787E+00   0.4206805E+01 
+    Isotropic polarizability:  0.4463339E+01
+  Anisotropic polarizability:  0.1545020E+01
+ 
+ Order:    0 by    0 for sites   H2 (  5) and    C (  1)
+  -0.4815273E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  5) and    C (  1)
+   0.0000000E+00  -0.1389234E+00  -0.4757010E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  5) and    C (  1)
+   0.1081576E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1624037E+00  -0.1817351E+00 
+   0.0000000E+00   0.3863279E+00   0.3791913E+00 
+    Isotropic polarizability:  0.2165842E+00
+  Anisotropic polarizability:  0.4009768E+00
+ 
+ Order:    0 by    0 for sites   H2 (  5) and    O (  2)
+  -0.1116234E-01 
+ 
+ Order:    0 by    1 for sites   H2 (  5) and    O (  2)
+   0.0000000E+00  -0.6535672E-01  -0.4891009E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  5) and    O (  2)
+  -0.3761418E-02   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.2307555E+00  -0.9091487E-01 
+   0.0000000E+00   0.2952963E-01   0.2341024E+00 
+    Isotropic polarizability: -0.1381512E-03
+  Anisotropic polarizability:  0.4323144E+00
+ 
+ Order:    0 by    0 for sites   H2 (  5) and   H1 (  3)
+  -0.4344560E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  5) and   H1 (  3)
+   0.0000000E+00  -0.2014012E-01   0.1151410E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  5) and   H1 (  3)
+   0.1685194E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.2926915E+00  -0.1417973E+00 
+   0.0000000E+00  -0.3421643E-01   0.3293352E-01 
+    Isotropic polarizability:  0.1647148E+00
+  Anisotropic polarizability:  0.3331030E+00
+ 
+ Order:    0 by    0 for sites   H2 (  5) and    N (  4)
+  -0.1694485E-02 
+ 
+ Order:    0 by    1 for sites   H2 (  5) and    N (  4)
+   0.0000000E+00  -0.1608691E+00  -0.5640810E-01 
+ 
+ Order:    1 by    1 for sites   H2 (  5) and    N (  4)
+  -0.2588372E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1622990E+00   0.1322455E+00 
+   0.0000000E+00   0.9808759E-01   0.1349586E+00 
+    Isotropic polarizability: -0.9539253E-01
+  Anisotropic polarizability:  0.4229007E+00
+ 
+ Order:    0 by    0 for sites   H2 (  5) and   H2 (  5)
+   0.1988729E-01 
+ 
+ Order:    0 by    1 for sites   H2 (  5) and   H2 (  5)
+   0.0000000E+00   0.2129215E-01  -0.3308130E-02 
+ 
+ Order:    1 by    1 for sites   H2 (  5) and   H2 (  5)
+   0.1306395E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1138656E+01  -0.1148201E+00 
+   0.0000000E+00  -0.1148201E+00   0.9498928E+00 
+    Isotropic polarizability:  0.1131648E+01
+  Anisotropic polarizability:  0.3673986E+00
+ 
+ Order:    0 by    0 for sites   H3 (  6) and    C (  1)
+  -0.8620433E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  6) and    C (  1)
+   0.0000000E+00  -0.6939309E-02  -0.1154248E+00 
+ 
+ Order:    1 by    1 for sites   H3 (  6) and    C (  1)
+   0.5990738E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1097723E+00   0.2038800E+00 
+   0.0000000E+00  -0.8874101E-01   0.1785083E+00 
+    Isotropic polarizability:  0.1160627E+00
+  Anisotropic polarizability:  0.3678856E+00
+ 
+ Order:    0 by    0 for sites   H3 (  6) and    O (  2)
+  -0.6780897E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  6) and    O (  2)
+   0.0000000E+00  -0.8153004E-02  -0.3867696E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  6) and    O (  2)
+   0.4645763E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.4103522E+00  -0.1995013E+00 
+   0.0000000E+00  -0.3729972E+00   0.1748076E+00 
+    Isotropic polarizability:  0.3499120E+00
+  Anisotropic polarizability:  0.4365730E+00
+ 
+ Order:    0 by    0 for sites   H3 (  6) and   H1 (  3)
+  -0.7642942E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  6) and   H1 (  3)
+   0.0000000E+00  -0.2325372E-01   0.3925247E-02 
+ 
+ Order:    1 by    1 for sites   H3 (  6) and   H1 (  3)
+   0.2457267E-01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.1574067E-01   0.2720445E+00 
+   0.0000000E+00  -0.1142082E+00   0.7138233E-01 
+    Isotropic polarizability:  0.2673811E-01
+  Anisotropic polarizability:  0.4772086E+00
+ 
+ Order:    0 by    0 for sites   H3 (  6) and    N (  4)
+   0.1062393E-03 
+ 
+ Order:    0 by    1 for sites   H3 (  6) and    N (  4)
+   0.0000000E+00  -0.1492845E-01  -0.1594429E+00 
+ 
+ Order:    1 by    1 for sites   H3 (  6) and    N (  4)
+  -0.2902099E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00  -0.2065087E-01  -0.9024686E-01 
+   0.0000000E+00   0.1868096E+00  -0.1141333E+00 
+    Isotropic polarizability: -0.1416647E+00
+  Anisotropic polarizability:  0.2839639E+00
+ 
+ Order:    0 by    0 for sites   H3 (  6) and   H2 (  5)
+   0.2129353E-02 
+ 
+ Order:    0 by    1 for sites   H3 (  6) and   H2 (  5)
+   0.0000000E+00  -0.3402935E-02   0.4833661E-02 
+ 
+ Order:    1 by    1 for sites   H3 (  6) and   H2 (  5)
+   0.1760072E+00   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1089806E+00   0.1481718E+00 
+   0.0000000E+00  -0.5850877E-01   0.2199803E+00 
+    Isotropic polarizability:  0.1683227E+00
+  Anisotropic polarizability:  0.2742959E+00
+ 
+ Order:    0 by    0 for sites   H3 (  6) and   H3 (  6)
+   0.2080868E-01 
+ 
+ Order:    0 by    1 for sites   H3 (  6) and   H3 (  6)
+   0.0000000E+00   0.1940549E-02   0.2681223E-01 
+ 
+ Order:    1 by    1 for sites   H3 (  6) and   H3 (  6)
+   0.1318243E+01   0.0000000E+00   0.0000000E+00 
+   0.0000000E+00   0.1609748E+01   0.3212787E-02 
+   0.0000000E+00   0.3212787E-02   0.1026092E+01 
+    Isotropic polarizability:  0.1318028E+01
+  Anisotropic polarizability:  0.5054917E+00
+ 
+       Polarizability calculations for w^2 = -4.368683325899941E-005
+       i.e., w =   6.609601596087271E-003 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -1.308617023136294E-003
+       i.e., w =   3.617481199863096E-002 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -9.110199235437613E-003
+       i.e., w =   9.544736369034827E-002 i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -3.906323447595483E-002
+       i.e., w =   0.197644211845313      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -0.137208911542497     
+       i.e., w =   0.370417212805367      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 = -0.455509771904592     
+       i.e., w =   0.674914640458030      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -1.59996991643054     
+       i.e., w =    1.26489917243650      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -6.86044271752941     
+       i.e., w =    2.61924468454732      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -47.7603446195507     
+       i.e., w =    6.91088595040829      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+       Polarizability calculations for w^2 =  -1430.63699832546     
+       i.e., w =    37.8237623502140      i  
+ 
+ Calculating distributed polarizabilities but not printing them.
+ Polarization matrix written in file HCONH2_0.0005_1000_f11_NL4.pol
+
+
+BEGIN GRID
+  Molecule formamide
+  ! No parameters specified. Defaults will be used.
+END
+Using 80-point Euler-MacLaurin radial quadrature
+Using 590-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+BEGIN GDMA
+                                     G D M A
+
+                                 by Anthony Stone
+
+                         version 2.2, 11 January 2006
+
+               Distributed Multipoles from Gaussian wavefunctions
+
+
+
+Starting at 10:31:10 on 10 Mar 2014 
+  Molecule formamide
+ WARNING: in subroutine situs_interface_to_gdma line          298
+ Largest degree of contraction not set correctly at present.
+  ! FILE <check point file from GAUSSIAN>
+  ! Using a hydrogen radius of 0.325 Angstrom = 0.614 a.u.
+  Bohr
+  Multipoles
+    Switch 4
+    Limit  4
+    Limit  1  H1
+    Radius H1  0.614
+    Limit  1  H2
+    Radius H2  0.614
+    Limit  1  H3
+    Radius H3  0.614
+    Punch HCONH2_DMA2_L4.mom
+WARNING: string truncated
+  Start
+
+                         Distributed Multipole Analysis
+
+Standard DMA for products of primitives with exponent greater than 4.00000
+Using 80-point Euler-MacLaurin radial quadrature
+Using 590-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+Positions and radii in bohr
+Multipole moments in atomic units, ea_0^k for rank k
+
+C          x =  0.000000  y =  0.000000  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =   0.165594
+|Q1| =   0.129749  Q11c =   0.105740  Q11s =  -0.075192
+|Q2| =   0.660750  Q20  =  -0.658253  Q22c =   0.056253  Q22s =   0.011402
+|Q3| =   2.264769  Q31c =   0.747502  Q31s =  -0.662863  Q33c =   2.016764
+                   Q33s =  -0.252375
+|Q4| =   6.326276  Q40  =   3.132153  Q42c =   1.699112  Q42s =   3.123414
+                   Q44c =  -1.375879  Q44s =   3.959248
+
+O          x =  2.290632  y =  0.000000  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.404305
+|Q1| =   0.426526  Q11c =  -0.426516  Q11s =   0.002947
+|Q2| =   0.949645  Q20  =  -0.229209  Q22c =   0.917389  Q22s =   0.087672
+|Q3| =   0.484153  Q31c =   0.447938  Q31s =  -0.078577  Q33c =   0.015608
+                   Q33s =  -0.165340
+|Q4| =   0.905428  Q40  =  -0.289869  Q42c =   0.451248  Q42s =  -0.099630
+                   Q44c =  -0.641765  Q44s =  -0.332208
+
+H1         x = -1.139082  y =  1.772468  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.099310
+|Q1| =   0.137705  Q11c =   0.088842  Q11s =  -0.105213
+
+N          x = -1.459853  y = -2.102051  z =  0.000000
+           Maximum rank =  4   Relative radius =  1.228
+                   Q00  =  -0.231475
+|Q1| =   0.082995  Q11c =   0.081515  Q11s =   0.015608
+|Q2| =   1.745716  Q20  =  -1.739049  Q22c =   0.146146  Q22s =   0.043261
+|Q3| =   3.816113  Q31c =   1.160923  Q31s =   1.218263  Q33c =  -3.348051
+                   Q33s =   0.722060
+|Q4| =   7.783487  Q40  =   3.837734  Q42c =  -1.558510  Q42s =   3.364446
+                   Q44c =   4.726394  Q44s =   3.125256
+
+H2         x = -3.362090  y = -1.984186  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.175631
+|Q1| =   0.070987  Q11c =   0.069463  Q11s =   0.014633
+
+H3         x = -0.627102  y = -3.821892  z =  0.000000
+           Maximum rank =  1   Relative radius =  0.614
+                   Q00  =   0.195219
+|Q1| =   0.074282  Q11c =   0.008057  Q11s =   0.073844
+
+Total multipoles
+referred to origin at x =   0.000000,  y =    0.000000,  z =    0.000000
+                   Q00  =  -0.000027
+|Q1| =   1.570651  Q11c =  -1.487128  Q11s =  -0.505368
+|Q2| =   3.920590  Q20  =  -1.864373  Q22c =  -3.267882  Q22s =   1.102763
+|Q3| =  21.812882  Q31c =  15.427567  Q31s =  14.442264  Q33c =  -5.276719
+                   Q33s =   1.170128
+|Q4| =  96.501130  Q40  =  57.522119  Q42c =  25.604569  Q42s = -48.836669
+                   Q44c =  38.704096  Q44s =  38.276006
+
+CPU time used:      0m29.714s          Total:      0m29.714s
+END
+
+Finished GDMA at 10:31:40 on 10 Mar 2014 
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                1.61
+ WriteToFile_TypeRealVector              12                0.00
+ WriteToFile_Vector                      12                0.00
+ WriteToFile_TypeRealMatrix             180                0.01
+ WriteToFile_Matrix                     230                0.02
+ update_molecular_geometry               30                0.00
+ update_molecular_orbitals               30                0.00
+ construct_molecular_integratio           2                0.00
+ df_parser                                3                0.09
+ df_monomer                              29                0.13
+ df_int_for_df                           45                0.08
+ make_integrals_for_df                   45                0.08
+ df_make_I                                1                0.00
+ make_s_matrix_coulomb                    3                0.00
+ diagonal_1index                          4                0.00
+ make_s_matrix_constraints                2                0.00
+ ReadFromFile_TypeRealMatrix            210                0.00
+ ReadFromFile_Matrix                    210                0.05
+ ReadFromFile_TypeRealVector              8                0.00
+ ReadFromFile_Vector                      8                0.00
+ make_T_AO_mono                           1                0.02
+ diagonal_2index                          1                0.00
+ matrix_write_block_types              7351                0.01
+ WriteToFile_InBlocks_TypeRealM        7351                0.00
+ WriteToFile_InBlocks_Matrix           7351                0.01
+ make_T_MO_mono_NN                        3                0.06
+ ReadRowsFromFile_TypeRealMatri        7225                0.00
+ ReadRowsFromFile_Matrix               7225                0.01
+ scale_trans_mat_types                    3                0.00
+ solve_df_equations_lu                   12                0.00
+ lineq_solver_lu                         28                0.16
+ lineq_lu_iter                           28                0.12
+ matrix_write                            50                0.01
+ test_df                                  2                0.00
+ matvec_types                             2                0.00
+ fill_subset                              7                0.01
+ densfit_prop                            22                0.94
+ init_prop                               22                0.76
+ make_h1                                  1                0.74
+ make_kernel_OVOV_ALDA                    1                0.73
+ df_int                                   5                0.73
+ make_kernel_integrals                    1                0.69
+ make_kernel_integrals:kernel_i           1                0.69
+ Chi_fxc_Chi_ALDAKernel                   1                0.69
+ matmult_types                           75                0.08
+ add_2e_ints_to_Hessians                  2                0.02
+ adddiag                                  2                0.00
+ make_twoeint                             4                0.01
+ make_D_S_D                               4                0.01
+ make_h2                                  1                0.00
+ polarizabilities                        11                0.00
+ make_perturbation_matrices              11                0.01
+ make_alphaPP                            11                0.02
+ dist_polarizabilities                   11                0.00
+ ====================================
+ 
+ 
+Maximum memory defined is :             2048 MB                                      
+Maximum memory used is    :               73 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   34
+ ======================================
+    1 TMP____000                           D: atom: C atom in molecule formamide
+    2 TMP____001                           D: atom: O atom in molecule formamide
+    3 TMP____002                          D: atom: H1 atom in molecule formamide
+    4 TMP____003                           D: atom: N atom in molecule formamide
+    5 TMP____004                          D: atom: H2 atom in molecule formamide
+    6 TMP____005                          D: atom: H3 atom in molecule formamide
+    7 TMP____006                                   E      Energies for formamide
+    8 TMP____007                                        C      MOs for formamide
+    9 TMP____008                                        C      MOs for formamide
+   10 TMP____009                                         P densmat for formamide
+   11 TMP____010                                          I_____XA 1-e integrals
+   12 TMP_D_c__a                                    D  Full DF sol for formamide
+   13 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+   14 TMP____011                     G  1-index diagonal integrals for formamide
+   15 TMP____012                                   SC___A_A 2-e 2-indx integrals
+   16 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   17 TMP____013                     G  2-index diagonal integrals for formamide
+   18 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   19 TMP_DrhoCa                                   Drho Density DF for formamide
+   20 TMP_Dooc_a                         OO part of D  Full DF sol for formamide
+   21 TMP_Dovc_a                         OV part of D  Full DF sol for formamide
+   22 TMP____016                                H1-matrix  for monomer formamide
+   23 TMP____017                                          OVOVAAAA 2-e integrals
+   24 TMP_D____a                                    D  Full DF sol for formamide
+   25 TMP_Drho_a                                   Drho Density DF for formamide
+   26 TMP_Doo__a                         OO part of D  Full DF sol for formamide
+   27 TMP_Dov__a                         OV part of D  Full DF sol for formamide
+   28 TMP_Dvv__a                         VV part of D  Full DF sol for formamide
+   29 TMP____018                                   KERAXAXA 1-e 2-indx integrals
+   30 TMP____019                   Rho : OO part of D  Full DF sol for formamide
+   31 TMP____020                                          VVOOAAAA 2-e integrals
+   32 TMP____021                                H2-matrix  for monomer formamide
+   33 TMP____022                                 H21 = H2 * H1 : mol indx =    1
+   34 TMP____023                          fH2D = -4.0 * H2 * D : mol indx =    1
+ --------------------------------------
+ 
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+--------------------------------------------------------------------------------
+
+Ending on 10-03-2014 at 10:31:40.061

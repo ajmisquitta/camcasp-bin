@@ -1,0 +1,1358 @@
+              CamCASP version 6.0.052  (b'ae87705')
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+      Compiled with ifort on 01 May 2020 at 10:22:05
+
+Starting on 02-05-2020 at 16:28:39.358
+ 
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE CO2
+TITLE Basis: aug-cc-pVTZ
+TITLE CalculationType: PROPERTIES
+
+
+MEMORY          8 GB
+ Memory Manager initialized with             8589934592  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code NWCHEM
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE CO2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file CO2-A-asc.movecs format ASCII-2
+   IP     0.506300 a.u.
+   Basis Main
+      SPHERICAL
+      Units Bohr
+      Format NWCHEM
+      O1         8.0        0.00000000       0.00000000       2.19605057  TYPE O
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+      O2         8.0        0.00000000       0.00000000      -2.19605057  TYPE O
+   End
+   Basis Aux
+        Cartesian
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       2.19605057  TYPE O
+    LIMITING basis on this site upto G symmetry
+    Minimum s-exponent is     0.000000
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+    Minimum s-exponent is     0.000000
+      O2         8.0        0.00000000       0.00000000      -2.19605057  TYPE O
+    LIMITING basis on this site upto G symmetry
+    Minimum s-exponent is     0.000000
+   End
+   Basis Atom-Aux
+        Spherical
+        Units Bohr
+        Format TURBOMOLE
+      O1         8.0        0.00000000       0.00000000       2.19605057  TYPE O
+    LIMITING basis on this site upto G symmetry
+    Minimum s-exponent is     0.000000
+      C          6.0        0.00000000       0.00000000       0.00000000  TYPE C
+    LIMITING basis on this site upto G symmetry
+    Minimum s-exponent is     0.000000
+      O2         8.0        0.00000000       0.00000000      -2.19605057  TYPE O
+    LIMITING basis on this site upto G symmetry
+    Minimum s-exponent is     0.000000
+   End
+END
+============================================================
+Summary for CO2
+    1         O1    8.00     0.0000     0.0000     2.1961
+    2          C    6.00     0.0000     0.0000     0.0000
+    3         O2    8.00     0.0000     0.0000    -2.1961
+ Molecular charge    =     0
+ Number of electrons =    22
+ Molecular IP       =     0.506300  a.u.
+ Number of molecular orbitals =   138
+     Occupied orbitals        =    11
+     Virtual  orbitals        =   127
+ Main basis: Size   =   138
+             Shells =    42
+             Type   = MC
+             Atoms  =     3
+       Sites(Main)  =     3
+       Site Types   =     2
+             GTOs   = Spherical
+ Aux  basis: Size   =   417
+             Shells =    93
+             Type   = MC
+        Sites(Aux)  =     3
+             GTOs   = Cartesian
+ Initialized stockholder atoms =       T
+ MO-file : CO2-A-asc.movecs Type ASCII-2
+============================================================
+
+
+
+
+Edit
+  NEIGHBOURS TYPE = OVR   EPS = 0.01  PRINT
+           3  neighbours for site O1
+          O1    C   O2 
+           3  neighbours for site C
+           C   O1   O2 
+           3  neighbours for site O2
+          O2   O1    C 
+           3  neighbours for atom O1
+          O1    C   O2 
+           3  neighbours for atom C
+           C   O1   O2 
+           3  neighbours for atom O2
+          O2   O1    C 
+ Corr-Atom-Aux :            3  neighbours for atom O1 in mol%aux:
+          O1    C   O2 
+ Corr-Atom-Aux :            3  neighbours for atom C in mol%aux:
+          O1    C   O2 
+ Corr-Atom-Aux :            3  neighbours for atom O2 in mol%aux:
+          O1    C   O2 
+ 
+End
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN GRID
+  Angular 200
+  Radial  40
+END
+ Integration grid summary
+ ========================
+ Molecular grid for molecule: CO2
+    Total number of points =        26910
+    Number of angular points          230
+    Number of radial  points           40
+ ========================
+    Atom     Total   Angular    Radial
+----------------------------------------
+O1            8970       230        40
+C             8970       230        40
+O2            8970       230        40
+----------------------------------------
+Total number of integration points on atoms:      26910
+========================================
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER OO
+END
+ DF-INT parameters set.
+SET DF
+  Solver GELSS (Options are LU and GELSS )
+END
+
+
+BEGIN DF
+  Type   RHO
+  Eta    =    0.0
+  Lambda = 1000.0
+  Gamma  =    0.0
+  Print only normalization constraints
+  Solver GELSS Condition = 1e-15
+END
+ Normalization tests for fitted density of CO2
+  \int \rho(r) dr = 22.00000
+Differs from expected value of    22 by .00000001
+ End of normalization tests
+
+
+Begin ISA
+  DF = Drho-C
+  ! W-INIT = Drho-C
+  W-INIT = ONE-GTO   ALPHA0 = 1.0
+  ISA-Algorithm A
+  Solver LU
+  !  Symmetry
+  Convergence
+    Convergence-Type W
+    EPS-Norm    = 1.0e-09
+    EPS-Q       = 1.0e-4
+    Max-Iter    = 120
+    W-Damping   = 0.0
+    W-Mix-Fraction = 0.0  Skip-Iterations = 20
+    W-Eps = 0.17  S-Block-Only  Couple  Activate-at 1.0e-05
+    Positive-W   Lambda = 0.001  Auto  Max-Alpha = 0.2
+    Tail-Iterations = 30
+  End
+ Finished reading in the STOCKHOLDER:CONVERGENCE block.
+  W-TAILS
+    Func = 1
+    R1-Multiplier = 1.5
+    R2-Multiplier = 2.5
+    Fit-Type = 3
+    W-Tests
+  END
+End
+ Finished reading in the STOCKHOLDER block.
+ Using ISA algorithm A                                       
+ Minimizing: ||\rho^{a} - \rho w^{a}/(\sum_{b} w^{b})||
+   using squared overlap norm
+w-initialization 1 : Coeff of GTO with exponent closest to       1.0000
+      set to 1.0. Rest set to 0.0
+   Int Rho(r) dr =    22.0000000061739     
+ type(basis_set) :: Subset of basis Atom basis for : CO2
+ Read in? :  T
+ Atoms  :            1
+ Sites  :            1
+ Shells :           12
+ Primitives :           12
+ Charge :            0
+ Type   : 
+ Type of GTOs : Spherical
+ O1    8.0    0.0000    0.0000    2.1961
+   S        1
+        256.00000      45.61315
+   S        1
+        128.00000      27.12174
+   S        1
+         64.00000      16.12668
+   S        1
+         32.00000       9.58898
+   S        1
+         16.00000       5.70164
+   S        1
+          8.00000       3.39022
+   S        1
+          4.00000       2.01584
+   S        1
+          2.00000       1.19862
+   S        1
+          1.00000       0.71271
+   S        1
+          0.50000       0.42378
+   S        1
+          0.25000       0.25198
+   S        1
+          0.12500       0.14983
+ type(basis_set) :: Subset of basis Atom basis for : CO2
+ Read in? :  T
+ Atoms  :            1
+ Sites  :            1
+ Shells :           12
+ Primitives :           12
+ Charge :            0
+ Type   : 
+ Type of GTOs : Spherical
+ C     6.0    0.0000    0.0000    0.0000
+   S        1
+        256.00000      45.61315
+   S        1
+        128.00000      27.12174
+   S        1
+         64.00000      16.12668
+   S        1
+         32.00000       9.58898
+   S        1
+         16.00000       5.70164
+   S        1
+          8.00000       3.39022
+   S        1
+          4.00000       2.01584
+   S        1
+          2.00000       1.19862
+   S        1
+          1.00000       0.71271
+   S        1
+          0.50000       0.42378
+   S        1
+          0.25000       0.25198
+   S        1
+          0.12500       0.14983
+ type(basis_set) :: Subset of basis Atom basis for : CO2
+ Read in? :  T
+ Atoms  :            1
+ Sites  :            1
+ Shells :           12
+ Primitives :           12
+ Charge :            0
+ Type   : 
+ Type of GTOs : Spherical
+ O2    8.0    0.0000    0.0000   -2.1961
+   S        1
+        256.00000      45.61315
+   S        1
+        128.00000      27.12174
+   S        1
+         64.00000      16.12668
+   S        1
+         32.00000       9.58898
+   S        1
+         16.00000       5.70164
+   S        1
+          8.00000       3.39022
+   S        1
+          4.00000       2.01584
+   S        1
+          2.00000       1.19862
+   S        1
+          1.00000       0.71271
+   S        1
+          0.50000       0.42378
+   S        1
+          0.25000       0.25198
+   S        1
+          0.12500       0.14983
+ BEGIN TEST SHAPE-FUNCTIONS: INITIALIZATION
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         0.000000000    0.000000000    8.000000000   0.000000E+00     n
+    2      C          0.000000000    0.000000000    6.000000000   0.000000E+00     n
+    3      O2         0.000000000    0.000000000    8.000000000   0.000000E+00     n
+====================================================================================
+ Residual charge =   22.000000000
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: INITIALIZATION
+ Stockholder iteration :            1
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.67593E+00
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.67593E+00
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            1
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         0.000000000    8.179597848   -0.179597848   6.759342E-01     n
+    2      C          0.000000000    5.583890714    0.416109286   6.529847E-01     n
+    3      O2         0.000000000    8.179592596   -0.179592596   6.759342E-01     n
+====================================================================================
+ Residual charge =    0.056918842
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            1
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8            10.53746             3.40151             1.44628
+ Func(1)  C          6            31.67030             3.96842             1.96855
+ Func(1)  O2         8            10.53746             3.40151             1.44628
+ End Shape-function analysis of tails
+ Stockholder iteration :            2
+ *** Tail-weighting : w-Eps =  0.00000E+00
+                  Max-Delta =  0.10331E-03
+ *** Positive Coefficients : Lambda =  0.00000E+00
+                  Max-Delta =  0.10331E-03
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            2
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.179597848    8.312176438   -0.312176438   6.243556E-07     n
+    2      C          5.583890714    5.301008382    0.698991618   1.033120E-04     n
+    3      O2         8.179592596    8.312179595   -0.312179595   6.243570E-07     n
+====================================================================================
+ Residual charge =    0.074635584
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            2
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.64968             2.87543             1.03351
+ Func(1)  C          6             5.89960             2.82324             0.99633
+ Func(1)  O2         8             7.64982             2.87544             1.03352
+ End Shape-function analysis of tails
+ Stockholder iteration :            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.80275E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.80275E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            3
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.312176438    8.370212711   -0.370212711   4.152436E-07     n
+    2      C          5.301008382    5.181236807    0.818763193   8.027544E-06     n
+    3      O2         8.312179595    8.370217680   -0.370217680   4.152466E-07     n
+====================================================================================
+ Residual charge =    0.078332802
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            3
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             8.11934             2.87469             1.03298
+ Func(1)  C          6             3.82747             2.63880             0.87041
+ Func(1)  O2         8             8.11954             2.87470             1.03299
+ End Shape-function analysis of tails
+ Stockholder iteration :            4
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            2
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.16538E-05
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.16538E-05
+ *** Tail-Fix is OFF
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            4
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.370212711    8.422706204   -0.422706204   1.607297E-07     n
+    2      C          5.181236807    5.149304769    0.850695231   1.653758E-06     n
+    3      O2         8.370217680    8.422712606   -0.422712606   1.607355E-07     n
+====================================================================================
+ Residual charge =    0.005276421
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            4
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             8.21579             2.87066             1.03009
+ Func(1)  C          6             3.32471             2.58583             0.83581
+ Func(1)  O2         8             8.21599             2.87067             1.03010
+ End Shape-function analysis of tails
+ Stockholder iteration :            5
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            2
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.35085E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.35085E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            5
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.422706204    8.438857514   -0.438857514   3.553762E-08     n
+    2      C          5.149304769    5.123131382    0.876868618   3.508513E-07     n
+    3      O2         8.422712606    8.438855732   -0.438855732   3.553762E-08     n
+====================================================================================
+ Residual charge =   -0.000844628
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            5
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.79386             2.83253             1.00290
+ Func(1)  C          6             3.26878             2.56551             0.82273
+ Func(1)  O2         8             7.79404             2.83253             1.00291
+ End Shape-function analysis of tails
+ Stockholder iteration :            6
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            2
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.28530E-06
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.28530E-06
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            6
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.438857514    8.441576842   -0.441576842   6.283185E-08     n
+    2      C          5.123131382    5.121917054    0.878082946   2.853007E-07     n
+    3      O2         8.438855732    8.441561916   -0.441561916   6.280675E-08     n
+====================================================================================
+ Residual charge =   -0.005055812
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            6
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.69646             2.82431             0.99709
+ Func(1)  C          6             3.26534             2.56611             0.82311
+ Func(1)  O2         8             7.69659             2.82432             0.99710
+ End Shape-function analysis of tails
+ Stockholder iteration :            7
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.56729E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.56729E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            7
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.441576842    8.448224922   -0.448224922   3.787420E-09     n
+    2      C          5.121917054    5.108599045    0.891400955   5.672943E-08     n
+    3      O2         8.441561916    8.448208069   -0.448208069   3.786446E-09     n
+====================================================================================
+ Residual charge =   -0.005032036
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            7
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.11879             2.79006             0.97305
+ Func(1)  C          6             3.17931             2.54235             0.80794
+ Func(1)  O2         8             7.11905             2.79008             0.97307
+ End Shape-function analysis of tails
+ Stockholder iteration :            8
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.15929E-07
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.15929E-07
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            8
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.448224922    8.445311751   -0.445311751   1.136037E-09     n
+    2      C          5.108599045    5.114715869    0.885284131   1.592931E-08     n
+    3      O2         8.448208069    8.445290903   -0.445290903   1.137394E-09     n
+====================================================================================
+ Residual charge =   -0.005318523
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            8
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.10262             2.78765             0.97138
+ Func(1)  C          6             3.13495             2.53912             0.80589
+ Func(1)  O2         8             7.10290             2.78768             0.97139
+ End Shape-function analysis of tails
+ Stockholder iteration :            9
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+   Stockholder shape function converged for atom            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+   Stockholder shape function converged for atom            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.26184E-08
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.26184E-08
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION            9
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.445311751    8.447363013   -0.447363013   2.453749E-10     Y
+    2      C          5.114715869    5.110569014    0.889430986   2.618420E-09     n
+    3      O2         8.445290903    8.447341544   -0.447341544   2.452917E-10     Y
+====================================================================================
+ Residual charge =   -0.005273570
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION            9
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.15970             2.79210             0.97448
+ Func(1)  C          6             3.03478             2.52076             0.79428
+ Func(1)  O2         8             7.16000             2.79213             0.97450
+ End Shape-function analysis of tails
+ Stockholder iteration :           10
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+   Stockholder shape function converged for atom            1
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+   Stockholder shape function converged for atom            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.27184E-08
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.27184E-08
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           10
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.447363013    8.444542778   -0.444542778   2.283777E-10     Y
+    2      C          5.110569014    5.116215874    0.883784126   2.718364E-09     n
+    3      O2         8.447341544    8.444520416   -0.444520416   2.285772E-10     Y
+====================================================================================
+ Residual charge =   -0.005279067
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           10
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.15104             2.79104             0.97374
+ Func(1)  C          6             3.03643             2.52242             0.79532
+ Func(1)  O2         8             7.15135             2.79107             0.97376
+ End Shape-function analysis of tails
+ Stockholder iteration :           11
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            1
+   Stockholder shape function converged for atom            1
+   Stockholder shape function converged for atom            2
+ POSITIVE-W alpha =   0.125000000000000       for atomindx =            3
+   Stockholder shape function converged for atom            3
+ *** Tail-weighting : w-Eps =  0.17000E+00
+                  Max-Delta =  0.27100E-09
+ *** Positive Coefficients : Lambda =  0.10000E-02
+                  Max-Delta =  0.27100E-09
+ *** Tail-Fix is ON
+ BEGIN TEST SHAPE-FUNCTIONS: ITERATION           11
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.444542778    8.445474234   -0.445474234   3.661649E-11     Y
+    2      C          5.116215874    5.114336139    0.885663861   2.709984E-10     Y
+    3      O2         8.444520416    8.445451676   -0.445451676   3.660527E-11     Y
+====================================================================================
+ Residual charge =   -0.005262049
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: ITERATION           11
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.15463             2.79218             0.97453
+ Func(1)  C          6             3.00727             2.51472             0.79047
+ Func(1)  O2         8             7.15495             2.79220             0.97455
+ End Shape-function analysis of tails
+ Stockholder convergence on iteration :           11
+ BEGIN TEST SHAPE-FUNCTIONS: CONVERGED
+  Atomindx Label         W0-norm       W-Norm        Charge         Converged?
+====================================================================================
+    1      O1         8.445474234    8.445474234   -0.445474234   3.661649E-11     Y
+    2      C          5.114336139    5.114336139    0.885663861   2.709984E-10     Y
+    3      O2         8.445451676    8.445451676   -0.445451676   3.660527E-11     Y
+====================================================================================
+ Residual charge =   -0.005262049
+ ====================================================
+ END TEST SHAPE-FUNCTIONS: CONVERGED
+ Begin Shape-function analysis of tails
+ Func(1)  O1         8             7.15121             2.79169             0.97419
+ Func(1)  C          6             3.00020             2.51472             0.79047
+ Func(1)  O2         8             7.15152             2.79172             0.97421
+ End Shape-function analysis of tails
+ BEGIN SHAPE-FUNCTIONS : NORMAL ITERATIONS
+ Atom            1    Name O1 atom in molecule CO2
+ type(FuncExpansion) :: Shape function (curr): O1 atom in molecule CO2
+   Type              :: 
+   Norm              ::     0.000000
+   Molecule          :: CO2
+   Atom              :: O1
+   Molecule Index    ::            1
+   Atom Index        ::            1
+   Which Basis       :: SHAPE
+   Coordinates          
+            1      0.000000      0.000000      2.196051
+  Tolerance:     0.000000
+ 
+ Indx Symm    alpha           ContCoeff           D_k          ContCoeff*D_k
+    1     256.00000000      45.61315010       3.07503410       140.26199208 *exp(-   256.00000*x*x) +
+    2     128.00000000      27.12174132      -0.87259953       -23.66641861 *exp(-   128.00000*x*x) +
+    3      64.00000000      16.12668387       5.18979199        83.69413474 *exp(-    64.00000*x*x) +
+    4      32.00000000       9.58898360       0.67693625         6.49113064 *exp(-    32.00000*x*x) +
+    5      16.00000000       5.70164376       2.12384861        12.10942820 *exp(-    16.00000*x*x) +
+    6       8.00000000       3.39021766      -1.06991764        -3.62725369 *exp(-     8.00000*x*x) +
+    7       4.00000000       2.01583548       0.63808332         1.28627100 *exp(-     4.00000*x*x) +
+    8       2.00000000       1.19862295       0.39164658         0.46943658 *exp(-     2.00000*x*x) +
+    9       1.00000000       0.71270547       0.92149696         0.65675592 *exp(-     1.00000*x*x) +
+   10       0.50000000       0.42377721       0.18056220         0.07651815 *exp(-     0.50000*x*x) +
+   11       0.25000000       0.25197944       0.03667912         0.00924239 *exp(-     0.25000*x*x) +
+   12       0.12500000       0.14982787      -0.00097597        -0.00014623 *exp(-     0.12500*x*x) +
+ =============================================================
+ Atom            2    Name C atom in molecule CO2
+ type(FuncExpansion) :: Shape function (curr): C atom in molecule CO2
+   Type              :: 
+   Norm              ::     0.000000
+   Molecule          :: CO2
+   Atom              :: C
+   Molecule Index    ::            1
+   Atom Index        ::            2
+   Which Basis       :: SHAPE
+   Coordinates          
+            1      0.000000      0.000000      0.000000
+  Tolerance:     0.000000
+ 
+ Indx Symm    alpha           ContCoeff           D_k          ContCoeff*D_k
+    1     256.00000000      45.61315010       0.99174793        45.23674702 *exp(-   256.00000*x*x) +
+    2     128.00000000      27.12174132      -0.12244930        -3.32103829 *exp(-   128.00000*x*x) +
+    3      64.00000000      16.12668387       1.99747039        32.21257354 *exp(-    64.00000*x*x) +
+    4      32.00000000       9.58898360       1.22861358        11.78115551 *exp(-    32.00000*x*x) +
+    5      16.00000000       5.70164376       1.80381953        10.28473638 *exp(-    16.00000*x*x) +
+    6       8.00000000       3.39021766       0.27347432         0.92713746 *exp(-     8.00000*x*x) +
+    7       4.00000000       2.01583548      -0.05006498        -0.10092275 *exp(-     4.00000*x*x) +
+    8       2.00000000       1.19862295      -0.02878362        -0.03450070 *exp(-     2.00000*x*x) +
+    9       1.00000000       0.71270547       0.48479883         0.34551878 *exp(-     1.00000*x*x) +
+   10       0.50000000       0.42377721       0.16208710         0.06868882 *exp(-     0.50000*x*x) +
+   11       0.25000000       0.25197944       0.03166581         0.00797913 *exp(-     0.25000*x*x) +
+   12       0.12500000       0.14982787       0.00036208         0.00005425 *exp(-     0.12500*x*x) +
+ =============================================================
+ Atom            3    Name O2 atom in molecule CO2
+ type(FuncExpansion) :: Shape function (curr): O2 atom in molecule CO2
+   Type              :: 
+   Norm              ::     0.000000
+   Molecule          :: CO2
+   Atom              :: O2
+   Molecule Index    ::            1
+   Atom Index        ::            3
+   Which Basis       :: SHAPE
+   Coordinates          
+            1      0.000000      0.000000     -2.196051
+  Tolerance:     0.000000
+ 
+ Indx Symm    alpha           ContCoeff           D_k          ContCoeff*D_k
+    1     256.00000000      45.61315010       3.07507025       140.26364107 *exp(-   256.00000*x*x) +
+    2     128.00000000      27.12174132      -0.87271102       -23.66944260 *exp(-   128.00000*x*x) +
+    3      64.00000000      16.12668387       5.18996684        83.69695463 *exp(-    64.00000*x*x) +
+    4      32.00000000       9.58898360       0.67674281         6.48927568 *exp(-    32.00000*x*x) +
+    5      16.00000000       5.70164376       2.12402483        12.11043293 *exp(-    16.00000*x*x) +
+    6       8.00000000       3.39021766      -1.07006369        -3.62774882 *exp(-     8.00000*x*x) +
+    7       4.00000000       2.01583548       0.63820139         1.28650900 *exp(-     4.00000*x*x) +
+    8       2.00000000       1.19862295       0.39155032         0.46932120 *exp(-     2.00000*x*x) +
+    9       1.00000000       0.71270547       0.92157352         0.65681049 *exp(-     1.00000*x*x) +
+   10       0.50000000       0.42377721       0.18050955         0.07649583 *exp(-     0.50000*x*x) +
+   11       0.25000000       0.25197944       0.03670550         0.00924903 *exp(-     0.25000*x*x) +
+   12       0.12500000       0.14982787      -0.00098335        -0.00014733 *exp(-     0.12500*x*x) +
+ =============================================================
+ END SHAPE-FUNCTIONS : NORMAL ITERATIONS
+ 
+ Tail Analysis
+ =============
+ BEST-FIT METHOD:
+ 
+ Found Rmax =       5.4000 a.u. at point   181 in r(pt)
+ Attempting a fit between       1.7008 and       5.4000 a.u.
+ CASE (1) : weight(r) = 1.0
+------------------------------------------------------------------------
+ Atom: O1   Fit to A exp(-b r) :        4.6507 * exp(      -2.5789 * x)
+ Atom: O1   Local IP =       0.8313  a.u.
+========================================================================
+ 
+ CASE (2) : weight(r) = r^2
+------------------------------------------------------------------------
+ Atom: O1   Fit to A exp(-b r) :        5.0988 * exp(      -2.6017 * x)
+ Atom: O1   Local IP =       0.8461  a.u.
+========================================================================
+ 
+ CASE (3) : weight(r) = r^2 exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+   RECOMMENDED: Asymmetric weighting includes volume (r^2) contribution.
+------------------------------------------------------------------------
+ Atom: O1   Fit to A exp(-b r) :        7.2012 * exp(      -2.6733 * x)
+ Atom: O1   Local IP =       0.8933  a.u.
+========================================================================
+ 
+ CASE (4) : weight(r) = exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+------------------------------------------------------------------------
+ Atom: O1   Fit to A exp(-b r) :        4.9571 * exp(      -2.5856 * x)
+ Atom: O1   Local IP =       0.8357  a.u.
+========================================================================
+ 
+ BOX-SHIFT METHOD:
+ 
+ Boxsize     R-start       R-end          <b>            var(b)      local-IP
+ ----------------------------------------------------------------------------
+     33        3.0000        3.9600        2.3605        0.0188        0.6965
+     36        2.9700        4.0200        2.3647        0.0226        0.6990
+     39        2.9100        4.0500        2.3693        0.0271        0.7017
+     42        2.8800        4.1100        2.3743        0.0317        0.7047
+     46        2.8200        4.1700        2.3818        0.0389        0.7091
+     50        2.7600        4.2300        2.3901        0.0468        0.7141
+     55        2.7000        4.3200        2.4019        0.0581        0.7211
+     60        2.6100        4.3800        2.4149        0.0706        0.7290
+     66        2.5200        4.4700        2.4324        0.0874        0.7396
+     72        2.4000        4.5300        2.4519        0.1058        0.7515
+     79        2.2800        4.6200        2.4765        0.1283        0.7666
+     86        2.1300        4.6800        2.5024        0.1506        0.7827
+     94        1.9200        4.7100        2.5308        0.1716        0.8006
+    103        0.8700        3.9300        2.5596        0.1768        0.8190
+    113        1.0200        4.3800        2.5524        0.1713        0.8144
+    124        0.8700        4.5600        2.5531        0.1660        0.8148
+    136        0.7800        4.8300        2.5659        0.1811        0.8230
+    149        0.6600        5.1000        2.5873        0.2643        0.8368
+    163        0.4500        5.3100        2.6278        0.4116        0.8632
+    179        0.3000        5.6400        2.9990        1.3784        1.1243
+    196        0.0300        5.8800        9.6173       81.9412       11.5617
+    215        0.0000        6.4200        8.7674       78.2844        9.6085
+    236        0.0000        7.0500        7.9873       74.7619        7.9746
+    259        0.2700        8.0100        6.8259       71.3989        5.8240
+    284        0.2700        8.7600        6.2250       68.2114        4.8438
+    312        0.3000        9.6300        5.6266       65.1026        3.9574
+    343        0.3300       10.5900        5.0873       62.1119        3.2350
+    377        0.3300       11.6100        4.6285       59.2628        2.6778
+    414        0.3600       12.7500        4.1929       56.5679        2.1976
+    455        0.3900       14.0100        3.7981       53.9724        1.8032
+    500        0.0000       14.9700        3.7700       51.5177        1.7766
+ ----------------------------------------------------------------------------
+  Recommended parameters for site O1
+     b    =       2.5659
+   var(b) =       0.1811
+    IP    =       0.8230 +-       0.1161
+   R range  = [       0.7800 ,       4.8300 ]
+   Good relative range:       5.1923 >=       0.7500
+ ----------------------------------------------------------------------------
+ BEST-FIT METHOD:
+ 
+ Found Rmax =       5.8500 a.u. at point   196 in r(pt)
+ Attempting a fit between       1.9842 and       5.8500 a.u.
+ CASE (1) : weight(r) = 1.0
+------------------------------------------------------------------------
+ Atom: C   Fit to A exp(-b r) :        1.8666 * exp(      -2.3180 * x)
+ Atom: C   Local IP =       0.6716  a.u.
+========================================================================
+ 
+ CASE (2) : weight(r) = r^2
+------------------------------------------------------------------------
+ Atom: C   Fit to A exp(-b r) :        1.8082 * exp(      -2.3103 * x)
+ Atom: C   Local IP =       0.6672  a.u.
+========================================================================
+ 
+ CASE (3) : weight(r) = r^2 exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+   RECOMMENDED: Asymmetric weighting includes volume (r^2) contribution.
+------------------------------------------------------------------------
+ Atom: C   Fit to A exp(-b r) :        1.8650 * exp(      -2.3168 * x)
+ Atom: C   Local IP =       0.6709  a.u.
+========================================================================
+ 
+ CASE (4) : weight(r) = exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+------------------------------------------------------------------------
+ Atom: C   Fit to A exp(-b r) :        1.7286 * exp(      -2.3000 * x)
+ Atom: C   Local IP =       0.6613  a.u.
+========================================================================
+ 
+ BOX-SHIFT METHOD:
+ 
+ Boxsize     R-start       R-end          <b>            var(b)      local-IP
+ ----------------------------------------------------------------------------
+     33        3.3600        4.3200        2.2297        0.0094        0.6215
+     36        3.3300        4.3800        2.2316        0.0110        0.6225
+     39        3.2700        4.4100        2.2337        0.0127        0.6237
+     42        3.2100        4.4400        2.2358        0.0146        0.6249
+     46        3.1500        4.5000        2.2389        0.0171        0.6266
+     50        3.0900        4.5600        2.2422        0.0199        0.6285
+     55        3.0000        4.6200        2.2467        0.0236        0.6309
+     60        2.9100        4.6800        2.2515        0.0277        0.6337
+     66        2.8200        4.7700        2.2577        0.0330        0.6372
+     72        2.7600        4.8900        2.2645        0.0388        0.6410
+     79        2.6400        4.9800        2.2730        0.0460        0.6458
+     86        2.5800        5.1300        2.2820        0.0536        0.6509
+     94        2.4900        5.2800        2.2928        0.0623        0.6571
+    103        2.4000        5.4600        2.3051        0.0715        0.6642
+    113        2.3700        5.7300        2.3179        0.0797        0.6716
+    124        2.7900        6.4800        2.3268        0.0822        0.6767
+    136        2.6100        6.6600        2.3269        0.0792        0.6768
+    149        2.4300        6.8700        2.3261        0.0800        0.6763
+    163        2.2200        7.0800        2.3259        0.0876        0.6762
+    179        1.4700        6.8100        2.3499        0.0916        0.6902
+    196        1.3800        7.2300        2.3346        0.1011        0.6813
+    215        2.8500        9.2700        2.2601        0.1103        0.6385
+    236        2.5500        9.6000        2.2694        0.1096        0.6438
+    259        2.2200        9.9600        2.2856        0.1169        0.6530
+    284        1.3800        9.8700        2.2968        0.1221        0.6594
+    312        1.2600       10.5900        2.3142        0.1400        0.6694
+    343        1.1700       11.4300        2.3468        0.1855        0.6884
+    377        1.0800       12.3600        2.3942        0.2544        0.7165
+    414        0.6300       13.0200        2.4119        0.3364        0.7272
+    455        0.6300       14.2500        2.5021        0.4310        0.7826
+    500        0.0300       15.0000        2.8374        1.5166        1.0063
+ ----------------------------------------------------------------------------
+  Recommended parameters for site C
+     b    =       2.3142
+   var(b) =       0.1400
+    IP    =       0.6694 +-       0.0810
+   R range  = [       1.2600 ,      10.5900 ]
+   Good relative range:       7.4048 >=       0.7500
+ ----------------------------------------------------------------------------
+ BEST-FIT METHOD:
+ 
+ Found Rmax =       5.4000 a.u. at point   181 in r(pt)
+ Attempting a fit between       1.7008 and       5.4000 a.u.
+ CASE (1) : weight(r) = 1.0
+------------------------------------------------------------------------
+ Atom: O2   Fit to A exp(-b r) :        4.6620 * exp(      -2.5798 * x)
+ Atom: O2   Local IP =       0.8319  a.u.
+========================================================================
+ 
+ CASE (2) : weight(r) = r^2
+------------------------------------------------------------------------
+ Atom: O2   Fit to A exp(-b r) :        5.1264 * exp(      -2.6035 * x)
+ Atom: O2   Local IP =       0.8473  a.u.
+========================================================================
+ 
+ CASE (3) : weight(r) = r^2 exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+   RECOMMENDED: Asymmetric weighting includes volume (r^2) contribution.
+------------------------------------------------------------------------
+ Atom: O2   Fit to A exp(-b r) :        7.2322 * exp(      -2.6746 * x)
+ Atom: O2   Local IP =       0.8942  a.u.
+========================================================================
+ 
+ CASE (4) : weight(r) = exp(-alpha*[ln(w(r)/w0)]^2)      
+   Gauss-Log weight of Hodges \& Wheatley CPL 326, 263(2000) 
+   alpha = 1/ln( 10000.00)   w0 =     0.000100
+   Fitting range (Bohr):     0.000000  to     15.000000
+------------------------------------------------------------------------
+ Atom: O2   Fit to A exp(-b r) :        4.9725 * exp(      -2.5866 * x)
+ Atom: O2   Local IP =       0.8363  a.u.
+========================================================================
+ 
+ BOX-SHIFT METHOD:
+ 
+ Boxsize     R-start       R-end          <b>            var(b)      local-IP
+ ----------------------------------------------------------------------------
+     33        3.0000        3.9600        2.3608        0.0188        0.6967
+     36        2.9700        4.0200        2.3649        0.0227        0.6991
+     39        2.9100        4.0500        2.3696        0.0271        0.7019
+     42        2.8800        4.1100        2.3746        0.0319        0.7048
+     46        2.8200        4.1700        2.3821        0.0390        0.7093
+     50        2.7600        4.2300        2.3905        0.0470        0.7143
+     55        2.7000        4.3200        2.4022        0.0584        0.7213
+     60        2.6100        4.3800        2.4153        0.0708        0.7292
+     66        2.5200        4.4700        2.4329        0.0876        0.7399
+     72        2.4000        4.5300        2.4524        0.1061        0.7518
+     79        2.2800        4.6200        2.4771        0.1286        0.7670
+     86        2.1300        4.6800        2.5029        0.1509        0.7831
+     94        1.9200        4.7100        2.5314        0.1719        0.8010
+    103        0.8700        3.9300        2.5597        0.1767        0.8190
+    113        1.0200        4.3800        2.5526        0.1711        0.8145
+    124        0.8700        4.5600        2.5534        0.1659        0.8150
+    136        0.7800        4.8300        2.5664        0.1814        0.8233
+    149        0.6600        5.1000        2.5882        0.2656        0.8373
+    163        0.4500        5.3100        2.6294        0.4144        0.8642
+    179        0.3000        5.6400        3.0068        1.4015        1.1301
+    196        5.7300       11.5800        0.2057        2.8722        0.0053
+    215        5.7300       12.1500        0.1875        2.7429        0.0044
+    236        5.7300       12.7800        0.1708        2.6186        0.0036
+    259        5.7300       13.4700        0.1556        2.5001        0.0030
+    284        5.7300       14.2200        0.1419        2.3879        0.0025
+    312        5.6700       15.0000        0.2367        2.6492        0.0070
+    343        4.7400       15.0000        0.6187        2.8575        0.0478
+    377        3.7200       15.0000        0.7906        2.7801        0.0781
+    414        2.6100       15.0000        0.9345        2.6925        0.1092
+    455        0.5100       14.1300        1.2438        2.6205        0.1934
+    500        0.0000       14.9700        1.4831        3.1545        0.2750
+ ----------------------------------------------------------------------------
+  Recommended parameters for site O2
+     b    =       2.5664
+   var(b) =       0.1814
+    IP    =       0.8233 +-       0.1164
+   R range  = [       0.7800 ,       4.8300 ]
+   Good relative range:       5.1923 >=       0.7500
+ ----------------------------------------------------------------------------
+ Analysis done. Results in files ending *-exp-analysis.dat
+ =========================================================
+ 
+ WARNING: Inconsistent parameters: Tail iterations are applicable
+   to the ISA A algorithm only if SelfConsistentTail==.true.     
+   Since this is not the case these iterations are being skipped.
+ WARNING: in subroutine Iterative_Stockholder_Atoms_restart line         1591
+ ISA: No tail-iterations performed.
+
+ISA atoms written to file: CO2_atoms.ISA
+
+ BEGIN ISA RESTART TESTS
+ INDEX  LABEL   CHARGE-FILE  CHARGE-COMPUTED   VERDICT
+ ============================================================================
+     1  O1         0.84455E+01   0.84455E+01     SAME or SIMILAR to 5%
+     2  C          0.51143E+01   0.51143E+01     SAME or SIMILAR to 5%
+     3  O2         0.84455E+01   0.84455E+01     SAME or SIMILAR to 5%
+ ============================================================================
+ ISA charges are consistent
+ END   ISA RESTART TESTS
+
+
+!  Calculate multipoles using the ISA atom-expansions
+Begin Multipoles
+  DF Type ISA
+  Rank 4
+End
+ Finished reading in the DIST_MOM block
+ Now for the calculations...
+ Total moments are computed w.r.t. the origin:
+    Origin : (   0.0000,   0.0000,   0.0000) BOHR
+ 
+! Multipole moments for CO2
+! Based on DF-type : ISA
+ 
+  O1     0.00000000     0.00000000     2.19605057     Type    O      Rank   4
+      -0.445474
+       0.132505      -0.000000       0.000000
+      -0.179719       0.000000       0.000000       0.000000       0.000000
+      -0.077646      -0.000000       0.000000      -0.000000      -0.000000
+                      0.000000      -0.000000
+       0.188044      -0.000000       0.000000       0.000000       0.000000
+                      0.000000       0.000000      -0.000756       0.000000
+ 
+   C     0.00000000     0.00000000     0.00000000     Type    C      Rank   4
+       0.885664
+       0.000003       0.000000       0.000000
+       0.126687       0.000000      -0.000000      -0.000000      -0.000000
+      -0.000045      -0.000000       0.000001       0.000000       0.000000
+                      0.000000       0.000000
+      -0.412759       0.000000      -0.000001      -0.000000      -0.000000
+                      0.000000       0.000000      -0.002055       0.000000
+ 
+  O2     0.00000000     0.00000000    -2.19605057     Type    O      Rank   4
+      -0.445452
+      -0.132493       0.000000      -0.000000
+      -0.179716       0.000000       0.000000      -0.000000       0.000000
+       0.077626       0.000000       0.000000      -0.000000      -0.000000
+                      0.000000       0.000000
+       0.188038       0.000000       0.000000      -0.000000      -0.000000
+                     -0.000000       0.000000      -0.000756      -0.000000
+ 
+Total molecular moments relative to origin (0,0,0):
+      -0.005262
+      -0.000034      -0.000000       0.000000
+      -3.365465      -0.000000       0.000001      -0.000000       0.000000
+      -0.000144      -0.000001       0.000004       0.000002       0.000000
+                      0.000000      -0.000000
+     -21.296079      -0.000004       0.000009      -0.000000       0.000000
+                      0.000000      -0.000000      -0.003567       0.000000
+ 
+ Distributed moments in file: CO2_ISA.mom
+ 
+ 
+ End of distributed moment module
+ 
+
+
+!  Calculate multipoles using the density-fitted densities
+!  and the ISA shape-functions.
+Begin Multipoles
+  DF Type ISA-GRID
+  Rank 4
+End
+ Finished reading in the DIST_MOM block
+ Now for the calculations...
+ Total moments are computed w.r.t. the origin:
+    Origin : (   0.0000,   0.0000,   0.0000) BOHR
+ 
+! Multipole moments for CO2
+! Based on DF-type : ISA-GRID
+ 
+  O1     0.00000000     0.00000000     2.19605057     Type    O      Rank   4
+      -0.442371
+       0.113343       0.000000      -0.000000
+       0.079080       0.000000      -0.000000      -0.000000      -0.000000
+       0.154817       0.000000      -0.000000      -0.000000      -0.000000
+                     -0.000000      -0.000000
+      -0.325151       0.000000      -0.000000      -0.000000       0.000000
+                      0.000000       0.000000      -0.000027      -0.000000
+ 
+   C     0.00000000     0.00000000     0.00000000     Type    C      Rank   4
+       0.884178
+       0.000004       0.000000       0.000000
+      -0.131747       0.000000      -0.000000      -0.000000      -0.000000
+      -0.000029      -0.000000      -0.000000       0.000000      -0.000000
+                     -0.000000      -0.000000
+       1.175071      -0.000000       0.000000       0.000000       0.000000
+                      0.000000      -0.000000      -0.000205      -0.000000
+ 
+  O2     0.00000000     0.00000000    -2.19605057     Type    O      Rank   4
+      -0.442364
+      -0.113332      -0.000000       0.000000
+       0.079088       0.000000      -0.000000      -0.000000      -0.000000
+      -0.154823       0.000000      -0.000000      -0.000000       0.000000
+                     -0.000000      -0.000000
+      -0.325170      -0.000000       0.000000       0.000000       0.000000
+                     -0.000000       0.000000      -0.000027      -0.000000
+ 
+Total molecular moments relative to origin (0,0,0):
+      -0.000556
+      -0.000000       0.000000      -0.000000
+      -3.244749       0.000000      -0.000000      -0.000000      -0.000000
+       0.000000       0.000000      -0.000000      -0.000000      -0.000000
+                     -0.000000      -0.000000
+      -3.152912       0.000000      -0.000000       0.000000      -0.000000
+                      0.000000       0.000000      -0.000259      -0.000000
+ 
+ Distributed moments in file: CO2_ISA-GRID.mom
+ 
+ 
+ End of distributed moment module
+ 
+
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecular-density
+    Slater-multiplier 5.0
+    isodensity 0.001
+    step = 0.3 bohr
+  END
+ Finished reading in the DISPLAY:MOL-DENS block.
+Density grid done
+IsoDensity_value =   0.001000
+Looking for iso-density surface at density   1.00E-03
+7368 triangles found
+3686 points
+100000 max points
+  AIM-ATOMS
+    ISOdensity   = 0.001
+    AIM-METHOD   = ISA  Grid-based
+    Density-Type = RHO-C
+    ATOMS        = ALL    ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN        = 1e-6   ( outer limit of scan determined to be radius at )
+                          ( which shape function is this value )
+
+    R-MAX        = 5.0 Bohr  ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+
+    DR           = 0.2 Bohr  ( step size of grid )
+  END
+ Finished reading in the DISPLAY:AIM-ATOMS block.
+ISA density grid for atom O1
+Looking for iso-density surface at density   1.00E-03
+10064 triangles found
+5042 points
+100000 max points
+ISA density grid for atom C
+Looking for iso-density surface at density   1.00E-03
+9592 triangles found
+4814 points
+100000 max points
+ISA density grid for atom O2
+Looking for iso-density surface at density   1.00E-03
+10032 triangles found
+5018 points
+100000 max points
+End
+ Finished reading in the DISPLAY block.
+
+
+! Fine integration grid needed for DMA calculation
+
+
+BEGIN GRID
+  Molecule A
+  Angular 590
+  Radial  80
+END
+ Integration grid summary
+ ========================
+ Molecular grid for molecule: CO2
+    Total number of points =       139830
+    Number of angular points          590
+    Number of radial  points           80
+ ========================
+    Atom     Total   Angular    Radial
+----------------------------------------
+O1           46610       590        80
+C            46610       590        80
+O2           46610       590        80
+----------------------------------------
+Total number of integration points on atoms:     139830
+========================================
+
+
+Begin GDMA
+                                     G D M A
+
+                                 by Anthony Stone
+
+                          version 2.3, 19 March 2019
+
+               Distributed Multipoles from Gaussian wavefunctions
+
+
+
+Starting at 16:28:44 on 2 May 2020  
+  Bohr
+  !  Original DMA
+  Multipoles
+ WARNING: in subroutine situs_interface_to_gdma line          299
+ Largest degree of contraction not set correctly at present.
+    Switch 0.0
+    Limit  5
+    Punch DMA_Z0_L5.mom
+  Start
+
+                         Distributed Multipole Analysis
+
+Standard DMA
+
+Positions and radii in bohr
+Multipole moments in atomic units, ea_0^k for rank k
+
+O1         x =  0.000000  y =  0.000000  z =  2.196051
+           Maximum rank =  5   Relative radius =  1.228
+     Q0 =   -0.45024092     Q1 =    0.15598931     Q2 =    0.01204310
+     Q3 =    0.02411765     Q4 =    0.08600289     Q5 =   -0.22241591
+
+
+C          x =  0.000000  y =  0.000000  z =  0.000000
+           Maximum rank =  5   Relative radius =  1.228
+     Q0 =    0.90048185     Q1 =    0.00000000     Q2 =   -0.29914759
+     Q3 =   -0.00000000     Q4 =    2.62579002     Q5 =   -0.00000000
+
+
+O2         x =  0.000000  y =  0.000000  z = -2.196051
+           Maximum rank =  5   Relative radius =  1.228
+     Q0 =   -0.45024092     Q1 =   -0.15598931     Q2 =    0.01204310
+     Q3 =   -0.02411765     Q4 =    0.08600289     Q5 =    0.22241591
+
+
+Total multipoles referred to origin at z =   0.000000
+     Q0 =   -0.00000000     Q1 =   -0.00000000     Q2 =   -3.24751778
+     Q3 =   -0.00000000     Q4 =   -3.80844316     Q5 =   -0.00000001
+
+
+CPU time used:      0m 0.008s          Total:      0m 0.008s
+  !  Revised DMA
+  Multipoles
+    Switch 4.0
+    Limit  5
+    Punch DMA_Z4_L5.mom
+  Start
+
+                         Distributed Multipole Analysis
+
+Standard DMA for products of primitives with exponent greater than 4.00000
+
+Positions and radii in bohr
+Multipole moments in atomic units, ea_0^k for rank k
+
+O1         x =  0.000000  y =  0.000000  z =  2.196051
+           Maximum rank =  5   Relative radius =  1.228
+                   Q00  =  -0.212389
+|Q1| =   0.377476  Q10  =  -0.377476
+|Q2| =   0.787072  Q20  =   0.787072
+|Q3| =   0.419913  Q30  =  -0.419913
+|Q4| =   0.601017  Q40  =  -0.601017
+|Q5| =   1.078916  Q50  =   1.078916
+
+C          x =  0.000000  y =  0.000000  z =  0.000000
+           Maximum rank =  5   Relative radius =  1.228
+                   Q00  =   0.424779
+|Q1| =   0.000000
+|Q2| =   0.542720  Q20  =   0.542720
+|Q3| =   0.000000
+|Q4| =   1.083150  Q40  =   1.083150
+|Q5| =   0.000000
+
+O2         x =  0.000000  y =  0.000000  z = -2.196051
+           Maximum rank =  5   Relative radius =  1.228
+                   Q00  =  -0.212389
+|Q1| =   0.377476  Q10  =   0.377476
+|Q2| =   0.787072  Q20  =   0.787072
+|Q3| =   0.419913  Q30  =   0.419913
+|Q4| =   0.601017  Q40  =  -0.601017
+|Q5| =   1.078916  Q50  =  -1.078916
+
+Total multipoles
+referred to origin at x =   0.000000,  y =    0.000000,  z =    0.000000
+                   Q00  =  -0.000000
+|Q1| =   0.000000
+|Q2| =   3.247518  Q20  =  -3.247518
+|Q3| =   0.000000
+|Q4| =   3.808443  Q40  =  -3.808443
+|Q5| =   0.000000
+
+CPU time used:      0m 4.329s          Total:      0m 4.337s
+End
+
+Finished GDMA at 16:28:48 on 2 May 2020  
+
+
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1                 0.282
+ WriteToFile_TypeRealVector              20                 0.000
+ WriteToFile_Vector                      20                 0.000
+ WriteToFile_TypeRealMatrix              16                 0.000
+ WriteToFile_Matrix                      16                 0.000
+ construct_molecular_integratio           2                 0.008
+ construct_atom_integration_gri           2                 0.004
+ df_parser                                2                 0.028
+ df_monomer                               3                 0.037
+ df_int_for_df                            9                 0.032
+ make_integrals_for_df                    9                 0.032
+ df_make_I                                1                 0.000
+ make_s_matrix_coulomb                    2                 0.001
+ diagonal_1index                          3                 0.000
+ make_s_matrix_constraints                1                 0.000
+ ReadFromFile_TypeRealMatrix             13                 0.000
+ ReadFromFile_Matrix                     13                 0.000
+ ReadFromFile_TypeRealVector              8                 0.000
+ ReadFromFile_Vector                      8                 0.000
+ make_T_AO_mono                           1                 0.019
+ diagonal_2index                          1                 0.000
+ matrix_write_block_types                95                 0.004
+ WriteToFile_InBlocks_TypeRealM          95                 0.000
+ WriteToFile_InBlocks_Matrix             95                 0.004
+ make_T_MO_mono_NN                        2                 0.011
+ ReadRowsFromFile_TypeRealMatri           2                 0.000
+ ReadRowsFromFile_Matrix                  2                 0.004
+ scale_trans_mat_types                    2                 0.000
+ solve_df_equations_gelss                 6                 0.000
+ llsq_gelss_types_1                       3                 0.005
+ StockholderParser                        1                 0.090
+ Iterative_Stockholder_Atoms_re           1                 0.090
+ initialize_stockholder_FuncExp           1                 0.000
+ initialize_D0                            3                 0.000
+ initialize_w0                            3                 0.000
+ shape_function_charge                   39                 0.000
+ shape_function_tests                    13                 0.000
+ make_Stilde_stockholder_A               33                 0.001
+ overlap2                                66                 0.001
+ make_T1_stockholder_A                   33                 0.075
+ Chi_rho_w_overlap                       33                 0.075
+ calculate_stockholder_weights          972                 0.012
+ solve_Stockholder_equations             33                 0.002
+ llsq_lu_types_1                         33                 0.001
+ lineq_lu_iter                           33                 0.001
+ update_D_one_atom                       33                 0.000
+ update_w                                33                 0.000
+ check_convergence                       33                 0.000
+ shape_function_tail_analysis            39                 0.012
+ shape_function_tail_fit1                36                 0.009
+ update_w0                               11                 0.000
+ update_D0                               11                 0.000
+ shape_function_analysis_exp              3                 0.004
+ calculate_moments                        2                 0.052
+ DistMultipoleIntegrals_primiti           3                 0.043
+ DisplayParser                            1                 0.000
+ evaluate_mol_density                     1                 0.006
+ isodensity                               4                 0.005
+ evaluate_AIM_atom_densities              1                 0.025
+ determine_R_w_min                        3                 0.000
+ evaluate_AIM_atom_density                3                 0.021
+ header                                   3                 0.000
+ ====================================
+ 
+ 
+Maximum memory defined is :             8192 MB                                      
+Maximum memory used is    :               61 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   28
+ ======================================
+    1 TMP____000                                D: atom: O1 atom in molecule CO2
+    2 TMP____001                                 D: atom: C atom in molecule CO2
+    3 TMP____002                                D: atom: O2 atom in molecule CO2
+    4 TMP____003                                         E      Energies for CO2
+    5 TMP____004                                              C      MOs for CO2
+    6 TMP____005                                          I_____XA 1-e integrals
+    7 TMP_DrhoCa                                         Drho Density DF for CO2
+    8 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+    9 TMP____006                           G  1-index diagonal integrals for CO2
+   10 TMP____007                                   SC___A_A 2-e 2-indx integrals
+   11 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   12 TMP____008                           G  2-index diagonal integrals for CO2
+   13 TMP_Too__a                                   T_MOOO_A 2-e 2-indx integrals
+   14 TMP_Doo__a                                             Doo  DF sol for CO2
+   15 TMP_Drho_a                                         Drho Density DF for CO2
+   16 TMP____011    D : Expan coeffs : Shape function (curr): O1 atom in molecul
+   17 TMP____012    D : Expan coeffs : Shape function (prev): O1 atom in molecul
+   18 TMP____013          Density function-expansion for atom (prev)           1
+   19 TMP____014    D : Expan coeffs : Shape function (curr): C atom in molecule
+   20 TMP____015    D : Expan coeffs : Shape function (prev): C atom in molecule
+   21 TMP____016          Density function-expansion for atom (prev)           2
+   22 TMP____017    D : Expan coeffs : Shape function (curr): O2 atom in molecul
+   23 TMP____018    D : Expan coeffs : Shape function (prev): O2 atom in molecul
+   24 TMP____019          Density function-expansion for atom (prev)           3
+   25 TMP____009                                   Rho : Drho Density DF for CO2
+   26 TMP____023            D : Expan coeffs : AtomRho : O1 atom in molecule CO2
+   27 TMP____024             D : Expan coeffs : AtomRho : C atom in molecule CO2
+   28 TMP____025            D : Expan coeffs : AtomRho : O2 atom in molecule CO2
+ --------------------------------------
+ 
+ WARNING: NoRelease = T. Name = C      MOs for CO2
+ WARNING: NoRelease = T. Name = C      MOs for CO2
+ WARNING: Temporary file to be removed does not exist in the list
+ File name is TMP____004
+ WARNING: NoRelease = T. Name = E      Energies for CO2
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+--------------------------------------------------------------------------------
+
+Ending on 02-05-2020 at 16:28:48.999

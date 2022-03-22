@@ -1,0 +1,87 @@
+! water cluster file
+! ==================
+
+Global
+  Units Bohr degrees
+  Overwrite Yes
+End
+
+MOLECULE water1
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O1          8.0   0.0000000000    0.0000000000    0.0000000000
+  H1          1.0  -1.4536519600    0.0000000000   -1.1216873200
+  H2          1.0   1.4536519600    0.0000000000   -1.1216873200
+  I.P.  0.4638
+  ac-shift 0.13186
+END
+Molecule water1
+  Units BOHR
+    1  O1          8.00     0.00000000    0.00000000    0.00000000   Type O1
+    2  H1          1.00    -1.45365196    0.00000000   -1.12168732   Type H1
+    3  H2          1.00     1.45365196    0.00000000   -1.12168732   Type H2
+End
+
+MOLECULE water2
+  Units Bohr
+  ! Vibrationally averaged geom.
+  O1          8.0   0.0000000000    0.0000000000    0.0000000000
+  H1          1.0  -1.4536519600    0.0000000000   -1.1216873200
+  H2          1.0   1.4536519600    0.0000000000   -1.1216873200
+  I.P.  0.4638
+  ac-shift 0.13186
+END
+Molecule water2
+  Units BOHR
+    1  O1          8.00     0.00000000    0.00000000    0.00000000   Type O1
+    2  H1          1.00    -1.45365196    0.00000000   -1.12168732   Type H1
+    3  H2          1.00     1.45365196    0.00000000   -1.12168732   Type H2
+End
+
+! Now get the dimer in the geometry for which the interaction energy
+! is close to the global minimum
+! Geometry taken from Mas and Szalewicz, J. Chem. Phys. 104 (1006)
+
+Rotate water1 by 119.18561 degrees about 0.0 1.0 0.0
+ Molecule water1 has been rotated by  119.1856 DEGREE
+  about the unit axis:   0.00000000   1.00000000   0.00000000
+Place water1 at 0.108809 0.0 -0.060776
+Show water1
+Molecule water1
+  Units BOHR
+    1  O1          8.00     0.10880900    0.00000000   -0.06077600   Type O1
+    2  H1          1.00    -0.16161460    0.00000000    1.75530702   Type H1
+    3  H2          1.00    -1.57933347    0.00000000   -0.78289890   Type H2
+End
+
+Rotate water2 by 144.73623 degrees about 0.670441 -0.670441 -0.317831
+ Molecule water2 has been rotated by  144.7362 DEGREE
+  about the unit axis:   0.67044140  -0.67044140  -0.31783119
+Place water2 at -0.096483 0.0 5.590288
+Show water2
+Molecule water2
+  Units BOHR
+    1  O1          8.00    -0.09648300    0.00000000    5.59028800   Type O1
+    2  H1          1.00     0.77186787    1.45365210    6.30032236   Type H1
+    3  H2          1.00     0.77186805   -1.45365182    6.30032273   Type H2
+End
+
+Files
+  Mols water1 and water2
+  Basis Sadlej and Type dc+
+  Aux-basis-type DC+
+  Midbond 3s2p1d Type Weighted
+  Func PBE0
+  AC multpole tanh 3.0 4.0
+  kernel ALDA+CHF
+  File-prefix H2O2
+  Interface files
+End
+ORIENT commands for water1 and water1
+ in file H2O2_energy.ornt
+NWChem file for water1 is H2O2_A.nw
+NWChem file for water2 is H2O2_B.nw
+CamCASP command file is H2O2.cks
+
+Finish
+ Exiting program cluster_operations

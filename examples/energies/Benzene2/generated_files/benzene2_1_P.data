@@ -1,0 +1,16 @@
+benzene1 and benzene2 : sadlej : MC+
+ &TRN
+  ISITDALT=T, OUT=F, TOLER=15, DIMER=F, BLKMB=F,  SPHG=T,
+  MEMTRAN= 536870912,
+  basis='ssssspppddssssspppddssssspppddssssspppddssssspppddssssspppddsssppsssppsssppsssppsssppsssppsssppdssssspppddssssspppddssssspppddssssspppddssssspppddssssspppddsssppsssppsssppsssppsssppssspp',
+  tags='mmmmmmmmaammmmmmmmaammmmmmmmaammmmmmmmaammmmmmmmaammmmmmmmaammmaammmaammmaammmaammmaammmaammmmmmmmmmmmmmbbmmmmmmmmbbmmmmmmmmbbmmmmmmmmbbmmmmmmmmbbmmmmmmmmbbmmmbbmmmbbmmmbbmmmbbmmmbbmmmbb'
+ &END
+ 
+ &CCINP
+   CCPRINT=F, VCRIT=1.0D-14, TOLITER=1.0D-12
+ &END
+ 
+ &INPUTCOR
+  SAPTKS=T,
+  PRINT=F, MEMSAPT= 536870912
+ &END

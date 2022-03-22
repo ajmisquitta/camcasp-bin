@@ -1,0 +1,20 @@
+Title "  OC...ClF Method: PBE0 "
+Scratch_dir <SCRATCHDIR>
+Memory     2048 mb
+Start OC-ClF_AB
+ 
+Charge     0
+Geometry Units Bohr nocenter noautoz noautosym
+   C               0.00000000       0.00000000      -5.29123277
+   O               0.00000000       0.00000000      -7.41334014
+   Cl              0.00000000       0.00000000       0.00000000
+   F               0.00000000       0.00000000       3.15938392
+End
+Basis "ao basis" Spherical
+      *          library     Sadlej_pVTZ
+End
+set lindep:tol 1e-5
+scf
+  thresh 1.0e-7
+end
+task SCF energy

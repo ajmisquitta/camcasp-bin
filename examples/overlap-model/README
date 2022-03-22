@@ -1,0 +1,186 @@
+Overlap Model for CO dimer
+==========================
+
+In this example we carry out an energy scan for 50 configurations of
+the CO dimer, and use the results with the overlap model of repulsion
+to generate an atom-atom short-range repulsion model for CO.
+
+The cluster file for the energy scan is in scan.clt. We use a
+good-quality basis, aug-cc-pVQZ, with MC main basis but DC aux basis.
+This is the recommended approach for reliable energies. The CamCASP
+commands are in the file energy-scan-cmnds; note that the file is
+referenced as ../energy-scan-cmnds in the cluster file, as the cluster
+file is processed from within the new job directory.
+
+The energy-scan-cmnds file is quite short, as we only need first-order
+energies. The parameters in the energy-scan section itself can be
+modified; see the users' guide for details. Leave them alone, however,
+if you want to check the output against the check files provided.
+
+It is necessary to use a large number of points -- a few thousand --
+if a reliable repulsion model is needed. For testing purposes a
+smaller number will do, and here we use only 50 points, with only one
+radial point per orientation. (There is no advantage in using more
+than one radial point per orientation unless an MC auxiliary basis is
+used for the energies.) We shall need the list of configurations
+as well as the file containing the energies, so we write it out in the
+RANDOM section.
+
+Note incidentally that the points are not in fact chosen randomly. For
+the orientations, the program uses a Sobol sequence, which is
+non-random but seeks to cover the configuration space as uniformly as
+possible. The molecule separations are chosen randomly, but using a
+pseudo-random sequence that is the same for every run.
+
+The command to run this part of the calculation is
+
+$ runcamcasp.py CO-CO --clt scan.clt -d scan --direct -q batch
+
+It is quite timeconsuming, even with only 50 points, so best to run
+via the Linux batch queue or another job management system.
+
+When the energy-scan job has run, we should have the files
+CO-CO-pts.dat and CO-CO-energies.dat in the output directory scan/OUT.
+The file scan/OUT/scan.out contains the camcasp output and should be
+checked in case there were any errors.
+
+Now we run the overlap-model calculation. This uses the same main
+basis but a different auxiliary basis; it has to be of type MC, and
+the jk-tzvpp basis has been found most suitable for partitioning the
+density between atoms.
+
+We also need the points and energies files from the energy-scan
+calculation. These need to be in the new directory created for the
+overlap-model calculation. The runcamcasp.py script has an
+--import-files option to deal with this:
+
+$ runcamcasp.py CO-CO --clt ovlap.clt -d ovlap -q batch \
+    --import-files scan/OUT/CO-CO-pts.dat scan/OUT/CO-CO-energies.dat \
+    scan/CO-CO-?-asc.movecs
+
+We can copy the wavefunction (.movecs) files too, as the main basis is
+the same for both energy scan and overlap model. This avoids
+recalculating them, and only the CamCASP calculation need be done.
+
+When this calculation has finished successfully, there will be some
+new files in ovlap/OUT:
+
+$ ls ovlap/OUT
+C_C.ornt                 CO-CO.out          dummy.dat
+CO_1_CO_2_total.ornt     CO-CO-overlap.dat  O_O.ornt
+CO-CO-data-summary.data  C_O.ornt           warnings.log
+
+The files C_C.ornt, C_O.ornt and O_O.ornt are data files for the
+Orient program, but they may need a little editing. We create a new orient
+directory for the edited files, rather than overwrite the originals;
+
+$ mkdir orient
+$ cp ovlap/OUT/*.ornt orient
+
+Then we need to create a local axes file for each molecule in the
+orient directory. The filenames appear in the *.ornt files; they can
+be changed if necessary. For this case the files are CO_1.axes and
+CO_2.axes, and the CO_1.axes file could be
+
+Axes
+  C1 z from O1 to C1 x global
+  O1 z from C1 to O1 x global
+End
+
+This defines the z axis for each atom to be outward from the centre
+of the molecule. The x and y axes are irrelevant as the molecules are
+linear. The CO_2_axes file needs to define the local axes for
+CO_2 in the same way; we are using the same repulsion model for the C
+atoms in each molecule, so the axes must match.
+
+
+
+Now run the Orient program for each atom-atom case:
+
+$ cd orient
+$ orient < C_C.ornt > C_C.out
+$ orient < C_O.ornt > C_O.out
+$ orient < O_O.ornt > O_O.out
+
+The fitting procedure converges quickly, with weighted r.m.s. errors
+of the order of 0.2 kJ/mol, but the resulting repulsion parameters
+should not be used as we have not provided enough data points to get
+reliable values.
+
+At this point there are various possibilities. The repulsion model
+used in the computer-generated .ornt files is fairly simple, with
+isotropic alpha and just a few S-function terms in the description of
+rho. One possibility, therefore, is to extend the model by adding some
+additional parameters.
+
+However the main purpose of fitting the individual site-site
+interactions is to obtain good starting-points for fitting the
+site-site repulsion model for the whole molecule. The
+CO_1_CO_2_total.ornt file is the orient data file for this task. It
+may be possible to run it as it stands:
+
+$ orient < CO_1_CO_2_total.ornt > CO_1_CO_2_total.out
+
+In the present case this converges well, with weighted r.m.s. error of
+0.03 kJ/mol. However in some cases the corresponding model will fail
+to converge, and in that case the recommended procedure is to paste in
+the fitted parameters from the individual C_C, C_O and O_O fits. The
+Pairs section of CO_1_CO_2_total.out then looks like this:
+
+Pairs
+   C   C  rho   alpha
+      00  00   0    6.759734    1.532399
+      00  10   1    0.011705    0.000000
+      10  00   1    0.011705    0.000000
+      00  20   2    0.268529    0.000000
+      20  00   2    0.268529    0.000000
+   End
+   C   O  rho   alpha
+      00  00   0    6.276101    1.900053
+      00  10   1   -0.155616    0.000000
+      10  00   1   -0.085726    0.000000
+      00  20   2    0.181954    0.000000
+      20  00   2    0.389280    0.000000
+   End
+   O   C  rho   alpha
+      00  00   0    6.276101    1.900053
+      00  10   1   -0.085726    0.000000
+      10  00   1   -0.155616    0.000000
+      00  20   2    0.389280    0.000000
+      20  00   2    0.181954    0.000000
+   End
+   O   O  rho   alpha
+      00  00   0    5.825454    2.548056
+      00  10   1   -0.195794    0.000000
+      10  00   1   -0.195794    0.000000
+      00  20   2    0.205939    0.000000
+      20  00   2    0.205939    0.000000
+   End
+End
+
+In the present case, the results are the same as before, but often the
+convergence and the fit will be better.
+
+If the whole-molecule fit diverges, a possible way forward is to
+constrain the fit by 'anchoring' the parameters to the values obtained
+from the individual site-site fits. To do this, uncomment the line
+           #include fit.anchors
+near the end of the total.ornt data file, and provide a fit.anchors
+file that looks something like this:
+
+!   Parameter  anchor  weight
+     rCC_0      6.7597    0.1
+     aCC        1.532     0.1
+     rCO_0      6.2761    0.1
+     aCO        1.9       0.1
+     rOO_0      5.8255    0.1
+     aOO        2.55      0.1
+
+The effect is to add a penalty to the fitting function that increases
+quadratically with departure of the fitted value from its anchor.
+The anchor values are the numbers provided in the Pairs section of the
+data. The weights have to be chosen by trial and error. They need to be as
+small as possible while preventing divergence, so the anchored
+parameters should be those that diverge in unconstrained fits. In the
+present case, the fit converges without the need to anchor any parameters.
+

@@ -1,0 +1,539 @@
+      CamCASP version 5.7.18  Wed 28 May 2014 11:50:31 BST
+                             by
+           Alston J. Misquitta and Anthony J. Stone
+                   with contributions from
+               Robert Bukowski, Wojciech Cencek
+                     and the authors of
+                    GAMESS(US) and GEM91
+
+Starting on 28-05-2014 at 19:24:30.788
+ 
+ ================================================================
+ Compiled on Apr 28 2014 at 10:39:50
+    Compiler : ifort
+    Version  : unknown
+ VCS BASE repository version:
+     22752
+ Working directory: 
+     /scratch/fastscratch/ajs1/CO-CO_19-24-28
+ Running on: whirligig
+ ================================================================
+
+ Memory manager not initialized. Doing so now with 1 GB limit
+ Memory Manager initialized with             1073741824  bytes
+TITLE CO_1 and CO_2
+TITLE Basis aug-cc-pVQZ and type MC
+TITLE Midbonds NONE and type weighted
+TITLE CalculationType: SAPT(DFT)
+
+
+MEMORY       2048 MB
+ Memory Manager initialized with             2147483648  bytes
+
+
+SET Global_data
+  Units Bohr cm-1
+  Scf-code DALTON2013
+  XC-func PBE0
+  Overwrite yes
+END
+
+
+MOLECULE CO_1 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file CO-CO-A-asc.movecs format ASCII-2
+   IP     0.515000 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type MC
+      C1         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+      O1         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+   End
+   Basis Aux
+      Spherical
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      C1         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O1         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+    LIMITING basis on this site upto G symmetry
+      C2         0.0        0.00000000       0.00000000      -1.20270254  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O2         0.0        0.00000000       0.00000000       0.90202691  TYPE O
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for CO_1
+    1         C1    6.00     0.0000     0.0000    -1.2027
+    2         O1    8.00     0.0000     0.0000     0.9020
+ Molecular charge   =     0
+ Molecular IP       =     0.515000  a.u.
+ Number of molecular orbitals =   160
+     Occupied orbitals        =     7
+     Virtual  orbitals        =   153
+ Main basis: Size   =   160
+             Shells =    40
+             Type   = MC
+             Atoms  =     2
+       Sites(Main)  =     2
+       Site Types   =     2
+             GTOs   = Spherical
+ Aux  basis: Size   =   584
+             Shells =   136
+             Type   = DC
+        Sites(Aux)  =     4
+             GTOs   = Spherical
+ Initialized stockholder atoms =       F
+ MO-file : CO-CO-A-asc.movecs Type ASCII-2
+============================================================
+
+
+MOLECULE CO_2 at 0.0 0.0 0.0
+   Charge    0
+   Echo No
+   Hessian format SAPT2006
+   MO-file CO-CO-B-asc.movecs format ASCII-2
+   IP     0.515000 a.u.
+   Basis Main
+      Spherical
+      Units Bohr
+      Format GAMESS
+      Type MC
+      C2         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+      O2         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+   End
+   Basis Aux
+      Spherical
+      Units Bohr
+      Format TURBOMOLE
+      Type DC
+      C1         0.0        0.00000000       0.00000000      -1.20270254  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O1         0.0        0.00000000       0.00000000       0.90202691  TYPE O
+    LIMITING basis on this site upto G symmetry
+      C2         6.0        0.00000000       0.00000000      -1.20270254  TYPE C
+    LIMITING basis on this site upto G symmetry
+      O2         8.0        0.00000000       0.00000000       0.90202691  TYPE O
+    LIMITING basis on this site upto G symmetry
+   End
+END
+============================================================
+Summary for CO_2
+    1         C2    6.00     0.0000     0.0000    -1.2027
+    2         O2    8.00     0.0000     0.0000     0.9020
+ Molecular charge   =     0
+ Molecular IP       =     0.515000  a.u.
+ Number of molecular orbitals =   160
+     Occupied orbitals        =     7
+     Virtual  orbitals        =   153
+ Main basis: Size   =   160
+             Shells =    40
+             Type   = MC
+             Atoms  =     2
+       Sites(Main)  =     2
+       Site Types   =     2
+             GTOs   = Spherical
+ Aux  basis: Size   =   584
+             Shells =   136
+             Type   = DC
+        Sites(Aux)  =     4
+             GTOs   = Spherical
+ Initialized stockholder atoms =       F
+ MO-file : CO-CO-B-asc.movecs Type ASCII-2
+============================================================
+BEGIN GRID
+  Molecule CO_1
+  Angular 200
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 230-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+BEGIN GRID
+  Molecule CO_2
+  Angular 200
+  Radial  60
+END
+Using 60-point Euler-MacLaurin radial quadrature
+Using 230-point Lebedev quadrature
+Becke smoothing parameter = 3
+
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+ DF-INT parameters set.
+
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+ Finished reading in QUADRATURE block
+
+
+BEGIN energy-scan
+  ! scan molecule B with molecule A
+  Energies E1exch E1elst
+  Energy-file CO-CO-energies
+  Random
+    Points 50
+    Radial 1
+    dRmin -1.0
+    dRmax +1.0
+    write CO-CO-pts.dat
+  End
+ WARNING: in subroutine orientation line           53
+ subroutine sobol has not been initialized. Doing it now.
+    1    -6.5379     0.0000     3.7747     180.00  -0.7071   0.0000  -0.7071
+    2     0.0000    -5.7514     1.4850      60.00   0.0000  -1.0000   0.0000
+    3     0.0000     4.3204     4.8989     120.00   0.0000  -1.0000   0.0000
+    4    -5.2499    -5.2499     3.0033      97.18   0.8819  -0.3333  -0.3333
+    5     2.3983     2.3983     6.1302     128.68   0.4804  -0.6202  -0.6202
+    6    -4.7932     4.7932     0.8540     112.02  -0.6742   0.5222  -0.5222
+    7     3.7366    -3.7366     4.2309     151.04  -0.2582   0.6831  -0.6831
+    8    -2.4268     5.8587     2.0862     155.29   0.5287   0.7842   0.3248
+    9     1.5796    -3.8134     5.7528     139.64   0.8872   0.4262   0.1765
+   10    -6.1411    -2.5437     0.4163     153.29  -0.0983  -0.3808   0.9194
+   11     5.4158     2.2433     3.9881      92.28  -0.3981  -0.3511   0.8475
+   12     5.6250    -2.3300     1.1622     104.66   0.3198  -0.3626  -0.8754
+   13    -4.8946     2.0274     5.0157      53.10   0.8290  -0.2140  -0.5167
+   14     2.0581     4.9686     2.6166     160.92  -0.4057   0.8444  -0.3498
+   15    -1.0243    -2.4729     7.2110     143.00  -0.8078   0.5446  -0.2256
+   16     3.7146    -5.5593     3.5481     100.31  -0.5576  -0.4612  -0.6902
+   17    -1.1548     1.7283     8.1182     150.50  -0.1759  -0.5469  -0.8185
+   18     5.6348     3.7650     1.5192     118.63   0.8881   0.3822  -0.2554
+   19    -3.3510    -2.2391     4.1663     141.98   0.5156   0.7124  -0.4760
+   20    -6.8982     1.3721     0.6623     160.96  -0.8431   0.5274   0.1049
+   21     5.5631    -1.1066     4.1855     169.53  -0.4606   0.8705   0.1732
+   22    -1.2223    -6.1451     2.2935      30.26   0.7357  -0.1321   0.6643
+   23     0.7138     3.5883     5.7513      95.63   0.1803  -0.1919   0.9647
+   24    -6.7444    -1.3415     1.0878     134.38  -0.0837  -0.8286  -0.5536
+   25     5.4441     1.0829     4.8277      74.78  -0.2603  -0.8028  -0.5364
+   26    -1.0336     5.1962     2.3554     165.71   0.6300   0.4314  -0.6457
+   27     0.6470    -3.2529     7.1100     158.59   0.9502   0.1731  -0.2591
+   28     3.4768     5.2034     1.8341     168.73  -0.1477   0.1930   0.9700
+   29    -2.2761    -3.4065     5.1276     132.23  -0.6628   0.1461   0.7344
+   30     5.9130    -3.9510     0.2223     127.67   0.3283  -0.9264   0.1843
+   31    -4.9660     3.3182     3.7451      85.40   0.7241  -0.6764   0.1345
+   32    -5.9380    -4.8732     2.1165     144.34  -0.6017  -0.3765   0.7044
+   33     3.1320     2.5704     4.8222     126.18  -0.9496  -0.1478   0.2764
+   34    -3.8314     4.6686     0.0944     137.11   0.2100   0.8623   0.4609
+   35     4.1018    -4.9981     3.8910      87.41   0.5592   0.7311   0.3908
+   36     0.6069     6.1620     0.8795     117.15  -0.1854   0.9404  -0.2853
+   37    -0.5247    -5.3272     4.4660      62.65  -0.4984   0.8296  -0.2517
+   38     6.0712    -0.5980     2.5887     172.79   0.2076  -0.2840  -0.9361
+   39    -2.9269     0.2883     5.7602     155.21   0.7246  -0.2001  -0.6595
+   40     1.8367    -6.0549     0.4958     169.57  -0.9264  -0.2911   0.2389
+   41    -1.5088     4.9740     3.6828     173.26  -0.5976  -0.6198   0.5086
+   42     6.1091     1.8532     2.2175      78.05   0.1215   0.6297   0.7673
+   43    -3.3728    -1.0231     5.2071     141.57   0.0343   0.6340   0.7726
+   44    -6.0741     3.2467     3.5009      79.84  -0.9808   0.0191  -0.1939
+   45     2.2326    -1.1933     7.9742     114.91  -0.5238   0.0835  -0.8478
+   46    -3.1457    -5.8852     1.3844     114.14   0.7893  -0.6111  -0.0602
+   47     2.5022     4.6812     5.2487     144.23   0.3932  -0.9150  -0.0901
+   48    -0.6413     6.5116     1.5775     166.26   0.0365   0.2901  -0.9563
+   49     0.5604    -5.6895     6.1856      93.19   0.2869   0.2781  -0.9167
+   50    -6.0188    -0.5928     3.3485     162.79  -0.4988  -0.8294  -0.2516
+End
+ Number of points =     50
+     Rx      Ry      Rz      alpha   Nx      Ny      Nz        E(1)elst    E(2)ind     E(2)disp    E(1)exch    E(2)exind   E(2)exdisp  TotOverlap  Eelst-MP    Eind-MP     Edisp-MP    Delta     
+         BOHR    BOHR    BOHR DEGREES     ---     ---     ---        CM-1        CM-1        CM-1        CM-1        CM-1        CM-1        CM-1        CM-1        CM-1        CM-1
+ ------------------------------------------------------------------------------
+    1  -6.5379   0.0000   3.7747 180.0000  -0.7071   0.0000  -0.7071  -0.6033E+01   0.0000E+00   0.0000E+00   0.8047E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    2   0.0000  -5.7514   1.4850  60.0000   0.0000  -1.0000   0.0000  -0.1990E+03   0.0000E+00   0.0000E+00   0.8671E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    3   0.0000   4.3204   4.8989 120.0000   0.0000  -1.0000   0.0000  -0.1317E+03   0.0000E+00   0.0000E+00   0.4321E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    4  -5.2499  -5.2499   3.0033  97.1808   0.8819  -0.3333  -0.3333  -0.3287E+02   0.0000E+00   0.0000E+00   0.1937E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    5   2.3983   2.3983   6.1302 128.6822   0.4804  -0.6202  -0.6202  -0.5711E+02   0.0000E+00   0.0000E+00   0.1960E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    6  -4.7932   4.7932   0.8540 112.0243  -0.6742   0.5222  -0.5222  -0.3930E+02   0.0000E+00   0.0000E+00   0.1536E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    7   3.7366  -3.7366   4.2309 151.0450  -0.2582   0.6831  -0.6831  -0.3977E+03   0.0000E+00   0.0000E+00   0.1721E+04   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    8  -2.4268   5.8587   2.0862 155.2949   0.5287   0.7842   0.3248  -0.5068E+02   0.0000E+00   0.0000E+00   0.1813E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+    9   1.5796  -3.8134   5.7528 139.6430   0.8872   0.4262   0.1765  -0.6530E+02   0.0000E+00   0.0000E+00   0.1491E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   10  -6.1411  -2.5437   0.4163 153.2916  -0.0983  -0.3808   0.9194  -0.2266E+03   0.0000E+00   0.0000E+00   0.7847E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   11   5.4158   2.2433   3.9881  92.2782  -0.3981  -0.3511   0.8475  -0.8196E+01   0.0000E+00   0.0000E+00   0.1004E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   12   5.6250  -2.3300   1.1622 104.6634   0.3198  -0.3626  -0.8754  -0.1140E+03   0.0000E+00   0.0000E+00   0.6008E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   13  -4.8946   2.0274   5.0157  53.1005   0.8290  -0.2140  -0.5167  -0.1018E+03   0.0000E+00   0.0000E+00   0.2617E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   14   2.0581   4.9686   2.6166 160.9234  -0.4057   0.8444  -0.3498  -0.2775E+03   0.0000E+00   0.0000E+00   0.9247E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   15  -1.0243  -2.4729   7.2110 143.0000  -0.8078   0.5446  -0.2256  -0.8539E+01   0.0000E+00   0.0000E+00   0.1110E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   16   3.7146  -5.5593   3.5481 100.3134  -0.5576  -0.4612  -0.6902   0.5393E+01   0.0000E+00   0.0000E+00   0.4264E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   17  -1.1548   1.7283   8.1182 150.5021  -0.1759  -0.5469  -0.8185  -0.1635E+02   0.0000E+00   0.0000E+00   0.7032E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   18   5.6348   3.7650   1.5192 118.6292   0.8881   0.3822  -0.2554  -0.4514E+02   0.0000E+00   0.0000E+00   0.1347E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   19  -3.3510  -2.2391   4.1663 141.9802   0.5156   0.7124  -0.4760  -0.5882E+03   0.0000E+00   0.0000E+00   0.1920E+04   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   20  -6.8982   1.3721   0.6623 160.9595  -0.8431   0.5274   0.1049  -0.1317E+01   0.0000E+00   0.0000E+00   0.9734E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   21   5.5631  -1.1066   4.1855 169.5295  -0.4606   0.8705   0.1732  -0.5931E+02   0.0000E+00   0.0000E+00   0.1447E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   22  -1.2223  -6.1451   2.2935  30.2588   0.7357  -0.1321   0.6643  -0.3020E+03   0.0000E+00   0.0000E+00   0.8372E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   23   0.7138   3.5883   5.7513  95.6345   0.1803  -0.1919   0.9647  -0.2989E+03   0.0000E+00   0.0000E+00   0.8265E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   24  -6.7444  -1.3415   1.0878 134.3784  -0.0837  -0.8286  -0.5536  -0.3230E+02   0.0000E+00   0.0000E+00   0.1876E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   25   5.4441   1.0829   4.8277  74.7788  -0.2603  -0.8028  -0.5364  -0.1267E+02   0.0000E+00   0.0000E+00   0.6688E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   26  -1.0336   5.1962   2.3554 165.7140   0.6300   0.4314  -0.6457  -0.4104E+03   0.0000E+00   0.0000E+00   0.1520E+04   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   27   0.6470  -3.2529   7.1100 158.5937   0.9502   0.1731  -0.2591  -0.2057E+02   0.0000E+00   0.0000E+00   0.4729E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   28   3.4768   5.2034   1.8341 168.7276  -0.1477   0.1930   0.9700  -0.1582E+03   0.0000E+00   0.0000E+00   0.5721E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   29  -2.2761  -3.4065   5.1276 132.2255  -0.6628   0.1461   0.7344  -0.1426E+03   0.0000E+00   0.0000E+00   0.4426E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   30   5.9130  -3.9510   0.2223 127.6706   0.3283  -0.9264   0.1843  -0.1218E+02   0.0000E+00   0.0000E+00   0.8288E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   31  -4.9660   3.3182   3.7451  85.3987   0.7241  -0.6764   0.1345  -0.3612E+02   0.0000E+00   0.0000E+00   0.1252E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   32  -5.9380  -4.8732   2.1165 144.3415  -0.6017  -0.3765   0.7044  -0.4861E+02   0.0000E+00   0.0000E+00   0.1418E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   33   3.1320   2.5704   4.8222 126.1777  -0.9496  -0.1478   0.2764  -0.2072E+03   0.0000E+00   0.0000E+00   0.6976E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   34  -3.8314   4.6686   0.0944 137.1079   0.2100   0.8623   0.4609  -0.1392E+03   0.0000E+00   0.0000E+00   0.6303E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   35   4.1018  -4.9981   3.8910  87.4123   0.5592   0.7311   0.3908  -0.7562E+02   0.0000E+00   0.0000E+00   0.3452E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   36   0.6069   6.1620   0.8795 117.1475  -0.1854   0.9404  -0.2853  -0.9112E+02   0.0000E+00   0.0000E+00   0.3913E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   37  -0.5247  -5.3272   4.4660  62.6482  -0.4984   0.8296  -0.2517  -0.3787E+02   0.0000E+00   0.0000E+00   0.1469E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   38   6.0712  -0.5980   2.5887 172.7933   0.2076  -0.2840  -0.9361  -0.1956E+02   0.0000E+00   0.0000E+00   0.2136E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   39  -2.9269   0.2883   5.7602 155.2079   0.7246  -0.2001  -0.6595  -0.4030E+03   0.0000E+00   0.0000E+00   0.1359E+04   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   40   1.8367  -6.0549   0.4958 169.5733  -0.9264  -0.2911   0.2389  -0.8256E+02   0.0000E+00   0.0000E+00   0.3575E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   41  -1.5088   4.9740   3.6828 173.2628  -0.5976  -0.6198   0.5086  -0.1577E+03   0.0000E+00   0.0000E+00   0.5599E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   42   6.1091   1.8532   2.2175  78.0510   0.1215   0.6297   0.7673  -0.5817E+03   0.0000E+00   0.0000E+00   0.1576E+04   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   43  -3.3728  -1.0231   5.2071 141.5685   0.0343   0.6340   0.7726  -0.2031E+03   0.0000E+00   0.0000E+00   0.7590E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   44  -6.0741   3.2467   3.5009  79.8389  -0.9808   0.0191  -0.1939  -0.1819E+02   0.0000E+00   0.0000E+00   0.5888E+02   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   45   2.2326  -1.1933   7.9742 114.9058  -0.5238   0.0835  -0.8478  -0.1593E+02   0.0000E+00   0.0000E+00   0.1072E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   46  -3.1457  -5.8852   1.3844 114.1354   0.7893  -0.6111  -0.0602  -0.2270E+03   0.0000E+00   0.0000E+00   0.9955E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   47   2.5022   4.6812   5.2487 144.2280   0.3932  -0.9150  -0.0901  -0.3159E+02   0.0000E+00   0.0000E+00   0.1038E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   48  -0.6413   6.5116   1.5775 166.2599   0.0365   0.2901  -0.9563  -0.3343E+01   0.0000E+00   0.0000E+00   0.1727E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   49   0.5604  -5.6895   6.1856  93.1901   0.2869   0.2781  -0.9167  -0.3079E+02   0.0000E+00   0.0000E+00   0.1518E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+   50  -6.0188  -0.5928   3.3485 162.7914  -0.4988  -0.8294  -0.2516  -0.5548E+02   0.0000E+00   0.0000E+00   0.1413E+03   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00   0.0000E+00
+ ------------------------------------------------------------------------------
+  Scan results will be written in file: CO-CO-energies.dat
+
+
+
+
+FINISH
+ End of Input file. Stopping.
+ 
+  Timing Report 
+ ===============
+ Subroutine                    Number of Calls   Time (minutes)
+ main_parser                              1               25.87
+ WriteToFile_TypeRealVector            1102                0.00
+ WriteToFile_Vector                    1102                0.00
+ WriteToFile_TypeRealMatrix          149413                0.47
+ WriteToFile_Matrix                  149763                0.49
+ update_molecular_geometry              754                0.00
+ update_molecular_orbitals              652                0.00
+ construct_molecular_integratio           2                0.00
+ df_parser                                1                0.00
+ energy_scan                              1               25.87
+ rotate_mos                              50                0.00
+ ReadFromFile_TypeRealMatrix           3750                0.00
+ ReadFromFile_Matrix                   3750                0.62
+ calculate_e1exchS2                      50               25.65
+ df_int                                 950               25.86
+ make_oneeint                           700                1.06
+ twoindx_1e_int_MO                      700                1.06
+ overlap_integrals                      200                0.05
+ transform_2index                       700                0.01
+ matmult_types                       147900                0.61
+ ReadFromFile_TypeRealVector            898                0.00
+ ReadFromFile_Vector                    898                0.00
+ open_gen_2eint                         200               25.64
+ df_dimer                               150                4.07
+ df_int_for_df                         1250               20.46
+ make_integrals_for_df                 1250               20.44
+ make_s_matrix_coulomb                   50                0.03
+ diagonal_1index                        200                0.00
+ fill_Smat_subsets                       50                0.04
+ make_T_dimer                            50                3.72
+ diagonal_2index                        150                0.28
+ matrix_write_block_types           1389650                1.05
+ WriteToFile_InBlocks_TypeRealM     1389650                0.00
+ WriteToFile_InBlocks_Matrix        1389650                0.97
+ scale_trans_mat_types                  250                0.41
+ solve_df_equations_lu                  700                0.00
+ lineq_solver_lu                        350                2.88
+ ReadRowsFromFile_TypeRealMatri     1288450                0.00
+ ReadRowsFromFile_Matrix            1288450                0.99
+ lineq_lu_iter                          350                2.51
+ matrix_write                           350                0.03
+ make_twoeint                           250                0.06
+ make_D_S_D                             250                0.05
+ close_gen_2eint                        200                0.00
+ df_monomer                             300               20.65
+ df_make_I                              100                0.00
+ make_T_AO_mono                         100                4.07
+ make_T_MO_mono_NN                      100               12.58
+ fill_subset                            300                0.99
+ calculate_e1elst_mol                    50                0.22
+ ====================================
+ 
+ 
+Maximum memory defined is :             2048 MB                                      
+Maximum memory used is    :              173 MB                                      
+ 
+ 
+ List of temporary file names and tags: 
+ Number of files currently in the list =   48
+ ======================================
+    1 TMP____000                                        E      Energies for CO_1
+    2 TMP____001                                             C      MOs for CO_1
+    3 TMP____002                                             C      MOs for CO_1
+    4 TMP____003                                              P densmat for CO_1
+    5 TMP____004                                        E      Energies for CO_2
+    6 TMP____005                                             C      MOs for CO_2
+    7 TMP____006                                             C      MOs for CO_2
+    8 TMP____007                                              P densmat for CO_2
+    9 TMP____008                        grid    of dimer geometries and energies
+   10 TMP____009                                          OVRLOOAB 1-e integrals
+   11 TMP_Doo_ab                                    Doo_ab  DF sol for CO_1_CO_2
+   12 TMP_S___ab                                   S_____AB 2-e 2-indx integrals
+   13 TMP____010                          G  1-index diagonal integrals for CO_1
+   14 TMP_S____a                                   S____A_A 2-e 2-indx integrals
+   15 TMP_S____b                                   S____B_B 2-e 2-indx integrals
+   16 TMP____013                                   S____A_B 2-e 2-indx integrals
+   17 TMP____014                                   S___A_AB 2-e 2-indx integrals
+   18 TMP____015                                   S___B_AB 2-e 2-indx integrals
+   19 TMP_Too_ab                                   T_MOOOAB 2-e 2-indx integrals
+   20 TMP_Tov_ab                                   T_MOOVAB 2-e 2-indx integrals
+   21 TMP_Tvo_ab                                   T_MOVOAB 2-e 2-indx integrals
+   22 TMP____011                          G  2-index diagonal integrals for CO_1
+   23 TMP_Dov_ab                                    Dov_ab  DF sol for CO_1_CO_2
+   24 TMP_Dvo_ab                                    Dvo_ab  DF sol for CO_1_CO_2
+   25 TMP____012                                          OOOOABAB 2-e integrals
+   26 TMP____016                                          NUCAOOAB 1-e integrals
+   27 TMP____017                                          NUCBOOAB 1-e integrals
+   28 TMP____018                                          I_____XA 1-e integrals
+   29 TMP_D____a                                         D  Full DF sol for CO_1
+   30 TMP_TAO__a                                   T_AO___A 2-e 2-indx integrals
+   31 TMP_T____a                                   T_MO___A 2-e 2-indx integrals
+   32 TMP_Drho_a                                        Drho Density DF for CO_1
+   33 TMP_Doo__a                              OO part of D  Full DF sol for CO_1
+   34 TMP_Dov__a                              OV part of D  Full DF sol for CO_1
+   35 TMP_Dvv__a                              VV part of D  Full DF sol for CO_1
+   36 TMP____019                                          OOOOAAAB 2-e integrals
+   37 TMP____020                                          NUCBOOAA 1-e integrals
+   38 TMP____021                                          I_____XB 1-e integrals
+   39 TMP_D____b                                         D  Full DF sol for CO_2
+   40 TMP_TAO__b                                   T_AO___B 2-e 2-indx integrals
+   41 TMP_T____b                                   T_MO___B 2-e 2-indx integrals
+   42 TMP_Drho_b                                        Drho Density DF for CO_2
+   43 TMP_Doo__b                              OO part of D  Full DF sol for CO_2
+   44 TMP_Dov__b                              OV part of D  Full DF sol for CO_2
+   45 TMP_Dvv__b                              VV part of D  Full DF sol for CO_2
+   46 TMP____022                                          OOOOABBB 2-e integrals
+   47 TMP____023                                          NUCAOOBB 1-e integrals
+   48 TMP____024                                          OOOOAABB 2-e integrals
+ --------------------------------------
+ 
+ 
+ Summary of CamCASP calculation
+ ==============================
+           Name           Value           Units     Description  Misc(optional)
+================================================================================
+E^{1}_{exch}(S2)            0.8046540E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.6032942E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8670594E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1990225E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4321116E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1317217E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1936512E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3287386E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1959595E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5710662E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1536453E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3929552E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1720503E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3976585E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1812594E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5067574E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1490915E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.6529571E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.7846696E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2265555E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1004403E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.8196375E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6007570E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1140380E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2616504E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1018201E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9247057E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2775064E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1110100E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.8538840E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4263947E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}                0.5393218E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.7032131E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1634609E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1347251E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4513835E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1920190E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5882243E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9734312E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1317318E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1447148E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5930702E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8372102E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3019600E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8264605E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2988876E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1876087E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3230181E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6688194E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1266931E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1519953E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4104317E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4728606E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2056921E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.5720722E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1582312E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.4426079E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1425587E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.8288093E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1217639E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1252356E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3611594E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1417952E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4860668E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6976102E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2072362E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.6303307E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1392186E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.3451638E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.7561958E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.3913437E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.9111564E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1469246E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3786684E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.2135903E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1956114E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1358785E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.4029585E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.3574551E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.8255557E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.5598917E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1577487E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1575983E+04        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5816788E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.7590469E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2031174E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.5887905E+02        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1819047E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1071739E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.1592767E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.9955064E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.2269503E+03        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1038219E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3159059E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1727023E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3343082E+01        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1518245E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.3078896E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+E^{1}_{exch}(S2)            0.1412857E+03        CM-1     DF :: S2 :: NoReg ::                                        
+E^{1}_{elst}               -0.5547512E+02        CM-1     mol-mol :: DF  :: NoReg                                     
+--------------------------------------------------------------------------------
+
+Ending on 28-05-2014 at 19:51:39.441

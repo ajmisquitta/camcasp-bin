@@ -1,0 +1,45 @@
+#  -*- coding: utf-8 -*-
+CamCASP-commands
+BEGIN GRID
+  Molecule A
+  Angular 200
+  Radial  60
+END
+
+BEGIN GRID
+  Molecule B
+  Angular 200
+  Radial  60
+END
+
+SET DF-INTEGRALS
+  DF-TYPE-MONOMER NN
+  DF-TYPE-DIMER OV
+END
+
+SET DF
+  Eta = 0.0
+  Lambda = 0.0
+  REDO-DF-ON-ROTATION  True
+  Solver LU
+END
+
+SET QUAD
+  Type Gauss-Legendre
+  Beta 0.5
+END
+
+BEGIN energy-scan
+  ! scan molecule B with molecule A
+  Energies E1exch E1elst
+  Energy-file CO-CO-energies
+  Random
+    Points 50
+    Radial 1
+    dRmin -1.2
+    dRmax +1.5
+    write CO-CO-pts.dat
+  End
+End
+
+End-CamCASP-commands

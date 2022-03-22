@@ -1,0 +1,40 @@
+Auxbasis sets for 1. to 4. period
+=================================
+
+-s and d functions are optimized for the atoms
+-p,f,g functions have been determined with the formula
+
+                eta(i+1) = eta(i)*beta*{1+gamma(i/(n+1))**2},
+
+ beta,gamma,eta0 are taken of the result of the optimization of BH,AlH,GaH:
+
+ p-set:  eta0=s(AO)+p(AO)/0.865,beta=2.4,gamma=0.7 (also for trans. metals)
+ [d-set: eta0=2*p(AO)/0.78,beta=3.15,gamma=0.91 --> only for comparison]
+ f-set:  eta0=2*d(AO)/1.095 (if 1f auxfunct.)
+         for transition metals the 3 f functions have been determined with
+         eta0=2*d(AO),beta=2.5,gamma=0.64,
+         taken from optimization of MnO3F
+ g-set:  where possible determined by optimization of the atoms;
+         else eta0=2*d(AO)
+         for Mn g's have been taken without modification from the optimized
+         3/1g set of Fe
+-d functions have been determined by optimization of atoms where possible;
+ for group V elements they have been determined by interpolation
+
+
+-contraction coefficients for p (and d) functions have mostly been determined
+ for the hydrides
+
+
+-numbers of functions used:
+ main group elements:   1.period  3/1/1/1/1/1s,3p,3d,1f
+                        2.period  8/1/1/1/1s,4/1/1p,4/1d,1f,1g (As:4p)
+ transition metals:       10/2/1/1/1/1/(1/)s,4p,2/1/1d,3f,3/1g
+
+
+############################################################################
+Information about acccuracy ("dev(DFT)"):
+            - the energies are calculated with functional b-p, gridsize3,
+            - and we have compared converged (RI-J and conventional DFT)
+              energies at the same geometry.
+############################################################################

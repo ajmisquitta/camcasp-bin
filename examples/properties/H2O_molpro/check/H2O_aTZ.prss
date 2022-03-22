@@ -1,0 +1,44 @@
+TITLE  PROCESS file for H2O
+! Usage: process < H2O_aTZ.prss
+
+
+Set Global-data
+   CamCASP /home/andreas/programs/CamCasp/CamCASP-dev-ajm-6.0
+   Units  BOHR  DEGREE
+   Overwrite
+   Echo Off
+End
+
+Molecule H2O
+  Units BOHR
+  O           8.00    0.00000000    0.00000000    0.00000000   Type O
+  H1          1.00   -1.45365196    0.00000000   -1.12168732   Type H
+  H2          1.00    1.45365196    0.00000000   -1.12168732   Type H
+End
+
+Read local pols for H2O
+   Use ascii file H2O_aTZ_L{LIMIT}_0f10.pol
+   Maximum rank {LIMIT}
+   Limit rank to {WSMLIMIT}
+   Limit rank to {HLIMIT} for sites +++
+       H1 H2
+   Frequencies STATIC + 10
+   ! Use this command to split the P-2-P pol file into 11 parts:
+   ! P2P-Pols <point-2-point pol file> SPLIT
+End
+
+Write
+   File-prefix H2O_aTZ
+     PFIT file for H2O
+     MODEL {PDEF}
+     CUTOFF {CUTOFF}
+     FREQ {INDEX}
+     PENALTIES
+     WEIGHT-TYPE {WEIGHT}
+     WEIGHT-COEFF {WEIGHT_COEFF}
+     {ISOTROPIC}
+     SVD {SVD}
+   End
+End
+
+Finish
