@@ -27,19 +27,26 @@ END
 BEGIN DF
   Type   OO
   Eta    =    0.0
-  Lambda =    1.0
+  Lambda =  100.0
   Gamma  =    0.0
   Print only normalization constraints
   ! Solver GELSS Condition = 1e-15
   Solver LU
 END
 
+! Moderate or low-accuracy grids needed at this stage.
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 311
+End
+
 Begin ISA
   DF = Doo-C
   ! W-INIT = Drho-C
   W-INIT = ONE-GTO   ALPHA0 = 1.0
   ISA-Algorithm A+DF  Zeta = 0.1
-  DF-PARAMETERS Lambda = 1000.0
+  DF-PARAMETERS Lambda = 100.0
   Solver LU
   !  Symmetry
   Convergence
@@ -68,16 +75,49 @@ Begin ISA
   End
 End
 
-Begin Multipoles
-  DF Type ISA-GRID
-  Rank 4
-  ! Debug
+! Set very-high quality grids for the multipole moments
+Set Num-Int-Pars
+  Grid-Quality   Dist-Mom  = 651
 End
 
+!  Calculate multipoles using the ISA atom-expansions
 Begin Multipoles
-  DF Type ISA
   Rank 4
-  ! Debug
+  DF with Constraints  Type ISA
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+
+!  Calculate multipoles using the density-fitted densities
+!  and the ISA shape-functions. 
+Begin Multipoles
+  Rank 4
+  DF with Constraints  Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
+End
+
+!  Generate isodensity surface grids for use in Orient
+Begin Display
+  Molecular-density
+    ISOdensity   = 0.001
+    Density-Type = RHO-C
+    SLATER-MULTIPLIER = 5.0  ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.3 Bohr  ( step size of grid )
+  END
+  AIM-ATOMS
+    ISOdensity   = 0.001
+    AIM-METHOD   = ISA  Grid-based
+    Density-Type = RHO-C
+    ATOMS        = ALL    ( specify list of atom labels or specify ALL for all atoms )
+    W-MIN        = 1e-6   ( outer limit of scan determined to be radius at )
+                          ( which shape function is this value )
+    R-MAX        = 5.0 Bohr  ( with a maximum radius of this )
+    SLATER-MULTIPLIER = 10.0 ( can also specify max radius as a )
+                             ( multiple of Slater radius )
+    DR           = 0.2 Bohr  ( step size of grid )
+  END
 End
 
 End-CamCASP-commands

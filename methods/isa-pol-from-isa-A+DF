@@ -58,7 +58,7 @@ END
 BEGIN DF
   Type     NN
   Eta    =    0.0 
-  Lambda =    1.0 
+  Lambda =  100.0 
   Gamma  =    0.0
   Print only normalization constraints
 END
@@ -76,7 +76,7 @@ Begin ISA
   ! W-INIT = Drho-C
   W-INIT = ONE-GTO   ALPHA0 = 1.0
   ISA-Algorithm A+DF  Zeta = 0.1
-  DF-PARAMETERS Lambda = 1000.0
+  DF-PARAMETERS Lambda = 100.0
   Solver        LU
   !  Symmetry
   Convergence

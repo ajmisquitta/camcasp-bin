@@ -4,7 +4,7 @@ CamCASP-commands
 Edit
   ! For strongly delocalised systems reduce EPS or use TYPE = ALL
   ! or else you will see large charge-violations in the ISA step.
-  NEIGHBOURS TYPE = OVR EPS = 0.01 PRINT
+  NEIGHBOURS TYPE = OVR EPS = 0.0001 PRINT
 End
 
 SET QUAD
@@ -37,10 +37,20 @@ END
 BEGIN DF
   Molecule A
   Type   OO
-  Eta    = 0.0 
-  Lambda = 1.0 
+  Eta    =   0.0 
+  Lambda = 100.0 
+  Gamma  =    0.0
   Print only normalization constraints
+  ! Solver GELSS Condition = 1e-15
+  Solver LU
 END
+
+! Moderate or low-accuracy grids needed at this stage.
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 311
+End
 
 Begin ISA
   DF = Doo-C
@@ -70,17 +80,26 @@ Begin ISA
   END
 End
 
+! Set very-high quality grids for the multipole moments
+Set Num-Int-Pars
+  Grid-Quality   Dist-Mom  = 651
+End
+
 !  Calculate multipoles using the ISA atom-expansions
 Begin Multipoles
-  DF Type ISA
   Rank 4
+  DF with Constraints  Type ISA
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
 End
 
 !  Calculate multipoles using the density-fitted densities
 !  and the ISA shape-functions. 
 Begin Multipoles
-  DF Type ISA-GRID
   Rank 4
+  DF with Constraints  Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
 End
 
 
@@ -109,6 +128,9 @@ BEGIN Polarizability
   ! Print options: use default names for the files:
   Pert-file DEFAULT
   Pol-file  DEFAULT
+
+  ISA-OPTIONS  TAIL-FIX  OFF               ( recommended for more accurate properties )
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1  ( Use the atom grids. For mol grids set to 0 )
 END
 
 End-CamCASP-commands

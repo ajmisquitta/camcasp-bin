@@ -21,13 +21,20 @@ END
 
 BEGIN DF
   Type   OO
-  Eta    = 0.0
-  Lambda = 1.0
-  Gamma  = 0.0
+  Eta    =   0.0
+  Lambda = 100.0
+  Gamma  =   0.0
   Print only normalization constraints
   ! Solver GELSS Condition = 1e-15
   Solver LU
 END
+
+! Moderate or low-accuracy grids needed at this stage.
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 311
+End
 
 Begin ISA
   DF = Doo-C
@@ -35,7 +42,8 @@ Begin ISA
   W-INIT = ONE-GTO   ALPHA0 = 1.0
   ISA-Algorithm A+DF  Zeta = 0.1
   DF-PARAMETERS Lambda = 1.0
-  Solver LU
+  Solver BVLS    Alpha-Max = 0.5   ( Options are: LU, GELSS, BVLS )
+  !  Solver LU
   !  Symmetry
   Convergence
     Convergence-Type W
@@ -58,22 +66,26 @@ Begin ISA
   END
 End
 
-BEGIN GRID
-  Angular 400
-  Radial  80
-END
+! Set very-high quality grids for the multipole moments
+Set Num-Int-Pars
+  Grid-Quality   Dist-Mom  = 651
+End
 
 !  Calculate multipoles using the ISA atom-expansions
 Begin Multipoles
-  DF with Constraints  Type ISA
   Rank 4
+  DF with Constraints  Type ISA
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
 End
 
 !  Calculate multipoles using the density-fitted densities
 !  and the ISA shape-functions. 
 Begin Multipoles
-  DF with Constraints  Type ISA-GRID
   Rank 4
+  DF with Constraints  Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1
 End
 
 !  Generate isodensity surface grids for use in Orient

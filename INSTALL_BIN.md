@@ -15,7 +15,7 @@
    to reduce their size. Before proceeding, gunzip them using:
    > cd camcasp-7.0
 
-   > gunzip x86-64/{ifort,gfortran}/*.gz
+   > gunzip x86-64/{ifort,gfortran}/\*.gz
 
 2. It is no longer necessary to apply for a licence to use CamCASP,
    but your use of the program is subject to the licence that is to be
@@ -56,10 +56,10 @@
 
 7. Run the tests in the CamCASP/tests directory. See the README in
    that directory for details, or run
-   >    run_tests.py --help
+   >    run\_tests.py --help
 
 Once all this is done, you are ready to submit CamCASP jobs. See the
-User's Guide, in $CAMCASP/doc/users_guide.pdf, for full details. There
+User's Guide, in $CAMCASP/doc/users\_guide.pdf, for full details. There
 are several examples in $CAMCASP/examples that you can use as tests of
 the program and as examples for your own calculations.
 
@@ -70,4 +70,4 @@ the program and as examples for your own calculations.
 
 Additional authorisation is required to download and use the source
 version. Consult Alton Misquitta, a.j.misquitta@qmul.ac.uk, for further
-information, and see INSTALL_SRC.md for installation details.
+information, and see INSTALL\_SRC.md for installation details.

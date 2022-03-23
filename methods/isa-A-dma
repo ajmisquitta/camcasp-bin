@@ -25,7 +25,7 @@ END
 BEGIN DF
   Type   OO
   Eta    =    0.0
-  Lambda =    1.0
+  Lambda =  100.0
   Gamma  =    0.0
   Print only normalization constraints
   ! Solver GELSS Condition = 1e-15
@@ -35,7 +35,7 @@ END
 Set Num-Int-Pars
   Grid-Quality   Chi-Rho-W = 311
   Grid-Quality   KL-Fa     = 111
-  Grid-Quality   Dist-Mom  = 651
+  Grid-Quality   Dist-Mom  = 311
 End
 
 Begin ISA
@@ -65,6 +65,11 @@ Begin ISA
     Fit-Type = 3
     W-Tests
   END
+End
+
+! Increase size of integration gird for moments
+Set Num-Int-Pars
+  Grid-Quality   Dist-Mom  = 651
 End
 
 !  Calculate multipoles using the ISA atom-expansions

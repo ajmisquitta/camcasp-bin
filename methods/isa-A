@@ -30,7 +30,7 @@ END
 BEGIN DF
   Type   OO
   Eta    =    0.0
-  Lambda =    1.0
+  Lambda =  100.0
   Gamma  =    0.0
   Print only normalization constraints
   ! Solver GELSS Condition = 1e-15
