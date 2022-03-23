@@ -70,6 +70,11 @@ BEGIN DF
   Print only normalization constraints
 END
 
+Set Num-Int-Pars
+  Grid-Quality   Chi-Rho-W = 311
+  Grid-Quality   KL-Fa     = 111
+  Grid-Quality   Dist-Mom  = 311
+End
 
 Begin ISA
   DF = Doo-C
@@ -77,7 +82,8 @@ Begin ISA
   W-INIT = ONE-GTO   ALPHA0 = 1.0
   ISA-Algorithm A+DF  Zeta = 0.1
   DF-PARAMETERS Lambda = 100.0
-  Solver        LU
+  Solver BVLS  Alpha-Max = 0.5
+  !  Solver        LU
   !  Symmetry
   Convergence
     Convergence-Type W
@@ -100,10 +106,16 @@ Begin ISA
   END
 End
 
+Set Num-Int-Pars
+  Grid-Quality   Dist-Mom  = 651
+End
+
 Begin Multipoles
-  DF Type ISA-GRID
   Rank 4
-  ! Debug
+  DF Type ISA-GRID
+  DF  with Constraints    Type ISA-GRID
+  ISA-OPTIONS  TAIL-FIX  OFF               ( recommended for more accurate properties )
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1  ( set to 0 for molecular grids - slower    )
 End
 
 BEGIN Polarizability
@@ -118,6 +130,9 @@ BEGIN Polarizability
   Print only static total pols upto rank 2
   Pert-file DEFAULT
   Pol-file  DEFAULT
+
+  ISA-OPTIONS  TAIL-FIX  OFF               ( recommended for more accurate properties )
+  INTEGRATION-OPTIONS  GRID-ALGORITHM = 1  ( Use the atom grids. For mol grids set to 0 )
 END
 
 End-CamCASP-commands
