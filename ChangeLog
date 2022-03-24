@@ -1,3 +1,11 @@
+2022-03-24 AJM  VERSION 7.2.2 003
+	* src/isa_analysis.F90: In subroutine calculate_ISA_atom_radii: Removed warning message
+	and using n_null instead of explicit value.
+	* src/isa_misc_operations.F90: In subroutine define_bvls_bounds: Correct bounds now applied
+	for A+DF and DF+ISA cases.
+	* src/isa_parameters.F90: Reorganisation of variables and parameters.
+	* src/isa_shapefunc.F90: Changed format of prints of KL(BASIS) and KL(GRID).
+
 2022-02-21 AJM 
 	* src/isa_analysis.F90: Allow zero and negative powers of r in 
 	subroutine calculate_ISA_atom_radii
